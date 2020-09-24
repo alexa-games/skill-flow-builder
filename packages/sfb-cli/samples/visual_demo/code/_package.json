@@ -1,0 +1,24 @@
+{
+    "name": "skill",
+    "version": "1.0.0",
+    "description": "Package to track necessary node modules for skill execution.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "compile": "npx tsc",
+        "clean": "npx rimraf ./dist"
+    },
+    "author": "",
+    "license": "LicenseRef-.amazon.com.-AmznSL-1.0",
+    "dependencies": {
+        "@alexa-games/sfb-f": "file:../sfb-f",
+        "@alexa-games/sfb-skill": "file:../sfb-skill",
+        "ask-sdk": "latest"
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^10.14.6",
+        "typescript": "^3.5.1",
+        "rimraf": "^2.6.3"
+    }
+}

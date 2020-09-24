@@ -1,0 +1,94 @@
+{
+    "name": "@alexa-games/sfb-vscode-extension",
+    "displayName": "Alexa SFB",
+    "description": "Adds syntax highlighting, hover tips, and autocomplete to Alexa SFB story files.",
+    "version": "1.3.4",
+    "engines": {
+        "vscode": "^1.34.0"
+    },
+    "publisher": "Amazon.com",
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:abc-format"
+    ],
+    "main": "./dist/extension.js",
+    "files": [
+        "dist",
+        "syntaxes",
+        "language-configuration.json",
+        "resources"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "abc-format",
+                "aliases": [
+                    "abc-format"
+                ],
+                "extensions": [
+                    ".abc"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "views": {
+            "explorer": [
+                {
+                    "id": "story-outline",
+                    "name": "Scenes",
+                    "when": "abcExperimentOutlineEnabled"
+                }
+            ]
+        },
+        "grammars": [
+            {
+                "language": "abc-format",
+                "scopeName": "text.abc.format",
+                "path": "./syntaxes/abc-format.tmLanguage.json"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "npm run lint && npx tsc -p ./",
+        "clean": "npx rimraf ./dist",
+        "watch": "npx tsc -watch -p ./",
+        "test-vscode": "npm run compile && node ./node_modules/vscode/bin/test",
+        "test": "mocha 'dist/test/**/*.spec.js'",
+        "coverage": "npx nyc --reporter text mocha 'dist/test/**/*.spec.js'",
+        "lint": "tslint --project tsconfig.json"
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^10.12.0",
+        "@types/sinon": "^7.0.13",
+        "@types/vscode": "1.34.0",
+        "mocha": "^6.1.3",
+        "mock-fs": "^4.12.0",
+        "nyc": "13.3.0",
+        "rimraf": "^2.6.3",
+        "sinon": "^7.3.2",
+        "tslint": "^5.17.0",
+        "typescript": "^3.5.1"
+    },
+    "dependencies": {
+        "@alexa-games/sfb-f": "file:../sfb-f",
+        "@alexa-games/sfb-util": "file:../sfb-util",
+        "vscode": "1.1.34"
+    },
+    "nyc": {
+        "exclude": [
+            "**/test"
+        ]
+    },
+    "license": "LicenseRef-.amazon.com.-AmznSL-1.0",
+    "keywords": [
+        "game",
+        "story",
+        "Alexa",
+        "skill",
+        "voice"
+    ]
+}

@@ -1,0 +1,216 @@
+@start
+    *say
+        Please select a test.
+    *then
+	
+		// apl.abc - mocha TBU
+        hear APL {
+            -> apl
+        }
+
+		// audio_src_tag.abc
+        hear audio source tag {
+            -> audio source tag
+        }
+
+		// bookmark_story.abc
+        hear bookmarks {
+            -> bookmark story
+        }
+
+        // built_in_slots.abc - TBD mocha / dev to update functionality.
+        hear built in slots {
+            -> built in name
+        }
+
+		// clear.abc
+        hear clear {
+            -> clear
+        }
+
+		// clear_all_and_restart.abc
+		hear clear all variables {
+			-> clear all
+		}
+
+        // custom_slots.abc
+        hear custom slots {
+            -> custom slots
+        }
+
+		// end.abc
+        hear ending {
+            -> ending
+        }
+
+		// flag_unflag.abc
+        hear flags {
+            -> flag
+        }
+
+		// go_back.abc - abc and mocha TBU
+		hear go back test {
+			-> back test
+		}
+
+        // multiple_hears_go_to_return.abc
+		hear go to return with variables {
+            -> multiple go to hears
+        }
+
+		// new_golden.abc
+        hear golden {
+            -> golden
+        }
+
+		// hear_otherwise.abc
+        hear hear otherwise {
+            -> otherwise
+        }
+
+        // if_operators.abc (new mocha pending - to be tested)
+        hear if operators {
+            -> if operators
+        }
+
+		// immediate_goto.abc
+        hear immediate go to {
+            -> immediate goto
+        }
+        
+		// increase_decrease.abc
+        hear increase decrease {
+            -> increase decrease
+        }
+
+        hear modulus {
+            -> modulus
+        }
+
+		// infinite.abc - intentionally crashes the skill.
+        hear infinite {
+            -> infinite
+        }
+
+        // multiple_ssml.abc (to be updated - no mocha test)
+        hear multiple voice tags {
+           -> multiple voice tags
+        }
+
+		// pause.abc
+        hear pause test {
+            -> pause test
+        }
+
+		// default_pause.abc
+        hear default pause test {
+            -> default pause test
+        }
+		// repeat.abc
+        hear repeat test {
+            -> repeat test
+        }
+
+		// reprompt.abc
+        hear reprompt test {
+            -> reprompt test
+        }
+
+		// restart.abc
+        hear restart test {
+            -> restart test
+        }
+
+		// common_uncommon_rolls.abc
+        hear roll test {
+            -> common and uncommon rolls
+        }
+
+        // conditional.abc
+        hear conditional test { 
+            -> conditional block test
+        }
+
+		// save_goto_return.abc
+        hear save go to return {
+            -> go to and return
+        }
+
+		// scene_say_other_statement.abc
+		hear say other statement {
+            -> say other statement
+        }
+
+		// say_symbols.abc
+        hear symbols {
+            -> symbols
+        }
+
+		// snippets.abc
+        hear snippets {
+            -> snippets
+        }
+
+		// say_this_or_that.abc
+        hear this or that {
+            -> this or that
+        }
+
+		// ssml_tags.abc
+        hear ssml tags {
+           -> SSML tags
+        }
+
+		// string_value.abc
+		hear string value {
+            -> string value
+        }
+
+		// time.abc
+        hear time {
+            -> time initialize
+        }
+
+		// truefalse.abc
+        hear true false {
+            -> true false
+        }
+
+		// variable_state_name.abc
+        hear variable state name {
+            -> variable state name
+        }
+
+        // variable_speech.abc
+        hear variable speech {
+            -> variable speech
+        }
+
+		// verify_string_no_single_quote.abc
+        hear verify string single quote {
+            -> verify string single quote
+        }
+
+        // verify_slot_variable.abc
+        hear verify slot variable {
+            -> verify slot variable
+        }
+		
+        // s3bgms.abc
+        hear background music {
+            -> background music
+        }
+
+// adding for sanity when testing on live - in the event you get stuck in a menu/test
+@global append
+    *then
+        hear main menu, new test {
+            >> RESTART
+        }
+
+@end
+    *say
+        Thanks for testing. Bye.
+    *then
+        >> END
+

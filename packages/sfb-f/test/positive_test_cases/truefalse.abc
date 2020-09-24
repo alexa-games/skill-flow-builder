@@ -1,0 +1,226 @@
+// true/false with wording
+
+// validates "is" instead of ==
+// validates functionality within hear block
+@true false
+	*say
+		Welcome to the true and false test. Our boolean is currently set to {evaluation}.
+		Do you want to check for true, or false?
+	*then
+		hear true {
+			flag evaluation
+			-> true test one
+			}
+		hear false {
+			unflag evaluation
+			-> false test one
+		}
+
+//////////////////////
+//    TRUE TESTS    //
+//////////////////////
+
+// only one if block, checking for true first
+@true test one
+	*say
+		Checking if the boolean is true first, with only one if block.
+	*then
+		if evaluation == true {
+			-> true test two
+		}
+		-> true test error
+
+// One if block, but we check for false first
+@true test two
+	*say
+		Pass! Now we'll check for false first.
+	*then
+		if evaluation == false {
+			-> true test error
+		}
+		-> true test three
+
+// using variable by itself
+@true test three
+	*say
+		Pass! Now checking if we can use just the boolean by itself in an if block.
+	*then
+		if evaluation {
+			-> true test four
+		}
+		-> true test error
+
+// checking nested if, with 'is' and '=='
+@true test four
+	*say
+		Pass! Now checking if it works in a nested if block.
+	*then
+		if evaluation is true {
+			if evaluation == true {
+				-> true false done
+			}
+			-> true test error
+		}
+		-> true test error
+
+@true test error
+	*say
+		We were checking for, true. But instead, the variable is {evaluation}.  Something went wrong! Bug it!
+	*then
+		>> END
+
+///////////////////////
+//    FALSE TESTS    //
+///////////////////////
+
+// only one if block, checking for false first
+@false test one
+	*say
+		Checking if the boolean is false first, with only one if block.
+	*then
+		if evaluation == false {
+			-> false test two
+		}
+		-> false test error
+
+// One if block, but we check for true first
+@false test two
+	*say
+		Pass! Now we'll check for true first.
+	*then
+		if evaluation == true {
+			-> false test error
+		}
+		-> false test three
+
+// using variable by itself
+@false test three
+	*say
+		Pass! Now checking if we can use just the boolean by itself in an if block.
+	*then
+		if evaluation {
+			-> false test error
+		}
+		-> false test four
+
+@false test four
+	*say
+		Pass! Now checking if it works in a nested if block.
+	*then
+		if evaluation is false {
+			if evaluation is false {
+				-> true false done
+			}
+			-> false test error
+		}
+		-> false test error
+
+@false test done
+	*say
+		Congratulations, if you're seeing this then everything passed perfectly!
+	*then
+		-> end
+
+@false test error
+	*say
+		We were checking for, false. But instead, the variable is {evaluation}.  Something went wrong! Bug it!
+	*then
+		>> END
+
+@true false done
+	*say
+		Test passed! Do you want to try again?
+	*then
+		hear yes {
+			-> true false
+		}
+		hear no {
+			-> end
+		}
+
+////////////////////////////////////////////////////////////////
+//                                                            //
+//  NOTHING UNDER THIS LINE PLUGS INTO ANY PART OF OUR TESTS  //
+//                                                            //
+////////////////////////////////////////////////////////////////
+
+// // true/false with operators?
+// @tf evaloneif
+// 	*say
+// 		One if statement.
+// 	*then
+// 		if evaluation == true {
+// 			-> tf trueval
+// 		}
+// 		-> tf falseval
+		
+// @tf evalis
+// 	*say
+// 		Use is instead of ==.
+// 	*then
+// 		if evaluation is true {
+// 			-> tf trueval
+// 		}
+// 		-> tf falseval
+		
+// @tf evalnocompare
+// 	*say
+// 		Use only the variable without == or is.
+// 	*then
+// 		if evaluation {
+// 			-> tf trueval
+// 		}
+// 		-> tf falseval
+		
+// @tf evalinsidehear
+// 	*say
+// 		Nested in a hear block.
+// 	*then
+// 		hear continue
+// 			if evaluation == true {
+// 				-> tf trueval
+// 			-> tf falseval
+			
+// @tf evalfalse
+// 	*say
+// 		Opposite day- check false first instead of true.
+// 	*then
+// 		if evaluation == false {
+// 			-> tf trueval
+// 		}
+// 			-> tf falseval
+		
+// @tf evalreturning
+// 	*say
+// 		Use is instead of ==.
+// 	*then
+// 		if evaluation is true {
+// 			<-> tf trueval
+// 		}
+// 		-> tf falseval
+
+
+// // Results
+// @tf trueval
+// 	*say
+// 		It's true.
+// 	*then
+// 		>> END
+
+// @tf falseval
+// 	*say
+// 		It's false!
+// 	*then
+// 		>> END
+
+// // // This functionality is already covered in flag_unflag.abc.  Removing/commenting out
+// // @tf anotherthing
+// // 	*say
+// // 		Evaluating boolean. It is currently {evaluation}.
+// // 	*then
+// // 		if evaluation is true {
+// // 			-> tf trueval
+// // 		}
+// // 		if evaluation is false {
+// // 			-> tf falseval
+// // 		}

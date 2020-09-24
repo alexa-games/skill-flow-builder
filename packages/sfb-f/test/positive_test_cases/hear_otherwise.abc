@@ -1,0 +1,23 @@
+@otherwise
+    *say
+		Hear Otherwise Test.
+        Say anything except test.
+    *then
+        hear test {
+            -> otherwise this is test
+        }
+        hear * {
+            -> otherwise this is everything else
+        }
+
+@otherwise this is test
+    *say
+        You said test. Let's try that again.
+    *then
+        -> otherwise
+
+@otherwise this is everything else
+    *say
+        You said something other than test. Pass!
+    *then
+        -> end

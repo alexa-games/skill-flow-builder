@@ -1,0 +1,15 @@
+@voice tags
+    *say
+        Testing voice tags with multiple tags. Say continue.
+    *then
+        hear continue {
+            -> vt tags
+        }
+
+@vt tags
+    *say
+        <voice name='Justin'>This is the voice tag <voice name='Matthew'>inside a voice tag.</voice></voice> 
+        <prosody pitch='low'>Prosody tag. Low pitch.</prosody>
+        Now ending the skill.
+    *then
+        >> END

@@ -1,0 +1,210 @@
+/* 
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
+ *
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *   http://aws.amazon.com/asl/
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  flex: 1;
+}
+
+.node {
+  cursor: pointer;
+}
+
+.nodeContainer {
+  fill: transparent;
+  radius: 50%;
+}
+
+.nodeSelected .nodeContainer {
+  fill: rgba(100, 149, 237, 0.2);
+}
+
+
+.edgeHide,
+.nodeHide {
+  opacity: 0;
+}
+
+.edge {
+  fill: none;
+  stroke: #666;
+  stroke-width: 3;
+}
+
+.edge.edgeHasHear {
+  stroke: limegreen;
+}
+
+.edgeOutline {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 25;
+  cursor: pointer;
+}
+
+.edgeSelected {
+  stroke: cornflowerblue;
+}
+
+.nodeCircle {
+  fill: #666;
+  stroke-width: 2;
+  stroke: white;
+}
+
+.nodeLink .nodeCircle {
+  fill: white;
+  stroke: #666;
+}
+
+.nodeLinkIcon {
+  fill: #666;
+  font-size: 12px;
+  text-anchor: middle;
+  font-family: 'Icons';
+  transform: translate3d(0,0.35em,0);
+}
+
+.nodeSelected:not(.nodeLink) .nodeCircle {
+  fill: #6495ed;
+}
+
+.nodeSelected.nodeLink .nodeCircle {
+  stroke: cornflowerblue;
+}
+
+.nodeSelected.nodeLink .nodeLinkIcon {
+  fill: cornflowerblue;
+}
+
+.nodeLabel {
+  text-anchor: middle;
+  font-family: sans-serif;
+  font-size: 12px;
+  fill: #666;
+}
+
+.nodeLabelOutline {
+  text-anchor: middle;
+  font-family: sans-serif;
+  font-size: 12px;
+  stroke: white;
+  stroke-width: 5;
+}
+
+.nodeSelected .nodeLabel {
+  fill: cornflowerblue;
+}
+
+.nodeToggleIconOpen,
+.nodeToggleIconClosed {
+  display: none;
+  fill: #666;
+  font-size: 12px;
+  text-anchor: middle;
+  font-family: 'Icons';
+  transform: translate3d(0,2em,0);
+}
+
+.nodeOpen .nodeToggleIconClosed,
+.nodeClosed .nodeToggleIconOpen {
+  display: block;
+}
+
+.canvas {
+  flex: 1;
+}
+
+.tooltip {
+  position: fixed;
+  left: 0;
+  z-index: 999;
+
+  line-height: 1.4em;
+
+  min-width: 10em;
+  max-width: 30em;
+  padding: 1em;
+  border: 1px solid white;
+  border-radius: 1.5em;
+  opacity: 1;
+
+  pointer-events: none;
+  transition: opacity 150ms linear;
+  box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.2);
+}
+
+.tooltip:empty {
+  opacity: 0;
+  transition: none;
+}
+
+.tooltip.say {
+  transform: translate3d(10px,10px,0);
+  background-color: cornflowerblue;
+  border-top-left-radius: 0;
+  color: white;
+}
+
+.tooltip.hear {
+  transform: translate3d(-100%,0,0);
+  background-color: lightgreen;
+  border-top-right-radius: 0;
+  color: green;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 var(--app-header-height);
+  border-top: 1px solid var(--border-color-dark);
+  background-color: #fff;
+}
+
+.toolbarMessage {
+  flex: 1;
+  padding: 0 1em;
+  font-weight: bold;
+}
+
+.mapActionDropdown:global(.ui.upward.dropdown) {
+  padding: 0 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.mapActionDropdown:global(.ui.upward.dropdown > .menu) {
+  top: auto !important;
+  border-radius: 0 !important;
+}
+
+button.toolboxButton:global(.ui.button) {
+  background-color: #f6f6f6;
+  margin-left: .25rem;
+  margin-right: .25rem;
+}
+button.toolboxButton:global(.ui.button):hover {
+  background-color: #bbb;
+}
+

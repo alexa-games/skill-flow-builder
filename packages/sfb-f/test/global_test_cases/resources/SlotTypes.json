@@ -1,0 +1,12 @@
+{
+  "CustomFruitType": [
+    "apple",
+    "pear",
+    "orange"
+  ],
+  "CustomTestType": [
+    "this",
+    "that",
+    "thing"
+  ]
+}

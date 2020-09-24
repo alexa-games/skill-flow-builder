@@ -1,0 +1,36 @@
+@custom slots
+    *say
+        Custom slot test.
+        Say apple, pear, or, orange.
+    *recap
+        Say apple, pear, or, orange.
+    *then
+        hear {CustomFruitType} {
+            -> cs success
+        }
+        hear * {
+            -> cs fail
+        }
+
+@cs success
+    *say
+        Success! That word is a value in our Custom Fruit Type slot.
+        Do you want to try again?
+    *then
+        hear yes {
+            -> custom slots *recap
+        }
+        hear no {
+            -> end
+        }
+
+@cs fail
+    *say
+        That word is not a valid value in our Custom Fruit Type slot. Try again?
+    *then
+        hear yes {
+            -> custom slots *recap
+        }
+        hear no {
+            -> end
+        }

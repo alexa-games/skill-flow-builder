@@ -1,0 +1,83 @@
+/* 
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
+ *
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *   http://aws.amazon.com/asl/
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+.logWindow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #eee;
+  border-top: 1px solid var(--border-color-dark);
+  z-index: 99;
+}
+
+.logWindow > header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color-dark);
+  padding: 0.5em 1em;
+}
+
+.logWindow > header > button {
+  border: none;
+  padding: 0;
+  background-color: transparent
+}
+
+.logWindow > header > button :global(.icon) {
+  margin-right: 0;
+}
+
+.log {
+  list-style: none;
+  height: 20em;
+
+  padding: 0;
+  margin: 0;
+
+  overflow-y: auto;
+}
+
+.log > :global(li) {
+  display: flex;
+  flex-direction: row;
+
+  padding: 0.5em 0;
+  line-height: 1em;
+  border-bottom: 1px solid var(--border-color-dark);
+}
+
+.logTimestamp {
+  flex: 0 1 auto;
+  padding: 0 1em;
+}
+
+.logMessage {
+  flex: 1;
+  padding: 0 1em;
+}
+
+.logSourceID {
+  flex: 0 1 auto;
+  padding: 0 1em;
+}
+
+.logLineNumber {
+  flex: 0 1 auto;
+  padding: 0 1em;
+}

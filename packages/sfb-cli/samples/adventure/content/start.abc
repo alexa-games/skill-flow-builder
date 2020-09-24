@@ -1,0 +1,11 @@
+@start
+	*say
+		Which would you like to do first, escape the office or escape the motel?
+	*then
+		hear office {
+            -> In the office
+        }
+
+        hear motel {
+            -> Wake up
+        }

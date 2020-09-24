@@ -1,0 +1,43 @@
+{
+  "name": "sfb-skill-package",
+  "author": "Amazon.com",
+  "version": "1.0.0",
+  "description": "Skill Flow Builder project",
+  "main": "./dist/index.js",
+  "devDependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "conventional-changelog-cli": "^2.0.21",
+    "husky": "^2.3.0",
+    "lerna": "^3.15.0",
+    "rimraf": "^2.6.3",
+    "yarn": "^1.17.3"
+  },
+  "scripts": {
+    "postinstall": "npm run build-modules",
+    "build-modules": "cd packages && node buildAll -c",
+    "build-verbose": "cd packages && node buildAll --verbose",
+    "coverage": "cd packages && node buildAll --coverage",
+    "coverage-skip-build": "cd packages && node buildAll --coverage --skip-build",
+    "editor": "cd packages && cd sfb-editor && npx yarn install && npx yarn dev",
+    "start": "cd packages && cd sfb-editor && npx yarn install && npx yarn dev",
+    "clean": "cd packages && node buildAll -cs",
+    "lerna-release": "npx lerna version --conventional-commits",
+    "lerna-prerelease": "npx lerna version --conventional-commits --conventional-prerelease",
+    "lerna-graduate": "npx lerna version --conventional-commits --conventional-graduate",
+    "lerna-release-test": "npx lerna version --conventional-commits --no-push --no-git-tag-version",
+    "lerna-prerelease-test": "npx lerna version --conventional-commits --conventional-prerelease --no-push --no-git-tag-version",
+    "ci": "npm install --ignore-scripts && npm run build-verbose"
+  },
+  "keywords": [
+    "game",
+    "story",
+    "demo"
+  ],
+  "license": "LicenseRef-.amazon.com.-AmznSL-1.0",
+  "devEngines": {
+    "node": ">=10.16.0",
+    "npm": ">=6.x",
+    "yarn": ">=1.x"
+  }
+}

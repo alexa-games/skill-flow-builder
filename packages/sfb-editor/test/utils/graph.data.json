@@ -1,0 +1,2539 @@
+{
+  "hikingDefault": {
+    "default": {"nodes":[{"scene":{"contents":[{"narration":"Good morning! You roll over in bed and look outside. It looks like a beautiful day. Would you like to go on a hike?","sceneDirections":[{"directionType":"clear","parameters":{"variableName":"hesitated"}},{"directionType":"choice","parameters":{"utterances":["yes","go on a hike"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"get ready","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"flag","parameters":{"variableName":"hesitated"}},{"directionType":"go to","parameters":{"target":"hesitate","targetSceneProperty":"narration"}}]}}]}],"id":"start","customProperties":{"sourceLocation":227,"sourceID":"story.abc"}},"childIds":["get ready","hesitate"],"id":"start","children":[],"isLink":false,"label":"start","sourceID":"story.abc","sourceLocation":227},{"scene":{"contents":[{"narration":"You spend the morning inside doing chores and playing video games. Late morning, you look outside and notice that the day is just getting nicer and nicer. It occurs to you that you still have time to fit in a hike. Do you reconsider and go on a hike?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["yes","go on a hike","reconsider"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"get ready","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"do not go on a hike","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["great"],"saveToHistory":"true","directions":[{"directionType":"ending","parameters":{}}]}}]}],"id":"hesitate","customProperties":{"sourceLocation":1203,"sourceID":"story.abc"}},"childIds":["get ready","do not go on a hike"],"id":"hesitate","children":[],"isLink":false,"label":"hesitate","sourceID":"story.abc","sourceLocation":1203},{"scene":{"contents":[{"narration":"You continue to do chores and play video games and the day passes you by. You go to sleep feeling cranky. What a waste of a beautiful day. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"do not go on a hike","customProperties":{"sourceLocation":1745,"sourceID":"story.abc"}},"childIds":[],"id":"do not go on a hike","children":[],"isLink":false,"label":"do not go on a hike","sourceID":"story.abc","sourceLocation":1745},{"scene":{"contents":[{"narration":"Yay, you are so excited. You start to get ready for your adventure. You pick a beautiful nearby alpine lake as your hiking destination and get out your daypack. You toss your fully charge smartphone, first aide kit, small multitool, a big bag of granola, and a lightweight rain jacket into your pack. You throw on some comfy hiking clothes and lace up your hiking shoes. Almost ready!","sceneDirections":[{"directionType":"recap","parameters":{"message":"You pick a hiking destination, get dressed, and pack your gear."}},{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"get ready","customProperties":{"sourceLocation":1940,"sourceID":"story.abc"}},"childIds":["water"],"id":"get ready","children":[],"isLink":false,"label":"get ready","sourceID":"story.abc","sourceLocation":1940},{"scene":{"contents":[{"narration":"How many bottles of water would you like to take with you?","sceneDirections":[{"directionType":"reprompt","parameters":{"message":"I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?"}},{"directionType":"slot","parameters":{"variableName":"bottles","variableType":"AMAZON.NUMBER"}},{"directionType":"choice","parameters":{"utterances":["{bottles}","{bottles} bottle","{bottles} bottles"],"saveToHistory":"true","directions":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 0","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}},{"directionType":"condition","parameters":{"condition":"{bottles} > 4","directions":[{"directionType":"go to","parameters":{"target":"too many","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"trailhead","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no","none"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}}]}],"id":"water","customProperties":{"sourceLocation":2550,"sourceID":"story.abc"}},"childIds":["not enough","too many","trailhead"],"id":"water","children":[],"isLink":false,"label":"water","sourceID":"story.abc","sourceLocation":2550},{"scene":{"contents":[{"narration":"You need at least some water.","sceneDirections":[{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"not enough","customProperties":{"sourceLocation":3780,"sourceID":"story.abc"}},"childIds":["water"],"id":"not enough","children":[],"isLink":false,"label":"not enough","sourceID":"story.abc","sourceLocation":3780},{"scene":{"contents":[{"narration":"You only have 4 bottles to use at home.","sceneDirections":[{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"too many","customProperties":{"sourceLocation":3944,"sourceID":"story.abc"}},"childIds":["water"],"id":"too many","children":[],"isLink":false,"label":"too many","sourceID":"story.abc","sourceLocation":3944},{"scene":{"contents":[{"narration":"You fill up {bottles} water bottles and grab your gear. On the car ride out to the trailhead you listen to your favorite album of woodland sounds. You are so amped for a hike.","sceneDirections":[{"directionType":"condition","parameters":{"condition":"{hesitated}","directions":[{"directionType":"go to","parameters":{"target":"parking full","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"parking free","targetSceneProperty":"narration"}}]}],"id":"trailhead","customProperties":{"sourceLocation":4022,"sourceID":"story.abc"}},"childIds":["parking full","parking free"],"id":"trailhead","children":[],"isLink":false,"label":"trailhead","sourceID":"story.abc","sourceLocation":4022},{"scene":{"contents":[{"narration":"You pull up to the trailhead and the parking lot is completely full. You drive around for a few minutes until you see a couple who are back from their hike and tossing their gear into the trunk of their car. You pull up and wait while they pack up. Eventually, they drive away and you grab their parking spot.","sceneDirections":[{"directionType":"go to","parameters":{"target":"start hike","targetSceneProperty":"narration"}}]}],"id":"parking full","customProperties":{"sourceLocation":4395,"sourceID":"story.abc"}},"childIds":["start hike"],"id":"parking full","children":[],"isLink":false,"label":"parking full","sourceID":"story.abc","sourceLocation":4395},{"scene":{"contents":[{"narration":"You pull up to the trailhead and park.","sceneDirections":[{"directionType":"go to","parameters":{"target":"start hike","targetSceneProperty":"narration"}}]}],"id":"parking free","customProperties":{"sourceLocation":4752,"sourceID":"story.abc"}},"childIds":["start hike"],"id":"parking free","children":[],"isLink":false,"label":"parking free","sourceID":"story.abc","sourceLocation":4752},{"scene":{"contents":[{"narration":"You start hiking up towards the alpine lake and after a short while you are feeling the effort in your legs and lungs. It feels good and you keep trekking through the trees, stopping occasionally for water or a quick bite of granola. Your mind begins to clear and you feel at one with nature. At about an hour in, the vegitation around you becomes shorter and more sparse and the trail connects with a stream that runs along your left. Then you see it, a little patch of blue expanse up ahead. Your legs are pretty tired, but you quicken your pace. The blue grows as you approach. Then, all of a sudden, the lake is right in front of you, surrounded on 3 sides by rocky peaks.","sceneDirections":[{"directionType":"go to","parameters":{"target":"rest","targetSceneProperty":"narration"}}]}],"id":"start hike","customProperties":{"sourceLocation":4838,"sourceID":"story.abc"}},"childIds":["rest"],"id":"start hike","children":[],"isLink":false,"label":"start hike","sourceID":"story.abc","sourceLocation":4838},{"scene":{"contents":[{"narration":"You take a seat on a large rock at the edge of the lake and relax with some water and granola. The sun feels great and your legs thank you for the chance to rest. You look to you right and notice that the trail continues. From where you sit, you can see it traversing back and forth up the right most peak. It must be an incredible view from up there. Would you like to continue on to the peak or call it a day and head down?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["continue on to the peak"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"continue","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["call it a day and head down"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"head home","targetSceneProperty":"narration"}}]}}]}],"id":"rest","customProperties":{"sourceLocation":5554,"sourceID":"story.abc"}},"childIds":["continue","head home"],"id":"rest","children":[],"isLink":false,"label":"rest","sourceID":"story.abc","sourceLocation":5554},{"scene":{"contents":[{"narration":"You rest a little longer at the lake and then head down the trail. To get to the parking lot faster than your thought you would and head to get a burger. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"head home","customProperties":{"sourceLocation":6148,"sourceID":"story.abc"}},"childIds":[],"id":"head home","children":[],"isLink":false,"label":"head home","sourceID":"story.abc","sourceLocation":6148},{"scene":{"contents":[{"narration":"You get up from the rock and start up the winding trail. Your legs ache but soon loosen up. You are high up enough that there isn't much tree coverage and the sun is beating down on you.","sceneDirections":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 1","directions":[{"directionType":"go to","parameters":{"target":"peak fail","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"peak","targetSceneProperty":"narration"}}]}],"id":"continue","customProperties":{"sourceLocation":6347,"sourceID":"story.abc"}},"childIds":["peak fail","peak"],"id":"continue","children":[],"isLink":false,"label":"continue","sourceID":"story.abc","sourceLocation":6347},{"scene":{"contents":[{"narration":"About half way up, you stop to drink some water and notice that there is not much left in your bottle. You drink the last bit and wish you had brought more water with you. It's still a pretty long way up to the top and the trail is completely exposed to the sun and wind. Just looking at the rest of the trail remaining makes your throat dry. You take stock of your situation and decide that you'd better call it a day. You head back to the lake and then down to the parking lot. You are parched and sad that you didn't make it to the top but glad that you didn't risk it. You hop in your car and head out to get a burger on your way back home. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"peak fail","customProperties":{"sourceLocation":6715,"sourceID":"story.abc"}},"childIds":[],"id":"peak fail","children":[],"isLink":false,"label":"peak fail","sourceID":"story.abc","sourceLocation":6715},{"scene":{"contents":[{"narration":"You stop for more granola and water frequently. Good thing you brought enough water. It is a grueling climb, much harder than your thought it would be when looking up from the lake. Eventually you start to get closer to the peak and your adrenalin starts to kick in. The air is great up here. Then you take your final step and you are standing on top of the peak and can see forever in all directions. You take a moment to soak it in and take some photos. It's quiet peaceful up there. Eventually, you decide to head down. It's a long trip down and your legs are shot but it was totally worth it. Finally, you make it to the parking lots and flop into your car. You are beat and ready for a burger. What a great day! The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"peak","customProperties":{"sourceLocation":7405,"sourceID":"story.abc"}},"childIds":[],"id":"peak","children":[],"isLink":false,"label":"peak","sourceID":"story.abc","sourceLocation":7405},{"scene":{"contents":[{"narration":"","sceneDirections":[{"directionType":"visuals","parameters":{"template":"default","background":"https://sfb-framework.s3.amazonaws.com/examples/images/alps.jpg","title":"Skill Flow Builder","subtitle":""}}]}],"id":"global prepend","customProperties":{"sourceLocation":8295,"sourceID":"story.abc"}},"childIds":[],"id":"global prepend","children":[],"isLink":false,"label":"global prepend","sourceID":"story.abc","sourceLocation":8295},{"scene":{"contents":[{"narration":"","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["start over","restart"],"saveToHistory":"true","directions":[{"directionType":"restart","parameters":{}}]}},{"directionType":"choice","parameters":{"utterances":["repeat"],"saveToHistory":"true","directions":[{"directionType":"repeat","parameters":{}}]}},{"directionType":"choice","parameters":{"utterances":["help"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"help","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["go back"],"saveToHistory":"true","directions":[{"directionType":"back","parameters":{"count":1}}]}},{"directionType":"condition","parameters":{"condition":"!{helped}","directions":[{"directionType":"choice","parameters":{"utterances":["*"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"help","targetSceneProperty":"narration"}}]}}]}}]}],"id":"global append","customProperties":{"sourceLocation":8660,"sourceID":"story.abc"}},"childIds":["help"],"id":"global append","children":[],"isLink":false,"label":"global append","sourceID":"story.abc","sourceLocation":8660},{"scene":{"contents":[{"narration":"Welcome back to your hiking story. Would you like to pick up where you last left off?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["yes"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"{resume}","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"restart","parameters":{}}]}}]}],"id":"resume","customProperties":{"sourceLocation":9501,"sourceID":"story.abc"}},"childIds":[],"id":"resume","children":[],"isLink":false,"label":"resume","sourceID":"story.abc","sourceLocation":9501},{"scene":{"contents":[{"narration":"Thanks for playing.","sceneDirections":[{"directionType":"pause","parameters":{}}]}],"id":"pause","customProperties":{"sourceLocation":9820,"sourceID":"story.abc"}},"childIds":[],"id":"pause","children":[],"isLink":false,"label":"pause","sourceID":"story.abc","sourceLocation":9820},{"scene":{"contents":[{"narration":"Thanks for playing. Would you like to start over or take a break?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["take a break"],"saveToHistory":"true","directions":[{"directionType":"ending","parameters":{}}]}}]}],"id":"end","customProperties":{"sourceLocation":9982,"sourceID":"story.abc"}},"childIds":[],"id":"end","children":[],"isLink":false,"label":"end","sourceID":"story.abc","sourceLocation":9982},{"scene":{"contents":[{"narration":"Here's the help menu. Make choices to navigate the story or you can tell me to start over or stop. Picking up where you left off.","sceneDirections":[{"directionType":"flag","parameters":{"variableName":"helped"}},{"directionType":"back","parameters":{"count":1}}]}],"id":"help","customProperties":{"sourceLocation":10105,"sourceID":"story.abc"}},"childIds":[],"id":"help","children":[],"isLink":false,"label":"help","sourceID":"story.abc","sourceLocation":10105}],"edges":[{"from":"start","to":"get ready"},{"from":"start","to":"hesitate"},{"from":"hesitate","to":"get ready"},{"from":"hesitate","to":"do not go on a hike"},{"from":"get ready","to":"water"},{"from":"water","to":"not enough"},{"from":"water","to":"too many"},{"from":"water","to":"trailhead"},{"from":"not enough","to":"water"},{"from":"too many","to":"water"},{"from":"trailhead","to":"parking full"},{"from":"trailhead","to":"parking free"},{"from":"parking full","to":"start hike"},{"from":"parking free","to":"start hike"},{"from":"start hike","to":"rest"},{"from":"rest","to":"continue"},{"from":"rest","to":"head home"},{"from":"continue","to":"peak fail"},{"from":"continue","to":"peak"},{"from":"global append","to":"help"},{"from":"global append","to":"help"}],"root":{"scene":{"contents":[{"narration":"Good morning! You roll over in bed and look outside. It looks like a beautiful day. Would you like to go on a hike?","sceneDirections":[{"directionType":"clear","parameters":{"variableName":"hesitated"}},{"directionType":"choice","parameters":{"utterances":["yes","go on a hike"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"get ready","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"flag","parameters":{"variableName":"hesitated"}},{"directionType":"go to","parameters":{"target":"hesitate","targetSceneProperty":"narration"}}]}}]}],"id":"start","customProperties":{"sourceLocation":227,"sourceID":"story.abc"}},"childIds":["get ready","hesitate"],"id":"start","children":[{"scene":{"contents":[{"narration":"Yay, you are so excited. You start to get ready for your adventure. You pick a beautiful nearby alpine lake as your hiking destination and get out your daypack. You toss your fully charge smartphone, first aide kit, small multitool, a big bag of granola, and a lightweight rain jacket into your pack. You throw on some comfy hiking clothes and lace up your hiking shoes. Almost ready!","sceneDirections":[{"directionType":"recap","parameters":{"message":"You pick a hiking destination, get dressed, and pack your gear."}},{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"get ready","customProperties":{"sourceLocation":1940,"sourceID":"story.abc"}},"childIds":["water"],"id":"get ready","children":[{"scene":{"contents":[{"narration":"How many bottles of water would you like to take with you?","sceneDirections":[{"directionType":"reprompt","parameters":{"message":"I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?"}},{"directionType":"slot","parameters":{"variableName":"bottles","variableType":"AMAZON.NUMBER"}},{"directionType":"choice","parameters":{"utterances":["{bottles}","{bottles} bottle","{bottles} bottles"],"saveToHistory":"true","directions":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 0","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}},{"directionType":"condition","parameters":{"condition":"{bottles} > 4","directions":[{"directionType":"go to","parameters":{"target":"too many","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"trailhead","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no","none"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}}]}],"id":"water","customProperties":{"sourceLocation":2550,"sourceID":"story.abc"}},"childIds":["not enough","too many","trailhead"],"id":"water","children":[{"scene":{"contents":[{"narration":"You need at least some water.","sceneDirections":[{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"not enough","customProperties":{"sourceLocation":3780,"sourceID":"story.abc"}},"childIds":["water"],"id":"not enough","children":[{"scene":{"contents":[{"narration":"How many bottles of water would you like to take with you?","sceneDirections":[{"directionType":"reprompt","parameters":{"message":"I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?"}},{"directionType":"slot","parameters":{"variableName":"bottles","variableType":"AMAZON.NUMBER"}},{"directionType":"choice","parameters":{"utterances":["{bottles}","{bottles} bottle","{bottles} bottles"],"saveToHistory":"true","directions":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 0","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}},{"directionType":"condition","parameters":{"condition":"{bottles} > 4","directions":[{"directionType":"go to","parameters":{"target":"too many","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"trailhead","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no","none"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}}]}],"id":"water","customProperties":{"sourceLocation":2550,"sourceID":"story.abc"}},"childIds":["not enough","too many","trailhead"],"id":"water","children":[],"isLink":true,"label":"water","sourceID":"story.abc","sourceLocation":2550}],"isLink":false,"label":"not enough","sourceID":"story.abc","sourceLocation":3780},{"scene":{"contents":[{"narration":"You only have 4 bottles to use at home.","sceneDirections":[{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"too many","customProperties":{"sourceLocation":3944,"sourceID":"story.abc"}},"childIds":["water"],"id":"too many","children":[{"scene":{"contents":[{"narration":"How many bottles of water would you like to take with you?","sceneDirections":[{"directionType":"reprompt","parameters":{"message":"I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?"}},{"directionType":"slot","parameters":{"variableName":"bottles","variableType":"AMAZON.NUMBER"}},{"directionType":"choice","parameters":{"utterances":["{bottles}","{bottles} bottle","{bottles} bottles"],"saveToHistory":"true","directions":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 0","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}},{"directionType":"condition","parameters":{"condition":"{bottles} > 4","directions":[{"directionType":"go to","parameters":{"target":"too many","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"trailhead","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no","none"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}}]}],"id":"water","customProperties":{"sourceLocation":2550,"sourceID":"story.abc"}},"childIds":["not enough","too many","trailhead"],"id":"water","children":[],"isLink":true,"label":"water","sourceID":"story.abc","sourceLocation":2550}],"isLink":false,"label":"too many","sourceID":"story.abc","sourceLocation":3944},{"scene":{"contents":[{"narration":"You fill up {bottles} water bottles and grab your gear. On the car ride out to the trailhead you listen to your favorite album of woodland sounds. You are so amped for a hike.","sceneDirections":[{"directionType":"condition","parameters":{"condition":"{hesitated}","directions":[{"directionType":"go to","parameters":{"target":"parking full","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"parking free","targetSceneProperty":"narration"}}]}],"id":"trailhead","customProperties":{"sourceLocation":4022,"sourceID":"story.abc"}},"childIds":["parking full","parking free"],"id":"trailhead","children":[{"scene":{"contents":[{"narration":"You pull up to the trailhead and the parking lot is completely full. You drive around for a few minutes until you see a couple who are back from their hike and tossing their gear into the trunk of their car. You pull up and wait while they pack up. Eventually, they drive away and you grab their parking spot.","sceneDirections":[{"directionType":"go to","parameters":{"target":"start hike","targetSceneProperty":"narration"}}]}],"id":"parking full","customProperties":{"sourceLocation":4395,"sourceID":"story.abc"}},"childIds":["start hike"],"id":"parking full","children":[{"scene":{"contents":[{"narration":"You start hiking up towards the alpine lake and after a short while you are feeling the effort in your legs and lungs. It feels good and you keep trekking through the trees, stopping occasionally for water or a quick bite of granola. Your mind begins to clear and you feel at one with nature. At about an hour in, the vegitation around you becomes shorter and more sparse and the trail connects with a stream that runs along your left. Then you see it, a little patch of blue expanse up ahead. Your legs are pretty tired, but you quicken your pace. The blue grows as you approach. Then, all of a sudden, the lake is right in front of you, surrounded on 3 sides by rocky peaks.","sceneDirections":[{"directionType":"go to","parameters":{"target":"rest","targetSceneProperty":"narration"}}]}],"id":"start hike","customProperties":{"sourceLocation":4838,"sourceID":"story.abc"}},"childIds":["rest"],"id":"start hike","children":[{"scene":{"contents":[{"narration":"You take a seat on a large rock at the edge of the lake and relax with some water and granola. The sun feels great and your legs thank you for the chance to rest. You look to you right and notice that the trail continues. From where you sit, you can see it traversing back and forth up the right most peak. It must be an incredible view from up there. Would you like to continue on to the peak or call it a day and head down?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["continue on to the peak"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"continue","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["call it a day and head down"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"head home","targetSceneProperty":"narration"}}]}}]}],"id":"rest","customProperties":{"sourceLocation":5554,"sourceID":"story.abc"}},"childIds":["continue","head home"],"id":"rest","children":[{"scene":{"contents":[{"narration":"You get up from the rock and start up the winding trail. Your legs ache but soon loosen up. You are high up enough that there isn't much tree coverage and the sun is beating down on you.","sceneDirections":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 1","directions":[{"directionType":"go to","parameters":{"target":"peak fail","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"peak","targetSceneProperty":"narration"}}]}],"id":"continue","customProperties":{"sourceLocation":6347,"sourceID":"story.abc"}},"childIds":["peak fail","peak"],"id":"continue","children":[{"scene":{"contents":[{"narration":"About half way up, you stop to drink some water and notice that there is not much left in your bottle. You drink the last bit and wish you had brought more water with you. It's still a pretty long way up to the top and the trail is completely exposed to the sun and wind. Just looking at the rest of the trail remaining makes your throat dry. You take stock of your situation and decide that you'd better call it a day. You head back to the lake and then down to the parking lot. You are parched and sad that you didn't make it to the top but glad that you didn't risk it. You hop in your car and head out to get a burger on your way back home. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"peak fail","customProperties":{"sourceLocation":6715,"sourceID":"story.abc"}},"childIds":[],"id":"peak fail","children":[],"isLink":false,"label":"peak fail","sourceID":"story.abc","sourceLocation":6715},{"scene":{"contents":[{"narration":"You stop for more granola and water frequently. Good thing you brought enough water. It is a grueling climb, much harder than your thought it would be when looking up from the lake. Eventually you start to get closer to the peak and your adrenalin starts to kick in. The air is great up here. Then you take your final step and you are standing on top of the peak and can see forever in all directions. You take a moment to soak it in and take some photos. It's quiet peaceful up there. Eventually, you decide to head down. It's a long trip down and your legs are shot but it was totally worth it. Finally, you make it to the parking lots and flop into your car. You are beat and ready for a burger. What a great day! The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"peak","customProperties":{"sourceLocation":7405,"sourceID":"story.abc"}},"childIds":[],"id":"peak","children":[],"isLink":false,"label":"peak","sourceID":"story.abc","sourceLocation":7405}],"isLink":false,"label":"continue","sourceID":"story.abc","sourceLocation":6347},{"scene":{"contents":[{"narration":"You rest a little longer at the lake and then head down the trail. To get to the parking lot faster than your thought you would and head to get a burger. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"head home","customProperties":{"sourceLocation":6148,"sourceID":"story.abc"}},"childIds":[],"id":"head home","children":[],"isLink":false,"label":"head home","sourceID":"story.abc","sourceLocation":6148}],"isLink":false,"label":"rest","sourceID":"story.abc","sourceLocation":5554}],"isLink":false,"label":"start hike","sourceID":"story.abc","sourceLocation":4838}],"isLink":false,"label":"parking full","sourceID":"story.abc","sourceLocation":4395},{"scene":{"contents":[{"narration":"You pull up to the trailhead and park.","sceneDirections":[{"directionType":"go to","parameters":{"target":"start hike","targetSceneProperty":"narration"}}]}],"id":"parking free","customProperties":{"sourceLocation":4752,"sourceID":"story.abc"}},"childIds":["start hike"],"id":"parking free","children":[{"scene":{"contents":[{"narration":"You start hiking up towards the alpine lake and after a short while you are feeling the effort in your legs and lungs. It feels good and you keep trekking through the trees, stopping occasionally for water or a quick bite of granola. Your mind begins to clear and you feel at one with nature. At about an hour in, the vegitation around you becomes shorter and more sparse and the trail connects with a stream that runs along your left. Then you see it, a little patch of blue expanse up ahead. Your legs are pretty tired, but you quicken your pace. The blue grows as you approach. Then, all of a sudden, the lake is right in front of you, surrounded on 3 sides by rocky peaks.","sceneDirections":[{"directionType":"go to","parameters":{"target":"rest","targetSceneProperty":"narration"}}]}],"id":"start hike","customProperties":{"sourceLocation":4838,"sourceID":"story.abc"}},"childIds":["rest"],"id":"start hike","children":[],"isLink":true,"label":"start hike","sourceID":"story.abc","sourceLocation":4838}],"isLink":false,"label":"parking free","sourceID":"story.abc","sourceLocation":4752}],"isLink":false,"label":"trailhead","sourceID":"story.abc","sourceLocation":4022}],"isLink":false,"label":"water","sourceID":"story.abc","sourceLocation":2550}],"isLink":false,"label":"get ready","sourceID":"story.abc","sourceLocation":1940},{"scene":{"contents":[{"narration":"You spend the morning inside doing chores and playing video games. Late morning, you look outside and notice that the day is just getting nicer and nicer. It occurs to you that you still have time to fit in a hike. Do you reconsider and go on a hike?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["yes","go on a hike","reconsider"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"get ready","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"do not go on a hike","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["great"],"saveToHistory":"true","directions":[{"directionType":"ending","parameters":{}}]}}]}],"id":"hesitate","customProperties":{"sourceLocation":1203,"sourceID":"story.abc"}},"childIds":["get ready","do not go on a hike"],"id":"hesitate","children":[{"scene":{"contents":[{"narration":"Yay, you are so excited. You start to get ready for your adventure. You pick a beautiful nearby alpine lake as your hiking destination and get out your daypack. You toss your fully charge smartphone, first aide kit, small multitool, a big bag of granola, and a lightweight rain jacket into your pack. You throw on some comfy hiking clothes and lace up your hiking shoes. Almost ready!","sceneDirections":[{"directionType":"recap","parameters":{"message":"You pick a hiking destination, get dressed, and pack your gear."}},{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"get ready","customProperties":{"sourceLocation":1940,"sourceID":"story.abc"}},"childIds":["water"],"id":"get ready","children":[],"isLink":true,"label":"get ready","sourceID":"story.abc","sourceLocation":1940},{"scene":{"contents":[{"narration":"You continue to do chores and play video games and the day passes you by. You go to sleep feeling cranky. What a waste of a beautiful day. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"do not go on a hike","customProperties":{"sourceLocation":1745,"sourceID":"story.abc"}},"childIds":[],"id":"do not go on a hike","children":[],"isLink":false,"label":"do not go on a hike","sourceID":"story.abc","sourceLocation":1745}],"isLink":false,"label":"hesitate","sourceID":"story.abc","sourceLocation":1203}],"isLink":false,"label":"start","sourceID":"story.abc","sourceLocation":227},"additionalRootNodes":[{"scene":{"contents":[{"narration":"","sceneDirections":[{"directionType":"visuals","parameters":{"template":"default","background":"https://sfb-framework.s3.amazonaws.com/examples/images/alps.jpg","title":"Skill Flow Builder","subtitle":""}}]}],"id":"global prepend","customProperties":{"sourceLocation":8295,"sourceID":"story.abc"}},"childIds":[],"id":"global prepend","children":[],"isLink":false,"label":"global prepend","sourceID":"story.abc","sourceLocation":8295},{"scene":{"contents":[{"narration":"","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["start over","restart"],"saveToHistory":"true","directions":[{"directionType":"restart","parameters":{}}]}},{"directionType":"choice","parameters":{"utterances":["repeat"],"saveToHistory":"true","directions":[{"directionType":"repeat","parameters":{}}]}},{"directionType":"choice","parameters":{"utterances":["help"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"help","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["go back"],"saveToHistory":"true","directions":[{"directionType":"back","parameters":{"count":1}}]}},{"directionType":"condition","parameters":{"condition":"!{helped}","directions":[{"directionType":"choice","parameters":{"utterances":["*"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"help","targetSceneProperty":"narration"}}]}}]}}]}],"id":"global append","customProperties":{"sourceLocation":8660,"sourceID":"story.abc"}},"childIds":["help"],"id":"global append","children":[{"scene":{"contents":[{"narration":"Here's the help menu. Make choices to navigate the story or you can tell me to start over or stop. Picking up where you left off.","sceneDirections":[{"directionType":"flag","parameters":{"variableName":"helped"}},{"directionType":"back","parameters":{"count":1}}]}],"id":"help","customProperties":{"sourceLocation":10105,"sourceID":"story.abc"}},"childIds":[],"id":"help","children":[],"isLink":false,"label":"help","sourceID":"story.abc","sourceLocation":10105},{"scene":{"contents":[{"narration":"Here's the help menu. Make choices to navigate the story or you can tell me to start over or stop. Picking up where you left off.","sceneDirections":[{"directionType":"flag","parameters":{"variableName":"helped"}},{"directionType":"back","parameters":{"count":1}}]}],"id":"help","customProperties":{"sourceLocation":10105,"sourceID":"story.abc"}},"childIds":[],"id":"help","children":[],"isLink":true,"label":"help","sourceID":"story.abc","sourceLocation":10105}],"isLink":false,"label":"global append","sourceID":"story.abc","sourceLocation":8660},{"scene":{"contents":[{"narration":"Welcome back to your hiking story. Would you like to pick up where you last left off?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["yes"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"{resume}","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"restart","parameters":{}}]}}]}],"id":"resume","customProperties":{"sourceLocation":9501,"sourceID":"story.abc"}},"childIds":[],"id":"resume","children":[],"isLink":false,"label":"resume","sourceID":"story.abc","sourceLocation":9501},{"scene":{"contents":[{"narration":"Thanks for playing.","sceneDirections":[{"directionType":"pause","parameters":{}}]}],"id":"pause","customProperties":{"sourceLocation":9820,"sourceID":"story.abc"}},"childIds":[],"id":"pause","children":[],"isLink":false,"label":"pause","sourceID":"story.abc","sourceLocation":9820},{"scene":{"contents":[{"narration":"Thanks for playing. Would you like to start over or take a break?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["take a break"],"saveToHistory":"true","directions":[{"directionType":"ending","parameters":{}}]}}]}],"id":"end","customProperties":{"sourceLocation":9982,"sourceID":"story.abc"}},"childIds":[],"id":"end","children":[],"isLink":false,"label":"end","sourceID":"story.abc","sourceLocation":9982}],"nodesOutput":null},
+    "orphan": {"nodes":[{"scene":{"contents":[{"narration":"Good morning! You roll over in bed and look outside. It looks like a beautiful day. Would you like to go on a hike?","sceneDirections":[{"directionType":"clear","parameters":{"variableName":"hesitated"}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"flag","parameters":{"variableName":"hesitated"}},{"directionType":"go to","parameters":{"target":"hesitate","targetSceneProperty":"narration"}}]}}]}],"id":"start","customProperties":{"sourceLocation":1,"sourceID":"story.abc"}},"childIds":["hesitate"],"id":"start","children":[],"isLink":false,"label":"start","sourceID":"story.abc","sourceLocation":1},{"scene":{"contents":[{"narration":"You spend the morning inside doing chores and playing video games. Late morning, you look outside and notice that the day is just getting nicer and nicer. It occurs to you that you still have time to fit in a hike. Do you reconsider and go on a hike?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"do not go on a hike","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["great"],"saveToHistory":"true","directions":[{"directionType":"ending","parameters":{}}]}}]}],"id":"hesitate","customProperties":{"sourceLocation":873,"sourceID":"story.abc"}},"childIds":["do not go on a hike"],"id":"hesitate","children":[],"isLink":false,"label":"hesitate","sourceID":"story.abc","sourceLocation":873},{"scene":{"contents":[{"narration":"You continue to do chores and play video games and the day passes you by. You go to sleep feeling cranky. What a waste of a beautiful day. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"do not go on a hike","customProperties":{"sourceLocation":1344,"sourceID":"story.abc"}},"childIds":[],"id":"do not go on a hike","children":[],"isLink":false,"label":"do not go on a hike","sourceID":"story.abc","sourceLocation":1344},{"scene":{"contents":[{"narration":"How many bottles of water would you like to take with you?","sceneDirections":[{"directionType":"reprompt","parameters":{"message":"I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?"}},{"directionType":"slot","parameters":{"variableName":"bottles","variableType":"AMAZON.NUMBER"}},{"directionType":"choice","parameters":{"utterances":["{bottles}","{bottles} bottle","{bottles} bottles"],"saveToHistory":"true","directions":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 0","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}},{"directionType":"condition","parameters":{"condition":"{bottles} > 4","directions":[{"directionType":"go to","parameters":{"target":"too many","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"trailhead","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no","none"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}}]}],"id":"water","customProperties":{"sourceLocation":1538,"sourceID":"story.abc"}},"childIds":["not enough","too many","trailhead"],"id":"water","children":[],"isLink":false,"label":"water","sourceID":"story.abc","sourceLocation":1538},{"scene":{"contents":[{"narration":"You need at least some water.","sceneDirections":[{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"not enough","customProperties":{"sourceLocation":2769,"sourceID":"story.abc"}},"childIds":["water"],"id":"not enough","children":[],"isLink":false,"label":"not enough","sourceID":"story.abc","sourceLocation":2769},{"scene":{"contents":[{"narration":"You only have 4 bottles to use at home.","sceneDirections":[{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"too many","customProperties":{"sourceLocation":2934,"sourceID":"story.abc"}},"childIds":["water"],"id":"too many","children":[],"isLink":false,"label":"too many","sourceID":"story.abc","sourceLocation":2934},{"scene":{"contents":[{"narration":"You fill up {bottles} water bottles and grab your gear. On the car ride out to the trailhead you listen to your favorite album of woodland sounds. You are so amped for a hike.","sceneDirections":[{"directionType":"condition","parameters":{"condition":"{hesitated}","directions":[{"directionType":"go to","parameters":{"target":"parking full","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"parking free","targetSceneProperty":"narration"}}]}],"id":"trailhead","customProperties":{"sourceLocation":3011,"sourceID":"story.abc"}},"childIds":["parking full","parking free"],"id":"trailhead","children":[],"isLink":false,"label":"trailhead","sourceID":"story.abc","sourceLocation":3011},{"scene":{"contents":[{"narration":"You pull up to the trailhead and the parking lot is completely full. You drive around for a few minutes until you see a couple who are back from their hike and tossing their gear into the trunk of their car. You pull up and wait while they pack up. Eventually, they drive away and you grab their parking spot.","sceneDirections":[{"directionType":"go to","parameters":{"target":"start hike","targetSceneProperty":"narration"}}]}],"id":"parking full","customProperties":{"sourceLocation":3383,"sourceID":"story.abc"}},"childIds":["start hike"],"id":"parking full","children":[],"isLink":false,"label":"parking full","sourceID":"story.abc","sourceLocation":3383},{"scene":{"contents":[{"narration":"You pull up to the trailhead and park.","sceneDirections":[{"directionType":"go to","parameters":{"target":"start hike","targetSceneProperty":"narration"}}]}],"id":"parking free","customProperties":{"sourceLocation":3739,"sourceID":"story.abc"}},"childIds":["start hike"],"id":"parking free","children":[],"isLink":false,"label":"parking free","sourceID":"story.abc","sourceLocation":3739},{"scene":{"contents":[{"narration":"You start hiking up towards the alpine lake and after a short while you are feeling the effort in your legs and lungs. It feels good and you keep trekking through the trees, stopping occasionally for water or a quick bite of granola. Your mind begins to clear and you feel at one with nature. At about an hour in, the vegitation around you becomes shorter and more sparse and the trail connects with a stream that runs along your left. Then you see it, a little patch of blue expanse up ahead. Your legs are pretty tired, but you quicken your pace. The blue grows as you approach. Then, all of a sudden, the lake is right in front of you, surrounded on 3 sides by rocky peaks.","sceneDirections":[{"directionType":"go to","parameters":{"target":"rest","targetSceneProperty":"narration"}}]}],"id":"start hike","customProperties":{"sourceLocation":3824,"sourceID":"story.abc"}},"childIds":["rest"],"id":"start hike","children":[],"isLink":false,"label":"start hike","sourceID":"story.abc","sourceLocation":3824},{"scene":{"contents":[{"narration":"You take a seat on a large rock at the edge of the lake and relax with some water and granola. The sun feels great and your legs thank you for the chance to rest. You look to you right and notice that the trail continues. From where you sit, you can see it traversing back and forth up the right most peak. It must be an incredible view from up there. Would you like to continue on to the peak or call it a day and head down?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["continue on to the peak"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"continue","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["call it a day and head down"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"head home","targetSceneProperty":"narration"}}]}}]}],"id":"rest","customProperties":{"sourceLocation":4539,"sourceID":"story.abc"}},"childIds":["continue","head home"],"id":"rest","children":[],"isLink":false,"label":"rest","sourceID":"story.abc","sourceLocation":4539},{"scene":{"contents":[{"narration":"You rest a little longer at the lake and then head down the trail. To get to the parking lot faster than your thought you would and head to get a burger. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"head home","customProperties":{"sourceLocation":5132,"sourceID":"story.abc"}},"childIds":[],"id":"head home","children":[],"isLink":false,"label":"head home","sourceID":"story.abc","sourceLocation":5132},{"scene":{"contents":[{"narration":"You get up from the rock and start up the winding trail. Your legs ache but soon loosen up. You are high up enough that there isn't much tree coverage and the sun is beating down on you.","sceneDirections":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 1","directions":[{"directionType":"go to","parameters":{"target":"peak fail","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"peak","targetSceneProperty":"narration"}}]}],"id":"continue","customProperties":{"sourceLocation":5331,"sourceID":"story.abc"}},"childIds":["peak fail","peak"],"id":"continue","children":[],"isLink":false,"label":"continue","sourceID":"story.abc","sourceLocation":5331},{"scene":{"contents":[{"narration":"About half way up, you stop to drink some water and notice that there is not much left in your bottle. You drink the last bit and wish you had brought more water with you. It's still a pretty long way up to the top and the trail is completely exposed to the sun and wind. Just looking at the rest of the trail remaining makes your throat dry. You take stock of your situation and decide that you'd better call it a day. You head back to the lake and then down to the parking lot. You are parched and sad that you didn't make it to the top but glad that you didn't risk it. You hop in your car and head out to get a burger on your way back home. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"peak fail","customProperties":{"sourceLocation":5698,"sourceID":"story.abc"}},"childIds":[],"id":"peak fail","children":[],"isLink":false,"label":"peak fail","sourceID":"story.abc","sourceLocation":5698},{"scene":{"contents":[{"narration":"You stop for more granola and water frequently. Good thing you brought enough water. It is a grueling climb, much harder than your thought it would be when looking up from the lake. Eventually you start to get closer to the peak and your adrenalin starts to kick in. The air is great up here. Then you take your final step and you are standing on top of the peak and can see forever in all directions. You take a moment to soak it in and take some photos. It's quiet peaceful up there. Eventually, you decide to head down. It's a long trip down and your legs are shot but it was totally worth it. Finally, you make it to the parking lots and flop into your car. You are beat and ready for a burger. What a great day! The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"peak","customProperties":{"sourceLocation":6388,"sourceID":"story.abc"}},"childIds":[],"id":"peak","children":[],"isLink":false,"label":"peak","sourceID":"story.abc","sourceLocation":6388},{"scene":{"contents":[{"narration":"","sceneDirections":[{"directionType":"visuals","parameters":{"template":"default","background":"https://sfb-framework.s3.amazonaws.com/examples/images/alps.jpg","title":"Skill Flow Builder","subtitle":""}}]}],"id":"global prepend","customProperties":{"sourceLocation":7279,"sourceID":"story.abc"}},"childIds":[],"id":"global prepend","children":[],"isLink":false,"label":"global prepend","sourceID":"story.abc","sourceLocation":7279},{"scene":{"contents":[{"narration":"","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["start over","restart"],"saveToHistory":"true","directions":[{"directionType":"restart","parameters":{}}]}},{"directionType":"choice","parameters":{"utterances":["repeat"],"saveToHistory":"true","directions":[{"directionType":"repeat","parameters":{}}]}},{"directionType":"choice","parameters":{"utterances":["help"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"help","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["go back"],"saveToHistory":"true","directions":[{"directionType":"back","parameters":{"count":1}}]}},{"directionType":"condition","parameters":{"condition":"!{helped}","directions":[{"directionType":"choice","parameters":{"utterances":["*"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"help","targetSceneProperty":"narration"}}]}}]}}]}],"id":"global append","customProperties":{"sourceLocation":7636,"sourceID":"story.abc"}},"childIds":["help"],"id":"global append","children":[],"isLink":false,"label":"global append","sourceID":"story.abc","sourceLocation":7636},{"scene":{"contents":[{"narration":"Welcome back to your hiking story. Would you like to pick up where you last left off?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["yes"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"{resume}","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"restart","parameters":{}}]}}]}],"id":"resume","customProperties":{"sourceLocation":8469,"sourceID":"story.abc"}},"childIds":[],"id":"resume","children":[],"isLink":false,"label":"resume","sourceID":"story.abc","sourceLocation":8469},{"scene":{"contents":[{"narration":"Thanks for playing.","sceneDirections":[{"directionType":"pause","parameters":{}}]}],"id":"pause","customProperties":{"sourceLocation":8789,"sourceID":"story.abc"}},"childIds":[],"id":"pause","children":[],"isLink":false,"label":"pause","sourceID":"story.abc","sourceLocation":8789},{"scene":{"contents":[{"narration":"Thanks for playing. Would you like to start over or take a break?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["take a break"],"saveToHistory":"true","directions":[{"directionType":"ending","parameters":{}}]}}]}],"id":"end","customProperties":{"sourceLocation":8951,"sourceID":"story.abc"}},"childIds":[],"id":"end","children":[],"isLink":false,"label":"end","sourceID":"story.abc","sourceLocation":8951},{"scene":{"contents":[{"narration":"Here's the help menu. Make choices to navigate the story or you can tell me to start over or stop. Picking up where you left off.","sceneDirections":[{"directionType":"flag","parameters":{"variableName":"helped"}},{"directionType":"back","parameters":{"count":1}}]}],"id":"help","customProperties":{"sourceLocation":9074,"sourceID":"story.abc"}},"childIds":[],"id":"help","children":[],"isLink":false,"label":"help","sourceID":"story.abc","sourceLocation":9074}],"edges":[{"from":"start","to":"hesitate"},{"from":"hesitate","to":"do not go on a hike"},{"from":"water","to":"not enough"},{"from":"water","to":"too many"},{"from":"water","to":"trailhead"},{"from":"not enough","to":"water"},{"from":"too many","to":"water"},{"from":"trailhead","to":"parking full"},{"from":"trailhead","to":"parking free"},{"from":"parking full","to":"start hike"},{"from":"parking free","to":"start hike"},{"from":"start hike","to":"rest"},{"from":"rest","to":"continue"},{"from":"rest","to":"head home"},{"from":"continue","to":"peak fail"},{"from":"continue","to":"peak"},{"from":"global append","to":"help"},{"from":"global append","to":"help"}],"root":{"scene":{"contents":[{"narration":"Good morning! You roll over in bed and look outside. It looks like a beautiful day. Would you like to go on a hike?","sceneDirections":[{"directionType":"clear","parameters":{"variableName":"hesitated"}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"flag","parameters":{"variableName":"hesitated"}},{"directionType":"go to","parameters":{"target":"hesitate","targetSceneProperty":"narration"}}]}}]}],"id":"start","customProperties":{"sourceLocation":1,"sourceID":"story.abc"}},"childIds":["hesitate"],"id":"start","children":[{"scene":{"contents":[{"narration":"You spend the morning inside doing chores and playing video games. Late morning, you look outside and notice that the day is just getting nicer and nicer. It occurs to you that you still have time to fit in a hike. Do you reconsider and go on a hike?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"do not go on a hike","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["great"],"saveToHistory":"true","directions":[{"directionType":"ending","parameters":{}}]}}]}],"id":"hesitate","customProperties":{"sourceLocation":873,"sourceID":"story.abc"}},"childIds":["do not go on a hike"],"id":"hesitate","children":[{"scene":{"contents":[{"narration":"You continue to do chores and play video games and the day passes you by. You go to sleep feeling cranky. What a waste of a beautiful day. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"do not go on a hike","customProperties":{"sourceLocation":1344,"sourceID":"story.abc"}},"childIds":[],"id":"do not go on a hike","children":[],"isLink":false,"label":"do not go on a hike","sourceID":"story.abc","sourceLocation":1344}],"isLink":false,"label":"hesitate","sourceID":"story.abc","sourceLocation":873}],"isLink":false,"label":"start","sourceID":"story.abc","sourceLocation":1},"additionalRootNodes":[{"scene":{"contents":[{"narration":"How many bottles of water would you like to take with you?","sceneDirections":[{"directionType":"reprompt","parameters":{"message":"I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?"}},{"directionType":"slot","parameters":{"variableName":"bottles","variableType":"AMAZON.NUMBER"}},{"directionType":"choice","parameters":{"utterances":["{bottles}","{bottles} bottle","{bottles} bottles"],"saveToHistory":"true","directions":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 0","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}},{"directionType":"condition","parameters":{"condition":"{bottles} > 4","directions":[{"directionType":"go to","parameters":{"target":"too many","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"trailhead","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no","none"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}}]}],"id":"water","customProperties":{"sourceLocation":1538,"sourceID":"story.abc"}},"childIds":["not enough","too many","trailhead"],"id":"water","children":[{"scene":{"contents":[{"narration":"You need at least some water.","sceneDirections":[{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"not enough","customProperties":{"sourceLocation":2769,"sourceID":"story.abc"}},"childIds":["water"],"id":"not enough","children":[{"scene":{"contents":[{"narration":"How many bottles of water would you like to take with you?","sceneDirections":[{"directionType":"reprompt","parameters":{"message":"I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?"}},{"directionType":"slot","parameters":{"variableName":"bottles","variableType":"AMAZON.NUMBER"}},{"directionType":"choice","parameters":{"utterances":["{bottles}","{bottles} bottle","{bottles} bottles"],"saveToHistory":"true","directions":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 0","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}},{"directionType":"condition","parameters":{"condition":"{bottles} > 4","directions":[{"directionType":"go to","parameters":{"target":"too many","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"trailhead","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no","none"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}}]}],"id":"water","customProperties":{"sourceLocation":1538,"sourceID":"story.abc"}},"childIds":["not enough","too many","trailhead"],"id":"water","children":[],"isLink":true,"label":"water","sourceID":"story.abc","sourceLocation":1538}],"isLink":false,"label":"not enough","sourceID":"story.abc","sourceLocation":2769},{"scene":{"contents":[{"narration":"You only have 4 bottles to use at home.","sceneDirections":[{"directionType":"go to","parameters":{"target":"water","targetSceneProperty":"narration"}}]}],"id":"too many","customProperties":{"sourceLocation":2934,"sourceID":"story.abc"}},"childIds":["water"],"id":"too many","children":[{"scene":{"contents":[{"narration":"How many bottles of water would you like to take with you?","sceneDirections":[{"directionType":"reprompt","parameters":{"message":"I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?"}},{"directionType":"slot","parameters":{"variableName":"bottles","variableType":"AMAZON.NUMBER"}},{"directionType":"choice","parameters":{"utterances":["{bottles}","{bottles} bottle","{bottles} bottles"],"saveToHistory":"true","directions":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 0","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}},{"directionType":"condition","parameters":{"condition":"{bottles} > 4","directions":[{"directionType":"go to","parameters":{"target":"too many","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"trailhead","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no","none"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"not enough","targetSceneProperty":"narration"}}]}}]}],"id":"water","customProperties":{"sourceLocation":1538,"sourceID":"story.abc"}},"childIds":["not enough","too many","trailhead"],"id":"water","children":[],"isLink":true,"label":"water","sourceID":"story.abc","sourceLocation":1538}],"isLink":false,"label":"too many","sourceID":"story.abc","sourceLocation":2934},{"scene":{"contents":[{"narration":"You fill up {bottles} water bottles and grab your gear. On the car ride out to the trailhead you listen to your favorite album of woodland sounds. You are so amped for a hike.","sceneDirections":[{"directionType":"condition","parameters":{"condition":"{hesitated}","directions":[{"directionType":"go to","parameters":{"target":"parking full","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"parking free","targetSceneProperty":"narration"}}]}],"id":"trailhead","customProperties":{"sourceLocation":3011,"sourceID":"story.abc"}},"childIds":["parking full","parking free"],"id":"trailhead","children":[{"scene":{"contents":[{"narration":"You pull up to the trailhead and the parking lot is completely full. You drive around for a few minutes until you see a couple who are back from their hike and tossing their gear into the trunk of their car. You pull up and wait while they pack up. Eventually, they drive away and you grab their parking spot.","sceneDirections":[{"directionType":"go to","parameters":{"target":"start hike","targetSceneProperty":"narration"}}]}],"id":"parking full","customProperties":{"sourceLocation":3383,"sourceID":"story.abc"}},"childIds":["start hike"],"id":"parking full","children":[{"scene":{"contents":[{"narration":"You start hiking up towards the alpine lake and after a short while you are feeling the effort in your legs and lungs. It feels good and you keep trekking through the trees, stopping occasionally for water or a quick bite of granola. Your mind begins to clear and you feel at one with nature. At about an hour in, the vegitation around you becomes shorter and more sparse and the trail connects with a stream that runs along your left. Then you see it, a little patch of blue expanse up ahead. Your legs are pretty tired, but you quicken your pace. The blue grows as you approach. Then, all of a sudden, the lake is right in front of you, surrounded on 3 sides by rocky peaks.","sceneDirections":[{"directionType":"go to","parameters":{"target":"rest","targetSceneProperty":"narration"}}]}],"id":"start hike","customProperties":{"sourceLocation":3824,"sourceID":"story.abc"}},"childIds":["rest"],"id":"start hike","children":[{"scene":{"contents":[{"narration":"You take a seat on a large rock at the edge of the lake and relax with some water and granola. The sun feels great and your legs thank you for the chance to rest. You look to you right and notice that the trail continues. From where you sit, you can see it traversing back and forth up the right most peak. It must be an incredible view from up there. Would you like to continue on to the peak or call it a day and head down?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["continue on to the peak"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"continue","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["call it a day and head down"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"head home","targetSceneProperty":"narration"}}]}}]}],"id":"rest","customProperties":{"sourceLocation":4539,"sourceID":"story.abc"}},"childIds":["continue","head home"],"id":"rest","children":[{"scene":{"contents":[{"narration":"You get up from the rock and start up the winding trail. Your legs ache but soon loosen up. You are high up enough that there isn't much tree coverage and the sun is beating down on you.","sceneDirections":[{"directionType":"condition","parameters":{"condition":"{bottles} <= 1","directions":[{"directionType":"go to","parameters":{"target":"peak fail","targetSceneProperty":"narration"}}]}},{"directionType":"go to","parameters":{"target":"peak","targetSceneProperty":"narration"}}]}],"id":"continue","customProperties":{"sourceLocation":5331,"sourceID":"story.abc"}},"childIds":["peak fail","peak"],"id":"continue","children":[{"scene":{"contents":[{"narration":"About half way up, you stop to drink some water and notice that there is not much left in your bottle. You drink the last bit and wish you had brought more water with you. It's still a pretty long way up to the top and the trail is completely exposed to the sun and wind. Just looking at the rest of the trail remaining makes your throat dry. You take stock of your situation and decide that you'd better call it a day. You head back to the lake and then down to the parking lot. You are parched and sad that you didn't make it to the top but glad that you didn't risk it. You hop in your car and head out to get a burger on your way back home. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"peak fail","customProperties":{"sourceLocation":5698,"sourceID":"story.abc"}},"childIds":[],"id":"peak fail","children":[],"isLink":false,"label":"peak fail","sourceID":"story.abc","sourceLocation":5698},{"scene":{"contents":[{"narration":"You stop for more granola and water frequently. Good thing you brought enough water. It is a grueling climb, much harder than your thought it would be when looking up from the lake. Eventually you start to get closer to the peak and your adrenalin starts to kick in. The air is great up here. Then you take your final step and you are standing on top of the peak and can see forever in all directions. You take a moment to soak it in and take some photos. It's quiet peaceful up there. Eventually, you decide to head down. It's a long trip down and your legs are shot but it was totally worth it. Finally, you make it to the parking lots and flop into your car. You are beat and ready for a burger. What a great day! The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"peak","customProperties":{"sourceLocation":6388,"sourceID":"story.abc"}},"childIds":[],"id":"peak","children":[],"isLink":false,"label":"peak","sourceID":"story.abc","sourceLocation":6388}],"isLink":false,"label":"continue","sourceID":"story.abc","sourceLocation":5331},{"scene":{"contents":[{"narration":"You rest a little longer at the lake and then head down the trail. To get to the parking lot faster than your thought you would and head to get a burger. The end.","sceneDirections":[{"directionType":"ending","parameters":{}}]}],"id":"head home","customProperties":{"sourceLocation":5132,"sourceID":"story.abc"}},"childIds":[],"id":"head home","children":[],"isLink":false,"label":"head home","sourceID":"story.abc","sourceLocation":5132}],"isLink":false,"label":"rest","sourceID":"story.abc","sourceLocation":4539}],"isLink":false,"label":"start hike","sourceID":"story.abc","sourceLocation":3824}],"isLink":false,"label":"parking full","sourceID":"story.abc","sourceLocation":3383},{"scene":{"contents":[{"narration":"You pull up to the trailhead and park.","sceneDirections":[{"directionType":"go to","parameters":{"target":"start hike","targetSceneProperty":"narration"}}]}],"id":"parking free","customProperties":{"sourceLocation":3739,"sourceID":"story.abc"}},"childIds":["start hike"],"id":"parking free","children":[{"scene":{"contents":[{"narration":"You start hiking up towards the alpine lake and after a short while you are feeling the effort in your legs and lungs. It feels good and you keep trekking through the trees, stopping occasionally for water or a quick bite of granola. Your mind begins to clear and you feel at one with nature. At about an hour in, the vegitation around you becomes shorter and more sparse and the trail connects with a stream that runs along your left. Then you see it, a little patch of blue expanse up ahead. Your legs are pretty tired, but you quicken your pace. The blue grows as you approach. Then, all of a sudden, the lake is right in front of you, surrounded on 3 sides by rocky peaks.","sceneDirections":[{"directionType":"go to","parameters":{"target":"rest","targetSceneProperty":"narration"}}]}],"id":"start hike","customProperties":{"sourceLocation":3824,"sourceID":"story.abc"}},"childIds":["rest"],"id":"start hike","children":[],"isLink":true,"label":"start hike","sourceID":"story.abc","sourceLocation":3824}],"isLink":false,"label":"parking free","sourceID":"story.abc","sourceLocation":3739}],"isLink":false,"label":"trailhead","sourceID":"story.abc","sourceLocation":3011}],"isLink":false,"label":"water","sourceID":"story.abc","sourceLocation":1538},{"scene":{"contents":[{"narration":"","sceneDirections":[{"directionType":"visuals","parameters":{"template":"default","background":"https://sfb-framework.s3.amazonaws.com/examples/images/alps.jpg","title":"Skill Flow Builder","subtitle":""}}]}],"id":"global prepend","customProperties":{"sourceLocation":7279,"sourceID":"story.abc"}},"childIds":[],"id":"global prepend","children":[],"isLink":false,"label":"global prepend","sourceID":"story.abc","sourceLocation":7279},{"scene":{"contents":[{"narration":"","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["start over","restart"],"saveToHistory":"true","directions":[{"directionType":"restart","parameters":{}}]}},{"directionType":"choice","parameters":{"utterances":["repeat"],"saveToHistory":"true","directions":[{"directionType":"repeat","parameters":{}}]}},{"directionType":"choice","parameters":{"utterances":["help"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"help","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["go back"],"saveToHistory":"true","directions":[{"directionType":"back","parameters":{"count":1}}]}},{"directionType":"condition","parameters":{"condition":"!{helped}","directions":[{"directionType":"choice","parameters":{"utterances":["*"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"help","targetSceneProperty":"narration"}}]}}]}}]}],"id":"global append","customProperties":{"sourceLocation":7636,"sourceID":"story.abc"}},"childIds":["help"],"id":"global append","children":[{"scene":{"contents":[{"narration":"Here's the help menu. Make choices to navigate the story or you can tell me to start over or stop. Picking up where you left off.","sceneDirections":[{"directionType":"flag","parameters":{"variableName":"helped"}},{"directionType":"back","parameters":{"count":1}}]}],"id":"help","customProperties":{"sourceLocation":9074,"sourceID":"story.abc"}},"childIds":[],"id":"help","children":[],"isLink":false,"label":"help","sourceID":"story.abc","sourceLocation":9074},{"scene":{"contents":[{"narration":"Here's the help menu. Make choices to navigate the story or you can tell me to start over or stop. Picking up where you left off.","sceneDirections":[{"directionType":"flag","parameters":{"variableName":"helped"}},{"directionType":"back","parameters":{"count":1}}]}],"id":"help","customProperties":{"sourceLocation":9074,"sourceID":"story.abc"}},"childIds":[],"id":"help","children":[],"isLink":true,"label":"help","sourceID":"story.abc","sourceLocation":9074}],"isLink":false,"label":"global append","sourceID":"story.abc","sourceLocation":7636},{"scene":{"contents":[{"narration":"Welcome back to your hiking story. Would you like to pick up where you last left off?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["yes"],"saveToHistory":"true","directions":[{"directionType":"go to","parameters":{"target":"{resume}","targetSceneProperty":"narration"}}]}},{"directionType":"choice","parameters":{"utterances":["no"],"saveToHistory":"true","directions":[{"directionType":"restart","parameters":{}}]}}]}],"id":"resume","customProperties":{"sourceLocation":8469,"sourceID":"story.abc"}},"childIds":[],"id":"resume","children":[],"isLink":false,"label":"resume","sourceID":"story.abc","sourceLocation":8469},{"scene":{"contents":[{"narration":"Thanks for playing.","sceneDirections":[{"directionType":"pause","parameters":{}}]}],"id":"pause","customProperties":{"sourceLocation":8789,"sourceID":"story.abc"}},"childIds":[],"id":"pause","children":[],"isLink":false,"label":"pause","sourceID":"story.abc","sourceLocation":8789},{"scene":{"contents":[{"narration":"Thanks for playing. Would you like to start over or take a break?","sceneDirections":[{"directionType":"choice","parameters":{"utterances":["take a break"],"saveToHistory":"true","directions":[{"directionType":"ending","parameters":{}}]}}]}],"id":"end","customProperties":{"sourceLocation":8951,"sourceID":"story.abc"}},"childIds":[],"id":"end","children":[],"isLink":false,"label":"end","sourceID":"story.abc","sourceLocation":8951}],"nodesOutput":null}
+  },
+  "testProject": {
+    "data": {
+      "nodes": [
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "startsay",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "second"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "second",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "third"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "third",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "start",
+            "customProperties": {
+              "sourceLocation": 1,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "second",
+            "third"
+          ],
+          "id": "start",
+          "children": [],
+          "isLink": false,
+          "label": "start",
+          "sourceID": "story.abc",
+          "sourceLocation": 1
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "secondday",
+                "sceneDirections": [
+                  {
+                    "directionType": "ending",
+                    "parameters": {}
+                  }
+                ]
+              }
+            ],
+            "id": "second",
+            "customProperties": {
+              "sourceLocation": 96,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [],
+          "id": "second",
+          "children": [],
+          "isLink": false,
+          "label": "second",
+          "sourceID": "story.abc",
+          "sourceLocation": 96
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "thirdsay",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "fourth"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "fourth",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "fifth"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "fifth",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "third",
+            "customProperties": {
+              "sourceLocation": 123,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "fourth",
+            "fifth"
+          ],
+          "id": "third",
+          "children": [],
+          "isLink": false,
+          "label": "third",
+          "sourceID": "story.abc",
+          "sourceLocation": 123
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "go to",
+                    "parameters": {
+                      "target": "start",
+                      "targetSceneProperty": "narration"
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "fourth",
+            "customProperties": {
+              "sourceLocation": 219,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "start"
+          ],
+          "id": "fourth",
+          "children": [],
+          "isLink": false,
+          "label": "fourth",
+          "sourceID": "story.abc",
+          "sourceLocation": 219
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "go to",
+                    "parameters": {
+                      "target": "third",
+                      "targetSceneProperty": "narration"
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "fifth",
+            "customProperties": {
+              "sourceLocation": 271,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "third"
+          ],
+          "id": "fifth",
+          "children": [],
+          "isLink": false,
+          "label": "fifth",
+          "sourceID": "story.abc",
+          "sourceLocation": 271
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Orphan start",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "orphan two"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphan2",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "orphanstart",
+            "customProperties": {
+              "sourceLocation": 322,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "orphan2"
+          ],
+          "id": "orphanstart",
+          "children": [],
+          "isLink": false,
+          "label": "orphanstart",
+          "sourceID": "story.abc",
+          "sourceLocation": 322
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "orphan three"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphan3",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "orphan 4"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphan4",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "go to scene orphanstart"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphanstart",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "orphan2",
+            "customProperties": {
+              "sourceLocation": 402,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "orphan3",
+            "orphan4",
+            "orphanstart"
+          ],
+          "id": "orphan2",
+          "children": [],
+          "isLink": false,
+          "label": "orphan2",
+          "sourceID": "story.abc",
+          "sourceLocation": 402
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "ending",
+                    "parameters": {}
+                  }
+                ]
+              }
+            ],
+            "id": "orphan3",
+            "customProperties": {
+              "sourceLocation": 575,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [],
+          "id": "orphan3",
+          "children": [],
+          "isLink": false,
+          "label": "orphan3",
+          "sourceID": "story.abc",
+          "sourceLocation": 575
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "go to",
+                    "parameters": {
+                      "target": "orphanstart",
+                      "targetSceneProperty": "narration"
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "orphan4",
+            "customProperties": {
+              "sourceLocation": 611,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "orphanstart"
+          ],
+          "id": "orphan4",
+          "children": [],
+          "isLink": false,
+          "label": "orphan4",
+          "sourceID": "story.abc",
+          "sourceLocation": 611
+        }
+      ],
+      "edges": [
+        {
+          "from": "start",
+          "to": "second"
+        },
+        {
+          "from": "start",
+          "to": "third"
+        },
+        {
+          "from": "third",
+          "to": "fourth"
+        },
+        {
+          "from": "third",
+          "to": "fifth"
+        },
+        {
+          "from": "fourth",
+          "to": "start"
+        },
+        {
+          "from": "fifth",
+          "to": "third"
+        },
+        {
+          "from": "orphanstart",
+          "to": "orphan2"
+        },
+        {
+          "from": "orphan2",
+          "to": "orphan3"
+        },
+        {
+          "from": "orphan2",
+          "to": "orphan4"
+        },
+        {
+          "from": "orphan2",
+          "to": "orphanstart"
+        },
+        {
+          "from": "orphan4",
+          "to": "orphanstart"
+        }
+      ],
+      "root": {
+        "scene": {
+          "contents": [
+            {
+              "narration": "startsay",
+              "sceneDirections": [
+                {
+                  "directionType": "choice",
+                  "parameters": {
+                    "utterances": [
+                      "second"
+                    ],
+                    "saveToHistory": "true",
+                    "directions": [
+                      {
+                        "directionType": "go to",
+                        "parameters": {
+                          "target": "second",
+                          "targetSceneProperty": "narration"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "directionType": "choice",
+                  "parameters": {
+                    "utterances": [
+                      "third"
+                    ],
+                    "saveToHistory": "true",
+                    "directions": [
+                      {
+                        "directionType": "go to",
+                        "parameters": {
+                          "target": "third",
+                          "targetSceneProperty": "narration"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "start",
+          "customProperties": {
+            "sourceLocation": 1,
+            "sourceID": "story.abc"
+          }
+        },
+        "childIds": [
+          "second",
+          "third"
+        ],
+        "id": "start",
+        "children": [
+          {
+            "scene": {
+              "contents": [
+                {
+                  "narration": "secondday",
+                  "sceneDirections": [
+                    {
+                      "directionType": "ending",
+                      "parameters": {}
+                    }
+                  ]
+                }
+              ],
+              "id": "second",
+              "customProperties": {
+                "sourceLocation": 96,
+                "sourceID": "story.abc"
+              }
+            },
+            "childIds": [],
+            "id": "second",
+            "children": [],
+            "isLink": false,
+            "label": "second",
+            "sourceID": "story.abc",
+            "sourceLocation": 96
+          },
+          {
+            "scene": {
+              "contents": [
+                {
+                  "narration": "thirdsay",
+                  "sceneDirections": [
+                    {
+                      "directionType": "choice",
+                      "parameters": {
+                        "utterances": [
+                          "fourth"
+                        ],
+                        "saveToHistory": "true",
+                        "directions": [
+                          {
+                            "directionType": "go to",
+                            "parameters": {
+                              "target": "fourth",
+                              "targetSceneProperty": "narration"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "directionType": "choice",
+                      "parameters": {
+                        "utterances": [
+                          "fifth"
+                        ],
+                        "saveToHistory": "true",
+                        "directions": [
+                          {
+                            "directionType": "go to",
+                            "parameters": {
+                              "target": "fifth",
+                              "targetSceneProperty": "narration"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "id": "third",
+              "customProperties": {
+                "sourceLocation": 123,
+                "sourceID": "story.abc"
+              }
+            },
+            "childIds": [
+              "fourth",
+              "fifth"
+            ],
+            "id": "third",
+            "children": [
+              {
+                "scene": {
+                  "contents": [
+                    {
+                      "narration": "Put say text here",
+                      "sceneDirections": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "start",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "id": "fourth",
+                  "customProperties": {
+                    "sourceLocation": 219,
+                    "sourceID": "story.abc"
+                  }
+                },
+                "childIds": [
+                  "start"
+                ],
+                "id": "fourth",
+                "children": [
+                  {
+                    "scene": {
+                      "contents": [
+                        {
+                          "narration": "startsay",
+                          "sceneDirections": [
+                            {
+                              "directionType": "choice",
+                              "parameters": {
+                                "utterances": [
+                                  "second"
+                                ],
+                                "saveToHistory": "true",
+                                "directions": [
+                                  {
+                                    "directionType": "go to",
+                                    "parameters": {
+                                      "target": "second",
+                                      "targetSceneProperty": "narration"
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "directionType": "choice",
+                              "parameters": {
+                                "utterances": [
+                                  "third"
+                                ],
+                                "saveToHistory": "true",
+                                "directions": [
+                                  {
+                                    "directionType": "go to",
+                                    "parameters": {
+                                      "target": "third",
+                                      "targetSceneProperty": "narration"
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "id": "start",
+                      "customProperties": {
+                        "sourceLocation": 1,
+                        "sourceID": "story.abc"
+                      }
+                    },
+                    "childIds": [
+                      "second",
+                      "third"
+                    ],
+                    "id": "start",
+                    "children": [],
+                    "isLink": true,
+                    "label": "start",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 1
+                  }
+                ],
+                "isLink": false,
+                "label": "fourth",
+                "sourceID": "story.abc",
+                "sourceLocation": 219
+              },
+              {
+                "scene": {
+                  "contents": [
+                    {
+                      "narration": "Put say text here",
+                      "sceneDirections": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "third",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "id": "fifth",
+                  "customProperties": {
+                    "sourceLocation": 271,
+                    "sourceID": "story.abc"
+                  }
+                },
+                "childIds": [
+                  "third"
+                ],
+                "id": "fifth",
+                "children": [
+                  {
+                    "scene": {
+                      "contents": [
+                        {
+                          "narration": "thirdsay",
+                          "sceneDirections": [
+                            {
+                              "directionType": "choice",
+                              "parameters": {
+                                "utterances": [
+                                  "fourth"
+                                ],
+                                "saveToHistory": "true",
+                                "directions": [
+                                  {
+                                    "directionType": "go to",
+                                    "parameters": {
+                                      "target": "fourth",
+                                      "targetSceneProperty": "narration"
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "directionType": "choice",
+                              "parameters": {
+                                "utterances": [
+                                  "fifth"
+                                ],
+                                "saveToHistory": "true",
+                                "directions": [
+                                  {
+                                    "directionType": "go to",
+                                    "parameters": {
+                                      "target": "fifth",
+                                      "targetSceneProperty": "narration"
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "id": "third",
+                      "customProperties": {
+                        "sourceLocation": 123,
+                        "sourceID": "story.abc"
+                      }
+                    },
+                    "childIds": [
+                      "fourth",
+                      "fifth"
+                    ],
+                    "id": "third",
+                    "children": [],
+                    "isLink": true,
+                    "label": "third",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 123
+                  }
+                ],
+                "isLink": false,
+                "label": "fifth",
+                "sourceID": "story.abc",
+                "sourceLocation": 271
+              }
+            ],
+            "isLink": false,
+            "label": "third",
+            "sourceID": "story.abc",
+            "sourceLocation": 123
+          }
+        ],
+        "isLink": false,
+        "label": "start",
+        "sourceID": "story.abc",
+        "sourceLocation": 1
+      },
+      "additionalRootNodes": [
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Orphan start",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "orphan two"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphan2",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "orphanstart",
+            "customProperties": {
+              "sourceLocation": 322,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "orphan2"
+          ],
+          "id": "orphanstart",
+          "children": [
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "Put say text here",
+                    "sceneDirections": [
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "orphan three"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "orphan3",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "orphan 4"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "orphan4",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "go to scene orphanstart"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "orphanstart",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "orphan2",
+                "customProperties": {
+                  "sourceLocation": 402,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "orphan3",
+                "orphan4",
+                "orphanstart"
+              ],
+              "id": "orphan2",
+              "children": [
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Put say text here",
+                        "sceneDirections": [
+                          {
+                            "directionType": "ending",
+                            "parameters": {}
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "orphan3",
+                    "customProperties": {
+                      "sourceLocation": 575,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [],
+                  "id": "orphan3",
+                  "children": [],
+                  "isLink": false,
+                  "label": "orphan3",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 575
+                },
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Put say text here",
+                        "sceneDirections": [
+                          {
+                            "directionType": "go to",
+                            "parameters": {
+                              "target": "orphanstart",
+                              "targetSceneProperty": "narration"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "orphan4",
+                    "customProperties": {
+                      "sourceLocation": 611,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "orphanstart"
+                  ],
+                  "id": "orphan4",
+                  "children": [
+                    {
+                      "scene": {
+                        "contents": [
+                          {
+                            "narration": "Orphan start",
+                            "sceneDirections": [
+                              {
+                                "directionType": "choice",
+                                "parameters": {
+                                  "utterances": [
+                                    "orphan two"
+                                  ],
+                                  "saveToHistory": "true",
+                                  "directions": [
+                                    {
+                                      "directionType": "go to",
+                                      "parameters": {
+                                        "target": "orphan2",
+                                        "targetSceneProperty": "narration"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "id": "orphanstart",
+                        "customProperties": {
+                          "sourceLocation": 322,
+                          "sourceID": "story.abc"
+                        }
+                      },
+                      "childIds": [
+                        "orphan2"
+                      ],
+                      "id": "orphanstart",
+                      "children": [],
+                      "isLink": true,
+                      "label": "orphanstart",
+                      "sourceID": "story.abc",
+                      "sourceLocation": 322
+                    }
+                  ],
+                  "isLink": false,
+                  "label": "orphan4",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 611
+                },
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Orphan start",
+                        "sceneDirections": [
+                          {
+                            "directionType": "choice",
+                            "parameters": {
+                              "utterances": [
+                                "orphan two"
+                              ],
+                              "saveToHistory": "true",
+                              "directions": [
+                                {
+                                  "directionType": "go to",
+                                  "parameters": {
+                                    "target": "orphan2",
+                                    "targetSceneProperty": "narration"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "orphanstart",
+                    "customProperties": {
+                      "sourceLocation": 322,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "orphan2"
+                  ],
+                  "id": "orphanstart",
+                  "children": [],
+                  "isLink": true,
+                  "label": "orphanstart",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 322
+                }
+              ],
+              "isLink": false,
+              "label": "orphan2",
+              "sourceID": "story.abc",
+              "sourceLocation": 402
+            }
+          ],
+          "isLink": false,
+          "label": "orphanstart",
+          "sourceID": "story.abc",
+          "sourceLocation": 322
+        }
+      ],
+      "nodesOutput": [
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "startsay",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "second"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "second",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "third"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "third",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "start",
+            "customProperties": {
+              "sourceLocation": 1,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "second",
+            "third"
+          ],
+          "id": "start",
+          "children": [
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "secondday",
+                    "sceneDirections": [
+                      {
+                        "directionType": "ending",
+                        "parameters": {}
+                      }
+                    ]
+                  }
+                ],
+                "id": "second",
+                "customProperties": {
+                  "sourceLocation": 96,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [],
+              "id": "second",
+              "children": [],
+              "isLink": false,
+              "label": "second",
+              "sourceID": "story.abc",
+              "sourceLocation": 96
+            },
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "thirdsay",
+                    "sceneDirections": [
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "fourth"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "fourth",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "fifth"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "fifth",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "third",
+                "customProperties": {
+                  "sourceLocation": 123,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "fourth",
+                "fifth"
+              ],
+              "id": "third",
+              "children": [
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Put say text here",
+                        "sceneDirections": [
+                          {
+                            "directionType": "go to",
+                            "parameters": {
+                              "target": "start",
+                              "targetSceneProperty": "narration"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "fourth",
+                    "customProperties": {
+                      "sourceLocation": 219,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "start"
+                  ],
+                  "id": "fourth",
+                  "children": [
+                    {
+                      "scene": {
+                        "contents": [
+                          {
+                            "narration": "startsay",
+                            "sceneDirections": [
+                              {
+                                "directionType": "choice",
+                                "parameters": {
+                                  "utterances": [
+                                    "second"
+                                  ],
+                                  "saveToHistory": "true",
+                                  "directions": [
+                                    {
+                                      "directionType": "go to",
+                                      "parameters": {
+                                        "target": "second",
+                                        "targetSceneProperty": "narration"
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "directionType": "choice",
+                                "parameters": {
+                                  "utterances": [
+                                    "third"
+                                  ],
+                                  "saveToHistory": "true",
+                                  "directions": [
+                                    {
+                                      "directionType": "go to",
+                                      "parameters": {
+                                        "target": "third",
+                                        "targetSceneProperty": "narration"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "id": "start",
+                        "customProperties": {
+                          "sourceLocation": 1,
+                          "sourceID": "story.abc"
+                        }
+                      },
+                      "childIds": [
+                        "second",
+                        "third"
+                      ],
+                      "id": "start",
+                      "children": [],
+                      "isLink": true,
+                      "label": "start",
+                      "sourceID": "story.abc",
+                      "sourceLocation": 1
+                    }
+                  ],
+                  "isLink": false,
+                  "label": "fourth",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 219
+                },
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Put say text here",
+                        "sceneDirections": [
+                          {
+                            "directionType": "go to",
+                            "parameters": {
+                              "target": "third",
+                              "targetSceneProperty": "narration"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "fifth",
+                    "customProperties": {
+                      "sourceLocation": 271,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "third"
+                  ],
+                  "id": "fifth",
+                  "children": [
+                    {
+                      "scene": {
+                        "contents": [
+                          {
+                            "narration": "thirdsay",
+                            "sceneDirections": [
+                              {
+                                "directionType": "choice",
+                                "parameters": {
+                                  "utterances": [
+                                    "fourth"
+                                  ],
+                                  "saveToHistory": "true",
+                                  "directions": [
+                                    {
+                                      "directionType": "go to",
+                                      "parameters": {
+                                        "target": "fourth",
+                                        "targetSceneProperty": "narration"
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "directionType": "choice",
+                                "parameters": {
+                                  "utterances": [
+                                    "fifth"
+                                  ],
+                                  "saveToHistory": "true",
+                                  "directions": [
+                                    {
+                                      "directionType": "go to",
+                                      "parameters": {
+                                        "target": "fifth",
+                                        "targetSceneProperty": "narration"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "id": "third",
+                        "customProperties": {
+                          "sourceLocation": 123,
+                          "sourceID": "story.abc"
+                        }
+                      },
+                      "childIds": [
+                        "fourth",
+                        "fifth"
+                      ],
+                      "id": "third",
+                      "children": [],
+                      "isLink": true,
+                      "label": "third",
+                      "sourceID": "story.abc",
+                      "sourceLocation": 123
+                    }
+                  ],
+                  "isLink": false,
+                  "label": "fifth",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 271
+                }
+              ],
+              "isLink": false,
+              "label": "third",
+              "sourceID": "story.abc",
+              "sourceLocation": 123
+            }
+          ],
+          "isLink": false,
+          "label": "start",
+          "sourceID": "story.abc",
+          "sourceLocation": 1
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "secondday",
+                "sceneDirections": [
+                  {
+                    "directionType": "ending",
+                    "parameters": {}
+                  }
+                ]
+              }
+            ],
+            "id": "second",
+            "customProperties": {
+              "sourceLocation": 96,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [],
+          "id": "second",
+          "children": [],
+          "isLink": false,
+          "label": "second",
+          "sourceID": "story.abc",
+          "sourceLocation": 96
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "thirdsay",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "fourth"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "fourth",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "fifth"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "fifth",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "third",
+            "customProperties": {
+              "sourceLocation": 123,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "fourth",
+            "fifth"
+          ],
+          "id": "third",
+          "children": [
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "Put say text here",
+                    "sceneDirections": [
+                      {
+                        "directionType": "go to",
+                        "parameters": {
+                          "target": "start",
+                          "targetSceneProperty": "narration"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "fourth",
+                "customProperties": {
+                  "sourceLocation": 219,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "start"
+              ],
+              "id": "fourth",
+              "children": [
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "startsay",
+                        "sceneDirections": [
+                          {
+                            "directionType": "choice",
+                            "parameters": {
+                              "utterances": [
+                                "second"
+                              ],
+                              "saveToHistory": "true",
+                              "directions": [
+                                {
+                                  "directionType": "go to",
+                                  "parameters": {
+                                    "target": "second",
+                                    "targetSceneProperty": "narration"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "directionType": "choice",
+                            "parameters": {
+                              "utterances": [
+                                "third"
+                              ],
+                              "saveToHistory": "true",
+                              "directions": [
+                                {
+                                  "directionType": "go to",
+                                  "parameters": {
+                                    "target": "third",
+                                    "targetSceneProperty": "narration"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "start",
+                    "customProperties": {
+                      "sourceLocation": 1,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "second",
+                    "third"
+                  ],
+                  "id": "start",
+                  "children": [],
+                  "isLink": true,
+                  "label": "start",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 1
+                }
+              ],
+              "isLink": false,
+              "label": "fourth",
+              "sourceID": "story.abc",
+              "sourceLocation": 219
+            },
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "Put say text here",
+                    "sceneDirections": [
+                      {
+                        "directionType": "go to",
+                        "parameters": {
+                          "target": "third",
+                          "targetSceneProperty": "narration"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "fifth",
+                "customProperties": {
+                  "sourceLocation": 271,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "third"
+              ],
+              "id": "fifth",
+              "children": [
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "thirdsay",
+                        "sceneDirections": [
+                          {
+                            "directionType": "choice",
+                            "parameters": {
+                              "utterances": [
+                                "fourth"
+                              ],
+                              "saveToHistory": "true",
+                              "directions": [
+                                {
+                                  "directionType": "go to",
+                                  "parameters": {
+                                    "target": "fourth",
+                                    "targetSceneProperty": "narration"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "directionType": "choice",
+                            "parameters": {
+                              "utterances": [
+                                "fifth"
+                              ],
+                              "saveToHistory": "true",
+                              "directions": [
+                                {
+                                  "directionType": "go to",
+                                  "parameters": {
+                                    "target": "fifth",
+                                    "targetSceneProperty": "narration"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "third",
+                    "customProperties": {
+                      "sourceLocation": 123,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "fourth",
+                    "fifth"
+                  ],
+                  "id": "third",
+                  "children": [],
+                  "isLink": true,
+                  "label": "third",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 123
+                }
+              ],
+              "isLink": false,
+              "label": "fifth",
+              "sourceID": "story.abc",
+              "sourceLocation": 271
+            }
+          ],
+          "isLink": false,
+          "label": "third",
+          "sourceID": "story.abc",
+          "sourceLocation": 123
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "go to",
+                    "parameters": {
+                      "target": "start",
+                      "targetSceneProperty": "narration"
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "fourth",
+            "customProperties": {
+              "sourceLocation": 219,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "start"
+          ],
+          "id": "fourth",
+          "children": [
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "startsay",
+                    "sceneDirections": [
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "second"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "second",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "third"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "third",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "start",
+                "customProperties": {
+                  "sourceLocation": 1,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "second",
+                "third"
+              ],
+              "id": "start",
+              "children": [],
+              "isLink": true,
+              "label": "start",
+              "sourceID": "story.abc",
+              "sourceLocation": 1
+            }
+          ],
+          "isLink": false,
+          "label": "fourth",
+          "sourceID": "story.abc",
+          "sourceLocation": 219
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "go to",
+                    "parameters": {
+                      "target": "third",
+                      "targetSceneProperty": "narration"
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "fifth",
+            "customProperties": {
+              "sourceLocation": 271,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "third"
+          ],
+          "id": "fifth",
+          "children": [
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "thirdsay",
+                    "sceneDirections": [
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "fourth"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "fourth",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "fifth"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "fifth",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "third",
+                "customProperties": {
+                  "sourceLocation": 123,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "fourth",
+                "fifth"
+              ],
+              "id": "third",
+              "children": [],
+              "isLink": true,
+              "label": "third",
+              "sourceID": "story.abc",
+              "sourceLocation": 123
+            }
+          ],
+          "isLink": false,
+          "label": "fifth",
+          "sourceID": "story.abc",
+          "sourceLocation": 271
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Orphan start",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "orphan two"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphan2",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "orphanstart",
+            "customProperties": {
+              "sourceLocation": 322,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "orphan2"
+          ],
+          "id": "orphanstart",
+          "children": [
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "Put say text here",
+                    "sceneDirections": [
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "orphan three"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "orphan3",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "orphan 4"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "orphan4",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "go to scene orphanstart"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "orphanstart",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "orphan2",
+                "customProperties": {
+                  "sourceLocation": 402,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "orphan3",
+                "orphan4",
+                "orphanstart"
+              ],
+              "id": "orphan2",
+              "children": [
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Put say text here",
+                        "sceneDirections": [
+                          {
+                            "directionType": "ending",
+                            "parameters": {}
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "orphan3",
+                    "customProperties": {
+                      "sourceLocation": 575,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [],
+                  "id": "orphan3",
+                  "children": [],
+                  "isLink": false,
+                  "label": "orphan3",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 575
+                },
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Put say text here",
+                        "sceneDirections": [
+                          {
+                            "directionType": "go to",
+                            "parameters": {
+                              "target": "orphanstart",
+                              "targetSceneProperty": "narration"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "orphan4",
+                    "customProperties": {
+                      "sourceLocation": 611,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "orphanstart"
+                  ],
+                  "id": "orphan4",
+                  "children": [
+                    {
+                      "scene": {
+                        "contents": [
+                          {
+                            "narration": "Orphan start",
+                            "sceneDirections": [
+                              {
+                                "directionType": "choice",
+                                "parameters": {
+                                  "utterances": [
+                                    "orphan two"
+                                  ],
+                                  "saveToHistory": "true",
+                                  "directions": [
+                                    {
+                                      "directionType": "go to",
+                                      "parameters": {
+                                        "target": "orphan2",
+                                        "targetSceneProperty": "narration"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "id": "orphanstart",
+                        "customProperties": {
+                          "sourceLocation": 322,
+                          "sourceID": "story.abc"
+                        }
+                      },
+                      "childIds": [
+                        "orphan2"
+                      ],
+                      "id": "orphanstart",
+                      "children": [],
+                      "isLink": true,
+                      "label": "orphanstart",
+                      "sourceID": "story.abc",
+                      "sourceLocation": 322
+                    }
+                  ],
+                  "isLink": false,
+                  "label": "orphan4",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 611
+                },
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Orphan start",
+                        "sceneDirections": [
+                          {
+                            "directionType": "choice",
+                            "parameters": {
+                              "utterances": [
+                                "orphan two"
+                              ],
+                              "saveToHistory": "true",
+                              "directions": [
+                                {
+                                  "directionType": "go to",
+                                  "parameters": {
+                                    "target": "orphan2",
+                                    "targetSceneProperty": "narration"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "orphanstart",
+                    "customProperties": {
+                      "sourceLocation": 322,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "orphan2"
+                  ],
+                  "id": "orphanstart",
+                  "children": [],
+                  "isLink": true,
+                  "label": "orphanstart",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 322
+                }
+              ],
+              "isLink": false,
+              "label": "orphan2",
+              "sourceID": "story.abc",
+              "sourceLocation": 402
+            }
+          ],
+          "isLink": false,
+          "label": "orphanstart",
+          "sourceID": "story.abc",
+          "sourceLocation": 322
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "orphan three"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphan3",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "orphan 4"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphan4",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "directionType": "choice",
+                    "parameters": {
+                      "utterances": [
+                        "go to scene orphanstart"
+                      ],
+                      "saveToHistory": "true",
+                      "directions": [
+                        {
+                          "directionType": "go to",
+                          "parameters": {
+                            "target": "orphanstart",
+                            "targetSceneProperty": "narration"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "orphan2",
+            "customProperties": {
+              "sourceLocation": 402,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "orphan3",
+            "orphan4",
+            "orphanstart"
+          ],
+          "id": "orphan2",
+          "children": [
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "Put say text here",
+                    "sceneDirections": [
+                      {
+                        "directionType": "ending",
+                        "parameters": {}
+                      }
+                    ]
+                  }
+                ],
+                "id": "orphan3",
+                "customProperties": {
+                  "sourceLocation": 575,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [],
+              "id": "orphan3",
+              "children": [],
+              "isLink": false,
+              "label": "orphan3",
+              "sourceID": "story.abc",
+              "sourceLocation": 575
+            },
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "Put say text here",
+                    "sceneDirections": [
+                      {
+                        "directionType": "go to",
+                        "parameters": {
+                          "target": "orphanstart",
+                          "targetSceneProperty": "narration"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "orphan4",
+                "customProperties": {
+                  "sourceLocation": 611,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "orphanstart"
+              ],
+              "id": "orphan4",
+              "children": [
+                {
+                  "scene": {
+                    "contents": [
+                      {
+                        "narration": "Orphan start",
+                        "sceneDirections": [
+                          {
+                            "directionType": "choice",
+                            "parameters": {
+                              "utterances": [
+                                "orphan two"
+                              ],
+                              "saveToHistory": "true",
+                              "directions": [
+                                {
+                                  "directionType": "go to",
+                                  "parameters": {
+                                    "target": "orphan2",
+                                    "targetSceneProperty": "narration"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "orphanstart",
+                    "customProperties": {
+                      "sourceLocation": 322,
+                      "sourceID": "story.abc"
+                    }
+                  },
+                  "childIds": [
+                    "orphan2"
+                  ],
+                  "id": "orphanstart",
+                  "children": [],
+                  "isLink": true,
+                  "label": "orphanstart",
+                  "sourceID": "story.abc",
+                  "sourceLocation": 322
+                }
+              ],
+              "isLink": false,
+              "label": "orphan4",
+              "sourceID": "story.abc",
+              "sourceLocation": 611
+            },
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "Orphan start",
+                    "sceneDirections": [
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "orphan two"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "orphan2",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "orphanstart",
+                "customProperties": {
+                  "sourceLocation": 322,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "orphan2"
+              ],
+              "id": "orphanstart",
+              "children": [],
+              "isLink": true,
+              "label": "orphanstart",
+              "sourceID": "story.abc",
+              "sourceLocation": 322
+            }
+          ],
+          "isLink": false,
+          "label": "orphan2",
+          "sourceID": "story.abc",
+          "sourceLocation": 402
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "ending",
+                    "parameters": {}
+                  }
+                ]
+              }
+            ],
+            "id": "orphan3",
+            "customProperties": {
+              "sourceLocation": 575,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [],
+          "id": "orphan3",
+          "children": [],
+          "isLink": false,
+          "label": "orphan3",
+          "sourceID": "story.abc",
+          "sourceLocation": 575
+        },
+        {
+          "scene": {
+            "contents": [
+              {
+                "narration": "Put say text here",
+                "sceneDirections": [
+                  {
+                    "directionType": "go to",
+                    "parameters": {
+                      "target": "orphanstart",
+                      "targetSceneProperty": "narration"
+                    }
+                  }
+                ]
+              }
+            ],
+            "id": "orphan4",
+            "customProperties": {
+              "sourceLocation": 611,
+              "sourceID": "story.abc"
+            }
+          },
+          "childIds": [
+            "orphanstart"
+          ],
+          "id": "orphan4",
+          "children": [
+            {
+              "scene": {
+                "contents": [
+                  {
+                    "narration": "Orphan start",
+                    "sceneDirections": [
+                      {
+                        "directionType": "choice",
+                        "parameters": {
+                          "utterances": [
+                            "orphan two"
+                          ],
+                          "saveToHistory": "true",
+                          "directions": [
+                            {
+                              "directionType": "go to",
+                              "parameters": {
+                                "target": "orphan2",
+                                "targetSceneProperty": "narration"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "id": "orphanstart",
+                "customProperties": {
+                  "sourceLocation": 322,
+                  "sourceID": "story.abc"
+                }
+              },
+              "childIds": [
+                "orphan2"
+              ],
+              "id": "orphanstart",
+              "children": [],
+              "isLink": true,
+              "label": "orphanstart",
+              "sourceID": "story.abc",
+              "sourceLocation": 322
+            }
+          ],
+          "isLink": false,
+          "label": "orphan4",
+          "sourceID": "story.abc",
+          "sourceLocation": 611
+        }
+      ]
+    }
+  },
+  "parentMapping": {
+    "edges": [
+      {
+        "from": "start",
+        "to": "second"
+      },
+      {
+        "from": "start",
+        "to": "third"
+      },
+      {
+        "from": "third",
+        "to": "fourth"
+      },
+      {
+        "from": "third",
+        "to": "fifth"
+      },
+      {
+        "from": "fourth",
+        "to": "start"
+      },
+      {
+        "from": "fifth",
+        "to": "third"
+      },
+      {
+        "from": "orphanstart",
+        "to": "orphan2"
+      },
+      {
+        "from": "orphan2",
+        "to": "orphan3"
+      },
+      {
+        "from": "orphan2",
+        "to": "orphan4"
+      },
+      {
+        "from": "orphan2",
+        "to": "orphanstart"
+      },
+      {
+        "from": "orphan4",
+        "to": "orphanstart"
+      }
+    ]
+  }
+}

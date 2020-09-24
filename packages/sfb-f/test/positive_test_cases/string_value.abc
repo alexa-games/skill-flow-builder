@@ -1,0 +1,17 @@
+// Tests the value of a variable container set as a string with quotes.
+// By default, all undeclared variables will evaluate to boolean False...
+// ... so if the {strVal} returned as SSML/TTS is False, it's a fail (or negative scenario Pass).
+@string value
+    *say
+        String value test. 
+        Current value is, {strVal}.
+        Changing the value.
+    *then
+        set strVal to 'I have value now'
+        -> sv result
+
+@sv result
+    *say
+        The new value is, {strVal}.
+    *then
+        -> end

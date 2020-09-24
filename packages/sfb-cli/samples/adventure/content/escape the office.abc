@@ -1,0 +1,211 @@
+@In the office
+	*say
+		You're in a small office, there is a door to your left and a window in front of you. A desk sits below the window piled high with paperwork. 
+		
+		Do you explore the desk, try to climb out the window, or attempt to escape through the door?
+	
+	*then
+		hear explore the desk {
+            -> explore the desk
+        }
+		
+        hear climb out the window {
+            -> climb out the window
+        }
+
+		hear escape through the door {
+			-> escape through the door
+		}
+
+@explore the desk
+	*say
+		While rummaging through the paperwork that's piled on the desk you find a room key. The key is a perfect fit for the door, you unlock it and step out into a small corridor.
+		Do you turn left or right?
+	*then 
+		hear left {
+		    -> deadend
+		}
+
+		hear right {
+	        -> first floor
+		}
+
+@climb out the window
+	*say
+        You clamber on top of the desk and climb out of the window expecting your feet to land 
+        on the terrace. But there is nothing there, and you're falling.
+
+	*then
+		>> END
+
+@escape through the door
+	*say
+		You pull on the handle but the door is locked. Your only options are to explore the desk or climb out the window.
+	*then
+		hear explore the desk {
+            -> explore the desk
+        }
+		
+        hear climb out the window {
+            -> climb out the window
+        }
+@first floor lift
+	*say
+        The doors to the elevator open. You step inside and look at buttons on the panel.
+        second floor.
+        reception.
+        basement.
+        Which button do you press?
+    
+    *then
+        hear press second floor {
+            -> second floor lift
+        }
+        
+        hear reception {
+            -> reception
+        }
+        
+        hear basement {
+            -> basement
+        }
+
+@first floor staircase
+	*say
+        You walk over to the staircase, the coast seems clear. Do you go up or do you go down the stairs?
+    
+    *then
+        hear go up { 
+            -> second floor
+        }
+        
+        hear down {
+            -> reception
+        }
+
+@basement
+	*say
+        The smell of damp hits you straight away as you step into the basement. You look around but there is no exit, your only option is to go back up.
+        Do you take the elevator? or do you take the stairs?
+
+    *then
+        hear take the elevator {
+            -> basement lift
+        }
+        
+        hear take the stairs {
+            -> basement staircase
+        }
+
+@reception
+	*say
+        You arrive in the reception, the lights are off and there is no one behind the counter. You walk over to the main entrance and try the door, it's locked.
+        As you turn around to head back something jumps out from behind the reception desk, you've been caught.
+
+@second floor
+	*say
+        You're on an empty roof terrace, there is no way out except for back down.
+        Do you take the stairs or do you take the elevator?
+        
+    *then
+        hear take the stairs {
+            -> first floor
+        }
+
+        hear elevator {
+            -> second floor lift
+        }
+
+@first floor
+	*say
+        You're in a small opening at the end of a door lined corridor.
+        There is staircase to your left and an elevator to your right. Do you take the stairs, take the elevator, or walk down the corridor?
+    
+    *then
+        hear take the stairs {
+            -> first floor staircase
+        }
+		
+        hear elevator {
+            -> first floor lift
+        }
+        
+        hear walk down the corridor {
+            -> deadend
+        }
+
+@deadend
+	*say
+        As you rush down the corridor you hear footsteps following you. You pick up pace but hit a deadend.
+        You cannot turn back.
+        Game-over.
+
+	*then
+		>> END
+
+@basement lift
+	*say
+        You call the elevator and wait in the dark for it to arrive. Straight away as the doors slide open you dive inside. You look at buttons on the panel.
+        press second floor.
+        first floor.
+        reception.
+        Which button do you press?
+    
+    *then
+        hear press second floor {
+            -> second floor
+        }
+        
+        hear first floor {
+            -> first floor 
+        }
+        
+        hear reception {
+            -> reception
+        }
+
+@basement staircase
+	*say
+        You're almost at the top of the staircase when you notice a flickering light coming from an alcove.
+        You stop in your tracks unsure of whether to turn around or carry on towards the light.
+        
+    *then
+        hear turn around {
+            -> basement
+        }
+        
+        hear carry on {
+            -> carry on
+        }
+
+@second floor lift
+	*say
+        You step into the elevator, glad to be out of the cold nights air.
+        You look at buttons on the panel.
+        press first floor.
+        reception.
+        basement.
+        Which button do you press?
+        
+    *then
+        hear press first floor {
+            -> first floor 
+        }
+        
+        hear reception {
+            -> reception 
+        }
+        
+        hear basement {
+            -> basement
+        }
+
+@carry on
+	*say
+        You reach the alcove and discover the flickering light is from an exit sign above a door.
+        You push the door open, stumbling out onto the pavement.
+        Congratulations you've escaped the office.
+
+	*then
+		>> END
+

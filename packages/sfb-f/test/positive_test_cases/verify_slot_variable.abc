@@ -1,0 +1,39 @@
+@verify slot variable
+*then
+    slot testSlot as 'CustomFruitType'
+    hear testing the slot {testSlot} {
+        if !testSlot {
+            -> slot variable empty
+        }
+
+        -> verify slot after capture
+    }
+
+    slot testSlotAnother as 'CustomFruitType'
+    hear another slot {testSlotAnother} {
+        if !testSlotAnother {
+            -> slot variable empty
+        }
+
+        set testSlot as testSlotAnother
+
+        -> verify slot after capture
+    }
+
+@slot variable empty
+*then
+    hear try again {
+        -> verify slot variable
+    }
+
+    hear done {
+        >> END
+    }
+
+@verify slot after capture
+*say
+    captured value is {testSlot}.
+*then
+    hear try again {
+        -> verify slot variable
+    }

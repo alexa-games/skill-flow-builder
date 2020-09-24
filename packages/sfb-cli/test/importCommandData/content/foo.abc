@@ -1,0 +1,20 @@
+@start
+  *say
+    Dummy start scene! Go to next scene?
+  *then
+    clear answeredNo
+    hear yes, go to next scene {
+      -> second scene
+    }
+    hear no {
+      flag answeredNo
+      -> answered no
+    }
+
+@second scene
+  *say
+    You brave soul!
+    [pause]
+    You get nothing. The cake is a lie.
+  *then
+    >> END

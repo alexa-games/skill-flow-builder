@@ -1,0 +1,364 @@
+{
+    "document": {
+        "type": "APL",
+        "version": "1.1",
+        "commands": {
+            "fadeDiceOut": {
+                "parameters": [
+                    "pgIndex"
+                ],
+                "commands": [
+                    {
+                        "type": "Parallel",
+                        "commands": [
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "frame-Pg${pgIndex}",
+                                "easing": "ease-in",
+                                "duration": 1000,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 1,
+                                        "to": 0
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "dice-Pg${pgIndex}",
+                                "easing": "ease-in",
+                                "duration": 1000,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 1,
+                                        "to": 0
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "rollDice": {
+                "parameters": [
+                    "pgIndex",
+                    {
+                        "name": "rollStopX",
+                        "default": "${Math.floor(Math.random() * 160) - 40}vw"
+                    },
+                    {
+                        "name": "endingX",
+                        "default": 0
+                    },
+                    {
+                        "name": "endingY",
+                        "default": "-30vh"
+                    }
+                ],
+                "commands": [
+                    {
+                        "type": "Parallel",
+                        "commands": [
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "frame-Pg${pgIndex}",
+                                "easing": "ease-in",
+                                "duration": 500,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 0,
+                                        "to": 0.5
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "dice-Pg${pgIndex}",
+                                "easing": "ease-in",
+                                "duration": 1000,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 1,
+                                        "to": 1
+                                    },
+                                    {
+                                        "property": "transform",
+                                        "from": [
+                                            {
+                                                "translateX": -800
+                                            },
+                                            {
+                                                "scale": 0.5
+                                            },
+                                            {
+                                                "rotate": 0
+                                            }
+                                        ],
+                                        "to": [
+                                            {
+                                                "translateX": "45vw",
+                                                "translateY": 0
+                                            },
+                                            {
+                                                "scale": 1
+                                            },
+                                            {
+                                                "rotate": 1080
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "AnimateItem",
+                        "componentId": "dice-Pg${pgIndex}",
+                        "easing": "ease-out",
+                        "duration": 1000,
+                        "value": [
+                            {
+                                "property": "transform",
+                                "from": [
+                                    {
+                                        "translateX": "45vw",
+                                        "translateY": 0
+                                    },
+                                    {
+                                        "rotate": 0
+                                    }
+                                ],
+                                "to": [
+                                    {
+                                        "translateX": "${rollStopX}",
+                                        "translateY": 0
+                                    },
+                                    {
+                                        "rotate": -360
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Parallel",
+                        "commands": [
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "dice-Pg${pgIndex}",
+                                "easing": "ease-in-out",
+                                "duration": 1000,
+                                "value": [
+                                    {
+                                        "property": "transform",
+                                        "from": [
+                                            {
+                                                "translateX": "${rollStopX}",
+                                                "translateY": 0
+                                            },
+                                            {
+                                                "scale": 1
+                                            }
+                                        ],
+                                        "to": [
+                                            {
+                                                "translateX": "${endingX}",
+                                                "translateY": "${endingY}"
+                                            },
+                                            {
+                                                "scale": 5
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "diceNumberImage-Pg${pgIndex}",
+                                "easing": "ease-in-out",
+                                "duration": 1000,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 0,
+                                        "to": 1
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "layouts": {
+            "DiceRollDynamicPager": {
+                "description": "A dynamic screen pager that takes layouts of any specified 'layout' type.",
+                "parameters": [
+                    "data"
+                ],
+                "item": [
+                    {
+                        "type": "Pager",
+                        "id": "primaryPager",
+                        "navigation": "none",
+                        "initialPage": 0,
+                        "width": "100%",
+                        "height": "100%",
+                        "data": "${data}",
+                        "items": [
+                            {
+                                "position": "absolute",
+                                "type": "${data.layout}",
+                                "pgIndex": "${index}"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "DiceRollAutoLayout": {
+                "description": "Dice Roll layout with background",
+                "parameters": [
+                    "pgIndex"
+                ],
+                "item": [
+                    {
+                        "type": "Container",
+                        "width": "100%",
+                        "height": "100%",
+                        "alignItems": "center",
+                        "justifyContent": "center",
+                        "items": [
+                            {
+                                "id": "sampleBackground",
+                                "type": "Image",
+                                "source": "${data.background}",
+                                "position": "absolute",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Frame",
+                                "id": "frame-Pg${pgIndex}",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "opacity": 0,
+                                "backgroundColor": "${data.color}",
+                                "position": "absolute"
+                            },
+                            {
+                                "id": "dice-Pg${pgIndex}",
+                                "type": "Dice",
+                                "top": "80vh",
+                                "opacity": 0,
+                                "position": "absolute",
+                                "D": "${data.D}",
+                                "roll": "${data.roll}",
+                                "pgIndex": "${pgIndex}"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Dice": {
+                "description": "A rolling die",
+                "parameters": [
+                    "endingX",
+                    "endingY",
+                    "D",
+                    "roll",
+                    "pgIndex"
+                ],
+                "item": [
+                    {
+                        "type": "Container",
+                        "width": "10vw",
+                        "height": "10vh",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "id": "diceBlankImage",
+                                "source": "https://sfb-framework.s3.amazonaws.com/examples/images/D${D}-0.png",
+                                "scale": "best-fit",
+                                "position": "absolute",
+                                "opacity": 1,
+                                "width": "10vw",
+                                "height": "10vh"
+                            },
+                            {
+                                "type": "Image",
+                                "id": "diceNumberImage-Pg${pgIndex}",
+                                "source": "https://sfb-framework.s3.amazonaws.com/examples/images/D${D}-${roll}.png",
+                                "opacity": 0,
+                                "scale": "best-fit",
+                                "position": "absolute",
+                                "width": "10vw",
+                                "height": "10vh"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "onMount": [
+            {
+                "type": "rollDice",
+                "pgIndex": 0
+            }
+        ],
+        "mainTemplate": {
+            "description": "********* Minimal APL document **********",
+            "parameters": [
+                "payload"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "width": "100%",
+                    "height": "100%",
+                    "alignItems": "center",
+                    "justifyContent": "center",
+                    "items": [
+                        {
+                            "id": "SFBAudioAndAlexaSpeechContainer",
+                            "description": "Please do not remove or change the ID of this component. Skill Flow Builder uses this id to play audio files and to add Alexa SpeakItem text blocks.",
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "Video",
+                                    "id": "audioPlayerId",
+                                    "description": "Please do not change this ID, skill flow builder uses this component to play audio files from your content.",
+                                    "autoplay": false,
+                                    "width": "0",
+                                    "height": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "position": "absolute",
+                            "type": "DiceRollDynamicPager",
+                            "data": "${payload.visualProperties.scenes}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "datasources": {
+        "visualProperties": {
+            "scenes": [
+                {
+                    "layout": "DiceRollAutoLayoutWithBackground",
+                    "color": "blue",
+                    "background": "https://sfb-framework.s3.amazonaws.com/examples/images/dark-background.jpg",
+                    "D": 20,
+                    "roll": 17
+                }
+            ]
+        }
+    }
+}

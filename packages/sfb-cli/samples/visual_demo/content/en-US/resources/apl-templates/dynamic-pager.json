@@ -1,0 +1,88 @@
+{
+    "document": {
+        "type": "APL",
+        "version": "1.1",
+        "commands": {            
+            "nextScene": {
+                "parameters": [],
+                "commands": [
+                    {
+                        "type": "SetPage",
+                        "componentId": "primaryPager",
+                        "position": "relative",
+                        "value": 1
+                    }
+                ]
+            }
+        },
+        "layouts": {
+            "DynamicPager": {
+                "description": "A dynamic screen pager that takes layouts of any specified 'layout' type. Automatically pulls in all layouts/commands from any other APL template that defines at least one layout specified in an ABC for the given request.",
+                "parameters": [
+                    "data"
+                ],
+                "item": [
+                    {
+                        "type": "Pager",
+                        "id": "primaryPager",
+                        "navigation": "none",
+                        "initialPage": 0,
+                        "width": "100%",
+                        "height": "100%",
+                        "data": "${data}",
+                        "items": [
+                            {
+                                "position": "absolute",
+                                "type": "${data.layout}",
+                                "pgIndex": "${index}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "mainTemplate": {
+            "description": "********* Minimal APL document **********",
+            "parameters": [
+                "payload"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "width": "100%",
+                    "height": "100%",
+                    "items": [
+                        {
+                            "id": "SFBAudioAndAlexaSpeechContainer",
+                            "description": "Please do not remove or change the ID of this component. Skill Flow Builder uses this id to play audio files and to add Alexa SpeakItem text blocks.",
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "Video",
+                                    "id": "audioPlayerId",
+                                    "description": "Please do not change this ID, skill flow builder uses this component to play audio files from your content.",
+                                    "autoplay": false,
+                                    "width": "0",
+                                    "height": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "position": "absolute",
+                            "type": "DynamicPager",
+                            "data": "${payload.visualProperties.scenes}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "datasources": {
+        "visualProperties": {
+            "title": "",
+            "subtitle": "",
+            "background": "",
+            "scenes": []
+        }
+    }
+}

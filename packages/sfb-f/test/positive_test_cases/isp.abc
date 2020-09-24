@@ -1,0 +1,44 @@
+@monetization
+    *say
+        This is the start scene. Moving to purchase scene now.
+    *then 
+        -> isp purchasething
+
+@isp purchasething
+    *say
+        Say purchase OTP.
+    *then
+        buy item='sample product' success='isp bought' declined='isp declined' fail='isp nope' already_purchased='isp already' error='isp error'
+
+@isp bought
+    *say
+        You bought it. Yay!
+    *then
+        -> isp lastscene
+
+@isp nope
+    *say
+        Purchase failed.
+    *then 
+        -> isp lastscene
+
+@isp declined
+    *say
+        You declined it.
+    *then 
+        -> isp lastscene
+@isp already
+    *say
+        You already purchased it.
+    *then 
+        -> isp lastscene
+@isp error
+    *say
+        Error.
+    *then 
+        -> isp lastscene
+@isp lastscene
+    *say
+        This is the last scene.
+    *then
+        >> END

@@ -1,0 +1,24 @@
+@start
+*then
+    // test file for utterances grouped together, then later doing two different things
+    hear apple, orange, lemon {
+        -> second scene
+    }
+
+@second scene
+*then
+    hear apple, lemon {
+        -> route 1
+    }
+
+    hear orange {
+        -> route 2
+    }
+
+@route 1
+*then
+    >> END
+
+@route 2
+*then
+    >> END

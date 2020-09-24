@@ -1,0 +1,102 @@
+@common and uncommon rolls
+    *say
+        Which roll type do you want to test? Common or uncommon?
+    *then
+        hear common {
+            -> cur common
+        }
+        hear uncommon {
+            -> cur uncommon
+        }
+
+@cur common
+    *say
+        Generating common rolls.
+    *then
+        roll 1d4
+        set rr1d4 to rollResult
+        roll 1d6
+        set rr1d6 to rollResult
+        roll 1d8
+        set rr1d8 to rollResult
+        roll 1d10
+        set rr1d10 to rollResult
+        roll 1d12
+        set rr1d12 to rollResult
+        roll 1d20
+        set rr1d20 to rollResult
+        roll 1d100
+        set rr1d100 to rollResult
+        -> rt common result
+
+@cur uncommon
+    *say
+        Generating uncommon rolls.
+    *then
+        set blart to 6
+        set mallcop to 4
+		
+        roll 2d4+4
+        set 2d4r to rollResult
+        roll 3d6+11
+        set 3d6r to rollResult
+        roll 1d20-1
+        set twtNeg to rollResult
+        roll 1d101
+        set 1d101r to rollResult
+        roll 1d2
+        set 1d2r to rollResult
+        roll 5d10
+        set 5d10r to rollResult
+        roll 1d9999999999
+        set 9999r to rollResult
+        roll 1d10^24
+        set powers to rollResult
+        roll -1d20
+        set negRoll to rollResult
+        roll 1d18
+        set 1d18r to rollResult
+        roll 3d{blart}+{mallcop}
+        set varRoll to rollResult
+        -> rt uncommon result
+
+@rt common result
+    *say
+        Results.
+        1D4 rolled {rr1d4}.
+        1D6 rolled {rr1d6}.
+        1D8 rolled {rr1d8}.
+        1D10 rolled {rr1d10}.
+        1D12 rolled {rr1d12}.
+        1D20 rolled {rr1d20}.
+        1D100 rolled {rr1d100}.
+        Do you want to roll again?
+    *then
+        hear yes {
+            -> cur common
+        }
+        hear no {
+            >> END
+        }
+
+@rt uncommon result
+    *say
+        2d4 is {2d4r}.
+        3d6 is {3d6r}.
+        1d20 is {twtNeg}.
+        1d101 is {1d101r}.
+        1d2 is {1d2r}.
+        5d10 is {5d10r}.
+        1d999 is {9999r}.
+        1d10 to the 24th power is {powers}.
+        negative 1d20 is {negRoll}.
+        1d18 is {1d18r}.
+        3d blart plus mallcop is {varRoll}.
+        Do you want to roll again?
+    *then
+        hear yes {
+            -> cur uncommon
+        }
+        hear no {
+            >> END
+        }

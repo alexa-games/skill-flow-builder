@@ -1,0 +1,63 @@
+@conditional block test
+*say
+    begin conditional start test.
+*then
+    <-> simple truthy condition test
+    <-> simple falsy condition test
+    <-> empty conditional block test
+
+@simple truthy condition test
+*say
+    conditional with true value.
+*then
+    hear next {
+        flag conditionalTestFlag
+        if conditionalTestFlag {
+            <-> conditional test pass
+            >> RETURN
+        }
+
+        -> conditional test fail
+    }
+    
+@simple falsy condition test
+*say
+    conditional with false value.
+*then
+    hear next {
+        unflag conditionalTestFlag
+        if !conditionalTestFlag {
+            <-> conditional test pass
+            >> RETURN
+        }
+
+        -> conditional test fail
+    }
+
+@empty conditional block test
+*say
+    empty conditional block test.
+*then
+    hear next {
+        <-> empty condition test case
+        <-> conditional test pass
+        >> RETURN
+    }
+
+@empty condition test case
+*then
+    flag conditionalTestFlag
+    if conditionalTestFlag {
+
+    }
+    >> RETURN
+
+@conditional test pass
+*then
+    hear next {
+        >> RETURN
+    }
+
+@conditional test fail
+*then
+    >> END

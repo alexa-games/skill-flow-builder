@@ -1,0 +1,250 @@
+{
+    "document": {
+        "type": "APL",
+        "version": "1.1",
+        "layouts": {
+            "SequenceDynamicPager": {
+                "description": "A pager just for the purposes of displaying in the APL Display editor tool, you can just leave this one alone because the dynamic-pager will supply a pager component at run time.",
+                "parameters": [
+                    "data"
+                ],
+                "item": [
+                    {
+                        "type": "Pager",
+                        "id": "primaryPager",
+                        "navigation": "none",
+                        "initialPage": 0,
+                        "width": "100%",
+                        "height": "100%",
+                        "data": "${data}",
+                        "items": [
+                            {
+                                "position": "absolute",
+                                "type": "${data.layout}",
+                                "pgIndex": "${index}"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "DiceSequenceLayout": {
+                "parameters": [
+                    {
+                        "name": "items",
+                        "default": [
+                            {
+                                "name": "D4",
+                                "description": "A four sided die, typcially pyramid in shape. Really cool.",
+                                "image": "https://sfb-framework.s3.amazonaws.com/examples/images/D4-4.png",
+                                "touchUtterance": "roll a D4"
+                            },
+                            {
+                                "name": "D6",
+                                "description": "A six sided die. Your standard, every day, hard working dice of choice.",
+                                "image": "https://sfb-framework.s3.amazonaws.com/examples/images/D6-6.png",
+                                "touchUtterance": "roll a D6"
+                            },
+                            {
+                                "name": "D20",
+                                "description": "A twenty sided die, also called a icosahedron. Treasured by roll-players everywhere.",
+                                "image": "https://sfb-framework.s3.amazonaws.com/examples/images/D20-20.png",
+                                "touchUtterance": "roll a D20"
+                            }
+                        ]
+                    },
+                    "pgIndex"
+                ],
+                "item": {
+                    "type": "Container",
+                    "width": "100%",
+                    "height": "100%",
+                    "alignItems": "center",
+                    "justifyContent": "center",
+                    "items": [
+                        {
+                            "id": "sampleBackground",
+                            "type": "Image",
+                            "source": "${data.background}",
+                            "position": "absolute",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "scale": "best-fill"
+                        },
+                        {
+                            "id": "aplVisualDemoText",
+                            "type": "Text",
+                            "text": "${data.title}",
+                            "textAlign": "center",
+                            "position": "absolute",
+                            "width": "100vw",
+                            "height": "20vh",
+                            "top": "5vh",
+                            "fontSize": 50
+                        },
+                        {
+                            "type": "Sequence",
+                            "position": "absolute",
+                            "scrollDirection": "horizontal",
+                            "top": "25vh",
+                            "left": "4vw",
+                            "height": "80vh",
+                            "width": "100vw",
+                            "data": "${items}",
+                            "item": {
+                                "type": "SequenceItem",
+                                "image": "${data.image}",
+                                "name": "${data.name}",
+                                "description": "${data.description}",
+                                "touchUtterance": "${data.touchUtterance}"
+                            }
+                        }
+                    ]
+                }
+            },
+            "SequenceItem": {
+                "parameters": [
+                    "image",
+                    "name",
+                    "description",
+                    "touchUtterance"
+                ],
+                "item": [
+                    {
+                        "type": "TouchWrapper",
+                        "id": "actionButton",
+                        "onPress": [
+                            {
+                                "type": "SetValue",
+                                "property": "disabled",
+                                "value": true
+                            },
+                            {
+                                "type": "SendEvent",
+                                "arguments": [
+                                    "Utterance",
+                                    "${touchUtterance}"
+                                ]
+                            }
+                        ],
+                        "item": {
+                            "type": "Container",
+                            "width": "31vw",
+                            "height": "80vh",
+                            "items": [
+                                {
+                                    "type": "Frame",
+                                    "position": "absolute",
+                                    "height": "60%",
+                                    "width": "95%",
+                                    "opacity": "0.75",
+                                    "borderRadius": "25dp",
+                                    "backgroundColor": "grey"
+                                },
+                                {
+                                    "type": "Image",
+                                    "position": "absolute",
+                                    "top": "5%",
+                                    "left": "10%",
+                                    "height": "20%",
+                                    "width": "80%",
+                                    "source": "${image}"
+                                },
+                                {
+                                    "type": "Text",
+                                    "position": "absolute",
+                                    "textAlign": "center",
+                                    "fontSize": 24,
+                                    "top": "30%",
+                                    "left": "0%",
+                                    "height": "100%",
+                                    "width": "95%",
+                                    "color": "#FFFFFF",
+                                    "text": "${name}"
+                                },
+                                {
+                                    "type": "Text",
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "fontSize": 14,
+                                    "top": "40%",
+                                    "left": "10%",
+                                    "height": "40%",
+                                    "width": "80%",
+                                    "color": "#FFFFFF",
+                                    "text": "${description}"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "mainTemplate": {
+            "description": "********* Minimal APL document **********",
+            "parameters": [
+                "payload"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "width": "100%",
+                    "height": "100%",
+                    "alignItems": "center",
+                    "justifyContent": "center",
+                    "items": [
+                        {
+                            "id": "SFBAudioAndAlexaSpeechContainer",
+                            "description": "Please do not remove or change the ID of this component. Skill Flow Builder uses this id to play audio files and to add Alexa SpeakItem text blocks.",
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "Video",
+                                    "id": "audioPlayerId",
+                                    "description": "Please do not change this ID, skill flow builder uses this component to play audio files from your content.",
+                                    "autoplay": false,
+                                    "width": "0",
+                                    "height": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "SequenceDynamicPager",
+                            "data": "${payload.visualProperties.scenes}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "datasources": {
+        "visualProperties": {
+            "scenes": [
+                {
+                    "layout": "SequenceLayout",
+                    "title": "Pick your dice",
+                    "subtitle": "",
+                    "items": [
+                        {
+                            "name": "D4",
+                            "description": "A four sided die, typcially pyramid in shape. Really cool.",
+                            "image": "https://sfb-framework.s3.amazonaws.com/examples/images/D4-1.png",
+                            "touchUtterance": "roll a D4"
+                        },
+                        {
+                            "name": "D6",
+                            "description": "A six sided die. Your standard, every day, hard working dice of choice.",
+                            "image": "https://sfb-framework.s3.amazonaws.com/examples/images/D6-1.png",
+                            "touchUtterance": "roll a D6"
+                        },
+                        {
+                            "name": "D20",
+                            "description": "A twenty sided die, also called a icosahedron. Treasured by roll-players everywhere.",
+                            "image": "https://sfb-framework.s3.amazonaws.com/examples/images/D20-1.png",
+                            "touchUtterance": "roll a D20"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

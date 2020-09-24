@@ -1,0 +1,923 @@
+{
+    "testProject": {
+        "data": {
+            "nodes": [
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "Put say text here",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "third"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "third",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "start"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "start",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "fourth",
+                        "customProperties": {
+                            "sourceLocation": 219,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [
+                        "start",
+                        "third"
+                    ],
+                    "id": "fourth",
+                    "children": [],
+                    "isLink": false,
+                    "label": "fourth",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 219
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "thirdsay",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "fourth"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "fourth",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "fifth"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "fifth",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "third",
+                        "customProperties": {
+                            "sourceLocation": 123,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [
+                        "fourth",
+                        "fifth"
+                    ],
+                    "id": "third",
+                    "children": [],
+                    "isLink": false,
+                    "label": "third",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 123
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "secondday",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "ending",
+                                        "parameters": {}
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "second",
+                        "customProperties": {
+                            "sourceLocation": 96,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [],
+                    "id": "second",
+                    "children": [],
+                    "isLink": false,
+                    "label": "second",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 96
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "startsay",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "second"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "second",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "third"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "third",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "start",
+                        "customProperties": {
+                            "sourceLocation": 1,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [
+                        "second",
+                        "third"
+                    ],
+                    "id": "start",
+                    "children": [],
+                    "isLink": false,
+                    "label": "start",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 1
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "Put say text here",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "go to",
+                                        "parameters": {
+                                            "target": "third",
+                                            "targetSceneProperty": "narration"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "fifth",
+                        "customProperties": {
+                            "sourceLocation": 271,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [
+                        "third"
+                    ],
+                    "id": "fifth",
+                    "children": [],
+                    "isLink": false,
+                    "label": "fifth",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 271
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "Orphan start",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "orphan two"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "orphan2",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "orphanstart",
+                        "customProperties": {
+                            "sourceLocation": 322,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [
+                        "orphan2"
+                    ],
+                    "id": "orphanstart",
+                    "children": [],
+                    "isLink": false,
+                    "label": "orphanstart",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 322
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "Put say text here",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "orphan three"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "orphan3",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "orphan 4"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "orphan4",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "go to scene orphanstart"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "orphanstart",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "orphan2",
+                        "customProperties": {
+                            "sourceLocation": 402,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [
+                        "orphan3",
+                        "orphan4",
+                        "orphanstart"
+                    ],
+                    "id": "orphan2",
+                    "children": [],
+                    "isLink": false,
+                    "label": "orphan2",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 402
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "Put say text here",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "ending",
+                                        "parameters": {}
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "orphan3",
+                        "customProperties": {
+                            "sourceLocation": 575,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [],
+                    "id": "orphan3",
+                    "children": [],
+                    "isLink": false,
+                    "label": "orphan3",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 575
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "Put say text here",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "go to",
+                                        "parameters": {
+                                            "target": "orphanstart",
+                                            "targetSceneProperty": "narration"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "orphan4",
+                        "customProperties": {
+                            "sourceLocation": 611,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [
+                        "orphanstart"
+                    ],
+                    "id": "orphan4",
+                    "children": [],
+                    "isLink": false,
+                    "label": "orphan4",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 611
+                }
+            ],
+            "edges": [
+                {
+                    "from": "third",
+                    "to": "fourth"
+                },
+                {
+                    "from": "third",
+                    "to": "fifth"
+                },
+                {
+                    "from": "fourth",
+                    "to": "start"
+                },
+                {
+                    "from": "fourth",
+                    "to": "third"
+                },
+                {
+                    "from": "fifth",
+                    "to": "third"
+                },
+                {
+                    "from": "start",
+                    "to": "second"
+                },
+                {
+                    "from": "start",
+                    "to": "third"
+                },
+                {
+                    "from": "orphanstart",
+                    "to": "orphan2"
+                },
+                {
+                    "from": "orphan2",
+                    "to": "orphan3"
+                },
+                {
+                    "from": "orphan2",
+                    "to": "orphan4"
+                },
+                {
+                    "from": "orphan2",
+                    "to": "orphanstart"
+                },
+                {
+                    "from": "orphan4",
+                    "to": "orphanstart"
+                }
+            ]
+        }
+    },
+    "expectedProject": {
+        "root": {
+            "scene": {
+                "contents": [
+                    {
+                        "narration": "startsay",
+                        "sceneDirections": [
+                            {
+                                "directionType": "choice",
+                                "parameters": {
+                                    "utterances": [
+                                        "second"
+                                    ],
+                                    "saveToHistory": "true",
+                                    "directions": [
+                                        {
+                                            "directionType": "go to",
+                                            "parameters": {
+                                                "target": "second",
+                                                "targetSceneProperty": "narration"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "directionType": "choice",
+                                "parameters": {
+                                    "utterances": [
+                                        "third"
+                                    ],
+                                    "saveToHistory": "true",
+                                    "directions": [
+                                        {
+                                            "directionType": "go to",
+                                            "parameters": {
+                                                "target": "third",
+                                                "targetSceneProperty": "narration"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "id": "start",
+                "customProperties": {
+                    "sourceLocation": 1,
+                    "sourceID": "story.abc"
+                }
+            },
+            "childIds": [
+                "second",
+                "third"
+            ],
+            "id": "start",
+            "children": [
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "secondday",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "ending",
+                                        "parameters": {}
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "second",
+                        "customProperties": {
+                            "sourceLocation": 96,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [],
+                    "id": "second",
+                    "children": [],
+                    "isLink": false,
+                    "label": "second",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 96
+                },
+                {
+                    "scene": {
+                        "contents": [
+                            {
+                                "narration": "thirdsay",
+                                "sceneDirections": [
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "fourth"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "fourth",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "directionType": "choice",
+                                        "parameters": {
+                                            "utterances": [
+                                                "fifth"
+                                            ],
+                                            "saveToHistory": "true",
+                                            "directions": [
+                                                {
+                                                    "directionType": "go to",
+                                                    "parameters": {
+                                                        "target": "fifth",
+                                                        "targetSceneProperty": "narration"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "id": "third",
+                        "customProperties": {
+                            "sourceLocation": 123,
+                            "sourceID": "story.abc"
+                        }
+                    },
+                    "childIds": [
+                        "fourth",
+                        "fifth"
+                    ],
+                    "id": "third",
+                    "children": [
+                        {
+                            "scene": {
+                                "contents": [
+                                    {
+                                        "narration": "Put say text here",
+                                        "sceneDirections": [
+                                            {
+                                                "directionType": "choice",
+                                                "parameters": {
+                                                    "utterances": [
+                                                        "third"
+                                                    ],
+                                                    "saveToHistory": "true",
+                                                    "directions": [
+                                                        {
+                                                            "directionType": "go to",
+                                                            "parameters": {
+                                                                "target": "third",
+                                                                "targetSceneProperty": "narration"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "directionType": "choice",
+                                                "parameters": {
+                                                    "utterances": [
+                                                        "start"
+                                                    ],
+                                                    "saveToHistory": "true",
+                                                    "directions": [
+                                                        {
+                                                            "directionType": "go to",
+                                                            "parameters": {
+                                                                "target": "start",
+                                                                "targetSceneProperty": "narration"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "id": "fourth",
+                                "customProperties": {
+                                    "sourceLocation": 219,
+                                    "sourceID": "story.abc"
+                                }
+                            },
+                            "childIds": [
+                                "start",
+                                "third"
+                            ],
+                            "id": "fourth",
+                            "children": [
+                                {
+                                    "scene": {
+                                        "contents": [
+                                            {
+                                                "narration": "startsay",
+                                                "sceneDirections": [
+                                                    {
+                                                        "directionType": "choice",
+                                                        "parameters": {
+                                                            "utterances": [
+                                                                "second"
+                                                            ],
+                                                            "saveToHistory": "true",
+                                                            "directions": [
+                                                                {
+                                                                    "directionType": "go to",
+                                                                    "parameters": {
+                                                                        "target": "second",
+                                                                        "targetSceneProperty": "narration"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "directionType": "choice",
+                                                        "parameters": {
+                                                            "utterances": [
+                                                                "third"
+                                                            ],
+                                                            "saveToHistory": "true",
+                                                            "directions": [
+                                                                {
+                                                                    "directionType": "go to",
+                                                                    "parameters": {
+                                                                        "target": "third",
+                                                                        "targetSceneProperty": "narration"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "id": "start",
+                                        "customProperties": {
+                                            "sourceLocation": 1,
+                                            "sourceID": "story.abc"
+                                        }
+                                    },
+                                    "childIds": [
+                                        "second",
+                                        "third"
+                                    ],
+                                    "id": "start",
+                                    "children": [],
+                                    "isLink": true,
+                                    "label": "start",
+                                    "sourceID": "story.abc",
+                                    "sourceLocation": 1
+                                },
+                                {
+                                    "scene": {
+                                        "contents": [
+                                            {
+                                                "narration": "thirdsay",
+                                                "sceneDirections": [
+                                                    {
+                                                        "directionType": "choice",
+                                                        "parameters": {
+                                                            "utterances": [
+                                                                "fourth"
+                                                            ],
+                                                            "saveToHistory": "true",
+                                                            "directions": [
+                                                                {
+                                                                    "directionType": "go to",
+                                                                    "parameters": {
+                                                                        "target": "fourth",
+                                                                        "targetSceneProperty": "narration"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "directionType": "choice",
+                                                        "parameters": {
+                                                            "utterances": [
+                                                                "fifth"
+                                                            ],
+                                                            "saveToHistory": "true",
+                                                            "directions": [
+                                                                {
+                                                                    "directionType": "go to",
+                                                                    "parameters": {
+                                                                        "target": "fifth",
+                                                                        "targetSceneProperty": "narration"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "id": "third",
+                                        "customProperties": {
+                                            "sourceLocation": 123,
+                                            "sourceID": "story.abc"
+                                        }
+                                    },
+                                    "childIds": [
+                                        "fourth",
+                                        "fifth"
+                                    ],
+                                    "id": "third",
+                                    "children": [],
+                                    "isLink": true,
+                                    "label": "third",
+                                    "sourceID": "story.abc",
+                                    "sourceLocation": 123
+                                }
+                            ],
+                            "isLink": false,
+                            "label": "fourth",
+                            "sourceID": "story.abc",
+                            "sourceLocation": 219
+                        },
+                        {
+                            "scene": {
+                                "contents": [
+                                    {
+                                        "narration": "Put say text here",
+                                        "sceneDirections": [
+                                            {
+                                                "directionType": "go to",
+                                                "parameters": {
+                                                    "target": "third",
+                                                    "targetSceneProperty": "narration"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "id": "fifth",
+                                "customProperties": {
+                                    "sourceLocation": 271,
+                                    "sourceID": "story.abc"
+                                }
+                            },
+                            "childIds": [
+                                "third"
+                            ],
+                            "id": "fifth",
+                            "children": [
+                                {
+                                    "scene": {
+                                        "contents": [
+                                            {
+                                                "narration": "thirdsay",
+                                                "sceneDirections": [
+                                                    {
+                                                        "directionType": "choice",
+                                                        "parameters": {
+                                                            "utterances": [
+                                                                "fourth"
+                                                            ],
+                                                            "saveToHistory": "true",
+                                                            "directions": [
+                                                                {
+                                                                    "directionType": "go to",
+                                                                    "parameters": {
+                                                                        "target": "fourth",
+                                                                        "targetSceneProperty": "narration"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "directionType": "choice",
+                                                        "parameters": {
+                                                            "utterances": [
+                                                                "fifth"
+                                                            ],
+                                                            "saveToHistory": "true",
+                                                            "directions": [
+                                                                {
+                                                                    "directionType": "go to",
+                                                                    "parameters": {
+                                                                        "target": "fifth",
+                                                                        "targetSceneProperty": "narration"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "id": "third",
+                                        "customProperties": {
+                                            "sourceLocation": 123,
+                                            "sourceID": "story.abc"
+                                        }
+                                    },
+                                    "childIds": [
+                                        "fourth",
+                                        "fifth"
+                                    ],
+                                    "id": "third",
+                                    "children": [],
+                                    "isLink": true,
+                                    "label": "third",
+                                    "sourceID": "story.abc",
+                                    "sourceLocation": 123
+                                }
+                            ],
+                            "isLink": false,
+                            "label": "fifth",
+                            "sourceID": "story.abc",
+                            "sourceLocation": 271
+                        }
+                    ],
+                    "isLink": false,
+                    "label": "third",
+                    "sourceID": "story.abc",
+                    "sourceLocation": 123
+                }
+            ],
+            "isLink": false,
+            "label": "start",
+            "sourceID": "story.abc",
+            "sourceLocation": 1
+        }
+    }
+}

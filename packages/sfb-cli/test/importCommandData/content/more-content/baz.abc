@@ -1,0 +1,5 @@
+@global append
+  *then
+    hear start over {
+      >> RESTART
+    }

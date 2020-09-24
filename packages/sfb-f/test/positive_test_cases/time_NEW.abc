@@ -1,0 +1,31 @@
+@time initialize
+    *say
+        Welcome to the timestamp test.
+    *then
+        // initialize the first timestamp and save it
+        time
+        set timeStamp as system_return
+        -> time 
+
+@time
+    *say
+        The current time in epoch milliseconds is {timeStamp}. Say move on to get the next timestamp.
+    *then
+        hear move on {
+            // overwrite the timestamp
+            time
+            set timeStamp as system_return
+            -> time output
+        }
+
+@time output
+    *say
+        Your second timestamp was {timeStamp}.
+    *then
+        -> end
+
+@time uh oh
+    *say
+        Something went wrong, or you went too fast! Trying this again.
+    *then
+        -> time initialize

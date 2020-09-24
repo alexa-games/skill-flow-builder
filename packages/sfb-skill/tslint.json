@@ -1,0 +1,7 @@
+{
+    "rules": {
+      "no-floating-promises": true,
+      "no-string-throw": true
+    }
+}
+  

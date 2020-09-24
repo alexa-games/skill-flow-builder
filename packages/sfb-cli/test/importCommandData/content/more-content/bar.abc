@@ -1,0 +1,10 @@
+@answered no
+  *say
+    Just go to next scene! What say you?
+  *then
+    hear yes {
+      -> second scene
+    }
+    hear no {
+      >> END
+    }

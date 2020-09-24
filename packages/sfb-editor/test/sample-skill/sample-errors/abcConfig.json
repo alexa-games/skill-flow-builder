@@ -1,0 +1,64 @@
+{
+	"prod": {},
+	"beta": {},
+	"alpha": {},
+	"dev": {},
+	"prod-en-us": {},
+	"beta-en-us": {},
+	"alpha-en-us": {},
+	"dev-en-us": {},
+	"en-us": {},
+	"en-gb": {},
+	
+	"default": {
+		"ask-profile-name": "default",
+
+		"aws-profile-name": "default",
+
+		"skill-invocation-name": "sample",
+
+		"dynamo-db-session-table-name": "sample-sessions",
+
+		"s3-domain-name": "s3.amazonaws.com",
+
+		"s3-bucket-name": "sample-bucket",
+
+		"ask-skill-directory-name": "sample",
+
+		"publish-locales": [
+			"en-US"
+		],
+
+		"update-string-with-source": true,
+
+		"story-title": "sample",
+
+		"story-id": "sample",
+		
+		"abc-baked-filename": "baked_story.json",
+		
+		"abc-recording-script-filename": "vo_script.txt",
+
+		"public-resource-folders": ["audio", "images", "vo"],
+
+		"polly-config": {
+			"enabled": false,
+			"combineAudioTags": true,
+			"dontUseCache": false,
+			"engine": "standard"
+		},
+
+		"default-narrator": {
+			"enabled": false,
+			"name": "Matthew",
+			"pitch": "+10%",
+			"rate": "112%",
+			"volume": "1.0"
+		},
+		
+		"snippet-map-filename": "Snippets.json",
+		"apl-templates-filename": "apl-templates.json",
+		"custom-slottype-filename": "SlotTypes.json",
+		"isp-config-filename": "ProductISPs.json"
+	}
+}

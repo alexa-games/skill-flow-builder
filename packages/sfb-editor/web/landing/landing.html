@@ -1,0 +1,112 @@
+<html>
+  <head>
+      <title>Skill Flow Builder</title>
+      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+      <meta http-equiv="Pragma" content="no-cache" />
+      <meta http-equiv="Expires" content="0" />
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="../semantic.min.css">
+  </head>
+  <body>
+    
+  <img class="ui fluid image" src="../images/email-lead_SkillFlowBuilder_640x190.png">
+  <div style="padding: 20px">
+  <img class="ui centered medium image" src="../images/SkillFlowBuilder-logo.png">
+  
+  <div class="ui raised segment">
+  <h3>
+  Welcome to the Skill Flow Builder.
+  </h3>
+  <p>
+  Please see our official documentation on the Developer Portal <a href="https://alexa.design/sfb-editor-landing-page" target="_blank" rel="noopener noreferrer">here</a>.
+  </p>
+  <p>
+  <i>Want to receive the Skill Flow Builder newsletter? Sign-up <a href="https://alexa.au1.qualtrics.com/jfe/form/SV_6LqUYQdGd57MkVD" target="_blank" rel="noopener noreferrer">here</a>!</i>
+  </p>
+  <p>
+  <i><b>Have a question that you need an answer to? Please search for or submit an issue to either the <a href='https://forums.developer.amazon.com/spaces/23/Alexa+Skills+Kit.html' target="_blank" rel="noopener noreferrer">Alexa Skills Kit forums</a> or the Skill Flow Builder Github Repository's Issues tracker: <a href='https://github.com/alexa-games/skill-flow-builder/issues' target="_blank" rel="noopener noreferrer">Skill Flow Builder on Github</a></b></i>
+  </p>
+  <p>
+  <i><b>Skill Flow Builder is now a channel on the Alexa Developer Slack. Search #Skill-Flow-Builder on <a href='http://www.alexaslack.com/' target="_blank" rel="noopener noreferrer">Alexa Developer Slack</a></b></i>
+  </p>
+  </div>
+  
+  <div class="ui raised segment yellow">
+  
+  
+    <h3>11/25/2019 Release Notes: The current release is version 1.3.0</h3>
+  
+    <h4>Skill Flow Builder Editor download: <a href="http://sfb-framework.s3-website-us-east-1.amazonaws.com/winLatest" target="_blank" rel="noopener noreferrer">Win</a> or <a href="http://sfb-framework.s3-website-us-east-1.amazonaws.com/macLatest" target="_blank" rel="noopener noreferrer">Mac</a></h4>
+  
+    <h4>Release Changes</h4>
+    <p>
+      The following features have changed or improved.
+    </p>
+  
+    <p>
+      <ul>
+    <li><b>Editor</b></li>
+    <ul>
+      <li>
+        We have improved the Editor's ability to handle large (500 scene) files. Tip: use multiple .abc files to structure a skill that is over 500 scenes. This can also make it easier to organize content. 
+      </li>
+      <li>
+        You probably won't notice, but "Writer Mode", represented by the pencil icon, has been removed. Problems with this mode were slowing the Editor, so we removed it in favor of the Editor handling larger skills.
+      </li>
+      <li>
+        Added undo and redo commands to work with guided mode in the Editor. Window size and position are also remembered when you reopen the editor.
+      </li>
+    </ul>
+    <li><b>Core Modules</b></li>
+    <ul>
+      <li>
+        <b>Coming soon:</b> major updates to technical documentation, coverage includes SFB Build Life Cycle, use of custom extensions, and other advanced use cases.
+      </li>
+      <li>
+        <b>Customer Request:</b> You can now use multiple stages: if you want to say create a beta stage and a prod stage for your skill, this often involves creating two separate skills in the Developer Console. To make this easier, you can use the --stage argument with the deploy command when using the sfb-cli.
+      </li>
+      <li>
+        <b>Customer Request:</b> With very minimal effort, you can now get better insights into how your users are navigating your SFB skills. The tooling supports various levels of configuration; from plug and play all the way to full BI integration. Check out the <a href='https://gist.github.com/superkew/40045d93e630acc246c0f0df7c902053#file-readme-md' target="_blank" rel="noopener noreferrer">SFB Metrics Extension</a></b></i>
+      </li>
+      <li>
+        Added debug flag to command line simulator to enable quiet mode. Makes it easier to see your project specific logging.
+      </li>
+      <li>
+        Updated core extension classes to make them easier to subclass for your own extensions.
+      </li>
+      <li>
+        Snippets now work in localized content.
+      </li>
+      <li>
+        Fixed an issue where recap/reprompt responses were erroneously combining their output.
+      </li>
+      <li>
+        Updated handling of AMAZON.StopIntent to return "shouldEndSession" flag as true to conform to new Alexa policy.
+      </li>
+    </ul>
+  </ul>
+  </p>
+  
+    <h4>Known Issues</h4>
+    <p>
+      Please be aware of the following known issues with this release,
+      we are actively working to fix these in an upcoming release:
+    </p>
+    <p>
+    <ul>
+        <li>Alexa soundbank URLs of the format 'soundbank://soundlibrary/...' will not play in simulator mode.</li>
+    </ul>
+  </p>
+  
+  </div>
+  
+  </div>
+  
+  <div align="center">
+      <a href='../LICENSE.txt' target="_blank" rel="noopener noreferrer">License</a><br />
+      Skill Flow Builder Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  </div>
+  
+  </body>
+  </html>
+  

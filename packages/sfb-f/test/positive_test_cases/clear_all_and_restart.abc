@@ -1,0 +1,33 @@
+@clear all
+    *say
+        Clear all test.
+    *then
+        set testNumber to 1
+        set testNumberTwo to 2
+        set testString to 'fubar'
+        -> clear all read vars
+
+@clear all read vars
+    *say
+        // set to 1
+        Value of T1 is {testNumber}. 
+        // set to 2
+        Value of T2 is {testNumberTwo}.
+        // set to 'fubar'
+        Value of T-string is {testString}.
+        Say clear to clear everything.
+    *then
+        hear clear {
+            clear *
+            -> clear all vars cleared
+        }
+
+@clear all vars cleared
+    *say
+        // all values should be 'false' now
+        T1 is {testNumber}. 
+        T2 is {testNumberTwo}.
+        T-string is {testString}.
+        All the values should be false!
+    *then
+        -> end

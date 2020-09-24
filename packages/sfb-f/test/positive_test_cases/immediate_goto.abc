@@ -1,0 +1,12 @@
+
+@immediate goto
+	*say 
+		Immediate go-to test. Going to the next scene now without input.
+	*then
+		-> igt next
+
+@igt next
+	*say
+		Hi. This is the next scene. Success!
+	*then
+		-> end

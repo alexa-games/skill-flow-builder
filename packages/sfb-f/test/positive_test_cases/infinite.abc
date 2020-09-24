@@ -1,0 +1,16 @@
+@infinite
+    *say
+        Welcome to the Infinite loop test. This will break your skill. Let's roll a die!
+    *then
+        roll 1d6
+        -> infinite roll test
+
+@infinite roll test
+    *say
+        You rolled a {rollResult}. Lets do it all again! Forever!
+    *then
+        roll 1d6
+        -> infinite roll test
+
+// TESTS:
+// Test 1: launch

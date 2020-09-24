@@ -1,0 +1,130 @@
+/* 
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
+ *
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *   http://aws.amazon.com/asl/
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+.editorContainer {
+  position: relative;
+  line-height: 1.8em;
+}
+
+.container {
+  position: relative;
+  line-height: 1.8em;
+  padding: 0.2rem 0.8rem;
+  cursor: pointer;
+}
+
+.audioToken {
+  display: inline-block;
+  line-height: 1.4em;
+  padding: 0.1rem 1rem 0.1rem 0.25rem;
+  background-color: black;
+  color: white;
+  border-radius: 1em;
+  user-select: none;
+}
+
+.audioToken :global(.icon) {
+  margin-left: 0.25rem;
+}
+
+.voiceToken {
+  display: inline-block;
+  line-height: 1.4em;
+  padding: 0.1rem 1rem 0.1rem 0.25rem;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 1em;
+}
+
+.voiceToken strong:first-child {
+  margin-right: 0.5rem;
+  font-size: 0.8em;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.voiceTokenDropdown {
+  margin-right: 0.5rem;
+}
+
+.voiceTokenDropdown :global(.icon) {
+  display: none;
+}
+
+.voiceTokenDropdown :global(.text) {
+  opacity: 0.6;
+}
+
+.voiceTokenDropdown :global(.dropdown.icon) {
+  margin-left: 0.5rem !important;
+}
+
+.valueToken {
+  display: inline-block;
+  line-height: 1.4em;
+  padding: 0.1rem 1rem 0.1rem 0.25rem;
+  background-color: black;
+  color: white;
+  border-radius: 1em;
+}
+
+.valueToken strong:first-child {
+  margin-right: 0.5rem;
+  font-size: 0.8em;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.valueTokenDropdown {
+  margin-right: 0.5rem;
+}
+
+.valueTokenDropdown :global(.icon) {
+  display: none;
+}
+
+.valueTokenDropdown :global(.text) {
+  opacity: 0.6;
+}
+
+.valueTokenDropdown :global(.dropdown.icon) {
+  margin-left: 0.5rem !important;
+}
+
+.snippetToken {
+  display: inline-block;
+  line-height: 1.4em;
+  padding: 0.1rem 1rem 0.1rem 0.25rem;
+  background-color: black;
+  color: white;
+  border-radius: 1em;
+  margin-right: 0.25em;
+}
+
+.snippetToken :global(.icon) {
+  margin-left: 0.25rem;
+}
+
+.parserErrorToken {
+  display: inline-block;
+  line-height: 1.4em;
+  padding: 0.1rem 1rem 0.1rem 0.25rem;
+  background-color: crimson;
+  color: white;
+  border-radius: 1em;
+  margin-right: 0.25em;
+}

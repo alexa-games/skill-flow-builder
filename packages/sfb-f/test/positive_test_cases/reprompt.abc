@@ -1,0 +1,19 @@
+// SPECIAL SCENE: @start is a special scene that tells the framework to start your game at this scene. It can be anywhere in your file. If no @start scene is present, the framework will start with the first scene in the file.
+@reprompt test
+	*say 
+		This is the full normal say line. Say AGAIN to hear a reprompt.
+	*reprompt
+		This is the reprompt line. Say end to quit.
+	*then
+		hear again {
+			>> REPROMPT
+		}
+		hear end {
+			-> end
+		}
+
+// TESTS:
+// 1) Basic reprompt functionality
+//    - launch >> "reprompt test" >> verify the reprompt statement plays when user says nothing
+// 2) Reprompt command
+//    - launch >> "reprompt test" >> "again" >> verify the reprompt statement is only repeated (not the say statement)

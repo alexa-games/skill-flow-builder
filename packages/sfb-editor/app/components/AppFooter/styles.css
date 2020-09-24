@@ -1,0 +1,91 @@
+/* 
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
+ *
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *   http://aws.amazon.com/asl/
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+.container {
+  display: flex;
+  position: relative;
+  grid-area: app-footer;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100vw;
+
+  background-color: #eee;
+
+  padding: 0 10px;
+  border-top: 1px solid var(--border-color-dark);
+}
+
+.message {
+  flex: 1 1 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 1em;
+}
+
+.rightSide {
+  flex: 0 1 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.viewToggle {
+  background-color: transparent;
+  border: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.unreadCounts {
+  flex: 0 1 auto;
+  padding: 0 0.5em;
+  border-left: 1px solid var(--border-color-dark);
+  border-right: 1px solid var(--border-color-dark);
+  margin: 0 1em;
+  outline: none;
+  white-space: nowrap;
+}
+
+.unreadCounts > button {
+  border: none;
+  padding: 0;
+  margin: 0 0.5em;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.hasLogMessages {
+  color: cornflowerblue;
+}
+
+.hasErrorMessages {
+  color: red;
+}
+
+.unreadCounts :global(.icon) {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+.version {
+    opacity: 0.2;
+}

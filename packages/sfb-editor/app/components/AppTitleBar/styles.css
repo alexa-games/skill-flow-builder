@@ -1,0 +1,160 @@
+/* 
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
+ *
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *   http://aws.amazon.com/asl/
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+.container {
+  display: flex;
+  grid-area: app-title-bar;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #eee;
+  color: #333;
+
+  height: 30px;
+
+  padding: 0;
+  border-bottom: 1px solid var(--border-color-dark);
+}
+
+/* max space for traffic lights on OSX */
+:global(.platform-darwin) .container {
+  padding-left: 0;
+}
+/* max space for traffic lights on OSX */
+:global(.platform-darwin) .mainTitle {
+  padding-left: 80px;
+}
+
+.container a {
+  color: #333;
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.middle {
+  padding: 0 1em;
+}
+
+.title {
+  color: #333;
+  font-size: 1.4em;
+  letter-spacing: -0.05em;
+}
+
+.rightSide {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  margin-right: 1px;
+}
+
+.primaryMode {
+  height: 100%;
+  justify-content: center;
+}
+
+.primaryMode:global(.ui.checked) {
+  cursor: pointer;
+}
+
+.primaryMode button {
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 0 1em;
+  height: 100% !important;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.primaryMode button.isSelected {
+  opacity: 1;
+  background-color: white;
+  border-left: 1px solid var(--border-color-dark);
+  border-right: 1px solid var(--border-color-dark);
+  border-top: 1px solid var(--border-color-dark);
+  position: relative;
+  top: 1px;
+  height: 100%;
+}
+
+.primaryMode button.isSelected :global(.icon) {
+  margin-right: 0;
+}
+
+.projectActionSelector {
+  height: var(--app-header-height);
+  line-height: var(--app-header-height);
+}
+
+.projectActionSelector:global(.ui .menu) {
+  border-radius: 0;
+  border-top: none;
+}
+
+.buildActionSelector {
+  padding: 0 1em;
+  height: var(--app-header-height);
+  line-height: var(--app-header-height);
+}
+
+.buildActionSelector:global(.ui .menu) {
+  border-radius: 0;
+  border-top: none;
+}
+
+.simulateSelector {
+  padding: 0 1rem;
+  height: var(--app-header-height);
+  line-height: var(--app-header-height);
+}
+
+.simulateSelector:global(.ui .menu) {
+  border-radius: 0;
+  border-top: none;
+}
+
+.localeSelector {
+  padding: 0 1rem;
+  height: var(--app-header-height);
+  line-height: var(--app-header-height);
+}
+
+.localeSelector:global(.ui .menu) {
+  border-radius: 0;
+  border-top: none;
+  overflow: auto !important;
+}
+
+button.toolboxButton:global(.ui.button) {
+  background-color: #eee;
+  margin-left: .05rem;
+  margin-right: .05rem;
+  padding: 0.4em !important;
+}
+button.toolboxButton:global(.ui.button):hover {
+  background-color: #bbb;
+}

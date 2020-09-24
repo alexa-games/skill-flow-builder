@@ -1,0 +1,59 @@
+@say other statement
+    *say
+        // recap will play when user says hodor since it is not an expected response
+        Hello, this is the first scene. Say HODOR.
+    *recap
+        THIS IS A RECAP OF THE FIRST SCENE. Say continue.
+    *then
+        hear continue {
+            ->sos scene two
+        }
+// Test #1: Verify recap functionality
+// - launch >> "say other statement" >> "hodor" >> verify recap statement plays 
+// - To get to next test: "continue"
+
+@sos scene two
+    *say
+        This is the second scene.
+        Say recap to hear the previous scene's recap statement.
+        Say continue to move to the next scene.
+    *then
+        // This forces the scene to go to the recap of "@say other statement"
+        hear recap {
+            -> say other statement *recap
+        }
+        hear continue {
+            -> sos scene three
+        }
+
+// Test #2: Recap statement for another scene can be directly targeted
+// - "recap" >> verify recap of @say other statement plays
+// - To get to next test: say "continue" >> "continue"
+
+@sos scene three
+    *say
+        This is the third scene.
+        Say recap to hear this scene's recap statement.
+    *recap
+        THIS IS THE RECAP FOR THE THIRD SCENE.
+        Say reprompt to hear this scene's reprompt statement.
+    *reprompt
+        THIS IS THE REPROMPT FOR THE THIRD SCENE.
+        Say end to end.
+    *then
+        // This ensures that the user can loop to the recap statement withn the scene.
+        hear recap {
+            -> sos scene three *recap
+        }
+        hear reprompt {
+            -> sos scene three *reprompt
+        }
+        hear end {
+            -> end
+        }
+
+// Test #3: Recap statement for current scene can be directly targeted
+// - "recap"
+
+// Test #4: Reprompt statement for current scene can be directly targeted
+// - "reprompt" >> "end" to end

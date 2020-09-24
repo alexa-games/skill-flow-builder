@@ -1,0 +1,16 @@
+// Missing @start scene test.
+@missing start
+	*say
+		This test must be run on its own without the main.abc in the manifest.
+		It should instantly crash the skill.
+	*then
+		hear continue {
+			-> missing start continue
+		}
+		>> END
+
+@missing start continue
+	*say
+		Nothing to see here.
+	*then
+		>> END

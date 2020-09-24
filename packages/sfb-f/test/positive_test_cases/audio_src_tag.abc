@@ -1,0 +1,9 @@
+// SPECIAL SCENE: @start is a special scene that tells the framework to start your game at this scene. It can be anywhere in your file. If no @start scene is present, the framework will start with the first scene in the file.
+
+// Plays a standard s3 mp3 file.
+@audio source tag
+	*say 
+		playing audio now: <audio src='https://sfb-framework.s3.amazonaws.com/examples/sounds/Trumpet_1.mp3' />
+		Playing same tag, but with a snippet. <trumpets>
+	*then
+		-> end

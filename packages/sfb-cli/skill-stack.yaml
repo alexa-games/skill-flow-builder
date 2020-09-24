@@ -1,0 +1,110 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  SkillId:
+    Type: String
+  LambdaRuntime:
+    Type: String
+  LambdaHandler:
+    Type: String
+  CodeBucket:
+    Type: String
+  CodeKey:
+    Type: String
+  CodeVersion:
+    Type: String
+
+Resources:
+  AlexaSkillIAMRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action:
+                - sts:AssumeRole
+        Path: /
+        Policies:
+          - PolicyName: alexaSkillExecutionPolicy
+            PolicyDocument:
+              Version: 2012-10-17
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - logs:*
+                  Resource:
+                    - arn:aws:logs:*:*:log-group:/aws/lambda/SFB-STORY-ID-function
+                    - arn:aws:logs:*:*:log-group:/aws/lambda/SFB-STORY-ID-function:log-stream:*
+                - Effect: Allow
+                  Action:
+                    - dynamodb:*
+                  Resource:
+                    - arn:aws:dynamodb:*:*:table/SFB-STORY-ID-sessions
+                    - arn:aws:dynamodb:*:*:table/SFB-STORY-ID-sessions/*
+                - Effect: Allow
+                  Action:
+                    - s3:*
+                  Resource:
+                    - arn:aws:s3:::SFB-STORY-ID-bucket
+                    - arn:aws:s3:::SFB-STORY-ID-bucket/*
+                - Effect: Allow
+                  Action:
+                    - polly:*
+                  Resource: '*'
+  AlexaSkillFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: !Ref CodeBucket
+        S3Key: !Ref CodeKey
+        S3ObjectVersion: !Ref CodeVersion
+      FunctionName: SFB-STORY-ID-function
+      Handler: !Ref LambdaHandler
+      Runtime: !Ref LambdaRuntime
+      Role: !GetAtt AlexaSkillIAMRole.Arn
+      MemorySize: 512
+      Timeout: 60
+SFB-ENVIRONMENT-VARIABLES
+  AlexaSkillFunctionEventPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:invokeFunction
+      FunctionName: !GetAtt AlexaSkillFunction.Arn
+      Principal: alexa-appkit.amazon.com
+      EventSourceToken: !Ref SkillId
+  AlexaSkillFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/SFB-STORY-ID-function
+      RetentionInDays: 14
+  AlexaSkillTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: SFB-STORY-ID-sessions
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      # Remember to scale up the capacity as your customer size grows!
+      ProvisionedThroughput:
+        ReadCapacityUnits: '5'
+        WriteCapacityUnits: '5'
+  AlexaSkillBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: SFB-STORY-ID-bucket
+      VersioningConfiguration:
+        Status: Enabled
+
+Outputs:
+  SkillEndpoint:
+    Description: LambdaARN for the regional endpoint
+    Value: !GetAtt AlexaSkillFunction.Arn

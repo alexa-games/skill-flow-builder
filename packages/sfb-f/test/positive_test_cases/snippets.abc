@@ -1,0 +1,51 @@
+// Testing the conversion of snippets.json into SSML.
+
+@snippets
+    *say
+        Welcome to the snippet test. Here's some snippets.
+    *then
+        -> snippet trumpet
+
+@snippet trumpet
+    *say
+        Here's a trumpet snippet. <trumpets>
+    *then
+        -> snippet ocean
+
+@snippet ocean
+    *say
+        Here's an ocean wave. <ocean wave>
+    *then
+        -> snippet short pause
+
+@snippet short pause
+    *say
+        Here's a short pause <pause> Was that short?
+    *then
+        -> snippet long pause
+
+@snippet long pause
+    *say
+        Here's a long pause. <longpause> Was that long?
+    *then
+        ->snippet kid voice
+
+@snippet kid voice
+    *say
+        <kid>Hi, my name is Justin.</kid>
+    *then
+        -> snippet old man
+
+@snippet old man
+    *say
+        <oldman>Hi, I'm an old man now.</oldman>
+    *then
+        -> snippet blank
+
+@snippet blank
+    *say
+        Here's a blank snippet. <blank> Did it break?
+    *then
+        -> end
+
+// Test: manual test to ensure these play correctly through dev portal/in skill

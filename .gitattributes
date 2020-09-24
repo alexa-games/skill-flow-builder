@@ -1,0 +1,13 @@
+package-lock.json   -diff -merge
+package-lock.json    linguist-generated=true
+
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Force code files to use lf for linting
+*.js eol=lf
+*.ts eol=lf
+*.litexa eol=lf
+
+# Force the bash scripts to be checked out with LF line endings.
+*.bash text eol=lf

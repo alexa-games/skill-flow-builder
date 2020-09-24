@@ -1,0 +1,36 @@
+// // Voice tags and Prosody tags within a voice tag for preview mode
+// // 1. create a scene with a single *say and text surrounded by <voice> tags.
+// // 2. in the same *say in the same scene, add another <voice> and a <prosody> tags inside the area surrounded by the existing <voice> tags
+// // 3. run the simulator
+// // VERIFY: compiled and output as TTS.
+
+// @SSML tags
+//     *say
+//         Normal. <amazon:effect name="whispered">Whispered effect.</amazon:effect>
+//         No emphasis. <emphasis level="reduced">Reduced emphasis.</emphasis>
+//         EN language. <lang xml:"fr-FR">FR language.</lang>
+//         No p tag. <p>Yes p tag.</p>
+//         No Pecan. <phoneme alphabet="ipa" ph="pɪˈkɑːn">pecan</phoneme> <phoneme alphabet="ipa" ph="ˈpi.kæn">pecan</phoneme>.
+//         Normal prosody. <prosody rate="fast" pitch="high" volume="loud">Fast high loud prosody text.</prosody>
+//         No s tag. <s> Yes s tag.</s>
+//         No reading. <say-as interpret-as="characters">Characters</say-as>
+//         No speak tag. <speak>Speak tag</speak>
+//         No sub tag. <sub alias="if you hear this then alias works"> sub tag.</sub>
+//         Normal voice. <voice name="Ivy"> Ivy's voice.</voice>
+//         No w tag. This is the present tense verb, <w role="amazon:VB">read</w>, and past tense, <w role="amazon:VBD">read</w>
+
+// 		Nested voice and prosody tags.
+//         <voice name='Kendra'><prosody volume="x-loud">This is Kendra's voice in a Louder volume.</prosody></voice>
+//         <voice name='Kendra'><prosody rate="x-slow">This is Kendra's voice speaking quite slowly.</prosody></voice>
+//         <voice name='Kendra'><prosody pitch="x-high"> This is Kendra's voice with a higher pitch.</prosody></voice>
+
+//         End of skill.
+//     *then
+//         >> END
+
+// // Kendra voice tags taken directly from SFB documentation. Prosody taken from SSML documentation.
+// // Unable to verify Kendra voice tags working in PCON
+
+// // All of this needs to be validated before we can say any of this works. It also looks like a lot of information on these tags are missing.
+// // Ex: Line 5, nowhere does it state to change the language to FR.
+// // It compiles because its all a say statement, so its treated as a string.  But does it actually DO the thing?

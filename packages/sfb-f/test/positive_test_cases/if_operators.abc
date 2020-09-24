@@ -1,0 +1,216 @@
+// Runs through all if-else scenarios.
+
+@if operators
+    *say
+        If operators.
+        Say a, b, c, d, e, or f.
+    *then
+        flag ifFlag
+        set ifVar to 5
+        set ifString to 'stringy'
+        set ifLow to 0
+        set ifHigh to 100
+        set ifNegative to -1
+        set ifStringCompare to 'not stringy'
+        hear a {
+            -> io a
+        }
+        hear b {
+            -> io b
+        }
+        hear c {
+            -> io c
+        }
+        hear d {
+            -> io d
+        }
+        hear e {
+            -> io e
+        }
+        hear f {
+            -> io f
+        }
+        hear g {
+            -> io g
+        }
+
+// Standard IF x == True and IF x == false checks
+@io a
+    *say
+        If operator test, A.
+    *then
+        if ifFlag == true {
+            -> io a true
+        }
+        if ifFlag == false {
+            -> io a false
+        }
+		-> io never
+
+@io a true
+    *say
+        // should be 'true'
+        The flag is set to {ifFlag}. Pass!
+        Unflagging the variable now.
+    *then
+        unflag ifFlag
+        -> io a
+
+@io a false
+    *say
+        // should be 'false'
+        The flag is set to {ifFlag}. Pass!
+    *then
+        -> end
+
+// Tests a combination using the AND (&&) operator.
+@io b
+    *say
+        If operator test, B.
+        If variable 1 equals 0, and variable 2 equals 100, our test will pass.
+    *then
+        if ifLow == 0 and ifHigh == 100 {
+            -> io b result
+        }
+		-> io b second result
+
+@io b result
+    *say
+        Pass!
+        Variable one is {ifLow}.
+        Variable two is {ifHigh}.
+        Lets increase each variable by one and do it again.
+    *then
+        increase ifLow by 1
+        increase ifHigh by 1
+        -> io b
+
+@io b second result
+    *say
+        Pass!
+        Variable one is {ifLow}.
+        Variable two is {ifHigh}.
+    *then
+        -> end
+
+
+// Tests the psuedo-else by evaluating ifLow > 0 as false
+@io c
+    *say
+        If operator test, C.
+        If our variable is greater than zero, this will fail.
+    *then
+        if ifLow > 0 {
+            -> io c should never go here
+        }
+        -> io c should always go here
+
+@io c should never go here
+    *say
+        This should not happen. Fail!
+    *then
+        >> END
+
+@io c should always go here
+    *say
+        Our variable is {ifLow}. PASS!
+    *then
+        -> end
+
+// Testing a nested if statement, and evaluating it to true.
+@io d
+    *say
+        If operator test, D. Nested if statement.
+    *then
+        if ifFlag {
+            if ifFlag {
+                -> io d passed
+            }
+            -> io d failed
+        }
+        -> io d failed
+
+@io d passed
+    *say
+        Passed 2 nested if statements. PASS!
+    *then
+        -> end
+
+@io d failed
+    *say
+        Boo. Failed 2 nested if statements. This is so wrong. Go back and figure out why this failed.
+    *then
+        >> END
+
+// Testing the not operator (!)
+@io e
+    *say
+        If operator test, E. If not test.
+    *then
+    // "if not true"
+        unflag ifFlag
+        if !ifFlag {
+            -> io e passed
+        }
+		-> io never
+
+@io e passed
+    *say
+        If not operator works. Pass!
+    *then
+        -> end
+
+// Testing the built-in booleans true and false.
+@io f
+    *say
+        If operator test, F. If true.
+    *then
+        if true {
+            -> io f true
+        }
+        if false {
+            -> io f false
+        }
+		-> io never
+
+@io f true
+    *say
+        True was checked first. True equals true. Who knew? Pass!
+    *then
+        -> end
+
+@io f false
+    *say
+        False was checked second.  If you see this, then true does not equal true. Uh oh. Go find that bug!
+    *then
+        >> END
+		
+@io g
+    *say
+        If operator test, G. If false.
+    *then
+        if false {
+            -> io g true
+        }
+        if true {
+            -> io g false
+        }
+		-> io never
+
+@io g false
+    *say
+        False was checked first. False equals false. Who knew? Pass!
+    *then
+        -> end
+
+@io g true
+    *say
+        True was checked second.  If you see this, then false does not equal false. Uh oh. Go find that bug!
+    *then
+        >> END		
+
+@io never
+	*say
+		Hmm. This should never happen. What did you do? Keep breaking things. Good tester. Have a cookie.
+	*then
+		>> END

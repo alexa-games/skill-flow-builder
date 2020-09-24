@@ -1,0 +1,6 @@
+{
+    "include": [
+        "*.abc"
+    ],
+    "version": 1
+}

@@ -1,0 +1,38 @@
+// Using additional SSML commands within a set of voice tags.	
+// 1. create a scene with a *say block and <voice> tags in it.
+// 2. in the same *say in the same scene, add more SSML commands inside the area surrounded by the <voice> tags
+// 3. run the simulator	
+// VERIFY: SSML nested within <voice> tags will be compiled and output as TTS - refer to expected results from ASK dev console.
+
+@multiple voice tags
+    *say
+        Audio source test.
+		<audio src='https://sfb-framework.s3.amazonaws.com/examples/sounds/Trumpet_1.mp3' />
+        
+        Here's a conversation between a few friends.
+        // <voice name="Kendra"><amazon:effect name="whispered">I want to tell you a secret.</amazon:effect></voice>
+        // <voice name="Kendra"><lang xml:lang="en-US"><amazon:effect name="whispered">I want to tell you a secret.</amazon:effect></lang></voice>
+        <amazon:effect name='whispered'>I want to tell you a secret.</amazon:effect>
+        <voice name='Brian'>Okay, I'm listening.</voice>
+        <voice name='Kendra'><lang xml:lang='en-US'>Americans say, advertisement, and barbecue.</lang></voice>
+        <voice name='Kendra'><lang xml:lang='en-GB'>British people say, advertisement, and barbecue. How do you say it?</lang></voice>
+        // check to make sure pronunciation is correct on these two statements
+        <voice name='Brian'><lang xml:lang='en-GB'>I say advertisement, and, barbecue.</lang></voice>
+        <voice name='Brian'><lang xml:lang='en-US'>But I can also say it your way.  Advertisement, barbecue. See?</lang></voice>
+        
+        // "pea-con" or "pee-can" (voice + phoneme tag)
+        <voice name='Justin'>Do you say, <phoneme alphabet='ipa' ph='pɪˈkɑːn'>pecan</phoneme>, or, <phoneme alphabet='ipa' ph='ˈpi.kæn'>pecan</phoneme>?</voice>
+        
+        // Should pronounce - I want to "reed", but I've already "red"
+        <voice name='Ivy'>
+        I want to <w role=amazon:VBD>read</w> a new book, but I've already <w role='amazon:VB'>read</w> everything in the library! That didn't sound right, lets try that again.
+        I want to <w role='amazon:VB'>read</w> a new book, but I've already <w role='amazon:VBD'>read</w> everything in the library! Much better!
+        </voice>
+        
+
+    *then
+        -> end
+
+
+// Tests:
+// 1) Manual - need to verify that all audio plays as expected based on the comments

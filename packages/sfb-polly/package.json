@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Amazon.com"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.163.0",
+    "mp3-duration": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.12.0",
+    "mocha": "^6.1.3",
+    "nyc": "13.3.0",
+    "rimraf": "^2.6.3",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.1"
+  },
+  "description": "Library to parse Alexa response strings for voice tags and translate them with Polly (and convert/upload them to S3) for use in your Alexa voice response SSML.",
+  "keywords": [
+    "alexa",
+    "polly",
+    "skill",
+    "ssml"
+  ],
+  "license": "LicenseRef-.amazon.com.-AmznSL-1.0",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "name": "@alexa-games/sfb-polly",
+  "nyc": {
+    "exclude": [
+      "**/test"
+    ]
+  },
+  "scripts": {
+    "integ-test": "npx rimraf '.out' && npx mocha 'dist/test/**/*.integ-spec.js'",
+    "test": "echo \"No tests defined. \"",
+    "coverage": "npx nyc --reporter lcov --reporter text mocha 'dist/test/**/*.integ-spec.js'",
+    "compile": "npm run clean && npm run lint && npx tsc",
+    "lint": "tslint --project tsconfig.json",
+    "integ-coverage": "nyc --reporter text npm run integ-test",
+    "clean": "npx rimraf  ./dist"
+  },
+  "version": "1.3.4"
+}

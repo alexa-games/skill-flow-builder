@@ -1,0 +1,62 @@
+// Similar to a real game where the player would pause in the middle of gameplay,
+// and come back and resume later from a certain point, saving variables (progress).
+// Clears hitPoints from any previous playthroughs, then sets it to 10.
+// When you pause, the skill ends, and then when the skill resumes, it should drop you in the @resume scene with your hitPoints set to 10.
+// The only true way to test this is manually on the dev console/device (or through ASK dialog).
+
+@pause test
+    *say
+        Welcome to the pause and resume test.
+        Say continue to drink a health potion!
+    *then
+		clear hitPoints
+		set hitPoints to 10
+        hear continue {
+			-> pt pause
+		}
+
+@pt pause
+	*say
+		// should be 10 hit points.
+		You have {hitPoints} hit points!
+		Say pause to pause the game!
+		Say end to end the test.
+		Or say drink to drink another health potion!
+	*then
+		// pauses the scene, do this first
+		hear pause {
+			>> PAUSE
+		}
+		// quits the test when you are done
+		hear end {
+			clear hitPoints
+			-> end
+		}
+		// increases hitpoints, allowing you to verify a variable can be changed/saved through multiple pause loops
+		hear drink {
+			increase hitPoints by 10
+			-> pt pause
+		}
+
+@pause
+	*say
+		You made it to the pause scene! The skill will end, but when you relaunch it you should automatically start at the resume scene!
+	*then
+		>> PAUSE
+
+@resume
+    *say
+        Resuming from where you left off last.
+    *then
+        >> RESUME
+
+
+// Tests:
+// 1) Pause and Resume terminators
+//    - launch >> "Pause test" >> "continue" >> "pause" >> relaunch the game >> verify that @resume occurs on launch >> verify that hit points are set to 10 >> "end"
+
+// 2) User increases variable and is saved through pause and resume
+//    - launch >> "Pause test" >> "continue" >> "drink" >> "Pause" >> relaunch the game >> verify that hit points are set to 20 >> "end"
+
+// 3) Variable is not cleared from multiple pause states
+//    - launch >> "Pause test" >> "continue" >> "Pause" >> relaunch the game >> verify that hit points are set to 10 >> "pause" >> relaunch the game >> verify that hit points are set to 10 still

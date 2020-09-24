@@ -1,0 +1,16 @@
+{
+    "trumpets": "<audio src='https://sfb-framework.s3.amazonaws.com/examples/sounds/Trumpet_1.mp3' />",
+
+    "pause": "<break time='500ms'/>",
+    "longpause": "<break time='2s'/>",
+
+    "kid": "<voice name='Justin'>",
+    "/kid": "</voice>",
+    "oldman": "<voice name='Matthew'><prosody rate='slow' pitch='low' volume='soft'>",
+    "/oldman": "</prosody></voice>",
+
+    "ocean wave": "<audio src='https://sfb-framework.s3.amazonaws.com/examples/sounds/ocean_wave.mp3'/>",
+
+    "blank": ""
+
+}

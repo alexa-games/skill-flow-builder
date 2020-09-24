@@ -1,0 +1,42 @@
+{
+  "author": {
+    "name": "Amazon.com"
+  },
+  "description": "Alexa utility functions.",
+  "keywords": [
+    "game",
+    "story",
+    "Alexa",
+    "skill",
+    "voice"
+  ],
+  "license": "LicenseRef-.amazon.com.-AmznSL-1.0",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "name": "@alexa-games/sfb-util",
+  "scripts": {
+    "test": "npx mocha 'dist/test/**/*.spec.js'",
+    "compile": "npm run lint && npx tsc && copyfiles test/testFiles/**/* dist/",
+    "clean": "npx rimraf ./dist",
+    "coverage": "npx nyc --reporter lcov --reporter text mocha 'dist/test/**/*.spec.js'",
+    "lint": "tslint --project tsconfig.json"
+  },
+  "version": "1.3.3",
+  "nyc": {
+    "exclude": [
+      "**/test"
+    ]
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.12.0",
+    "copyfiles": "^2.1.1",
+    "mocha": "^6.1.3",
+    "nyc": "^13.3.0",
+    "rimraf": "^2.6.3",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.1"
+  }
+}

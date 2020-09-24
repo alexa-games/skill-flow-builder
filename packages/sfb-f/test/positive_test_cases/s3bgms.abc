@@ -1,0 +1,24 @@
+@background music
+    *say
+        Welcome to the background music test. You should not hear Alexa's voice with any background music.
+    *then
+        -> background mix
+
+@background mix
+    *say
+        <voice name="Kendra">Alexa's voice does not mix with background music, so I am using a Polly voice instead. Do you hear music? You should hear music.</voice>
+    *then
+        bgm https://sfb-framework.s3.amazonaws.com/examples/sounds/Crowd_Cheer_2_LONG.mp3
+        -> background end
+
+@background end
+    *say
+        Now I'm back to Alexa's voice.
+        Say again to repeat the test, or end to quit.
+    *then
+        hear again {
+            -> background music
+        }
+        hear end {
+            -> end
+        }

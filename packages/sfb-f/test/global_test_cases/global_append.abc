@@ -1,0 +1,55 @@
+@global append
+    *say
+        // should be same content as prepend
+        Beginning of APPENDED statements:
+        
+        // prosody tags
+        <prosody volume='x-loud'>This is my normal voice in a Louder volume.</prosody>
+        <prosody rate='x-slow'>This is my normal voice speaking quite slowly.</prosody>
+        <prosody pitch='x-high'> This is my normal voice with a higher pitch.</prosody>
+        <prosody pitch='low'>This is my normal voice with a lower pitch.</prosody>
+        // effects
+        <amazon:effect name='whispered'>Here's a whisper effect.</amazon:effect>
+        // emphasis tags
+        <emphasis level='reduced'>Here's a reduced emphasis effect.</emphasis>
+        <emphasis level='reduced'>This is a moderate emphasis effect.</emphasis>
+        <emphasis level='strong'>Here's a strong emphasis effect.</emphasis>
+        // language
+        <lang xml:'fr-FR'>I am trying to speak in French!</lang>
+        // voices & speak tag
+        <speak>
+        Alexa's voice. 
+        <voice name='Ivy'> Ivy's voice.</voice> <voice name='Kendra'>
+        Now I'm speaking in Kendra's voice.</voice>
+        </speak>
+        // paragraph tag (p)
+        <p>Paragraph tag, there should be a pause after this is spoken.</p>
+        <p>This is the next paragraph.</p>
+        // phonemes
+        Phoneme tag. You say, <phoneme alphabet='ipa' ph='pɪˈkɑːn'>pecan</phoneme>.
+        I say, <phoneme alphabet='ipa' ph='ˈpi.kæn'>pecan</phoneme>.
+        // strong break tag (s)
+        <s>This is a sentence with no punctuation</s>
+        <s>There should be a short pause before this second sentence</s>
+        This sentence ends with a period and should have the same pause. Cool.
+        // say as tag
+        I'm going to spell out the word characters. <say-as interpret-as='characters'>Characters</say-as>.
+        // sub tag
+        No sub tag. <sub alias='if you hear this then alias works'> sub tag.</sub>
+        // w tag
+        No w tag. This is the present tense verb, <w role='amazon:VB'>read</w>, and past tense, <w role='amazon:VBD'>read</w>
+        // audio source tag
+        Here's a trumpet. <audio src='https://sfb-framework.s3.amazonaws.com/examples/sounds/Trumpet_1.mp3' />
+        // snippet
+        Here's a wave. <ocean wave>
+
+        End of APPENDED statements!
+    *then
+        // test case for globally appended valid user response
+        hear secret scene {
+            -> secret scene
+        }
+        // global otherwise test case
+        hear * {
+            -> heard otherwise
+        }

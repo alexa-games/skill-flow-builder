@@ -1,0 +1,19 @@
+// Say OR test.
+// Tries 3 times to get a random TTS.
+@this or that
+	*say 
+		Option one. Say again or end.
+		||
+		Option two. Say again or end.
+		||
+		Option three. Say again or end.
+	*then
+		hear again {
+			-> this or that
+		}
+		hear end {
+			-> end
+		}
+
+// TEST:
+// Run a few times by saying "more". Should never get the same 2 statements in a row

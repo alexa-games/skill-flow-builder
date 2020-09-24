@@ -1,0 +1,68 @@
+{
+        "prod": {},
+        "beta": {},
+        "alpha": {},
+        "dev": {},
+        "prod-en-us": {},
+        "beta-en-us": {},
+        "alpha-en-us": {},
+        "dev-en-us": {},
+        "en-us": {},
+        "en-gb": {},
+
+        "default": {
+                "sfbLocalTesting": true,
+
+                "ask-profile-name": "default",
+
+                "aws-profile-name": "default",
+
+                "skill-invocation-name": "Visual Demo",
+
+                "dynamo-db-session-table-name": "visualdemo-sessions",
+
+                "s3-domain-name": "s3.amazonaws.com",
+
+                "s3-bucket-name": "my-branch-story-bucket",
+
+                "ask-skill-directory-name": "visualdemo",
+
+                "publish-locales": [
+                        "en-US"
+                ],
+
+                "update-string-with-source": true,
+
+                "use-lambda-layer": false,
+
+                "story-title": "VisualDemo",
+
+                "story-id": "visualdemo",
+
+                "abc-baked-filename": "baked_story.json",
+
+                "abc-recording-script-filename": "vo_script.txt",
+
+                "public-resource-folders": ["audio", "images", "vo"],
+
+                "polly-config": {
+                        "enabled": false,
+                        "combineAudioTags": true,
+                        "dontUseCache": false,
+                        "engine": "standard"
+                },
+
+                "default-narrator": {
+                        "enabled": false,
+                        "name": "Matthew",
+                        "pitch": "+10%",
+                        "rate": "112%",
+                        "volume": "1.0"
+                },
+
+                "snippet-map-filename": "Snippets.json",
+                "apl-templates-filename": "apl-templates.json",
+                "custom-slottype-filename": "SlotTypes.json",
+                "isp-config-filename": "ProductISPs.json"
+        }
+}

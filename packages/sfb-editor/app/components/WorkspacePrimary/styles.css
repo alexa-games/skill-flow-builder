@@ -1,0 +1,168 @@
+/* 
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
+ *
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *   http://aws.amazon.com/asl/
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.fileSelector,
+.headerSceneId {
+  height: 100%;
+  padding: 0 1rem;
+  line-height: var(--app-header-height);
+}
+
+.headerSceneId {
+  margin: 0;
+  color: cornflowerblue;
+}
+
+.fileSelector:global(.ui .menu) {
+  border-radius: 0;
+}
+
+.fileSelector:global(.ui .menu) {
+  border-left: none;
+  overflow-y: auto !important;
+}
+
+.headerButton {
+  background-color: transparent !important;
+  border: none !important;
+  opacity: 0.2;
+  transition: opacity 100ms linear;
+  cursor: pointer;
+  outline: none;
+}
+
+.headerButton:focus,
+.headerButton:hover {
+  opacity: 0.5;
+}
+
+.openProjectMessage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fileName {
+  margin: 0 1rem;
+  font-size: 1.25em;
+}
+
+.simulatorHeaderContainer {
+  flex: 1;
+  display: flex;
+  font-weight: bold;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.simulatorHeaderContainer button {
+  border: none;
+  background-color: transparent;
+}
+
+.simulatorHeaderContainer strong {
+  font-size: 1.25em;
+}
+
+.sceneNameContainer {
+  flex: 1;
+  display: flex;
+  font-size: 1.25em;
+  font-weight: bold;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.sceneIdInput {
+  flex: 1;
+}
+
+.sceneIdInput input {
+  border: none !important;
+  font-weight: bold;
+  height: 100%;
+  padding: 0 1rem !important;
+  color: cornflowerblue !important;
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+}
+
+.minWidthButton {
+  width: 250px;
+}
+
+.writerHeaderContainer {
+  flex: 1;
+  display: flex;
+  font-weight: bold;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 1rem;
+}
+
+.writerHeaderContainer button {
+  font-weight: bold;
+  opacity: 0.5;
+  transition: opacity 200ms linear;
+}
+
+.writerHeaderContainer button:focus,
+.writerHeaderContainer button:hover {
+  opacity: 1;
+}
+
+.projectList {
+  width: 400px;
+}
+
+.togglePollyPreviewContainer {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+.bannerMessageContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+.bannerMessage {
+  max-width:500px;
+  margin: 0rem;
+}
+.aceEditorHidden {
+  height: 0;
+}
+.invalidSceneName :global(.content) {
+  color: red;
+}

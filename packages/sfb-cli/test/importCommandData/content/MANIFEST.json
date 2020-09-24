@@ -1,0 +1,7 @@
+{
+  "include": [
+    "*.abc",
+    "more-content/*.abc"
+  ],
+  "version": 1
+}

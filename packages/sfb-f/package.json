@@ -1,0 +1,52 @@
+{
+  "name": "@alexa-games/sfb-f",
+  "description": "Alexa Skill Flow Builder Framework (SFB-f) core module. Enables and aids importing and creating interactive story skills for Alexa.",
+  "author": "Amazon.com",
+  "license": "LicenseRef-.amazon.com.-AmznSL-1.0",
+  "dependencies": {
+    "@alexa-games/sfb-polly": "file:../sfb-polly",
+    "@alexa-games/sfb-util": "file:../sfb-util",
+    "ask-sdk": "latest"
+  },
+  "devDependencies": {
+    "@types/inquirer": "0.0.43",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.12.0",
+    "@types/sinon": "^7.0.13",
+    "mocha": "^6.1.3",
+    "nyc": "^13.3.0",
+    "rimraf": "^2.6.3",
+    "sinon": "^7.3.2",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.1"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "npx mocha 'dist/test/**/*.int-spec.js' 'dist/test/**/*.spec.js'",
+    "posttest": "npx rimraf ./.out",
+    "perftest": "npx mocha 'dist/test/**/*.perf-spec.js' --timeout 20000",
+    "unit-test": "npx mocha 'dist/test/**/*.spec.js'",
+    "unit-coverage": "nyc --reporter text npm run unit-test",
+    "coverage": "nyc --reporter lcov --reporter text mocha 'dist/test/**/*.int-spec.js' 'dist/test/**/*.spec.js'",
+    "compile": "npm run clean && npm run lint && npx tsc",
+    "lint": "tslint --project tsconfig.json",
+    "clean": "npx rimraf  ./dist",
+    "build": "npm run compile"
+  },
+  "nyc": {
+    "exclude": [
+      "**/test"
+    ]
+  },
+  "version": "1.3.4",
+  "keywords": [
+    "game",
+    "story",
+    "Alexa",
+    "skill",
+    "voice"
+  ]
+}

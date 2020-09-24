@@ -1,0 +1,66 @@
+@repeat test
+    *say
+        Welcome to the Repeat test. Say "hear this again" if you want to repeat this line. Or, say "move on" to go to the next scene.
+    *then
+        // Verify: say statement is repeated
+        hear hear this again {
+            >> REPEAT
+        }
+        hear move on {
+            -> repeat scene two
+        }
+
+@repeat scene two
+    *say
+        <audio src='https://sfb-framework.s3.amazonaws.com/examples/sounds/Trumpet_1.mp3' />
+        Say "hear this again" to repeat the trumpet sound and this text. Or say "end" to end the test.
+    *then
+        // Verify: say statement with audio src tag is repeated without issue
+        hear hear this again {
+            >> REPEAT
+        }
+        hear move on {
+            -> repeat scene three
+        }
+
+@repeat scene three
+    *say
+        This is a say statement. 
+        Say HODOR to hear the recap. 
+        Don't say anything to hear the reprompt. 
+        Say END to quit.
+    *recap
+        Recap statement. This should play if the user says something unexpected like HODOR!
+        // verifies recap can be repeated
+        Say REPEAT to repeat this statement.
+        Say END to quit.
+        Say RETRY to retry.
+    // repeats the reprompt statement when user says nothing. Automatically happens when running in the simulator.
+    *reprompt
+        Reprompt statement. This should play if the user says nothing when prompted to respond.
+        // verifies reprompt can be repeated
+        Say REPEAT to repeat this statement.
+        Say END to quit.
+        Say RETRY to retry.
+    *then
+        hear retry {
+            -> repeat scene three
+        }
+        hear end {
+            -> end
+        }
+        hear repeat {
+            >> REPEAT
+        }
+
+// Tests:
+// 1) Repeat say statement
+//    - launch >> "repeat test" >> "hear this again" >> verify that the say statement is repeated.
+// 2) Audio artifact is repeated
+//    - From end of #1 >> "move on" >> "hear this again" >> verify that audio artifacts play (src and say)
+// 3) Reprompt functionality
+//    - From end of #2 >> "move on" >> verify reprompt occurs when you say nothing to the prompt
+// 4) Recap functionality
+//    - From end of #3 >> say "hodor" >> verify recap statement plays
+// 5) Repeat recap
+//    - From end of #4 >> "repeat" >> verify recap statement is repeated >> "end" to quit

@@ -1,0 +1,66 @@
+
+@setupGame
+    *then
+        roll 1d6
+        
+        if rollResult == 1 {
+            set opponentName to 'Cindy'
+        }
+        if rollResult == 2 {
+            set opponentName to 'Alice'
+        }
+        if rollResult == 3 {
+            set opponentName to 'Jessica'
+        }
+        if rollResult == 4 {
+            set opponentName to 'Parker'
+        }
+        if rollResult == 5 {
+            set opponentName to 'Tom'
+        }
+        if rollResult == 6 {
+            set opponentName to 'Max'
+        }
+
+        set showIntro to 'I have a great quiz for you today, the topic is all about movies.'
+        
+        >> RETURN
+
+@setupQuestionData
+    *then
+        set gainedPointsThisRound to 0
+        set answerPointsValue to 10
+        set numQuestionsTotal to 3
+        if showId == 1 and questionNum == 1 {
+            set questionIntro to 'All right, here's our first question to lead off the movie category, hope you've seen this one.'
+            set question to 'Who won the academy award for best actress in the year 2010?'
+            set questionAnswer to 'She won best actress for her role in the movie The Blind Side, which told the story of football player Michael Oher.'
+            set correctAnswer to 'Sandra Bullock'
+            set answerA to 'Meryl Streep'
+            set answerB to 'Sandra Bullock'
+            set answerC to 'Penelope Cruz'
+            >> RETURN
+        }
+        if showId == 1 and questionNum == 2 {
+            set questionIntro to 'So, the director Steven Spielberg has made so, so many movies, that it's hard to see them all, which leads to this question...'
+            set question to 'Which of the following movies was not directed by Steven Spielberg?'
+            set questionAnswer to 'Reportedly, Spielberg said that he did not direct the Harry Potter movie because for me, that was shooting ducks in a barrel.'
+            set correctAnswer to 'Harry Potter'
+            set answerA to 'Minority Report'
+            set answerB to 'Raiders of the Lost Ark'
+            set answerC to 'Harry Potter'
+            >> RETURN
+        }
+        if showId == 1 and questionNum == 3 {
+            set questionIntro to 'Our last question today is all about the business of movies.'
+            set question to 'Of the following movies, which had the highest worldwide revenue?'
+            set questionAnswer to 'Coming in with over 1.6 billion dollars, Jurassic World finally delivers the 4th installment in the franchise created by the original author, Michael Crichton, who passed away in 2008.'
+            set correctAnswer to 'Jurassic World'
+            set answerA to 'Frozen'
+            set answerB to 'Jurassic World'
+            set answerC to 'Toy Story 3'
+            >> RETURN
+        }
+    
+    >> RETURN    
+

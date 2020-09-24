@@ -1,0 +1,35 @@
+// Global tests validated in the main menu:
+// Prepended:
+//  - APL
+//  - Say
+//  - Background music
+// Appended: 
+//  - Say
+//  - Repeat
+// Audio source tag
+// SSML Tags
+
+// appended and prepended outputs should occur on start scene
+// Only valid responses should be: 'demo story', 'secret scene'
+@start
+    *say
+        WELCOME TO THE GLOBAL TEST CASE STORY.
+        SAY DEMO STORY TO PLAY THE DEMO STORY.  
+        OR SAY SECRET SCENE TO GET TO THE SECRET SCENE.  
+        OR SAY SOMETHING UNEXPECTED, LIKE HODOR.
+
+    *then
+        hear demo story {
+            -> demo story
+        } 
+
+@heard otherwise
+    *say
+        YOU SAID SOMETHING THAT WASN'T EXPECTED USING THE GLOBALLY APPENDED OTHERWISE STATEMENT! GOOD JOB. BYE.
+    *then
+        >> END
+
+// appended and prepended outputs should occur on end scene
+@end
+    *say
+        THIS IS THE END SCENE!

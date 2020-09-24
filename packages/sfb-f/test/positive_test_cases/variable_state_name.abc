@@ -1,0 +1,18 @@
+// Testing setting a variable as a state name and going to it.
+
+@variable state name
+	*say
+		Variable state name test. First scene. 
+		Setting variable to a scene name and going to it now.
+		Say continue.
+	*then
+        hear continue {
+            set getReady as 'vsn get ready'
+            -> {getReady}
+        }
+
+@vsn get ready
+	*say
+		You are now at the variable state name scene. Success!
+	*then
+		-> end

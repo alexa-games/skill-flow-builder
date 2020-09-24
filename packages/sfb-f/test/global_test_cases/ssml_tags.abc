@@ -1,0 +1,23 @@
+// this is just a place to compile a list of ssml tags
+// they should be added to global append and prepend
+
+@SSML tags
+    *say
+        <prosody volume='x-loud'>This is my normal voice in a Louder volume.</prosody>
+        <prosody rate='x-slow'>This is my normal voice speaking quite slowly.</prosody>
+        <prosody pitch='x-high'"> This is my normal voice with a higher pitch.</prosody>
+        <prosody pitch='low'>This is my normal voice with a lower pitch.</prosody>
+        <amazon:effect name='whispered'>Here's a whisper effect.</amazon:effect>
+        <emphasis level='reduced'>Here's a reduced emphasis effect.</emphasis>
+        <lang xml:'fr-FR'>Now I'm speaking in French!</lang>
+        <voice name='Kendra'>Now I'm speaking in Kendra's voice.</voice>
+        No p tag <p>Yes p tag.</p>
+        No Pecan. <phoneme alphabet='ipa' ph='pɪˈkɑːn'>pecan</phoneme> <phoneme alphabet='ipa' ph='ˈpi.kæn'>pecan</phoneme>.
+        No s tag. <s> Yes s tag.</s>
+        No reading. <say-as interpret-as='characters'>Characters</say-as>
+        No speak tag. <speak>Speak tag</speak>
+        No sub tag. <sub alias='if you hear this then alias works'> sub tag.</sub>
+        Normal voice. <voice name='Ivy'> Ivy's voice.</voice>
+        No w tag. This is the present tense verb, <w role='amazon:VB'>read</w>, and past tense, <w role='amazon:VBD'>read</w>
+    *then
+        >> END

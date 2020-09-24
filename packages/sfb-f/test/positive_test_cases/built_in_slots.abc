@@ -1,0 +1,45 @@
+@built in name
+    *say
+        Welcome to the built in slots test.  What's your first name?
+    *then
+    // documentation in READ.ME
+        slot playerName to 'AMAZON.US_FIRST_NAME'
+        hear {playerName}, my name is {playerName} {
+            -> built in numbers
+        }
+        hear * {
+            -> not a name
+        }
+
+@built in numbers
+    *say 
+        // Verify name is correct
+        Hi {playerName}! Now, give me a number!
+    *then
+        slot playerNumber to 'AMAZON.NUMBER'
+        hear {playerNumber} {
+            -> numbers output
+        }
+        hear * {
+            -> not a number
+        }
+
+@numbers output
+    *say
+        // Verify number is correct
+        {playerName}, your number is {playerNumber}!
+    *then
+        -> end
+
+
+@not a name
+    *say
+        That's not a name! Lets try that again.
+    *then
+        -> built in name
+
+@not a number
+    *say
+        That's not a number! Lets try that again.
+    *then
+        -> built in numbers

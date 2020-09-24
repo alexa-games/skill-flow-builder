@@ -1,0 +1,65 @@
+{
+  "name": "@alexa-games/sfb-cli",
+  "author": "Amazon.com",
+  "bin": {
+    "alexa-sfb": "./dist/bin/alexa-sfb"
+  },
+  "version": "1.3.4",
+  "files": [
+    "THIRD-PARTY",
+    "dist",
+    "samples",
+    "ffmpeg",
+    "skill-stack.yaml"
+  ],
+  "description": "Alexa SFB build and deployment module",
+  "main": "./dist/lib/index.js",
+  "dependencies": {
+    "@alexa-games/sfb-f": "file:../sfb-f",
+    "@alexa-games/sfb-skill": "file:../sfb-skill",
+    "@alexa-games/sfb-story-debugger": "file:../sfb-story-debugger",
+    "@alexa-games/sfb-util": "file:../sfb-util",
+    "@alexa-games/sfb-vscode-extension": "file:../sfb-vscode-extension",
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "copyfiles": "^2.1.0",
+    "semver": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.6",
+    "@types/mock-fs": "^4.10.0",
+    "@types/node": "^12.0.7",
+    "@types/semver": "^6.0.1",
+    "@types/sinon": "^7.0.13",
+    "mocha": "^6.1.3",
+    "mock-fs": "^4.12.0",
+    "nyc": "^13.3.0",
+    "pseudo-localization": "^2.0.2",
+    "rimraf": "^2.6.3",
+    "sinon": "^7.3.2",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.1"
+  },
+  "scripts": {
+    "compile": "npm run lint && npx tsc && npx copyfiles -f ./bin/* ./dist/bin",
+    "clean": "npx rimraf ./dist",
+    "coverage": "npx nyc --reporter text mocha 'dist/test/**/*.int-spec.js' 'dist/test/**/*.spec.js'",
+    "lint": "npx tslint --project tsconfig.json",
+    "test": "npx mocha 'dist/test/**/*.int-spec.js' 'dist/test/**/*.spec.js'",
+    "package": "./buildFFmpeg.sh && cp _THIRD-PARTY-for-package THIRD-PARTY",
+    "posttest": "npx rimraf ./.out"
+  },
+  "nyc": {
+    "exclude": [
+      "**/test"
+    ]
+  },
+  "keywords": [
+    "game",
+    "story",
+    "Alexa",
+    "skill",
+    "voice"
+  ],
+  "license": "LicenseRef-.amazon.com.-AmznSL-1.0"
+}

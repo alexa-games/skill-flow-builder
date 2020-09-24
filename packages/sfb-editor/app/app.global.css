@@ -1,0 +1,65 @@
+/* 
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
+ *
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *   http://aws.amazon.com/asl/
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+
+@import '~semantic-ui-css/semantic.min.css';
+@import '~react-splitter-layout/lib/index.css';
+@import '~vis/dist/vis.min.css';
+@import './styles/button.css';
+
+body {
+  position: relative;
+  color: black;
+  height: 100vh;
+  background-color: white;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  --app-title-bar: 30px;
+  --app-rail-width: 60px;
+  --app-header-height: 40px;
+  --app-footer-height: 30px;
+
+  --border-color-dark: rgba(0,0,0,0.1);
+  --border-color-light: rgba(255,255,255,0.1);
+  --color-red: #db2828;
+}
+
+.editorHighlight {
+    background: rgba(223, 223, 130, 0.155);
+    position: absolute;
+    width: 100% !important;
+    left: 0 !important;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}

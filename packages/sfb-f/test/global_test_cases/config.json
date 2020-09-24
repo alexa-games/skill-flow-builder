@@ -1,0 +1,23 @@
+{
+    "include": [
+        "*.abc"
+    ],
+    "apl": [
+        "resources/apl-templates.json"
+    ],
+    "isp": [
+        "resources/ProductISPs.json"
+    ],
+    "slotTypes": [
+        "resources/SlotTypes.json"
+    ],
+    "snippets": [
+        "resources/Snippets.json"
+    ],
+    "imgPath": [
+        "resources/images/"
+    ],
+    "sfxPath": [
+        "resources/audio/"
+    ]
+}

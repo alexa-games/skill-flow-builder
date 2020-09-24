@@ -1,0 +1,85 @@
+@bookmark story
+	*say
+		Welcome to the bookmark test. Say END at any time to quit testing.
+		Say SAVE MY PLACE to bookmark this scene.
+		Say CONTINUE to move on to the next scene without setting a bookmark.
+	*then
+        hear save my place {
+			// Setting the bookmark here.
+            bookmark
+			flag earmark
+            -> bs scene two
+        }
+		hear continue {
+			-> bs scene two
+		}
+		hear end {
+			unflag earmark
+			-> end
+		}
+
+@bs scene two
+	*say
+		This is Scene 2.
+		Say SAVE MY PLACE to bookmark this scene.
+		Say CONTINUE to move on to the next scene without setting a bookmark.
+		say BOOKMARK to go to the scene you have bookmarked.
+	*then
+		hear save my place {
+			bookmark
+			flag earmark
+			-> bs scene three
+		}
+		hear continue { 
+			-> bs scene three
+		}
+		hear bookmark {
+			if earmark is true {
+				-> bookmark
+			}
+			if earmark is false {
+				-> bs error
+			}
+		}
+		hear end {
+			unflag earmark
+			-> end
+		}
+
+@bs scene three
+	*say
+		This is scene 3.
+		Say SAVE MY PLACE to bookmark this scene.
+		Say CONTINUE to move on to the next scene without setting a bookmark.
+		say BOOKMARK to go to the scene you have bookmarked.
+	*then
+		hear save my place {
+			bookmark
+			flag earmark
+			-> bookmark story
+		}
+		hear continue { 
+			-> bookmark story
+		}
+		hear bookmark {
+			if earmark is true {
+				-> bookmark
+			}
+			if earmark is false {
+				-> bs error
+			}
+		}
+		hear end {
+			unflag earmark
+			-> end
+		}
+
+@bs error
+	*say
+		You didn't set a bookmark! Lets go back to the last scene and try again.
+	*then
+		>> BACK
+
+// set a bookmark at scene 1, at scene 2 go back to it (validates normal functionality)
+// set a bookmark at scene 1, set a bookmark at scene 2, at scene 3 go back to your bookmark (validates updates)
+// need negative test for going to bookmark that is not set

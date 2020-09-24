@@ -1,0 +1,16 @@
+@golden
+    *say   
+        This is the new file for json baked story verification. Say next to move on.
+    *then 
+        hear next {
+            -> blahscene
+        }
+
+@blahscene
+    *say
+        Yay that worked, I suppose?
+    *then
+        -> end
+
+// Tests:
+// idk?

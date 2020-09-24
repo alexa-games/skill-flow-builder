@@ -1,0 +1,57 @@
+// Goes to and returns from another scene.
+
+@go to and return
+    *say
+        Welcome to the go to and return test. 
+        Say continue to go to the next scene.
+    *then
+        hear continue {
+            // goes to 'gtr jump in jump out', comes back here, then goes to 'gtr second try'
+            <-> gtr jump in jump out
+            -> gtr second try
+        }
+
+@gtr jump in jump out
+    *say
+        Now you're in a new scene.
+        Returning to the first scene's then block.
+    *then
+        >> RETURN
+
+// Test 1: Return command basic functionality
+// launch >> "go to return more" >> continue >> verify @gtr jump in jump out occurs >> verify skill navigates to @gtr second try
+
+@gtr second try
+    *say
+        That worked.  Lets try this again.  Say continue!
+    *then
+        hear continue {
+            // goes to gtr attempt two, continues for a scene, then comes back here, then goes to gtr test complete
+            <-> gtr attempt two
+            -> gtr test complete
+        }
+
+@gtr attempt two
+    *say
+        Successfully navigated to a new scene, but we're not going back just yet. Say continue to move to the next scene.
+    *then
+        hear continue {
+            -> gtr at next
+        }
+
+@gtr at next
+    *say
+        This is the last scene.  Say return to go back to the scene that lead us down this path.
+    *then
+        hear return {
+            >> RETURN
+        }
+
+// TEST 2: Return command works several scenes away from the <-> operator
+// launch >> "go to return more" >> "continue" >> "continue" >> "continue" >> "return" >> verify "That worked! Test Complete!"
+
+@gtr test complete
+    *say
+        That worked.  Test complete!
+    *then
+        -> end

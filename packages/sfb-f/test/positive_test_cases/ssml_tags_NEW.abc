@@ -1,0 +1,241 @@
+// Voice tags and Prosody tags within a voice tag for preview mode
+// 1. create a scene with a single *say and text surrounded by <voice> tags.
+// 2. in the same *say in the same scene, add another <voice> and a <prosody> tags inside the area surrounded by the existing <voice> tags
+// 3. run the simulator
+// VERIFY: compiled and output as TTS.
+
+@SSML tags
+    *say
+        Welcome to the SSML test case. This is Alexa's normal speaking voice.
+
+        Say NEXT to move on.
+    *then
+        hear next {
+            -> ssml effects
+        }
+
+// effects test
+@ssml effects
+    *say
+        This is a Alexa's normal voice.
+        <amazon:effect name="whispered">This is a whisper effect.</amazon:effect>
+        Say NEXT to move on.
+    *then
+        hear next {
+            -> ssml emphasis
+        }
+
+// emphasis test
+@ssml emphasis
+    *say
+        No emphasis.
+        <emphasis level="reduced">This is a reduced emphasis statement.</emphasis>
+        <emphasis level="moderate">This is a moderate emphasis statement.</emphasis>
+        <emphasis level="strong">This is a strong emphasis statement.</emphasis>
+        Say NEXT to move on.
+    *then
+        hear next {
+            -> ssml language
+        }
+
+// language tag test - will still speak in english but with an accent
+@ssml language
+    *say
+        <lang xml:lang="en-US">This is Alexa's normal voice.</lang>
+
+        Americans say advertisement, barbeque.
+        <lang xml:lang="en-GB">British pronunciation is, advertisement, barbecue.</lang>
+        <lang xml:lang="en-IN">Indian pronunciation is, advertisement, barbecue.</lang>
+        <lang xml:lang="en-AU">Australian pronunciation is, advertisement, barbecue.</lang>
+        <lang xml:lang="en-CA">Canadian pronunciation is, advertisement, barbecue.</lang>
+
+        <lang xml:lang="de-DE">I am speaking in a German accent.</lang>
+        <lang xml:lang="es-ES">I am speaking in a Spanish accent.</lang>
+        <lang xml:lang="it-IT">I am speaking in an Italian accent.</lang>
+        <lang xml:lang="ja-JP">I am speaking in a Japanese accent.</lang>
+        <lang xml:lang="fr-FR">I am speaking in a French accent.</lang>
+
+        Say NEXT to move on.
+    *then
+        hear next {
+            -> ssml paragraph
+        }
+
+// paragraph pause test
+@ssml paragraph
+    *say
+        <p>This is the first paragraph. There should be a pause after this text is spoken.</p>
+        <p>This is the second paragraph.</p>
+
+        Say NEXT to move on.
+    *then
+        hear next {
+            -> ssml phoneme
+        }
+
+// phoneme test - "pea-con" vs. "pee-can"
+@ssml phoneme
+    *say
+        You say, <phoneme alphabet="ipa" ph="pɪˈkɑːn">pecan</phoneme>.
+        I say, <phoneme alphabet="ipa" ph="ˈpi.kæn">pecan</phoneme>.
+
+        Say NEXT to move on.
+    *then
+        hear next {
+            -> ssml prosody
+        }
+
+// prosody test
+@ssml prosody
+    *say
+        Normal volume for the first sentence.
+        <prosody volume="x-loud">Louder volume for the second sentence</prosody>.
+        When I wake up, <prosody rate="x-slow">I speak quite slowly</prosody>.
+
+        I can speak with my normal pitch,
+        <prosody pitch="x-high"> but also with a much higher pitch </prosody>,
+        and also <prosody pitch="low">with a lower pitch</prosody>.
+
+        This is my normal rate of speech.
+        <prosody rate="slow">This is slow speech.</prosody>
+        <prosody rate="medium">This is medium speech.</prosody>
+        <prosody rate="x-fast">This is extra fast speech.</prosody>
+
+        // combining voices and prosody
+        <voice name='Kendra'><prosody volume="x-loud">This is Kendra's voice in a Louder volume.</prosody></voice>
+        <voice name='Kendra'><prosody rate="x-slow">This is Kendra's voice speaking quite slowly.</prosody></voice>
+        <voice name='Kendra'><prosody pitch="x-high"> This is Kendra's voice with a higher pitch.</prosody></voice>
+        Say next to move on.
+    *then
+        hear next {
+            -> ssml sentence tag
+        }
+
+// sentence tag test
+@ssml sentence tag
+    *say
+        Punctuation. More punctuation. These statements have periods at the end of them.
+
+        <s>This sentence doesn't have punctuation</s>
+        <s>Neither does this</s>
+        <s>Or this</s>
+
+        Say next to move on.
+    *then
+        hear next {
+            -> ssml sayas
+        }
+
+// say-as test
+@ssml sayas
+    *say
+        Here is a number spoken as a cardinal number.
+        <say-as interpret-as="cardinal">1234567</say-as>.
+
+        Here is the same number with each digit spoken separately.
+        <say-as interpret-as="digits">1234567</say-as>.
+
+        Here is the same number interpreted as a telephone number.
+        <say-as interpret-as="telephone">1234567</say-as>.
+
+        Here is the word, hello, spelled out. <say-as interpret-as="spell-out">hello</say-as>.
+
+        Here's some dates.
+        // should output as September 22nd
+        <say-as interpret-as="date">????0922</say-as>.
+        // should output as May 10, 2019
+        <say-as interpret-as="date">20190510</say-as>.
+
+        Say next to move on.
+    *then
+        hear next {
+            -> ssml sub
+        }
+
+// substitute test
+@ssml sub
+    *say
+        // should say "aluminum" and "magnesium" instead of Al or Mg
+        My favorite chemical element is <sub alias="aluminum">Al</sub>, but Al prefers <sub alias="magnesium">Mg</sub>.
+
+        Say next to move on.
+    *then
+        hear next {
+            -> ssml voices
+        }
+
+// voices test
+@ssml voices
+    *say
+        This is Alexa's normal voice.
+
+        US voice roll call!
+ //       <speak>
+        <voice name="Ivy">My name is Ivy</voice>.
+        <voice name="Joanna">My name is Joanna</voice>.
+        <voice name="Joey">My name is Joey</voice>.
+        <voice name="Kendra">My name is Kendra</voice>.
+        <voice name="Kimberly">My name is Kimberly</voice>.
+        <voice name="Matthew">My name is Matthew</voice>.
+        <voice name="Salli">My name is Salli</voice>.
+
+        Australian voice roll call!
+        <voice name="Nicole">My name is Nicole</voice>.
+        <voice name="Russell">My name is Russell</voice>.
+
+        British voice roll call!
+        <voice name="Amy">My name is Amy</voice>.
+        <voice name="Brian">My name is Brian</voice>.
+        <voice name="Emma">My name is Emma</voice>.
+
+        Indian voice roll call!
+        <voice name="Aditi">My name is Aditi</voice>.
+        <voice name="Raveena">My name is Raveena</voice>.
+
+        German voice roll call!
+        <voice name="Hans">My name is Hans</voice>.
+        <voice name="Marlene">My name is Marlene</voice>.
+        <voice name="Vicki">My name is Vicki</voice>.
+
+        Spanish voice roll call!
+        <voice name="Conchita">My name is Conchita</voice>.
+        <voice name="Enrique">My name is Enrique</voice>.
+
+        Italian voice roll call!
+        <voice name="Carla">My name is Carla</voice>.
+        <voice name="Giorgio">My name is Giorgio</voice>.
+
+        Japanese voice roll call!
+        <voice name="Mizuki">My name is Mizuki</voice>.
+        <voice name="Takumi">My name is Takumi</voice>.
+
+        French voice roll call!
+        <voice name="Celine">My name is Celine</voice>.
+        <voice name="Lea">My name is Lea</voice>.
+        <voice name="Mathieu">My name is Mathieu</voice>.
+ //       </speak>
+
+        Say next to move on.
+    *then
+        hear next {
+            -> ssml read as
+        }
+
+// read-as test
+@ssml read as
+    *say
+        This is the present tense verb, <w role="amazon:VB">read</w>, and past tense, <w role="amazon:VBD">read</w>.
+
+        Say end to end the test.
+    *then
+        hear end {
+            -> end
+        }
+
+
+// Kendra voice tags taken directly from SFB documentation. Prosody taken from SSML documentation.
+// Unable to verify Kendra voice tags working in PCON
+
+// All of this needs to be validated before we can say any of this works. It also looks like a lot of information on these tags are missing.
+// Ex: Line 5, nowhere does it state to change the language to FR.
+// It compiles because its all a say statement, so its treated as a string.  But does it actually DO the thing?

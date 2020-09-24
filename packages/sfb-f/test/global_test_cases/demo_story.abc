@@ -1,0 +1,13 @@
+@demo story
+    *say
+        THIS IS A DEMO STORY. THERE SHOULD BE A LOT OF GIBBERISH HAPPENING BEFORE AND AFTER THIS STATEMENT.  SAY ,GO FORWARD, TO CONTINUE.
+    *then
+        hear go forward {
+            -> next step
+        }
+
+@next step
+    *say
+        THE SAME GIBBERISH SHOULD HAVE BEEN OUTPUT AGAIN. NOW LETS GO TO AN END SCENE, WHERE MORE GIBBERISH SHOULD OCCUR!
+    *then
+        >> END

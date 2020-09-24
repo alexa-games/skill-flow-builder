@@ -1,0 +1,76 @@
+@increase decrease
+    *say
+        // bottles should be 'false'
+        Increase and decrease test.
+		You currently have {beerBottles} bottles.
+        Lets give you some bottles!
+    *then
+        // sets bottle count to 1
+        clear beerBottles
+        set beerBottles to 1
+        -> bottles result
+
+@bottles result
+    *say
+        You now have {beerBottles} bottles.
+        Say Increase, Decrease, or End.
+    *then
+        hear increase {
+            -> bottles increase
+        }
+        hear decrease {
+            -> bottles decrease
+        }
+        hear end {
+            -> end
+        }
+
+@bottles increase
+    *say
+        How many do you want to increase by?
+        Say 1, 2, 5, or random.
+		// Random number between 1 and 100.
+    *then
+        hear one {
+            increase beerBottles by 1
+            -> bottles result
+        }
+        hear two {
+            increase beerBottles by 2
+            -> bottles result
+        }
+        hear five {
+            increase beerBottles by 5
+            -> bottles result
+        }
+        hear random {
+            roll 1d100
+            set randomNum to rollResult
+            increase beerBottles by randomNum
+            -> bottles result
+        }
+
+@bottles decrease
+    *say
+        How many do you want to increase by?
+        Say 1, 2, 5, or random.
+		// Random number between 1 and 100.
+    *then
+        hear one {
+            decrease beerBottles by 1
+            -> bottles result
+        }
+        hear two {
+            decrease beerBottles by 2
+            -> bottles result
+        }
+        hear five {
+            decrease beerBottles by 5
+            -> bottles result
+        }
+        hear random {
+            roll 1d100
+            set randomNum to rollResult
+            decrease beerBottles by randomNum
+            -> bottles result
+        }

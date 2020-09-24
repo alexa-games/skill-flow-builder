@@ -1,0 +1,56 @@
+// Tests back functionality, incrementing a variable each time the >> back command is triggered.
+// Retains the variable value and passes when all code in the previous scene's *then block is executed.
+// Mimics real game playthroughs.
+// Next will be to create a negative case to ensure when a flag is set, that it is not reset when >> back is triggered.
+
+@back test
+    *say
+        Welcome to the go back test.
+        // should be "false"
+        Tracked variable is at {runCount}.
+        Going to the next scene!
+        Say CONTINUE to start.
+    *then
+        hear continue {
+            clear runCount
+            set runCount to 1
+            -> bt second
+        }
+
+@bt second
+	*say
+		Welcome to scene two!
+        // runcount = 1 first time through
+        Tracked variable is at {runCount}. 
+		Say increase to go to the next scene and increase runCount.
+	*then
+		hear increase {
+            increase runCount by 1
+            -> bt three
+        }
+
+@bt three
+    *say
+        Welcome to scene three! 
+        // run count = 2 first time through
+        Tracked variable is at {runCount}.
+		Say go back to return to the last scene. Say end to exit the test.
+    *then
+        hear go back {
+            >> BACK
+        }
+        hear end {
+            clear runCount
+            -> end
+        }
+
+// So the functionality of back is currently being reviewed.  In documentation it says that >> BACK goes back to the last 'interaction'.  An interaction is classified as a user response.  So, when stepping backwards, scenes that do not have an interaction (no hear statement) are bundled with the nearest scene after it with an interaction.
+
+// In the case of this test case...
+// 1) @start : "back test"
+// 2) @back test -> @bt second : "increase"
+// 3) @bt three : "back"
+
+// LOGIC: The first interaction is "back test".  The second interaction is "increase".  The third interaction is "go back".
+// When >> BACK is executed at the third interaction, the back function executes everything from between the 1st and 2nd interaction. This bundles @back test and @bt second into one "interaction".
+// Bug has been logged for confusing functionality/documentation.

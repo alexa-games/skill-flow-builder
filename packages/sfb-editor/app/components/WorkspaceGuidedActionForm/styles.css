@@ -1,0 +1,75 @@
+/* 
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ *
+ * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
+ *
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *   http://aws.amazon.com/asl/
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  background-color: #eee;
+  border-radius: 1rem;
+  margin: 0.5rem 0;
+}
+
+.form > * {
+  flex: 1;
+  padding: 0.5rem 0;
+}
+
+.form label {
+  font-size: 0.8em;
+  margin-bottom: 0.2rem;
+}
+
+.form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.3rem;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.form label small {
+  float: right;
+  display: block;
+  text-align: right;
+}
+
+.actions > button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.2;
+  margin-top: 0.5rem;
+  outline: none;
+}
+
+.actions > button:focus,
+.actions > button:hover {
+  opacity: 0.5;
+}
+
+.deleteButton {
+  padding-right: 0;
+}

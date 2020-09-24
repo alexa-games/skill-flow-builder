@@ -1,0 +1,26 @@
+{
+  "default": {
+    "publish-locales": ["en-US", "en-GB"],
+    "isp-config-filename": "isp.json"
+  },
+  "en-us": {
+    "abc-baked-filename": "en-us-baked-story.json",
+    "abc-recording-script-filename": "en-us-script.txt",
+    "story-title": "Awesome",
+    "story-id": "awesome-123",
+    "skill-invocation-name": "Awesome Skill",
+    "custom-slottype-filename": "en-us-slots.json",
+    "snippet-map-filename": "snippets.json",
+    "apl-templates-filename": "apl-templates.json"
+  },
+  "en-gb": {
+    "abc-baked-filename": "en-gb-baked-story.json",
+    "abc-recording-script-filename": "en-gb-script.txt",
+    "story-title": "Absolute Unit",
+    "story-id": "absolute-unit-123",
+    "skill-invocation-name": "Absolute Unit",
+    "custom-slottype-filename": "en-gb-slots.json",
+    "snippet-map-filename": "snippets-en-gb.json",
+    "apl-templates-filename": "apl-templates-en-gb.json"
+  }
+}

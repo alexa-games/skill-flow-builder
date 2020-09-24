@@ -1,0 +1,202 @@
+{
+    "document": {
+        "type": "APL",
+        "version": "1.1",
+        "commands": {
+            "nextScene": {
+                "parameters": [],
+                "commands": [
+                    {
+                        "type": "SetPage",
+                        "componentId": "primaryPager",
+                        "position": "relative",
+                        "value": 1
+                    }
+                ]
+            }
+        },
+        "layouts": {
+            "BasicScreenPager": {
+                "description": "A basic screen pager that can accept many different layouts.",
+                "parameters": [
+                    "data"
+                ],
+                "item": [
+                    {
+                        "type": "Pager",
+                        "id": "primaryPager",
+                        "initialPage": 0,
+                        "width": "100%",
+                        "height": "100%",
+                        "data": "${data}",
+                        "items": [
+                            {
+                                "position": "absolute",
+                                "type": "${data.layout}",
+                                "background": "${data.background}",
+                                "title": "${data.title}",
+                                "subtitle": "${data.subtitle}"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "BasicScreenLayout1": {
+                "description": "A basic layout with background image and title/subtitle. Make more layouts and pass them in.",
+                "parameters": [
+                    "background",
+                    "title",
+                    "subtitle"
+                ],
+                "item": [
+                    {
+                        "type": "Container",
+                        "width": "100%",
+                        "height": "100%",
+                        "alignItems": "center",
+                        "justifyContent": "center",
+                        "items": [
+                            {
+                                "id": "sampleBackground",
+                                "type": "Image",
+                                "source": "${background}",
+                                "position": "absolute",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "position": "absolute",
+                                "textAlign": "center",
+                                "top": "30vh",
+                                "height": "20vh",
+                                "width": "100vw",
+                                "fontSize": 80,
+                                "type": "Text",
+                                "color": "#FFFFFF",
+                                "text": "${title}"
+                            },
+                            {
+                                "position": "absolute",
+                                "textAlign": "center",
+                                "top": "50vh",
+                                "height": "50vh",
+                                "width": "90vw",
+                                "fontSize": 30,
+                                "type": "Text",
+                                "color": "#FFFFFF",
+                                "text": "${subtitle}"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "BasicScreenLayout2": {
+                "description": "Example of how to put another layout into your APL template.",
+                "parameters": [
+                    "background",
+                    "title",
+                    "subtitle"
+                ],
+                "item": [
+                    {
+                        "type": "Container",
+                        "width": "100%",
+                        "height": "100%",
+                        "alignItems": "center",
+                        "justifyContent": "center",
+                        "items": [
+                            {
+                                "id": "sampleBackground",
+                                "type": "Image",
+                                "source": "${background}",
+                                "position": "absolute",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "position": "absolute",
+                                "textAlign": "center",
+                                "top": "70vh",
+                                "height": "20vh",
+                                "width": "100vw",
+                                "fontSize": 80,
+                                "type": "Text",
+                                "color": "#FFFFFF",
+                                "text": "${title}"
+                            },
+                            {
+                                "position": "absolute",
+                                "textAlign": "center",
+                                "top": "90vh",
+                                "height": "50vh",
+                                "width": "90vw",
+                                "fontSize": 30,
+                                "type": "Text",
+                                "color": "#FFFFFF",
+                                "text": "${subtitle}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "mainTemplate": {
+            "description": "********* Minimal APL document **********",
+            "parameters": [
+                "payload"
+            ],
+            "item": {
+                "type": "Container",
+                "width": "100%",
+                "height": "100%",
+                "alignItems": "center",
+                "justifyContent": "center",
+                "items": [
+                    {
+                        "id": "SFBAudioAndAlexaSpeechContainer",
+                        "description": "Please do not remove or change the ID of this component. Skill Flow Builder uses this id to play audio files and to add Alexa SpeakItem text blocks.",
+                        "type": "Container",
+                        "items": [
+                            {
+                                "type": "Video",
+                                "id": "audioPlayerId",
+                                "description": "Please do not change this ID, skill flow builder uses this component to play audio files from your content.",
+                                "autoplay": false,
+                                "width": "0",
+                                "height": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "position": "absolute",
+                        "type": "BasicScreenPager",
+                        "data": "${payload.visualProperties.scenes}"
+                    }
+                ]
+            }
+        }
+    },
+    "datasources": {
+        "visualProperties": {
+            "background": "",
+            "title": "",
+            "subtitle": "",
+            "scenes": [
+                {
+                    "layout": "BasicScreenLayout1",
+                    "background": "https://m.media-amazon.com/images/G/01/alexa-games/backgrounds/memorystory-gui-1.png",
+                    "title": "Title 1",
+                    "subtitle": "Subtitle 1"
+                },
+                {
+                    "layout": "BasicScreenLayout2",
+                    "background": "https://m.media-amazon.com/images/G/01/alexa-games/backgrounds/memorystory-gui-3.png",
+                    "title": "Title 2",
+                    "subtitle": "Subtitle 2"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,24 @@
+@start
+*then
+    // test file for intent building up with differenet additional utterances
+    hear apple {
+        -> second scene
+    }
+
+@second scene
+*then
+    hear apple, lemon {
+        -> third scene
+    }
+
+
+
+@third scene
+*then
+    hear apple, orange {
+        -> final scene
+    }
+
+@final scene
+*then
+    >> END

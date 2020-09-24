@@ -1,0 +1,53 @@
+// Tests flag and unflag commands.
+// Checks if variable 'hesitated' is true or false (flagged or unflagged.)
+// Asks to start over at the end.
+
+///// NEW TEST
+@flag
+	*say
+		Welcome to the flag test. Our variable is called HESITATED and is currently set to {hesitated}. Do you want to flag or unflag it?
+	*then
+        hear flag {
+            flag hesitated
+            -> flagged variable
+        }
+		hear unflag {
+			unflag hesitated
+            -> unflagged variable
+        }
+
+@flagged variable
+	*then
+		if hesitated is true {
+			-> flag success
+		}
+		-> flag fail
+
+@unflagged variable
+	*then
+		if hesitated is false {
+			-> flag success
+		}
+		-> flag fail
+
+@flag success
+	*say
+		Success! Hesitated is now {hesitated}. Do you want to try again?
+	*then
+		hear yes {
+			-> flag
+		}
+		hear no {
+			-> end
+		}
+
+@flag fail
+	*say
+		Fail! Hesitated is now {hesitated}. Do you want to try again?
+	*then
+		hear yes {
+			-> flag
+		}
+		hear no {
+			-> end
+		}

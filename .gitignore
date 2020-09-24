@@ -1,0 +1,28 @@
+.DS_Store
+
+**/node_modules
+**/package-lock.json
+**/yarn.lock
+**/yarn-error.log
+dist/
+node_modules/
+baked/
+my-branch-story/
+/lib/abcEditor/skill
+packages/sfb-cli/ffmpeg
+packages/sfb-cli/ffmpeg_build
+packages/sfb-cli/THIRD-PARTY
+
+
+# JetBrains Tools
+.idea
+
+# VsCode
+.vscode
+
+# Coverage directory used by tools like istanbul
+coverage
+.nyc_output
+
+# Script result
+.out

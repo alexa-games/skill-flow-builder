@@ -1,0 +1,40 @@
+// Similar to a real game where the player would pause in the middle of gameplay,
+// and come back and resume later from a certain point, saving variables (progress).
+// Clears hitPoints from any previous playthroughs, then sets it to 10.
+// When you pause, the skill ends, and then when the skill resumes, it should drop you in the @resume scene with your hitPoints set to 10.
+// The only true way to test this is manually on the dev console/device (or through ASK dialog).
+
+@default pause test
+    *say
+        Welcome to the pause and resume test.
+        Say continue to drink a health potion!
+    *then
+		clear hitPoints
+		set hitPoints to 10
+        hear continue {
+			-> pt pause
+		}
+
+@default pt pause
+	*say
+		// should be 10 hit points.
+		You have {hitPoints} hit points!
+		Say pause to pause the game!
+		Say end to end the test.
+		Or say drink to drink another health potion!
+	*then
+		// pause invocation should hit pause scene without specifying utterance
+		
+		// quits the test when you are done
+		hear end {
+			clear hitPoints
+			-> end
+		}
+		// increases hitpoints, allowing you to verify a variable can be changed/saved through multiple pause loops
+		hear drink {
+			increase hitPoints by 10
+			-> default pt pause
+		}
+
+//@pause already defined in pause.abc
+//@resume already defined in resume.abc

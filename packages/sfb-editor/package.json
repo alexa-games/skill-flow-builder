@@ -1,0 +1,299 @@
+{
+  "name": "@alexa-games/sfb-editor",
+  "productName": "SFB Editor",
+  "version": "1.3.4",
+  "description": "Alexa branched content design tool for rapid content management",
+  "scripts": {
+    "build": "yarn prebuild && npx concurrently \"yarn build-main\" \"yarn build-renderer\"",
+    "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
+    "build-e2e": "cross-env E2E_BUILD=true yarn build",
+    "build-main": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.main.prod.babel.js --colors",
+    "build-renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.renderer.prod.babel.js --colors",
+    "compile": "yarn build",
+    "coverage": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest --coverage",
+    "clean": "npx rimraf ./dll ./app/dist",
+    "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
+    "dev-no-copy": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
+    "lint": "cross-env NODE_ENV=development eslint --cache --format=pretty .",
+    "lint-fix": "yarn --silent lint --fix; exit 0",
+    "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
+    "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
+    "package": "npx rimraf release && yarn build && electron-builder build --publish never",
+    "package-all": "bump --prompt && yarn build && electron-builder build -mwl",
+    "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
+    "package-linux": "yarn build && electron-builder build --linux",
+    "package-win": "yarn build && electron-builder build --win --x64",
+    "prebuild": "npx electron-builder install-app-deps package.json && yarn build-dll && npx opencollective-postinstall",
+    "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}'",
+    "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
+    "prestart": "yarn build",
+    "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
+    "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev.js",
+    "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
+    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest",
+    "test-all": "yarn lint && yarn build && yarn test && yarn build-e2e && yarn test-e2e",
+    "test-e2e": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe electron:./ ./test/e2e/FrontPage.e2e.js",
+    "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe-live electron:./ ./test/e2e/FrontPage.e2e.js",
+    "test-watch": "yarn test --watch --runInBand",
+    "upload-website": "aws s3 cp ./web s3://sfb-framework/web/ --recursive --acl public-read --profile SFB"
+  },
+  "main": "./app/main.prod.js",
+  "bin": {
+    "sfb-editor": "./bin/sfb-editor"
+  },
+  "build": {
+    "productName": "SFB Editor",
+    "appId": "com.amazon.alexa.games.abc",
+    "files": [
+      "app/dist/",
+      "app/app.html",
+      "app/utils-main",
+      "app/main.prod.js",
+      "app/main.prod.js.map",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "app/sfb-extensions",
+        "to": "sfb-extensions",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ],
+      "icon": "resources/icon.ico"
+    },
+    "mac": {
+      "hardenedRuntime": true,
+      "entitlements": "./entitlements.mac.inherit.plist",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "snap",
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "fileAssociations": [
+      {
+        "ext": "abc",
+        "name": "Alexa Branching Content File",
+        "role": "Editor"
+      }
+    ]
+  },
+  "author": {
+    "name": "Amazon.com"
+  },
+  "contributors": [],
+  "license": "LicenseRef-.amazon.com.-AmznSL-1.0",
+  "keywords": [
+    "game",
+    "story",
+    "Alexa",
+    "skill",
+    "voice"
+  ],
+  "jest": {
+    "testURL": "http://localhost/",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|md)$": "<rootDir>/internals/mocks/fileMock.js",
+      "\\.(css)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "setupFiles": [
+      "./internals/scripts/CheckBuiltsExist.js"
+    ],
+    "verbose": true
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@babel/plugin-proposal-do-expressions": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.1.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+    "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@types/jest": "^24.0.13",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "cross-spawn": "^6.0.5",
+    "css-loader": "^1.0.1",
+    "electron": "^3.0.10",
+    "electron-builder": "21.2.0",
+    "electron-devtools-installer": "^2.2.4",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-formatter-pretty": "^2.0.0",
+    "eslint-import-resolver-webpack": "^0.10.1",
+    "eslint-plugin-compat": "^2.6.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.0.0",
+    "eslint-plugin-jsx-a11y": "6.1.2",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-testcafe": "^0.2.1",
+    "fbjs-scripts": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "husky": "^1.1.4",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "mock-fs": "^4.10.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "redux-actions-assertions": "^1.3.0",
+    "redux-mock-store": "^1.5.3",
+    "sinon": "^7.3.2",
+    "spectron": "^5.0.0",
+    "stylelint": "^9.8.0",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "terser-webpack-plugin": "^1.1.0",
+    "testcafe": "^0.23.2",
+    "testcafe-browser-provider-electron": "^0.0.6",
+    "testcafe-live": "^0.1.4",
+    "testcafe-react-selectors": "^3.0.0",
+    "version-bump-prompt": "^4.3.0",
+    "webpack": "^4.26.0",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4",
+    "yarn": "^1.12.3"
+  },
+  "dependencies": {
+    "@alexa-games/sfb-cli": "file:../sfb-cli",
+    "@alexa-games/sfb-f": "file:../sfb-f",
+    "@alexa-games/sfb-polly": "file:../sfb-polly",
+    "@alexa-games/sfb-skill": "file:../sfb-skill",
+    "@alexa-games/sfb-story-debugger": "file:../sfb-story-debugger",
+    "@alexa-games/sfb-util": "file:../sfb-util",
+    "axios": "^0.19.0",
+    "bumpit": "^1.0.2",
+    "commander": "^2.19.0",
+    "connected-react-router": "^5.0.1",
+    "core-js": "2.6.9",
+    "cross-spawn": "^6.0.5",
+    "css-loader": "^1.0.1",
+    "d3": "^5.9.2",
+    "dagre-d3": "^0.6.3",
+    "detect-port": "^1.3.0",
+    "devtron": "^1.4.0",
+    "electron-debug": "^2.0.0",
+    "electron-log": "^2.2.17",
+    "electron-settings": "^3.2.0",
+    "electron-updater": "^4.0.6",
+    "electron-window-state": "^5.0.3",
+    "fbjs-scripts": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "fs-extra": "^8.1.0",
+    "history": "^4.7.2",
+    "identity-obj-proxy": "^3.0.0",
+    "immutable": "^4.0.0-rc.12",
+    "marked": "^0.6.0",
+    "memoize-one": "^5.0.0",
+    "mime-types": "^2.1.22",
+    "mini-css-extract-plugin": "^0.4.4",
+    "moment": "^2.24.0",
+    "opencollective-postinstall": "^2.0.1",
+    "os": "^0.1.1",
+    "os-name": "^3.1.0",
+    "prettier": "^1.15.2",
+    "prop-types": "^15.7.1",
+    "raw-loader": "^1.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.8.4",
+    "react-redux": "^5.1.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-splitter-layout": "^4.0.0",
+    "react-test-renderer": "^16.6.3",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "0.88.1",
+    "shell-env": "^3.0.0",
+    "shortid": "^2.2.14",
+    "slate": "^0.46.1",
+    "slate-html-serializer": "^0.8.1",
+    "slate-react": "^0.21.24",
+    "source-map-support": "^0.5.9",
+    "style-loader": "^0.23.1",
+    "underscore": "^1.9.1",
+    "url": "^0.11.0",
+    "url-loader": "^1.1.2",
+    "uuid": "^3.3.2",
+    "vis": "^4.21.0"
+  },
+  "devEngines": {
+    "node": ">=10.16.0",
+    "npm": ">=6.x",
+    "yarn": ">=1.x"
+  },
+  "browserslist": [
+    "chrome > 60",
+    "electron 1.6"
+  ]
+}

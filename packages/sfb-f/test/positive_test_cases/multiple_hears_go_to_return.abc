@@ -1,0 +1,53 @@
+// multiple *hears in the goto-and-return scene	
+// 1. in the initial scene, create a *then goto-and-return function
+// 2. in the scene that the goto points to, insert 3 different *hear statements.
+// 3. run the simulator.
+// 4. give all utterances.	Verify the *hears can be executed properly in the simulator, and the first scene is returned to properly.
+
+// this goes to @multiple hears to modify a variable based off user input, then loops back to @multiple go to hears to move on within the flow.
+@multiple go to hears
+    *say
+        Welcome to the multiple go to hears test.  We're about to go into a scene with a handful of hear statements, then return back to here!
+    *then
+        <-> multiple hears
+        -> variable thingy
+
+@multiple hears
+    *say
+        Say one of these words: Chocolate, Purple, Oranges, or, Macho Man.
+    *then
+        hear chocolate {
+            set word to 'chocolate'
+            set points to 1
+            >> RETURN
+        }
+        hear purple {
+            set word to 'purple'
+            set points to 2
+            >> RETURN
+        }
+        hear oranges {
+            set word to 'oranges'
+            set points to 3
+            >> RETURN
+        }
+        hear macho man {
+            set word to 'macho man'
+            set points to 4
+            >> RETURN
+        }
+
+@variable thingy
+    *say
+        You chose {word}, which got you {points} points!
+        Try again?
+    *then
+        hear yes {
+            -> multiple go to hears
+        }
+        hear no {
+            -> end
+        }
+
+// TESTS TO RUN:
+// Test 1: launch >> say 'go to return with variables' >> say 'chocolate' >> say 'yes' >> say 'purple' >> say 'yes' >> say 'oranges' >> say 'yes' >> say 'macho man' >> say 'no' to end.

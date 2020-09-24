@@ -1,0 +1,41 @@
+@modulus
+    *say
+        // bottles should be 'false'
+        Modulus test.
+		You currently have {beerBottles} bottles.
+        Lets give you some bottles!
+    *then
+        // sets bottle count to 3
+        clear beerBottles
+        set beerBottles to 3
+        -> modulus result
+
+@modulus result
+    *say
+        You now have {beerBottles} bottles.
+        Mod by five, or Mod by three, or Mod by two.
+    *then
+        hear mod by five {
+            -> modulus mod by five
+        }
+        hear mod by three {
+            -> modulus mod by three
+        }
+        hear mod by two {
+            -> modulus mod by two
+        }
+
+@modulus mod by five
+    *then
+        mod beerBottles by 5
+        -> modulus result
+
+@modulus mod by three
+    *then
+        mod beerBottles by 3
+        -> modulus result
+
+@modulus mod by two
+    *then
+        mod beerBottles by 2
+        -> modulus result

@@ -1,0 +1,11 @@
+@start
+    *say
+        hello this is start.
+    *then
+        -> somewhere
+
+@somewhere
+    *say
+        hello this is somewhere.
+    *then
+        set someVar as 5

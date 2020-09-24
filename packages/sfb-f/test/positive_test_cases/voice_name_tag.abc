@@ -1,0 +1,9 @@
+// SPECIAL SCENE: @start is a special scene that tells the framework to start your game at this scene. It can be anywhere in your file. If no @start scene is present, the framework will start with the first scene in the file.
+@voice name tag
+	*say 
+		Hi
+		<voice name='Kendra'>
+		Hello I'm Kendra.
+		</voice>
+	*then
+		>> END

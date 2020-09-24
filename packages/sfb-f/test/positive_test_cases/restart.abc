@@ -1,0 +1,38 @@
+// Testing ```>> RESTART``` function.
+// Expected Result: Goes to @start scene.
+@restart test
+    *say
+        Welcome to the restart test!
+        // restartCount should be 'false' the first time through. Then 1, 2, 3, etc.
+        You've run this test {restartCount} times.
+    *then
+        -> restart end
+
+@restart end
+    *say
+        Say restart to return to the start scene. Or say end to quit the skill.
+    *then
+        hear restart {
+            // creates restartCount variable and sets it to 1 if it didn't exist before
+            // increases restartCount by 1 if it already exists
+            increase restartCount by 1
+            >> RESTART
+        }
+        hear end {
+            clear restartCount
+            -> end
+        }
+        hear immediate trigger scene {
+            increase restartCount by 1
+            -> immediate trigger scene
+        }
+
+@immediate trigger scene
+    *then
+        >> RESTART
+
+// TESTS:
+// 1) Basic restart functionality
+//    - launch >> "restart test" >> "restart" >> verify that skill navigates back to @start scene
+// 2) Variables save through restarts
+//    - launch >> "restart test" >> "restart" >> "restart test" >> verify variable is at 1 now >> "restart" >> "restart test" >> verify variable is at 2 now >> "end"

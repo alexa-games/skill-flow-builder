@@ -1,0 +1,25 @@
+// Clears a single variable.
+
+@clear
+    *say
+        Clear one variable test.
+    *then
+        set testNumber to 1
+        -> clear read current testNumber value
+
+@clear read current testNumber value
+    *say
+        The current variable has a value of {testNumber}.
+        Say Clear.
+    *then
+        hear clear {
+            clear testNumber
+            -> clear read clear variable value
+        }
+
+@clear read clear variable value
+    *say
+        // should be set to 'false' now
+        The current variable has a value of {testNumber}.
+    *then
+        -> end

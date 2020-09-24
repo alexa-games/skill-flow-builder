@@ -1,0 +1,42 @@
+@variable speech
+	*say
+		Variable speech test.
+        Testing for behavior when the variable is used in say, reprompt, and recap
+	*then
+        hear continue {
+            set returnString as 'some thing to say'
+            set repromptString as 'reprompt message'
+
+            set outputSpeech as 'say <voice name=\'Emma\'> <prosody pitch=\'+40%\' rate=\'95%\'>{returnString}</prosody> </voice>  {repromptString}'
+            set outputReprompt as 'reprompt <voice name=\'Emma\'> <prosody pitch=\'+40%\' rate=\'95%\'>{returnString}</prosody> </voice>  {repromptString}'
+            set outputRecap as 'recap <voice name=\'Emma\'> <prosody pitch=\'+40%\' rate=\'95%\'>{returnString}</prosody> </voice>  {repromptString}'
+
+            -> variable speech say
+        }
+
+@variable speech say
+	*say
+		{outputSpeech}
+    *reprompt
+        {outputReprompt}
+    *recap
+        {outputRecap}
+	*then
+		hear continue {
+            set outputSpeech as 'say <voice name='Emma'> <prosody pitch='+40%' rate='95%'>{returnString}</prosody> </voice>  {repromptString}'
+            set outputReprompt as 'reprompt <voice name='Emma'> <prosody pitch='+40%' rate='95%'>{returnString}</prosody> </voice>  {repromptString}'
+            set outputRecap as 'recap <voice name='Emma'> <prosody pitch='+40%' rate='95%'>{returnString}</prosody> </voice>  {repromptString}'
+            -> non escaped variable speech say
+        }
+
+@non escaped variable speech say
+	*say
+		{outputSpeech}
+    *reprompt
+        {outputReprompt}
+    *recap
+        {outputRecap}
+	*then
+		hear end {
+           >> END
+        }

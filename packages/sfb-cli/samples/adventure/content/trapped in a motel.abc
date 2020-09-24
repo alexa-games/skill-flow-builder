@@ -1,0 +1,330 @@
+@Wake up
+	*say
+        You're woken up by the beep of your phone. In a daze you look towards the space next to you in bed, oddly it is empty and you are alone.
+        You pick up your phone, expecting a message letting you know where they are but the message reads 'Get out now!'.
+        You jump out of bed and run towards the exit. You can hear heavy footsteps heading up the metal staircase towards the door. In that 
+        split second you need to decide whether to open the door or lock the door.
+	*then
+        hear open the door {
+            -> open the door 
+        }
+        
+        hear lock the door {
+            -> lock the door
+        }
+
+@open the door
+	*say
+        As you open the door the footsteps stop. You stand on the 1st floor terrace in the chill of the night and look around, there is no one to be seen.
+        There are staircases at each end of the terrace, the staircase on the left heads up and the staircase on the right heads down.
+        Do you go left or right?
+	*then
+        hear left {
+            -> left
+        }
+        
+        hear right {
+            -> right
+        }
+
+@lock the door
+	*say
+        You slide the deadbolt into it's locked position, then turn and look around the room.
+        There are two other doors, one to the bathroom and another to the closet. Which do you choose?
+	*then
+        hear bathroom {
+            -> bathroom
+        }
+        
+        hear closet {
+            -> closet
+        }
+
+@left
+	*say
+        As you hurry towards the staircase on your left you get the sense that someone, or something, is following you.
+        You're barely half way to the staircase when you feel a hand reaching for your shoulder. You peer over the railings to the ground below, unsure of whether to jump or turn and fight.
+	*then
+        hear jump {
+            -> jump
+        }
+            
+        hear fight {
+            -> fight 
+        }
+
+@right
+	*say
+    	You sprint along the terrace and you're only strides from the top of the staircase when a door swings open. You try to stop but you're running too fast, you hit the door with a thump and fall to the ground.
+
+    *then
+        >> END
+
+@bathroom
+	*say
+	    You hurry over to the bathroom and open the door. As you step inside the cold hits you, the window is wide open. You turn to run but a gust of wind slams the door closed. It's too late to escape. 
+
+    *then
+        >> END
+
+@closet
+	*say
+	    You open the closet door hoping to find something to help you protect yourself. But all you find is a broom or an iron. Which one do you pick up?
+	    
+	*then
+	    hear broom {
+	        -> broom
+	    }
+	    
+	    hear iron {
+	        -> iron
+	    }
+
+@jump
+	*say
+        You catapult yourself over the railing, the cold nights air rushes past you as you're falling, and falling, and falling. 
+        
+    *then
+        >> END
+
+@fight
+	*say
+        Pow, bang, smack.
+        The attacker falls to the floor, you leap over them and sprint back to the room, slamming the door behind you before sliding the deadbolt into it's locked position.
+        You turn and look around the room. There are two other doors, one to the bathroom and another to the closet. Which do you choose?
+	*then
+        hear bathroom {
+            -> bathroom
+        }
+        
+        hear closet {
+            -> closet
+        }
+
+@broom
+	*say
+        You grab hold of the broom and try to pull it towards you, but its caught on something. As you rummage around in the darkness trying free to broom you discover it's caught on a metal lever that's on the wall.
+        Do you pull the lever or to you grab hold of the broom and wait in the closet.
+	*then
+        hear pull the lever {
+            -> pull the lever 
+        }
+        
+        hear wait {
+            -> wait
+        }
+
+@iron
+	*say
+	    There's the sound of footsteps approaching the room as you pick up the iron. Your only option is to hide, do you jump in the closet or head to the bathroom.
+	*then
+	    hear closet {
+	        -> wait
+	    }
+	    hear bathroom {
+	        -> bathroom 
+	    }
+
+@pull the lever
+	*say
+        Pulling the lever causes a large vent the back wall of the closet to creep open. You crawl through the vent into a small office, there is a door to your left and a window in front of you. A desk sits below the window piled high with paperwork.
+        Do you explore the desk, try to climb out the window, or attempt to escape through the door?
+	*then
+        hear explore the desk {
+            -> motel explore the desk
+        }
+        
+        hear climb out the window {
+            -> motel climb out the window
+        }
+        
+        hear escape through the door {
+            -> motel escape through the door
+        }
+
+@wait
+	*say
+        Climb into the closet and gentle close the door behind you.
+        As you sit in the darkness you hear someone outside the room, the handle rattles but the door is locked. The rattling stops and you breath a sign of relief.
+        But the relief is short lived, there is a bang followed by the sound of splintering wood as the lock gives way.
+        You let out a scream giving away your hiding place, you may be armed but you're paralyzed with fear and unable to fight back. 
+	*then
+        >> END
+
+@motel explore the desk
+	*say
+        While rummaging through the paperwork that is piled on the desk, you find a room key. The key is a perfect fit for the door, you unlock it and step out in a small corridor.
+        Do you turn left or right?
+	*then
+        hear left {
+            -> motel deadend
+        }
+        hear right {
+            -> motel first floor
+        }
+
+@motel climb out the window
+	*say
+	    You clamber on top of the desk and climb out of the window expecting your feet to land on the terrace. But there is nothing there, and you're falling.
+    
+    *then
+        >> END
+
+@motel escape through the door
+	*say
+	    You pull on the handle but the door is locked. You need to be quick, your only options are to explore the desk or climb out the window.
+	*then
+	    hear explore the desk {
+	        -> motel explore the desk
+	    }
+	    
+	    hear climb out the window {
+	        -> motel climb out the window
+	    }
+
+@motel first floor lift
+	*say
+        The doors to the elevator open. You step inside and look at buttons on the panel.
+        second floor.
+        reception.
+        basement.
+        Which button do you press?
+	*then
+        hear second floor {
+            -> motel second floor 
+        }
+        
+        hear reception {
+            -> motel reception
+        }
+        
+        hear basement {
+            -> motel basement
+        }
+
+@motel first floor staircase
+	*say
+	    You walk over to the staircase, the coast seems clear. Do you go up or do you go down the staircase?
+	*then
+	    hear up {
+	        -> motel second floor
+	    }
+	    hear down {
+	        -> motel reception
+	    }
+
+@motel basement
+	*say
+        The smell of damp hits you straight away as you step into the basement. You look around but there is no exit, you're only option is to go back up.
+        Do you take the elevator? or do you take the stairs?
+	*then
+	    hear elevator {
+	        -> motel basement lift
+	    }
+	    
+	    hear stairs {
+	        -> motel basement staircase
+	    }
+
+@motel reception
+	*say
+        You arrive in the reception, the lights are off and there is no one behind the counter. You walk over to the main entrance and try the door, it's locked.
+        As you turn around to head back something jumps out from behind the reception desk and grabs you.
+	*then
+        >> END
+
+@motel second floor
+	*say
+        You're on an empty roof terrace, there is no way out except for back down.
+        Do you take the stairs or do you take the elevator?
+	*then
+        hear stairs {
+            -> motel first floor
+        }
+        
+        hear elevator {
+            -> motel second floor lift
+        }
+
+@motel first floor
+	*say
+        You're in a small opening at the end of a door lined corridor.
+        There is staircase to your the left and an elevator to your right. Do you take the stairs, take elevator, or walk down the corridor?
+	*then
+	    hear elevator {
+	        -> motel first floor lift
+	    }
+	    
+	    hear stairs {
+	        -> motel first floor staircase
+	    }
+	    
+	    hear corridor {
+	        -> motel deadend
+	    }
+
+@motel deadend
+	*say
+        As you rush down the corridor hear footsteps following you. You pick up pace but hit a deadend.
+        You can not turn back. 
+	*then
+        >> END
+
+@motel basement lift
+	*say
+        You call the elevator and wait in the dark for it to arrive. Straight away as the doors slide open you dive inside and close the doors. You look at buttons on the panel.
+        second floor
+        first floor
+        reception. Which button do you press?
+	*then
+        hear second floor {
+            -> motel second floor
+        }
+        hear first floor {
+            -> motel first floor
+        }
+        hear reception {
+            -> motel reception
+        }
+
+@motel basement staircase
+	*say
+        You make your way over to the dimly lit staircase and start to climb.
+        You're almost at the top of the staircase when you notice a flickering light coming from an alcove.
+        You stop in your tracks unsure of whether to turn around or carry on towards the light.
+	*then
+	    hear turn around {
+	        -> motel basement
+	    }
+	    
+	    hear carry on {
+	        -> motel carry on
+	    }
+
+@motel second floor lift
+	*say
+        You step into the elevator, glad to be out of the cold nights air.
+        You look at buttons on the panel.
+        first floor,
+        reception, and
+        basement. Which button do you press?
+	*then
+        hear first floor {
+            -> motel first floor
+        }
+        hear reception {
+            -> motel reception
+        }
+        
+        hear basement {
+            -> motel basement
+        }
+
+@motel carry on
+	*say
+        You reach the alcove and discover the flickering light is from an exit sign above a door.
+        You push the door open, stumbling out onto the pavement before running to safety.
+        Congratulations you've escaped the motel.
+	*then
+        >> END
+

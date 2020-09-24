@@ -1,0 +1,373 @@
+// This tutorial story is intended to represent the breadth of what the framework can do. 
+@start
+    *say
+       Welcome to the Skill Flow Builder. Let's get to know each other.
+       What is your name?
+    *show
+        title:'Skill Flow Builder'
+        subtitle:'Welcome to Skill Flow Builder!'
+    *then  
+        slot playerName as 'AMAZON.US_FIRST_NAME'
+        hear my name is {playerName}, {playerName}, call me {playerName} {
+            -> learn scenes
+        }
+
+@learn scenes
+    *say
+        Great! Welcome to the framework {playerName}! Let's get started.
+        Scenes are the basic building blocks of a story in the Skill Flow Builder. 
+        They can be connected linearly, branching, looping, or any other way you can think of.
+        First, you have to give each scene a name. For example, this scene is named 'learn scenes'. This name needs to be unique within your story.
+        Then, you can give your scene some content. For example, this scene has 'say' content, which you are hearing right now and some 'then' content which tells it where to go next. 
+        When you are ready to move on, say 'continue'.
+    *then
+        hear continue, yes, ready, move on {
+            -> learn say and reprompt
+        }
+
+@learn say and reprompt
+    *say
+        Let's learn more about 'say' and 'reprompt' content within a scene.
+        What you are hearing right now is this scene's 'say' content.
+        To hear this scene's 'reprompt' try not saying anything...
+    *reprompt
+        'reprompt' content is what the player will hear if nothing is said or we didn't understand what the player said.
+        If you don't provide 'reprompt' content, it will just repeat the 'say' content. 
+        Try saying 'continue' this time.
+    *then
+        hear continue {
+            -> snippets
+        }
+
+@snippets
+    *say
+        Snippets allow you to insert content or markup into your story. 
+        Here are a few common use cases for snippets.
+        Sound effects [trumpet]
+        [kid]
+            Character voices.
+        [/kid]
+        Pauses [pause]
+        And more! Even longer, dramatic pauses, by passing arguments to a snippet.
+        [pause for 2s]
+        You can define snippets in the abcconfig file.
+        Ready to continue?
+    *then
+        hear continue, yes, ready {
+            -> background music
+        }
+
+@background music
+    *say
+        Skill Flow Builder allows you to mix sounds into the background of a scene.
+        Ready to continue?
+    *then
+        // BGM requires polly-config enabled from the abcConfig.json
+		bgm https://sfb-framework.s3.amazonaws.com/examples/sounds/Crowd_Cheer_2_LONG.mp3
+        hear continue, yes, ready {
+            -> images
+        }
+
+@images
+    *say
+        Skill Flow Builder allows you to show content on supported devices during a scene.
+        Ready to continue?
+    *show
+        template: 'default'
+        background:'https://m.media-amazon.com/images/G/01/alexa-games/backgrounds/memorystory-gui-1._CB473869069_.png'
+        image:'https://sfb-framework.s3.amazonaws.com/examples/images/alps.jpg'
+        title: 'Skill Flow Builder'
+        subtitle: ''
+    *then
+        hear continue, yes, ready {
+            -> learn variations
+        }
+
+@learn variations
+    *say
+        This scene has 3 variations of its 'say' content, one of which will be randomly selected to present to the player.
+        For example, here's a random banana!
+        This can be useful for scenes that come up a lot and can feel stale without some variation.
+        You can have as many variations as you want and they work for any type of scene content.
+        Say 'continue' to move on.
+        ||
+        This scene has 3 variations of its 'say' content, one of which will be randomly selected to present to the player.
+        For example, here's a random mango!
+        This can be useful for scenes that come up a lot and can feel stale without some variation.
+        You can have as many variations as you want and they work for any type of scene content.
+        Say 'continue' to move on.
+        ||
+        This scene has 3 variations of its 'say' content, one of which will be randomly selected to present to the player.
+        For example, here's a random apple!
+        This can be useful for scenes that come up a lot and can feel stale without some variation.
+        You can have as many variations as you want and they work for any type of scene content.
+        Say 'continue' to move on.
+    *then
+        hear continue {
+            -> learn choices
+        }
+    
+@learn choices
+    *say
+        In the 'then' content, you can tell the scene to go somewhere if it hears something by using the keyword 'hear'. 
+        We've been using this in the previous scenes to listen for the word 'continue' and then -> the next scene.
+        You can use 'hear' multiple times in order to give players choices.
+        For example, would you like to learn more about choices or move on to the next topic?
+    *then
+        hear learn more about choices {
+            -> more on choices
+        }
+            
+        hear move on to the next topic {
+            -> learn variables
+        }
+    
+@more on choices
+    *say
+        Players might respond with variations of the command you provide them. You can list multiple variations inline using a comma to separate them.
+        For example, say 'continue', 'move on', or 'get moving' to continue.
+    *then
+        hear continue, move on, get moving {
+            -> learn variables
+        }
+    
+@learn variables
+    *say
+        Great! Sometimes you might want to add or remove items or change some attributes to make your story more exciting.
+        You can accomplish this in the 'then' content. 'set', 'increase', or 'decrease' a variable. 
+        For example, we set 'antidote' to 0.
+        Now, we can use this variable in our story. Say 'continue' to find out how.
+    *then
+        set antidote to 0
+
+        hear continue {
+            -> learn conditional
+        }
+    
+@learn conditional
+    *then
+        if antidote is 0 {
+            -> antidote zero
+        }
+        
+        if antidote is 1 {
+            -> antidote one
+        }
+
+        -> antidotes
+
+@antidote zero
+    *say
+        You are hearing this because we detected that you don't have any antidotes.
+        We used an 'if' statement in the 'then' content to accomplish this. Use a period to close your 'if' statement.
+        Add an antidote by saying 'add antidote'. 
+    *reprompt
+        Say 'add antidote.'
+    *then
+    
+        hear add antidote, antidote, more antidote {
+            increase antidote by 1
+            -> learn conditional
+        }
+
+@antidote one
+    *say
+        You are hearing this because we detected that you now have 1 antidote.
+        Add one more antidote by saying 'add antidote'. 
+    *reprompt
+        Say 'add antidote.'
+    *then
+        hear add antidote, antidote, more antidote {
+            increase antidote by 1
+            -> learn conditional
+        }
+    
+@antidotes
+    *say
+        You have {antidote} antidotes. 
+        You are hearing this because the first 2 'if' statements weren't triggered. 
+        When an 'if' is triggered and it has a '->' in it, nothing afterwards is executed. 
+        Try adding one more antidote.
+    *recap
+        You have {antidote} antidotes. 
+        This is the same scene as the one you just heard but you are hearing the recap content instead of the say content.
+        The 'recap' is played if you have already heard this scene once and can be useful in trimming down long scenes that the user could encounter multiple times.
+        You can add even more antidotes by saying 'add antidote' or say 'continue' to move on.
+    *then
+        hear add antidote, antidote, more antidote {
+            increase antidote by 1
+            -> learn conditional
+        }
+
+        hear continue, move on {
+            -> congrats
+        }
+
+@congrats
+    *say
+        Congratulations! You have finished the basic tutorial.
+        There are more features that can be found in the documentation.
+        If you'd like to see an example of something more complicated, you can try getting in a fight. Otherwise, good luck and happy writing!
+    *then
+        -> other commands.
+
+@other commands
+    *say
+        Wanna fight?
+    *then
+        hear fight, yes {
+            set player_health to 20
+            set bad_guy_health to 50
+            -> fight
+        }
+        
+        hear no {
+            -> end
+        }
+    
+@fight
+    *say
+        Would you like to throw an axe or an apple?
+    *then
+        roll 2d6
+        set damage to rollResult
+        decrease player_health by damage
+        
+        hear throw an apple, apple {
+            roll 2d3
+            set attack to rollResult
+            decrease bad_guy_health by attack
+            -> fight result
+        }
+
+        hear throw an axe, axe {
+            roll 6d6
+            set attack to rollResult
+            decrease bad_guy_health by attack
+            -> fight result
+        }
+    
+@fight result
+    *say
+        You've taken {damage} damage. Now you have {player_health} health points.
+        The bad guy took {attack} damage. Now the bad guy has {bad_guy_health} health points.
+    *then
+        -> check gameover.  
+    
+@check gameover
+    *then
+        if player_health <= 0 {
+            -> dead
+        }
+
+        if bad_guy_health <= 0 {
+            -> win
+        }
+
+        -> keep fighting
+    
+@keep fighting
+    *say
+        Would you like to keep fighting?
+        ||
+        You gonna keep fighting?
+        ||
+        You gonna fight, bro?
+    *then
+        hear fight, yes {
+            -> fight
+        }
+
+        hear no {
+            -> end
+        }
+
+@dead
+    *say
+        You died. gg.
+
+@win
+    *say
+        You won! gg.
+    *then
+        -> end
+    
+@end
+    *say
+        Thanks for learning about the Skill Flow Builder! Bye now!
+
+@learn monetization
+    *say
+        let's make some munnay!
+    *then
+        buy item='sample product' success='purchase success' fail='purchase failed'
+
+@purchase success
+    *say
+        we made them monnayyy
+    *then
+        -> learn scenes
+
+@purchase failed
+    *say
+        aww you don't want to give us some monnay?
+    *then
+        -> learn scenes
+
+@help message
+    *say
+        This is a help message. In this story, this scene is set up to be reachable only through the global scene.
+    *then
+        -> bookmark
+
+// Special Scenes
+// Played before resuming the skill
+@resume
+    *say
+        This is a resuming scene. This scene is played when the user re-launches your skill after exiting.
+    *show
+        background:'https://m.media-amazon.com/images/G/01/alexa-games/backgrounds/memorystory-gui-1._CB473869069_.png'
+        title:'Welcome Back!'
+        subtitle: 'Welcome back to Skill Flow Builder!'
+    *then
+        // Automatically resume to last save point.
+        >> RESUME
+
+// Triggered on AMAZON.CancelIntent, AMAZON.PauseIntent and AMAZON.StopIntent
+@pause
+    *say
+        Thanks for playing!
+    *then
+        // nothing needed here as the skill will automatically close
+
+// Prepended to all scenes (performed before every scene)
+@global prepend
+    *show
+        template: 'default'
+        background:'https://m.media-amazon.com/images/G/01/alexa-games/backgrounds/memorystory-gui-1._CB473869069_.png'
+        title: 'Skill Flow Builder'
+        subtitle: ''
+    *then
+        // nothing
+
+// Appended to all scenes (performed after every scene)
+@global postpend
+    *then
+        hear help {
+            bookmark
+            -> help message
+        }
+
+@example of calling an extension
+    *then
+		// Example of calling a function that will set a {randomDayName} variable, showing how to use a custom extension
+		pickRandomDay paramExample='myParam'
+
+		// Example of calling a function that will set a {randomDayName} variable, showing how to use a custom extension
+        generateRandomTreeName param1='myParam'
+
+	-> print extension result
+
+@print extension result
+	*say
+		The random day I choose was {randomDayName}. The tree I chose was {randomTreeName}.

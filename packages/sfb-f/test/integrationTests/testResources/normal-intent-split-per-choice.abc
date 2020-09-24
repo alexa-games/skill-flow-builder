@@ -1,0 +1,26 @@
+@start
+*then
+    // test file for intent building up with differenet additional utterances
+    hear apple, orange, lemon {
+        -> fruit scene
+    }
+
+    hear human, animal, dog {
+        -> animal scene
+    }
+
+    hear something else, nothing else, what else {
+        -> random scene
+    }
+
+@fruit scene
+*then
+    >> END
+
+@animal scene
+*then
+    >> END
+
+@random scene
+*then
+    >> END

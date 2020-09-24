@@ -1,0 +1,409 @@
+{
+    "document": {
+        "type": "APL",
+        "version": "1.1",
+        "commands": {
+            "codeAppear4": {
+                "commands": [
+                    {
+                        "type": "AnimateItem",
+                        "componentId": "code-4",
+                        "easing": "ease-in-out",
+                        "duration": 2000,
+                        "value": [
+                            {
+                                "property": "opacity",
+                                "from": 0,
+                                "to": 1
+                            },
+                            {
+                                "property": "transform",
+                                "from": [
+                                    {
+                                        "translateY": -800
+                                    },
+                                    {
+                                        "scale": 0.5
+                                    }
+                                ],
+                                "to": [
+                                    {
+                                        "translateX": "0",
+                                        "translateY": 0
+                                    },
+                                    {
+                                        "scale": 1
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "codeAppear3": {
+                "commands": [
+                    {
+                        "type": "Parallel",
+                        "commands": [
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "code-3",
+                                "easing": "ease-in-out",
+                                "duration": 1000,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 0,
+                                        "to": 1
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "codeAppear2": {
+                "commands": [
+                    {
+                        "type": "AnimateItem",
+                        "componentId": "code-2",
+                        "easing": "ease-in-out",
+                        "duration": 1000,
+                        "value": [
+                            {
+                                "property": "opacity",
+                                "from": 0,
+                                "to": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            "codeAppear1": {
+                "commands": [
+                    {
+                        "type": "Parallel",
+                        "commands": [
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "code-1",
+                                "easing": "ease-in-out",
+                                "duration": 1000,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 0,
+                                        "to": 1
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "showCommandsTitle": {
+                "commands": [
+                    {
+                        "type": "AnimateItem",
+                        "componentId": "aplVisualDemoText",
+                        "easing": "ease-in-out",
+                        "duration": 1000,
+                        "value": [
+                            {
+                                "property": "opacity",
+                                "from": 0,
+                                "to": 1
+                            },
+                            {
+                                "property": "transform",
+                                "from": [
+                                    {
+                                        "translateY": 800
+                                    },
+                                    {
+                                        "scale": 0.5
+                                    }
+                                ],
+                                "to": [
+                                    {
+                                        "translateX": "0",
+                                        "translateY": 0
+                                    },
+                                    {
+                                        "scale": 1
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "diceAppear": {
+                "commands": [
+                    {
+                        "type": "Parallel",
+                        "commands": [
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "frame",
+                                "easing": "ease-in",
+                                "duration": 500,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 0,
+                                        "to": 0.5
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "AnimateItem",
+                                "componentId": "dice",
+                                "easing": "ease-in",
+                                "duration": 2000,
+                                "value": [
+                                    {
+                                        "property": "opacity",
+                                        "from": 0,
+                                        "to": 1
+                                    },
+                                    {
+                                        "property": "transform",
+                                        "from": [
+                                            {
+                                                "scale": 1.5
+                                            }
+                                        ],
+                                        "to": [
+                                            {
+                                                "scale": 3
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "diceSpin": {
+                "commands": [
+                    {
+                        "type": "AnimateItem",
+                        "componentId": "dice",
+                        "easing": "linear",
+                        "duration": 4000,
+                        "screenLock": false,
+                        "value": [
+                            {
+                                "property": "transform",
+                                "from": [
+                                    {
+                                        "scale": 3
+                                    },
+                                    {
+                                        "rotate": 0
+                                    }
+                                ],
+                                "to": [
+                                    {
+                                        "scale": 3
+                                    },
+                                    {
+                                        "rotate": 720
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "layouts": {
+            "CommandExample": {
+                "description": "Command Example",
+                "parameters": [
+                    "data"
+                ],
+                "item": [
+                    {
+                        "type": "Container",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "items": [
+                            {
+                                "id": "sampleBackground",
+                                "type": "Image",
+                                "source": "${data.background}",
+                                "position": "absolute",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Image",
+                                "id": "code-1",
+                                "position": "absolute",
+                                "top": "5vh",
+                                "left": "15vw",
+                                "width": "70vw",
+                                "height": "90vh",
+                                "align": "top",
+                                "borderRadius": "25dp",
+                                "source": "https://sfb-framework.s3.amazonaws.com/examples/images/code-1.png",
+                                "scale": "best-fit",
+                                "opacity": 0
+                            },
+                            {
+                                "type": "Image",
+                                "id": "code-2",
+                                "position": "absolute",
+                                "top": "5vh",
+                                "left": "15vw",
+                                "width": "70vw",
+                                "height": "90vh",
+                                "align": "top",
+                                "borderRadius": "25dp",
+                                "source": "https://sfb-framework.s3.amazonaws.com/examples/images/code-2.png",
+                                "scale": "best-fit",
+                                "opacity": 0
+                            },
+                            {
+                                "type": "Image",
+                                "id": "code-3",
+                                "position": "absolute",
+                                "top": "5vh",
+                                "left": "15vw",
+                                "width": "70vw",
+                                "height": "90vh",
+                                "align": "top",
+                                "borderRadius": "25dp",
+                                "source": "https://sfb-framework.s3.amazonaws.com/examples/images/code-3.png",
+                                "scale": "best-fit",
+                                "opacity": 0
+                            },
+                            {
+                                "type": "Image",
+                                "id": "code-4",
+                                "position": "absolute",
+                                "top": "5vh",
+                                "left": "15vw",
+                                "width": "70vw",
+                                "height": "90vh",
+                                "align": "top",
+                                "borderRadius": "25dp",
+                                "source": "https://sfb-framework.s3.amazonaws.com/examples/images/code-4.png",
+                                "scale": "best-fit",
+                                "opacity": 0
+                            },
+                            {
+                                "type": "Frame",
+                                "id": "frame",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "opacity": 0,
+                                "backgroundColor": "${data.color}",
+                                "position": "absolute"
+                            },
+                            {
+                                "id": "aplVisualDemoText",
+                                "type": "Text",
+                                "text": "Commands Demo",
+                                "textAlign": "center",
+                                "position": "absolute",
+                                "align": "center",
+                                "width": "100vw",
+                                "height": "20vh",
+                                "top": "80vh",
+                                "fontSize": 90,
+                                "opacity": 0
+                            },
+                            {
+                                "id": "dice",
+                                "type": "SpinningDice",
+                                "top": "50vh",
+                                "left": "45vw",
+                                "position": "absolute",
+                                "opacity": 0,
+                                "D": "${data.D}"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "SpinningDice": {
+                "description": "A rolling die",
+                "parameters": [
+                    "rollStopX",
+                    "endingX",
+                    "endingY",
+                    "delay",
+                    "D",
+                    "roll"
+                ],
+                "item": [
+                    {
+                        "type": "Container",
+                        "width": "10vw",
+                        "height": "10vh",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "id": "dice",
+                                "source": "https://sfb-framework.s3.amazonaws.com/examples/images/D${D}-0.png",
+                                "scale": "best-fit",
+                                "position": "absolute",
+                                "opacity": 1,
+                                "width": "10vw",
+                                "height": "10vh"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "mainTemplate": {
+            "description": "********* Minimal APL document **********",
+            "parameters": [
+                "payload"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "width": "100%",
+                    "height": "100%",
+                    "items": [
+                        {
+                            "id": "SFBAudioAndAlexaSpeechContainer",
+                            "description": "Please do not remove or change the ID of this component. Skill Flow Builder uses this id to play audio files and to add Alexa SpeakItem text blocks.",
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "Video",
+                                    "id": "audioPlayerId",
+                                    "description": "Please do not change this ID, skill flow builder uses this component to play audio files from your content.",
+                                    "autoplay": false,
+                                    "width": "0",
+                                    "height": "0"
+                                }
+                            ]
+                        },
+                        {
+                            "position": "absolute",
+                            "type": "CommandExample",
+                            "data": "${payload.visualProperties}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "datasources": {
+        "visualProperties": {
+            "layout": "DiceRollGuidedLayoutWithBackground",
+            "color": "blue",
+            "background": "https://sfb-framework.s3.amazonaws.com/examples/images/dark-background.jpg",
+            "D": 20
+        }
+    }
+}

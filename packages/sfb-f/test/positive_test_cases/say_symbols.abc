@@ -1,0 +1,95 @@
+// Testing that common symbols dont break say statements.
+@symbols
+    *say
+        Hello, here are some common symbols developers might use in their say statements.
+    *then
+        -> symbols exlamation
+
+@symbols exlamation
+    *say 
+        Exclamation mark ! Exclamation mark. Next!
+    *then
+        -> symbols at
+
+@symbols at
+    *say
+    //    At sign @ At sign. Next!
+        The at symbol would be here, but it causes the skill to crash, so I removed it. Next!
+    *then
+        -> symbols pound
+
+@symbols pound
+    *say
+        Pound sign # pound sign. Next!
+    *then
+        -> symbols dollar
+
+@symbols dollar
+    *say
+        Dollar sign $ dollar sign. $5 bill ya'll. Next!
+    *then
+        -> symbols euro
+
+@symbols euro
+    *say
+        Euro sign € euro sign. €5 bill, ya'll. Next!
+    *then
+        -> symbols percent
+
+@symbols percent
+    *say
+        Percent symbol % perscent symbol. Next!
+    *then
+        -> symbols carat
+
+@symbols carat
+    *say
+        Carat thingy ^ carat thingy. Next!
+    *then
+        -> symbols ampersand
+
+@symbols ampersand
+    *say
+        // Ampersand & ampersand. Next!
+        The ampersand symbol would be here, but it causes the skill to crash, so I removed it. Next!
+    *then
+        -> symbols asterisk
+
+@symbols asterisk
+    *say
+        Asterisk * asterisk. Next!
+    *then
+        -> symbols braces
+
+@symbols braces
+    *say
+        Braces ( ) braces. Next!
+    *then
+        -> symbols brackets
+
+@symbols brackets
+    *say
+        Brackets [ ] brackets. Next!
+    *then
+        -> symbols back slash
+
+@symbols back slash
+    *say
+        Back slash \ back slash. Next!
+    *then
+        -> symbols foward slash
+
+@symbols foward slash
+    *say
+        Forward slash / forward slash. Next!
+    *then
+        -> symbols line thing
+
+@symbols line thing
+    *say
+        Line thing | line thing. Next!
+    *then
+        -> end
+
+// Test: Needs to be manually run.  Verify that TTS is not cut off/stopped when hitting any of these symbols.
+// may need to add more symbols to test.  @uncommon symbols?

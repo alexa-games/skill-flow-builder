@@ -1,0 +1,64 @@
+// Testing all basic APL functions.
+// Displays a title and subtitle on a blank background.
+@apl
+    *say
+        APL test.
+        You should see a blank background with text.
+        The title should read, This is the title.
+        The subtitle should read, This is the subtitle.
+        Say, more, to move on.
+    *show
+        title: 'This is the title.'
+        subtitle: 'This is the subtitle.'
+    *then
+        set avariable to 10
+        hear more {
+            -> moreapl
+		}
+
+// Displays a background image, a title, and a subtitle.
+@moreapl
+    *say
+        Now the background should be a picture of hikers in the Alps.
+        The title should read, Skill Flow Builder.
+        The subtitle should read, Start of the hike 10.
+        Say, more, to move on.
+    *show
+        template: 'default'
+        background: 'https://sfb-framework.s3.amazonaws.com/examples/images/alps.jpg'
+        title: 'Skill Flow Builder.'
+        subtitle: 'Start of the hike {avariable}.'
+    *then 
+        hear more {
+            -> evenmoreapl
+		}
+
+// Displays only an image by itself.
+@evenmoreapl
+    *say 
+        Now the background should be completely blank.
+        Say, more, to move on.
+    *show 
+        background: ''
+    *then
+        hear more {
+            -> evenevenmoreapl
+		}
+
+// Switches to a different background image, title, and subtitle.
+@evenevenmoreapl
+    *say
+        You should see the hikers in the Alps again.
+        The title should read, welcome back!
+        The subtitle should read, Welcome back to the Skill Flow Builder!
+        Say end to end this test.
+    *show
+        background: 'https://sfb-framework.s3.amazonaws.com/examples/images/alps.jpg'
+        title: 'Welcome Back!'
+        subtitle: 'Welcome back to the Skill Flow Builder!'
+    *then
+        hear end {
+            -> end
+        }
+
+// test verifications are in the say statements.

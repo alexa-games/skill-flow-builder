@@ -1,0 +1,5 @@
+@ending
+    *say
+        Welcome to the end test. The skill should end after I say bye. Bye!
+    *then
+        >> END

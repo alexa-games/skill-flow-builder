@@ -1,0 +1,45 @@
+@isp two
+    *say
+        ISP Testing 2 purchases.
+    *then 
+        -> isp two purchasething
+
+@isp two purchasething
+    *say
+        Here comes the first purchase prompt.
+    *then
+        buy item='sample product' success='isp two bought' declined='isp two declined' fail='isp two nope' already_purchased='isp two already' error='isp two error'
+
+@isp two bought
+    *say
+        You bought it. Yay!
+        Here's the second purchase prompt.
+    *then
+        buy item='sample product' success='isp two lastscene' declined='isp two declined' fail='isp two nope' already_purchased='isp two already' error='isp two error'
+
+@isp two nope
+    *say
+        Purchase failed.
+    *then 
+        -> isp lastscene
+
+@isp two declined
+    *say
+        You declined it.
+    *then 
+        -> isp lastscene
+@isp two already
+    *say
+        You already purchased it.
+    *then 
+        -> isp lastscene
+@isp two error
+    *say
+        Error.
+    *then 
+        -> isp lastscene
+@isp two lastscene
+    *say
+        This is the last scene.
+    *then
+        >> END

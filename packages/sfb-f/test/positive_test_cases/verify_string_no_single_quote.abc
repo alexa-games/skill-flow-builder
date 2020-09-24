@@ -1,0 +1,12 @@
+@verify string single quote
+    *say
+        This is the single quote string test. I'm setting a variable to a word. Here's the word.
+    *then
+        set test as 'warrior'
+        -> warrior test
+
+@warrior test
+    *say
+        {test}. I should have said, warrior.
+    *then
+        -> end

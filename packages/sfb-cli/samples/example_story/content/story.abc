@@ -1,0 +1,235 @@
+// SPECIAL SCENE: @start is a special scene that tells the framework to start your game at this scene. It can be anywhere in your file. If no @start scene is present, the framework will start with the first scene in the file.
+@start
+	*say
+		Good morning! You roll over in bed and look outside. It looks like a beautiful day. Would you like to go on a hike?
+	*then
+		// Clear the flag called 'hesitated' in case it was set in a previous play-through.
+		clear hesitated
+		// Listen for affirmative response phrases from the player and continue the game accordingly. Note: the phrase 'yes' will get automatically mapped to the AMAZON.YesIntent so that it will catch responses like "yep" and many others.
+        hear yes, go on a hike {
+			// go to the '@get ready' scene.
+            -> get ready
+        }
+		// Listen for negative response phrases from the player and continue the game accordingly. Note: the phrase 'no' will get automatically mapped to the AMAZON.NoIntent so that it will catch responses like "nope" and many others.
+        hear no {
+			// Remember that the player hesitated so we can use that decision later in the game.
+            flag hesitated
+            -> hesitate
+        }
+
+@hesitate
+	*say
+		You spend the morning inside doing chores and playing video games. Late morning, you look outside and notice that the day is just getting nicer and nicer. It occurs to you that you still have time to fit in a hike. Do you reconsider and go on a hike?
+	*then
+		hear yes, go on a hike, reconsider {
+            -> get ready
+        }
+        hear no {
+            -> do not go on a hike
+        }
+		hear great {
+			-> end
+		}
+
+@do not go on a hike
+	*say
+		You continue to do chores and play video games and the day passes you by. You go to sleep feeling cranky. What a waste of a beautiful day. The end.	
+	*then
+		-> end
+
+@get ready
+	*say
+		Yay, you are so excited. You start to get ready for your adventure. You pick a beautiful nearby alpine lake as your hiking destination and get out your daypack. You toss your fully charge smartphone, first aide kit, small multitool, a big bag of granola, and a lightweight rain jacket into your pack. You throw on some comfy hiking clothes and lace up your hiking shoes. Almost ready!
+	// Define a shortened '*recap' which the player will hear anytime this scene is repeated after the first time.
+	*recap
+		You pick a hiking destination, get dressed, and pack your gear.
+	*then
+		-> water
+
+
+@water
+	*say
+		How many bottles of water would you like to take with you?
+	// Define a '*reprompt' to play if we don't understand the player's response.
+	*reprompt
+		I'd recommend one to three bottles of water. How many bottles of water would you like to take with you?
+	*then
+		// Tell the framework that it should listen for a number when we ask it to listen for {bottles}
+		slot bottles to 'AMAZON.NUMBER'
+		// Listen for a number or a number folowed by the phrase 'bottle' or 'bottles' and remember that number as 'bottles'
+		hear {bottles}, {bottles} bottle, {bottles} bottles {
+			// if the player said zero, tell the player they need to bring water
+            if bottles <= 0 {
+                -> not enough
+            }
+			// if the player said more that 4 bottles of water, tell the player that is too much
+            if bottles > 4 {
+                -> too many
+            }
+			// if the player said between 1 and 4 bottles of water, keep playing
+            -> trailhead
+        }
+		// If the player refuses or says 'none', tell the player to bring water. Hydration is important.
+		hear no, none {
+			-> not enough
+		}
+
+// Give a reason why the player can't proceed and route back to ask how many bottles of water.
+@not enough
+	*say
+		You need at least some water.
+	*then
+		-> water
+
+// Give a reason why the player can't proceed and route back to ask how many bottles of water.
+@too many
+	*say
+		You only have 4 bottles to use at home.
+	*then
+		-> water
+
+
+@trailhead
+	*say
+		You fill up {bottles} water bottles and grab your gear. On the car ride out to the trailhead you listen to your favorite album of woodland sounds. You are so amped for a hike.
+	*then
+		// The parking lot is now full if the player hesitated before deciding to go on a hike.
+		if hesitated {
+            -> parking full
+        }
+        -> parking free
+
+
+@parking full
+	*say
+		You pull up to the trailhead and the parking lot is completely full. You drive around for a few minutes until you see a couple who are back from their hike and tossing their gear into the trunk of their car. You pull up and wait while they pack up. Eventually, they drive away and you grab their parking spot.
+	*then
+		-> start hike
+
+
+@parking free
+	*say
+		You pull up to the trailhead and park.
+	*then
+		-> start hike
+
+
+@start hike
+	*say
+		You start hiking up towards the alpine lake and after a short while you are feeling the effort in your legs and lungs. It feels good and you keep trekking through the trees, stopping occasionally for water or a quick bite of granola. Your mind begins to clear and you feel at one with nature. At about an hour in, the vegitation around you becomes shorter and more sparse and the trail connects with a stream that runs along your left. Then you see it, a little patch of blue expanse up ahead. Your legs are pretty tired, but you quicken your pace. The blue grows as you approach. Then, all of a sudden, the lake is right in front of you, surrounded on 3 sides by rocky peaks.
+	*then
+		-> rest
+
+
+@rest
+	*say
+		You take a seat on a large rock at the edge of the lake and relax with some water and granola. The sun feels great and your legs thank you for the chance to rest. You look to you right and notice that the trail continues. From where you sit, you can see it traversing back and forth up the right most peak. It must be an incredible view from up there. Would you like to continue on to the peak or call it a day and head down?
+	*then
+		hear continue on to the peak {
+            -> continue
+        }
+        hear call it a day and head down {
+            -> head home
+        }
+
+
+@head home
+	*say
+		You rest a little longer at the lake and then head down the trail. To get to the parking lot faster than your thought you would and head to get a burger. The end.
+	*then
+		-> end
+
+@continue
+	*say
+		You get up from the rock and start up the winding trail. Your legs ache but soon loosen up. You are high up enough that there isn't much tree coverage and the sun is beating down on you.
+	*then
+		// The player can't make it to the peak if the player didn't bring enough water.
+		if bottles <= 1 {
+            -> peak fail
+        }
+        -> peak
+
+
+@peak fail
+	*say
+		About half way up, you stop to drink some water and notice that there is not much left in your bottle. You drink the last bit and wish you had brought more water with you. It's still a pretty long way up to the top and the trail is completely exposed to the sun and wind. Just looking at the rest of the trail remaining makes your throat dry. You take stock of your situation and decide that you'd better call it a day. You head back to the lake and then down to the parking lot. You are parched and sad that you didn't make it to the top but glad that you didn't risk it. You hop in your car and head out to get a burger on your way back home. The end.
+	*then
+		-> end
+
+@peak
+	*say
+		You stop for more granola and water frequently. Good thing you brought enough water. It is a grueling climb, much harder than your thought it would be when looking up from the lake. Eventually you start to get closer to the peak and your adrenalin starts to kick in. The air is great up here. Then you take your final step and you are standing on top of the peak and can see forever in all directions. You take a moment to soak it in and take some photos. It's quiet peaceful up there. Eventually, you decide to head down. It's a long trip down and your legs are shot but it was totally worth it. Finally, you make it to the parking lots and flop into your car. You are beat and ready for a burger. What a great day! The end.
+	*then
+		-> end
+
+// SPECIAL SCENE: "@global prepend" is a special scene and allows you to add content or instructions to the start of every scene set
+@global prepend
+    *show
+        // add visuals to every scene
+        template: 'default'
+        background:'https://sfb-framework.s3.amazonaws.com/examples/images/alps.jpg'
+        title: 'Skill Flow Builder'
+        subtitle: ''
+
+// SPECIAL SCENE: "@global append" is a special scene and allows you to add content or instructions to the end of every scene set
+@global append
+    *then
+        // listen everywhere for a few helpful phrases
+        hear start over, restart {
+            // Tell the framework to restart from the beginning
+            >> RESTART
+        }
+        hear repeat {
+            // Tell the framework to repeat everything the player just heard. You can use >> REPROMPT which only plays the reprompt content
+            >> REPEAT
+        }
+        hear help {
+            -> help
+        }
+        hear go back {
+            >> back
+        }
+        // if the player hasn't heard the help message yet and says something the framework didn't catch, play the help message
+        if !helped {
+            hear * {
+                -> help
+            }
+        }
+
+// SPECIAL SCENE: @resume is a special scene that will play when the player comes back to the game after leaving
+@resume
+	*say
+		Welcome back to your hiking story. Would you like to pick up where you last left off?
+	*then
+		hear yes {
+            // Tell the framework to pick up where they last left off
+			>> RESUME
+		}
+		hear no {
+			>> RESTART
+		}
+
+// SPECIAL SCENE: @pause is a special scene that plays before the skill pauses
+@pause
+	*say
+		Thanks for playing. 
+	*then
+		>> PAUSE
+
+@end
+	*say
+		Thanks for playing. Would you like to start over or take a break?
+	*then
+		hear take a break {
+			>> END
+		}
+
+@help
+    *say
+        Here's the help menu. Make choices to navigate the story or you can tell me to start over or stop. Picking up where you left off. 
+    *then
+        // flag that player has heard this
+        flag helped
+
+        // go back to last scene.
+        >> BACK

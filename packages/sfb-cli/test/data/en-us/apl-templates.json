@@ -1,0 +1,58 @@
+{
+    "default": {
+        "type": "Alexa.Presentation.APL.RenderDocument",
+        "token": "ABC_RENDERED_DOCUMENT",
+        "version": "1.0",
+        "document": {
+            "type": "APL",
+            "version": "1.0",
+            "import": [
+              {
+                    "name": "alexa-layouts",
+                    "version": "1.0.0"
+              }
+            ],
+            "mainTemplate": {
+                "description": "********* Minimal APL document **********",
+                "parameters": [
+                    "payload"
+                ],
+                "items": [
+                    {
+                        "type": "Container",
+                        "width": "100%",
+                        "height": "100%",
+                        "alignItems": "center",
+                        "justifyContent": "center",
+                        "items": [{
+                                "type": "Image",
+                                "source": "${payload.visualProperties.background}",
+                                "position": "absolute",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "scale": "best-fill"
+                            },
+                            {
+                                "type": "Text",
+                                "color": "#FFFFFF",
+                                "text": "${payload.visualProperties.title}"
+                            },
+                            {
+                                "type": "Text",
+                                "color": "#FFFFFF",
+                                "text": "${payload.visualProperties.subtitle}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "datasources": {
+            "visualProperties": {
+                "background": "https://m.media-amazon.com/images/G/01/alexa-games/backgrounds/memorystory-gui-1._CB473869069_.png",
+                "title": "",
+                "subtitle": ""
+            }
+        }
+    }				
+}

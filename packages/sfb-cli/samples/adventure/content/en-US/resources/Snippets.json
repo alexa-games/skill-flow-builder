@@ -1,0 +1,15 @@
+{
+    "trumpet": "<audio src='https://sfb-framework.s3.amazonaws.com/examples/sounds/Trumpet_1.mp3' />",
+
+    "pause for": "<break time='$1'/>",
+
+    "pause": "<break time='1s'/>",
+
+    "kid": "<voice name='Justin'>",
+    
+    "/kid": "</voice>",
+
+    "ocean wave": "<audio src='https://sfb-framework.s3.amazonaws.com/examples/sounds/ocean_wave.mp3'/>",
+
+    "sfx": "<audio src='$SNIPPET_S3_RESOURCES_URI/audio/$1'/>"
+}

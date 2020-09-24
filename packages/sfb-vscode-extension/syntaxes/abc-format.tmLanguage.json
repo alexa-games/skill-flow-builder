@@ -1,0 +1,428 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "abc-format",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#scene"
+		}
+	],
+	"repository": {
+		"scene": {
+			"patterns": [
+				{
+					"begin": "^[\\s]*(@)[\\s]*(.*?)$",
+					"end": "^(?=[\\s]*@)",
+					"description": "This is the name of your Scene.",
+					"beginCaptures": {
+						"1" : {
+							"name" : "entity.name.class"
+						},
+						"2" : {
+							"name" : "entity.name.class"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#directionSection"
+						},
+						{
+							"begin": "(\\*)(say|reprompt|recap|show)[\\s]*$",
+							"end": "(?=^[\\s]*(?:\\*|@))",
+							"patterns": [
+								{
+									"include": "#comment"
+								},
+								{
+									"match": "({)(.*?)(})",
+									"captures": {
+										"1": {
+											"name" : "keyword.operator"
+										},
+										"2": {
+											"name" : "variable"
+										},
+										"3": {
+											"name" : "keyword.operator"
+ 										}
+									}
+								},
+								{
+									"match": "(<)(.*?)(>)",
+									"captures": {
+										"1": {
+											"name" : "keyword.operator"
+										},
+										"2": {
+											"name" : "variable"
+										},
+										"3": {
+											"name" : "keyword.operator"
+ 										}
+									}
+								},
+								{
+									"match": "(\\[)(.*?)(\\])",
+									"captures": {
+										"1": {
+											"name" : "keyword.operator"
+										},
+										"2": {
+											"name" : "variable"
+										},
+										"3": {
+											"name" : "keyword.operator"
+ 										}
+									}
+								},
+								{
+									"match": "\\|\\|",
+									"name": "keyword.operator"
+								},
+								{
+									"match": ".+?",
+									"name": "string.quoted.double"
+								}
+							],
+							"name": "keyword.operator",
+							"beginCaptures": {
+								"0" : {
+									"name" : "entity.name.function"
+								}
+							}
+						}					
+					]
+				}
+			]
+		},
+		"directionSection": {
+			"patterns": [
+				{
+					"begin": "(\\*do|\\*then)",
+					"patterns": [
+						{
+							"include": "#comment"
+						},
+						{
+							"include": "#brackets"
+						},
+						{
+							"include": "#directionKeywords"
+						}
+					],
+					"end": "(?=^[\\s]*(?:\\*|@))",
+					"beginCaptures": {
+						"1" : {
+							"name" : "entity.name.function"
+						}
+					}
+				}	
+			]
+		},
+		"directionKeywords": {
+			"patterns": [
+				{
+					"begin": "^[\\s]*(hear)[\\s]+",
+					"patterns": [
+						{
+							"match": "([^,{}]+?),?",
+							"captures": {
+								"1": {
+									"name": "string.quoated.double"
+								}
+							}
+						}
+					],
+					"end": "(?=,[\\s]*$|\\.[\\s]*$|{$|$)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control"
+						}
+					}
+				},
+				{
+					"begin": "^[\\s]*(if)[\\s]+",
+					"patterns": [
+						{
+							"match": "[\\s]+?(>=|<=|<|>||==|is|and|or|&&|\\|\\|greater than|larger than|bigger than|smaller than|less than|more than|equals to|equal to)[,]?[\\s]+?",
+							"captures": {
+								"1": {
+									"name": "keyword.operator"
+								}
+							}
+						},
+
+						{
+							"match": "'[^{}]*?'",
+							"name": "string.quoted.double"
+						},
+						{
+							"match": "[\\d]+?",
+							"name": "keyword.operator"
+						},
+						{
+							"match": "[^{}\\s]+?",
+							"name": "variable"
+						}	
+					],
+					"end": "(?=,[\\s]*$|\\.[\\s]*$|{$|$)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(go to)[\\s]+(?:(.*?)(?=,[\\s]*$|\\.[\\s]*$|$))?",
+					"captures": {
+						"1": {
+							"name": "keyword.control"
+						},
+						"2": {
+							"name": "entity.name.class"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(->)[\\s]*(?:(.*?)(?=,[\\s]*$|\\.[\\s]*$|$))?",
+					"captures": {
+						"1": {
+							"name": "keyword.control"
+						},
+						"2": {
+							"name": "entity.name.class"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(time)[\\s]*(?=,[\\s]*$|\\.[\\s]*$|$)",
+					"name": "keyword.function"
+				},
+				{
+					"match": "^[\\s]*(roll)[\\s]+(?:(?:(.+?))(?=,[\\s]*$|\\.[\\s]*$|$))?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"2": {
+							"name": "string.quoated.double"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(flag|unflag|clear|pop|dequeue)[\\s]+(?:(?:([\\S]+?))(?=,[\\s]*$|\\.[\\s]*$|$))?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"2": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(set)[\\s]+(?:([\\S]+?)[\\s]+(?:(to|as)[\\s]+(?:([\\d]+?)|('.+?'?)|([\\S]+?))(?=,[\\s]*$|\\.[\\s]*$|$))?)?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"2": {
+							"name": "variable"
+						},
+						"3": {
+							"name": "keyword.operator"
+						},
+						"4": {
+							"name": "keyword.operator"
+						},
+						"5": {
+							"name": "string.quoted.double"
+						},
+						"6": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(slot)[\\s]+(?:([\\S]+?)[\\s]+(?:(to|as)[\\s]+(?:('.+?'?)|([\\S]+?))(?=,[\\s]*$|\\.[\\s]*$|$))?)?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"2": {
+							"name": "variable"
+						},
+						"3": {
+							"name": "keyword.operator"
+						},
+						"4": {
+							"name": "string.quoted.double"
+						},
+						"5": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(reduce|increase|decrease)[\\s]+(?:([\\S]+?)[\\s]+(?:(by)[\\s]+(?:([\\d]+?)|('.+?'?)|([\\S]+?))(?=,[\\s]*$|\\.[\\s]*$|$))?)?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"2": {
+							"name": "variable"
+						},
+						"3": {
+							"name": "keyword.operator"
+						},
+						"4": {
+							"name": "keyword.operator"
+						},
+						"5": {
+							"name": "string.quoted.double"
+						},
+						"6": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(stack)[\\s]+(?:(?:([\\d]+?)|('.+?'?)|([\\S]+?))[\\s]+(?:(on)[\\s]+([\\S]+?)(?=,[\\s]*$|\\.[\\s]*$|$))?)?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"6": {
+							"name": "variable"
+						},
+						"5": {
+							"name": "keyword.operator"
+						},
+						"2": {
+							"name": "keyword.operator"
+						},
+						"3": {
+							"name": "string.quoted.double"
+						},
+						"4": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(put)[\\s]+(?:(?:([\\d]+?)|('.+?'?)|([\\S]+?))[\\s]+(?:(into)[\\s]+([\\S]+?)(?=,[\\s]*$|\\.[\\s]*$|$))?)?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"6": {
+							"name": "variable"
+						},
+						"5": {
+							"name": "keyword.operator"
+						},
+						"2": {
+							"name": "keyword.operator"
+						},
+						"3": {
+							"name": "string.quoted.double"
+						},
+						"4": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(enqueue|put)[\\s]+(?:(?:([\\d]+?)|('.+?'?)|([\\S]+?))[\\s]+(?:(into)[\\s]+([\\S]+?)(?=,[\\s]*$|\\.[\\s]*$|$))?)?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"6": {
+							"name": "variable"
+						},
+						"5": {
+							"name": "keyword.operator"
+						},
+						"2": {
+							"name": "keyword.operator"
+						},
+						"3": {
+							"name": "string.quoted.double"
+						},
+						"4": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"match": "^[\\s]*(remove)[\\s]+(?:(?:([\\d]+?)|('.+?'?)|([\\S]+?))[\\s]+(?:(from)[\\s]+([\\S]+?)(?=,[\\s]*$|\\.[\\s]*$|$))?)?",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"6": {
+							"name": "variable"
+						},
+						"5": {
+							"name": "keyword.operator"
+						},
+						"2": {
+							"name": "keyword.operator"
+						},
+						"3": {
+							"name": "string.quoted.double"
+						},
+						"4": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"begin": "^[\\s]*([\\S]+)(?: |$)",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function"
+						}
+					},
+					"patterns": [
+						{
+							"match": "([\\S]+?)(?:[\\s]*?(=)([\\s]*?'.+?')?)?",
+							"captures": {
+								"1": {
+									"name": "variable"
+								},
+								"2": {
+									"name": "keyword.operator"
+								},
+								"3": {
+									"name": "string.quoted.double"
+								}
+							}
+						}
+					],
+					"end": "$"
+				}
+			]
+		},
+		"brackets" : {
+			"patterns" : [
+				{
+					"name": "keyword.control",
+					"match": "({|})"
+				}
+			]
+		},
+		"comment" : {
+			"patterns" : [
+				{
+					"name": "comment.line",
+					"match": "^[\\s]*?(\/\/.*?)$"
+				}
+			]
+		}
+	},
+	"scopeName": "text.abc.format"
+}
