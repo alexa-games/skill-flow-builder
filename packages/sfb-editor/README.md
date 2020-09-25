@@ -25,7 +25,7 @@ requirements:
 First, clone the parent repository.
 
 ```sh
-git clone https://github.com/alexa-games/SkillFlowBuilder.git && cd SkillFlowBuilder/
+git clone https://github.com/alexa-games/skill-flow-builder.git && cd skill-flow-builder/
 ```
 
 The SFB Editor requires that the core modules are built, build all the packages
@@ -33,9 +33,6 @@ in the `packages/` directory by running `yarn build-modules`.
 
 Navigate into the `sfb-editor/` directory with `cd packages/sfb-editor/`,
 and run `yarn start`. This should conclude launching the editor.
-
-Alternatively, you can download prepackaged executables for [Mac](http://sfb-framework.s3-website-us-east-1.amazonaws.com/macLatest)
-or [Windows](http://sfb-framework.s3-website-us-east-1.amazonaws.com/winLatest).
 
 ## Package Structure
 

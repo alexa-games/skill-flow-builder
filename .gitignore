@@ -9,8 +9,8 @@ node_modules/
 baked/
 my-branch-story/
 /lib/abcEditor/skill
+ffmpeg_build/
 packages/sfb-cli/ffmpeg
-packages/sfb-cli/ffmpeg_build
 packages/sfb-cli/THIRD-PARTY
 
 

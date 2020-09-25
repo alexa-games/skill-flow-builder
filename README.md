@@ -9,9 +9,6 @@ In parallel, developers can build differentiated features and minimize time spen
 on content changes. The tools share a common source file format, which helps make
 handoffs between teams more efficient.
 
-Visit [Skill Flow Builder](https://alexa.design/sfb-editor-landing-page) for more
-information.
-
 ## Skill Flow Builder Editor
 
 Using the Skill Flow Builder Editor, designers and writers can visualize their
@@ -26,7 +23,8 @@ Use the built-in simulator to preview, demo, and test your content. When
 finished, export and share a Skill Flow Builder format (.abc) file with your
 development team, or export text for narration or localization.
 
-For more information, see [Use the Skill Flow Builder Editor](https://developer.amazon.com/en-US/docs/alexa/custom-skills/use-the-skill-flow-builder-editor.html).
+For more information, see
+[Use the Skill Flow Builder Editor](docs/use-the-skill-flow-builder-editor/README.md)
 
 ## Skill Flow Builder Core Tools
 
@@ -45,9 +43,10 @@ the built-in scripting ability called scene instructions.
 The content debugger helps isolate debugging process from the content. You can
 view variables used, save state for later testing, and view content execution steps.
 
-See a more detailed view of the structure of typical SFB [project](https://developer.amazon.com/en-US/docs/alexa/custom-skills/set-up-the-skill-flow-builder-as-a-developer.html#skill-flow-builder-project-structure).
+See a more detailed view of the structure of typical SFB [project](docs/set-up-skill-flow-builder-as-a-developer/project-structure).
 
-For more information, see [Set up the Skill Flow Builder as a Developer](https://developer.amazon.com/en-US/docs/alexa/custom-skills/set-up-the-skill-flow-builder-as-a-developer.html).
+For more information, see
+[Set up Skill Flow Builder as a Developer](docs/set-up-skill-flow-builder-as-a-developer/README.md)
 
 ## Packages
 
@@ -104,7 +103,6 @@ project files.
 * Install Node.js (with npm) [https://nodejs.org/en/download/] version 10.15 or later.
 * Install the latest version of the [Amazon Web Services Command Line Interface (AWS CLI)](https://aws.amazon.com/cli/).
 * Install the latest version of the [Alexa Skills Kit Command Line Interface (ASK CLI)](https://www.npmjs.com/package/ask-cli)
-
 * (Windows only) Install the latest version of the [windows-build-tools module](https://www.npmjs.com/package/windows-build-tools).
 
 ### Environment Setup
@@ -117,22 +115,43 @@ This package uses yarn to manage dependencies, you can install yarn globally wit
 npm install yarn -g.
 ```
 
-#### FFmpeg & Lame
+#### FFmpeg & LAME
 
 To enable the audio mixing features of SFB, we recommend installing
-[FFmpeg](https://ffmpeg.org/) and [Lame](https://lame.sourceforge.io/).
+[FFmpeg](https://ffmpeg.org/) and [LAME](https://lame.sourceforge.io/).
 FFmpeg is called as a stand-alone application in the editor to mix audio when
 using the Voice Preview functionality, as well as in the Lambda endpoint to mix
-audio to return in Alexa Skill responses. Lame is also utilized to perform MP3
-encoding for the mixed audio. Scripts to install both of these for Windows, Mac,
-and Linux are available in the scripts/setup/ directory.
+audio to return in Alexa Skill responses. LAME is utilized to perform MP3
+encoding for the mixed audio.
+
+Scripts to build and install both LAME and FFmpeg are available in the `scripts/setup/`
+directory, and you can run the following command to build them in the root directory:
+
+```sh
+yarn dependencies:OPERATING_SYSTEM
+```
+
+Where `OPERATING_SYSTEM` is the operating system you wish to build for:
+
+* linux
+* mac
+* win
+
+> **Note:** For Windows, the script is designed to be used with
+> [Msys2](https://www.msys2.org/) while running the MINGW64 shell.
+> It can be difficult to install Node.js under Msys2, so unless you are already
+> working in Msys2 with Node.js, we suggest running
+> `scripts/setup/InstallDependenciesWin.sh` directly.
+
+Additional information on how to build and install FFmpeg with LAME can be found
+in the [FFmpeg Compilation Guide](https://trac.ffmpeg.org/wiki/CompilationGuide).
 
 ### Quick Start
 
 To get everything up and running, first clone and navigate into this repository with:
 
 ```sh
-git clone https://github.com/alexa-games/SkillFlowBuilder.git && cd SkillFlowBuilder/
+git clone https://github.com/alexa-games/skill-flow-builder.git && cd skill-flow-builder/
 ```
 
 To build all the modules in the `packages/` directory, use `yarn build-modules`
@@ -167,10 +186,15 @@ alexa-sfb new <storyName>
 
 ### Start the Editor
 
-After running `yarn build-modules`, you can start the editor by running `yarn
-editor`. This will launch the SFB editor, which will visualize your skill’s
-behavior and content. You can create a new project, or open an existing project
-using the buttons on the top left.
+After running `yarn build-modules`, you can start the editor by running:
+
+```sh
+yarn editor
+```
+
+This will launch the SFB editor, which will visualize your skill’s behavior and
+content. You can create a new project, or open an existing project using the
+buttons on the top left.
 
 ## Security
 

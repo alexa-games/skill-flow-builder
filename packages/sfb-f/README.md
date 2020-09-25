@@ -22,7 +22,7 @@ Yarn
 ### Compiling
 
 ```sh
-yarn && yarn compile
+yarn install && yarn compile
 ```
 
 The compiled code is built into the `dist/` directory. The Skill Flow Builder

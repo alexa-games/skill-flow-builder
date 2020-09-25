@@ -56,6 +56,27 @@ yarn global upgrade {SFB}/lib/moduleSrc/alexa-sfb
 
 ```sh
 sudo npm --global upgrade <SFB>/lib/moduleSrc/alexa-sfb
-# or 
+# or
 yarn global upgrade <SFB>/lib/moduleSrc/alexa-sfb
 ```
+
+## Audio mixing fails in the skill
+
+If you are building and installing the `sfb-cli` package directly from this
+repository (rather than installing via `npm`), and your skill fails when it
+attempts to mix audio, it is likely your `sfb-cli` package is missing the
+`ffmpeg` binary.
+
+When building from source, you need to supply your own Linux build of FFmpeg
+(including LAME) to copy into the skill. The
+`scripts/setup/InstallDependenciesLinux.sh` script supplied with repository
+will build FFmpeg and LAME binaries with the required configuration.
+
+Next, copy the `ffmpeg` binary into one of these locations:
+
+1. The `sfb-cli` package directory
+2. The `code/` directory in your SFB story package
+
+Alternatively, you can set the `ffmpeg-location-for-skill` property
+in your project's `abcConfig.json` file to the full filepath for the
+`ffmpeg` binary.

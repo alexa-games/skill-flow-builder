@@ -1,13 +1,8 @@
-# SFB Quick Start Package
+# Skill Flow Builder
 
-> To view the official documentation, sign in to the
-> [Developer Portal](https://developer.amazon.com/) using your
-> developer account that has been whitelisted to view the
-> docs. Then, click the following links:
+> To view the official documentation, visit
+> [skill-flow-builder](https://github.com/alexa-games/skill-flow-builder) on GitHub.
 >
-> * [Set up the Alexa Skill Flow Builder](https://developer.amazon.com/docs/custom-skills/set-up-the-alexa-content-engine.html)
-> * [Format Your Content for the Alexa Skill Flow Builder](https://developer.amazon.com/docs/custom-skills/format-your-content-for-the-alexa-content-engine.html)
-> * [Alexa Skill Flow Builder Format Reference](https://developer.amazon.com/docs/custom-skills/alexa-content-engine-format-reference.html)
->
-> Developer accounts are individually whitelisted, and you need
-> to log in using the correct whitelisted account.
+> * [Understanding the Skill Flow Builder](https://github.com/alexa-games/skill-flow-builder/blob/master/docs/README.md)
+> * [Use Skill Flow Builder to Create Your Content](https://github.com/alexa-games/skill-flow-builder/blob/master/docs/use-skill-flow-builder-to-create-content/README.md)
+> * [Skill Flow Builder Reference](https://github.com/alexa-games/skill-flow-builder/blob/master/docs/skill-flow-builder-reference/README.md)
