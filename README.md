@@ -137,6 +137,12 @@ Where `OPERATING_SYSTEM` is the operating system you wish to build for:
 * mac
 * win
 
+e.g.
+
+```sh
+yarn dependencies:mac
+```
+
 > **Note:** For Windows, the script is designed to be used with
 > [Msys2](https://www.msys2.org/) while running the MINGW64 shell.
 > It can be difficult to install Node.js under Msys2, so unless you are already

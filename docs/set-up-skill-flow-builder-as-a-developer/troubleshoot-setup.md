@@ -39,8 +39,7 @@ npm upgrade # (or 'yarn upgrade' if using yarn)
 Alternatively, if you installed the Skill Flow Builder CLI globally, complete
 the following procedure.
 
-- Open a command prompt, and enter the following command, and then replace {SFB}
-with the full path.
+- Open a command prompt, and enter the following command, and then replace {SFB} with the full path.  (You can find where `alexa-sfb` is installed by running `which alexa-sfb` in the command line)
 
 ```sh
 npm --global upgrade {SFB}/lib/moduleSrc/alexa-sfb
@@ -50,14 +49,6 @@ or if using `yarn`
 
 ```sh
 yarn global upgrade {SFB}/lib/moduleSrc/alexa-sfb
-```
-
-- On Mac OS, you might need to add the `sudo` prefix:
-
-```sh
-sudo npm --global upgrade <SFB>/lib/moduleSrc/alexa-sfb
-# or
-yarn global upgrade <SFB>/lib/moduleSrc/alexa-sfb
 ```
 
 ## Audio mixing fails in the skill
