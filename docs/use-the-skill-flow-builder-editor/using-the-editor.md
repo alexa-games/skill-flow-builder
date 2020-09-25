@@ -98,7 +98,7 @@ You can use the Skill Flow Builder editor to add a snippet, using the
 You can also create snippets by modifying the Snippets.json file inside of your
 project's `content/<locale>/` directory.
 
-- **Note**: You can have a different `Snippets.json` file for each locale to
+> **Note**: You can have a different `Snippets.json` file for each locale to
 support localization of snippets.
 
 The following example shows what a `Snippets.json` file might look like:
@@ -131,7 +131,7 @@ In the editor's Snippets panel, you can click the trash can icon to delete a sni
 You might also edit the `Snippets.json` file directly for your project to remove
 snippets.
 
-- **Note**: Do not remove the sfx or pic snippets. They are for use by the
+> **Note**: Do not remove the sfx or pic snippets. They are for use by the
 editor when using drag and drop to add audio/image files to your skill.
 
 ### Edit snippets
@@ -181,7 +181,7 @@ The following example shows the snippet structure beforehand.
 The following example shows how the structure turns into the following snippet
 at simulate/runtime.
 
-- **Note**: This special variable replacement can also help with content
+> **Note**: This special variable replacement can also help with content
 localization of audio/images files, as the generated URL contains the locale in
 the generated URL.
 

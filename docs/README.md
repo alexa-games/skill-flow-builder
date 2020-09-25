@@ -18,10 +18,10 @@ and sound effects, and implement game logic. Assign Amazon Polly voices to
 specific characters, add images, and add background audio.
 
 Use the built-in simulator to preview, demo, and test your content. When
-finished, export and share a Skill Flow Builder format (.abc) file with your
+finished, export and share a Skill Flow Builder format (`.abc`) file with your
 development team, or export text for narration or localization.
 
-For more information, see [Use the Skill Flow Builder Editor](use-the-skill-flow-builder-editor/README).
+For more information, see [Use the Skill Flow Builder Editor](use-the-skill-flow-builder-editor/README.md).
 
 ## Skill Flow Builder Core
 
@@ -32,21 +32,21 @@ Command Line Interface (ASK CLI), and the AWS CLI. Skill Flow Builder integrates
 with extensions for Alexa Presentation Language (APL) templates and in-skill
 purchasing, which saves you implementation time.
 
-When you receive a new Skill Flow Builder format (.abc) file from designers and
+When you receive a new Skill Flow Builder format (`.abc`) file from designers and
 writers, you can deploy and validate the content as a skill before touching the
-code. You can also implement business logic directly in the .abc file by using
+code. You can also implement business logic directly in the `.abc` file by using
 the built-in scripting ability called scene instructions.
 
 The content debugger helps isolate debugging process from the content. You can
 view variables used, save state for later testing, and view content execution steps.
 
-For more information, see [Set up the Skill Flow Builder as a Developer](set-up-skill-flow-builder-as-a-developer/README).
+For more information, see [Set up the Skill Flow Builder as a Developer](set-up-skill-flow-builder-as-a-developer/README.md).
 
 ## Resources
 
-- [Set up the Skill Flow Builder as a Developer](set-up-skill-flow-builder-as-a-developer/README)
-- [Use the Skill Flow Builder Editor](use-the-skill-flow-builder-editor/README)
-- [Use Skill Flow Builder to Create your Content](use-skill-flow-builder-to-create-content/README)
-- [Basic Skill Flow Builder Syntax](basic-skill-flow-builder-syntax/README)
-- [Advanced Skill Flow Builder Syntax](advanced-skill-flow-builder-syntax/README)
-- [Skill Flow Builder Reference](skill-flow-builder-reference/README)
+- [Set up the Skill Flow Builder as a Developer](set-up-skill-flow-builder-as-a-developer/README.md)
+- [Use the Skill Flow Builder Editor](use-the-skill-flow-builder-editor/README.md)
+- [Use Skill Flow Builder to Create your Content](use-skill-flow-builder-to-create-content/README.md)
+- [Basic Skill Flow Builder Syntax](basic-skill-flow-builder-syntax/README.md)
+- [Advanced Skill Flow Builder Syntax](advanced-skill-flow-builder-syntax/README.md)
+- [Skill Flow Builder Reference](skill-flow-builder-reference/README.md)

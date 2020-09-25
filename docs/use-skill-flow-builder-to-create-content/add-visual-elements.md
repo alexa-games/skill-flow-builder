@@ -79,8 +79,8 @@ The example adds a global `start over` command to all scenes that takes the
 player back to the start when they say "start over".
 
 The `@global prepend` is similar to `@global append` used in the sections
-[Let players restart from anywhere](../basic-skill-flow-builder-syntax/README#let-users-restart-from-anywhere)
-and [Add a help menu in Basic Skill Flow Builder Syntax](../basic-skill-flow-builder-syntax/README#add-a-help-menu).
+[Let players restart from anywhere](../basic-skill-flow-builder-syntax/README.md#let-users-restart-from-anywhere)
+and [Add a help menu in Basic Skill Flow Builder Syntax](../basic-skill-flow-builder-syntax/README.md#add-a-help-menu).
 The `@global prepend` and `@global append` are similar because you use them in
 all other scenes, but you apply them differently in each scene. You would use
 @global prepend before a scene. You would use `@global append` after a scene.

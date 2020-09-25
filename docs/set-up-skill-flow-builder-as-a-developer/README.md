@@ -69,13 +69,11 @@ Open a command prompt, enter `alexa-sfb`, and then press the Enter key.
 
 ### To run the CLI locally
 
-`npx` can also be used to run the CLI locally with
-
-`npx alexa-sfb`
+`npx` can also be used to run the CLI locally with `npx alexa-sfb`
 
 ## Install and set up the Visual Studio Code Extension
 
-Amazon has optimized Skill Flow Builder for Visual Studio Code. Install a
+Amazon has optimized Skill Flow Builder for Visual Studio Code. Skill Flow Builder includes a
 language extension for Visual Studio Code to provide syntax highlighting, error
 diagnostics, and definition jumps.
 
@@ -90,7 +88,7 @@ diagnostics, and definition jumps.
 3. Restart VSCode to refresh your extensions
 
 After the extension is installed, you should be able to use definition jump to
-jump to the file and line that defines a scene. For example, if your content
+jump to the specific file and line that defines a scene. For example, if your content
 contains the instruction `-> myscene`, click `myscene` and then press F12 or
 right-click and select *Go to Definition* to be navigated to the line that
 defines `myscene`.
@@ -104,7 +102,7 @@ to create your skill project for your new game or story.
 
 Depending on how you installed the SFB CLI, open a command prompt and enter
 `alexa-sfb new` or `npx alexa-sfb new` and then enter a path to the folder where
-you want to store the files or your game or story, for example:
+you want to store the files of your game/story, for example:
 
 `alexa-sfb new my_best_story`
 
@@ -135,16 +133,16 @@ your AWS account. If you have already set up your ASK profile, skip to [Step 2](
 Open a command prompt, type the following command: `ask init`, and then follow
 the prompts.
 
-### To use an ASK profile other than `"default"
+### To use an ASK profile other than "default"
 
 Open `<your_project_path>/abcConfig.json` and then edit the attribute
 `"ask-profile-name"` to specify the profile you want to use.
 
 1. To specify the profile you want to use, open
-/`<your_project_path>/abcConfig.json`, and then edit the attribute
+`<your_project_path>/abcConfig.json`, and then edit the attribute
 `"ask-profile-name"`. You must provide a working AWS account with AWS account
 security credentials set up for your user.
-2. If you don't have an IAM user with credentials, open the AWS Management console.
+2. If you don't have an IAM user with credentials, open the [AWS Management console](https://aws.amazon.com/console/).
 3. Click the **IAM** tab, click **Add User**, and then create a new user name.
 4. Select the check box for **programmatic access**, and then grant a policy
 with the following structure.
@@ -195,7 +193,7 @@ information in the skill configuration file:
 Your AWS Lambda function name and the skill name derive from this value. You can
 use contain upper and lowercase letters (A-Z, a-z), numbers (0-9), underscores
 (_), and dashes (-).
-- `""skill-invocation-name"`: Defines how users invoke your skill. For more
+- `"skill-invocation-name"`: Defines how users invoke your skill. For more
 information, see [Understand How Users Invoke Custom Skills](https://developer.amazon.com/en-US/docs/alexa/custom-skills/understanding-how-users-invoke-custom-skills.html).
 - For information on what can be used as a valid invocation name, look at
 [Invocation Name Requirements](https://developer.amazon.com/en-US/docs/alexa/custom-skills/choose-the-invocation-name-for-a-custom-skill.html#cert-invocation-name-req)
@@ -213,7 +211,7 @@ and need to run the script as an administrator.
 
     `alexa-sfb deploy <your_project_path>`
 
-    **Important**: If you run the script from Windows, you might have to open
+    > **Important**: If you run the script from Windows, you might have to open
 your command prompt as an administrator. You open our command prompt as an
 administrator to avoid a permissions error when the script runs PowerShell
 batch files as part of the deployment process.
@@ -223,23 +221,21 @@ batch files as part of the deployment process.
 in the AWS Management Console, go to IAM, and then verify that your user has the
 policy described in [Step 1: Set up your ASK profile.](#step-1-set-up-your-ask-profile)
 
-## Step 4: Set up the AWS IAM role
+### Step 4: Set up the AWS IAM role
 
-After you create the skill in your developer account and create the AWS Lambda
-function, you need to add permissions.
+After you create the skill in your developer account and create the AWS Lambda function, you need to add permissions.
+> **Note:** This only applies to users deploying with the Lambda deployer option. If you are using CloudFormation, skip to [Step 5](#step-5-launch-your-skill)
 
-### To setup the AWS IAM
+#### To setup the AWS IAM
 
-- Add permissions for DynamoDB, Amazon S3, and Amazon Polly to the IAM role
-created for your AWS Lambda function.
-
+Add permissions for DynamoDB, Amazon S3, and Amazon Polly to the IAM role created for your AWS Lambda function.
 > The name of the default role created for your skill is `ask-lambda-"your skill
 > project name"`
 >
 > There should already be a managed policy for the role
 >`AWSLambdaBasicExecutionRole` for running the skill code on AWS Lambda.
 
-### To add a new policy so that AWS Lambda function can access DynamoDB
+#### To add a new policy so that AWS Lambda function can access DynamoDB
 
 In the AWS Management Console, add the following policy:
 
@@ -278,20 +274,15 @@ saying the wake word and invocation name.
 
 #### To launch your skill
 
-1. On your Alexa device, test your skill by saying the wake word, followed by
+On your Alexa device, test your skill by saying the wake word, followed by
 the invocation name. For example, say, "Alexa, open the High Low Game."
-    - **Note:** The first time you launch your skill, you receive an error message.
-    This is because your AWS Lambda function tries to generate the state
-    management DynamoDB table.
-2. Wait about 15 seconds for the AWS Lambda function to create the DynamoDB
-table, and then say the wake word, followed by the skill invocation name. For
-example, say, "Alexa, open the High Low Game."
+> **Note:** If you are deploying with the Lambda Deployer option, the first time you launch your skill you will receive an error message. This is because your AWS Lambda function tries to generate the state management DynamoDB table. Wait about 15 seconds for the AWS Lambda function to create the DynamoDB table, and then say the wake word, followed by the skill invocation name. For example, say, "Alexa, open the High Low Game." This does not apply to the CloudFormation deploy process.
 
 ## Extra Resources
 
-- [Skill Flow Builder Project Structure](./project-structure)
-- [Skill Flow Builder Life Cycle](./life-cycle)
-- [Create a custom extension](./create-a-custom-extension)
-- [Skill Flow Builder CLI Reference](./cli-reference)
-- [Set up Amazon Polly voices (Optional)](./setup-polly-voices)
-- [Uninstall the Skill Flow Builder](./uninstall)
+- [Skill Flow Builder Project Structure](./project-structure.md)
+- [Skill Flow Builder Life Cycle](./life-cycle.md)
+- [Create a custom extension](./create-a-custom-extension.md)
+- [Skill Flow Builder CLI Reference](./cli-reference.md)
+- [Set up Amazon Polly voices (Optional)](./setup-polly-voices.md)
+- [Uninstall the Skill Flow Builder](./uninstall.md)

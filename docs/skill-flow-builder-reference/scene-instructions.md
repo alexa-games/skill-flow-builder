@@ -141,10 +141,10 @@ the player back to the scene where the instruction `bookmark` was last executed.
     }
 
 @money report
-*say
-    You have 500 dollars.
-*then
-    -> bookmark
+    *say
+        You have 500 dollars.
+    *then
+        -> bookmark
 ```
 
 ## -> (go to) *property

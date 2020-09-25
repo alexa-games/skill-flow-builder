@@ -57,6 +57,6 @@ trigger the command. Solid gray lines represent direct go-to links, showing
 scenes that are either directly chained together or are chained together through
 logical operations.
 
-## Next
+## Next Steps
 
-See [Using The Editor](./using-the-editor)
+See [Using The Editor](./using-the-editor.md)

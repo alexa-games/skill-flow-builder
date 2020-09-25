@@ -6,8 +6,8 @@ the scope of the project folder.
 ## To remove all traces of the project
 
 - Remove the directory that contains the project.
-  - **Note:** If you installed `alexa-sfb` globally, remove it by running the
-  following command, replacing <SFB> with the full path. 
+  > **Note:** If you installed `alexa-sfb` globally, remove it by running the
+  following command, replacing `@alexa-games/sfb-cli` with the full path. 
 
 ## Commands
 

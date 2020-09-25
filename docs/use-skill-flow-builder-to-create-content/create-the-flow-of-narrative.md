@@ -17,9 +17,9 @@ Every scene starts with the scene name following the at sign (`@`) on a new
 line. In the example, the scene name is `start`. Skill Flow Builder reserves a
 few scene names such as `start`. Only use these scene names for special
 behavior. For more information about reserved scene names, see
-[Special scenes in the Skill Flow Builder Reference](../skill-flow-builder-reference/special-scenes).
+[Special scenes in the Skill Flow Builder Reference](../skill-flow-builder-reference/special-scenes.md).
 
-Add content to the scene by using a [scene property](../skill-flow-builder-reference/scene-properties)
+Add content to the scene by using a [scene property](../skill-flow-builder-reference/scene-properties.md)
 such as `*say`, which tells Alexa what to say during the scene. Specify the
 scene property on a new line with an asterisk (`*`) followed by the property name.
 
@@ -31,7 +31,7 @@ scene property on a new line with an asterisk (`*`) followed by the property nam
 The sentence `Welcome to my awesome game!` is the content of the `*say`
 property. Content can continue for multiple lines until you define another scene
 property with `*`, or another scene with `@`. Indentation is optional. For more
-information see [Scene properties in the Skill Flow Builder Reference](../skill-flow-builder-reference/scene-properties).
+information see [Scene properties in the Skill Flow Builder Reference](../skill-flow-builder-reference/scene-properties.md).
 
 ## Give choices to the player
 
@@ -73,7 +73,7 @@ the instructions listed between `{` and `}`.
 If the player says "pirate", Alexa executes `-> choose pirate`, which tells
 Alexa to go to the scene "choose pirate". The transition for the `go to`
 instruction occurs immediately, and the remaining instructions within the scene
-don't execute. For more information see [(go to) in the Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions#go-to).
+don't execute. For more information see [(go to) in the Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions.md#--go-to).
 
 ## String multiple scenes together
 

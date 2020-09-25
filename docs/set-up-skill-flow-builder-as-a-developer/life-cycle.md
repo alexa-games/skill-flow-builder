@@ -9,7 +9,7 @@ The following is a lifecycle for Skill Flow Builder project when the build
 process is executed by running `alexa-sfb build`.
 
 1. Code Build: Install dependencies and run compile script for `code/` directory.
-2. Pre-Import: Run `extendSourceContent()` on content source (included `*abc`
+2. Pre-Import: Run `extendSourceContent()` on content source (included `*.abc`
 files) for the attached `ImporterExtension`.
 3. Import: Translate `*.abc` story content into `StoryMetadata` object.
 4. Post-Import: Run `extendImportedContent()` on resulting `StoryMetadata` for
@@ -20,8 +20,8 @@ command, then copy built code, imported story, and assets from
 `content/{locale}/resources` to the resulting deployment payload directory. If
 metadata exists copy `skill.json`, `ask-states.json`, and `ask-resources.json`
 from the `metadata/` directory for appropriate stages.
-6. Deploy (if you are running `alexa-sfb deploy` command): Run `ask deploy` on
-the deployment payload.
+6. Deploy: Runs `ask deploy` on the deployment payload.
+> **Note:** This step is if you are running `alexa-sfb deploy` command:
 
 ## Skill Runtime Life Cycle
 
@@ -36,11 +36,11 @@ ASK SDK, and persistent skill state is retrieved with attached
 is passed to `SFBRequestHandler` for processing, then the handler calls
 `SFBDriver` with current skill state and incoming request.
 3. Skill Flow Builder Driver Pre Run: Run `pre()` for all attached instances of
-`DriverExtension`. Default `DriverExtension` like `AlexaExtension` would parse
+`DriverExtension`. A default `DriverExtension` like `AlexaExtension` would parse
 the request in to `UserInput` object at this step.
 4. Skill Flow Builder Driver Run: The core logic for taking the incoming user
 input, `StoryMetadata`, and current skill state, is executed at this step along
 with running custom instructions defined in attached `InstructionExtension`.
 5. Skill Flow Builder Driver Post Run: Run `post()` for all attached instances
-of `DriverExtension`. Default `DriverExtension` like `AlexaExtension` would
+of `DriverExtension`. A default `DriverExtension` like `AlexaExtension` would
 generate an Alexa skill response given the post run state at this step.
