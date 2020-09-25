@@ -26,7 +26,7 @@ The scene name identifies the scene. The scene name:
 - Must be contained within the line
 
 Some scene names are reserved for special purposes. For more information, see
-[special scenes](./special-scenes).
+[special scenes](./special-scenes.md).
 
 ## *say
 
@@ -58,7 +58,7 @@ feel less stale for repeated content. You can use dialogue variation on `*say`,
 ### *show
 
 If the player is on a device that supports visual content, the device displays
-the visual components assigned within this section. See [Add visuals](../use-skill-flow-builder-to-create-content/add-visual-elements).
+the visual components assigned within this section. See [Add visuals](../use-skill-flow-builder-to-create-content/add-visual-elements.md).
 
 ### *then
 

@@ -30,7 +30,7 @@ The `>> RESUME` terminator resumes the game by going to the scene where the
 player last left off.
 
 This terminator controls the `Relaunch` behavior as described in the section
-[Control relaunch behavior](../basic-skill-flow-builder-syntax/README#control-relaunch-behavior).
+[Control relaunch behavior](../basic-skill-flow-builder-syntax/README.md#control-relaunch-behavior).
 
 ## >> REPEAT
 

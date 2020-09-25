@@ -1,7 +1,7 @@
 # Implement Game Logic
 
 The two examples result in identical experiences for the player. However, you
-might find [Example 2](./create-the-flow-of-narrative#example-2) more useful for
+might find [Example 2](./create-the-flow-of-narrative.md#example-2) more useful for
 the following reasons:
 
 - Later on in your game, you can go directly to `@choose your trade` question
@@ -93,7 +93,7 @@ loses the skeleton key in a scene, unset the flag in the following manner:
 ```
 
 For more information about flag and unflag instructions see `set`, `increase`,
-`decrease`, `clear`, `flag`, `unflag`, in the [Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions#set-increase-decrease-clear-flag-unflag).
+`decrease`, `clear`, `flag`, `unflag`, in the [Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions.md#set-increase-decrease-clear-flag-unflag).
 
 ### Use saved player decisions, inventory, or progress to do something
 
@@ -122,15 +122,15 @@ automatically to a scene called `door locked`.
 Use the instruction to tell Alexa to check whether the statements after `if` are
 true or false. When the statement that follows `if` is true, for example, the
 player has set a flag, Alexa executes the instructions between the beginning
-curly bracket ({) and the ending curly bracket (}). If the player has not set
+curly bracket `{` and the ending curly bracket `}`. If the player has not set
 the flag, the if instruction interprets the statement as `false`, and skips the
-instructions listed between the beginning curly bracket ({) and the ending curly
-bracket(}).
+instructions listed between the beginning curly bracket `{` and the ending curly
+bracket `}`.
 
 Any flag that the player never declares evaluates to `false`. For more 
-information, see `If` in the [Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions#if).
+information, see `if` in the [Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions.md#if).
 
-- Note: If you include a `-> (go to)` instruction within the if block, the if
+> **Note:** If you include a `-> (go to)` instruction within the `if` block, the if
 instruction skips any remaining instructions for the current scene and the
 transition happens immediately.
 
@@ -192,7 +192,8 @@ You might want to use this if you intend for the player to only be able to open
 the door if the player has the skeleton key and has also talked to the wizard.
 In the example, you must set both flags for the statement to be `true`.
 
-The following example shows how to apply `or`.
+If you want to check if the player is able open the door or talked to the wizard
+use `or`. In this next example, either flags can be set for the statement to be `true`.
 
 ```
 *then
@@ -200,9 +201,6 @@ The following example shows how to apply `or`.
         -> open door
     }
 ```
-
-You might want to use this if you intend the player to open the door if the
-player has the skeleton key or has talked to the wizard, or both.
 
 ## Set and use variables
 
@@ -252,7 +250,7 @@ following example shows how to do this.
 ```
 @play introduction
     *say
-        welcome to our mysterious world. Your class is {playerClass}.
+        Welcome to our mysterious world. Your class is {playerClass}.
 ```
 
 The player hears the phrase with `{playerClass}` replaced with the value of the variable.
@@ -264,7 +262,7 @@ Use variables to control game behavior:
 ```
 @play introduction
     *say
-        welcome to our mysterious world. Your class is {playerClass}.
+        Welcome to our mysterious world. Your class is {playerClass}.
     *then
         if playerClass is 'mage' {
             -> mage start
@@ -286,7 +284,8 @@ You can also store numbers in a variable and manipulate the variable as the game
 plays out. The following example shows a starting value for the variable named `playerHealth`:
 
 ```
-set playerHealth as 10
+@start
+    set playerHealth as 10
 ```
 
 The following example reduces the value of the variable:
@@ -309,24 +308,24 @@ example does so by checking whether the value is less than zero.
 
 The `decrease` command decreases the value stored in a variable by the number
 indicated. For instructions related to variables, see
-[Set, increase, decrease, clear, flag, unflag, in Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions#set-increase-decrease-clear-flag-unflag).
+[Set, increase, decrease, clear, flag, unflag, in Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions.md#set-increase-decrease-clear-flag-unflag).
 
 If you have never declared a variable, any statement that evaluates the variable
-returns `false`. For example, if you don't declar `playerHealth`, if
+returns `false`. For example, if you don't declare `playerHealth`, if
 `playerHealth <= 0` returns `false`, and the game logic proceeds as if
 `playerHealth` is a positive value.
 
 ### Use randomness to make decisions for players
 
 To make a random decision in your game, or to generate a random number for
-dynamic content for your game, you can use the [roll instruction](../skill-flow-builder-reference/core-extensions#roll-and-rollresult).
+dynamic content for your game, you can use the [roll instruction](../skill-flow-builder-reference/core-extensions.md#roll-and-rollresult).
 
-The [roll instruction](../skill-flow-builder-reference/core-extensions#roll-and-rollresult)
+The [roll instruction](../skill-flow-builder-reference/core-extensions.md#roll-and-rollresult)
 takes one argument that combines the number of dice, and the number sides on the
 dice to roll and returns a result that ranges between 1 and the highest number
 possible. To roll a standard six-sided die, you can write `roll 1d6`, or to flip
 a two-sided coin you can write `roll 1d2`. If you use the
-[roll instruction](../skill-flow-builder-reference/core-extensions#roll-and-rollresult)
+[roll instruction](../skill-flow-builder-reference/core-extensions.md#roll-and-rollresult)
 on a line by itself, the game stores the result in a special variable called
 `rollResult` that you can check on subsequent lines.
 

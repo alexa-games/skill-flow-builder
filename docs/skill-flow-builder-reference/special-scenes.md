@@ -49,7 +49,7 @@ The content of `@global prepend` is prepended to every scene within the game.
         Bing!
 ```
 
-For an example, see [Add visuals to all scenes](../use-skill-flow-builder-to-create-content/add-visual-elements).
+For an example, see [Add visuals to all scenes](../use-skill-flow-builder-to-create-content/add-visual-elements.md).
 
 ## @global append
 
@@ -66,4 +66,4 @@ The content of `@global append` is appended to every scene within the game.
         }
 ```
 
-For an example, see [Let players restart from anywhere](../basic-skill-flow-builder-syntax/README#let-users-restart-from-anywhere).
+For an example, see [Let players restart from anywhere](../basic-skill-flow-builder-syntax/README.md#let-users-restart-from-anywhere).

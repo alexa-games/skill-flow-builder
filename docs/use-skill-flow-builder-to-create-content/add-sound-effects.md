@@ -36,5 +36,5 @@ Mix background music for the scene's narration.
 
 You can mix background music for a scene's narration. Background music only
 works when you mix with foreground audio or narration using custom
-[Amazon Polly](https://aws.amazon.com/polly/). You can't mix music with Alexa's
-voice. Insert bgm after `*then`.
+[Amazon Polly](https://aws.amazon.com/polly/). You cannot mix music with Alexa's
+voice. Insert `bgm` after a `*then`.

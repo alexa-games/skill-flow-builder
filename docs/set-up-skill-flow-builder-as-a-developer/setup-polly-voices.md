@@ -2,13 +2,16 @@
 
 By default, you can use [Amazon Polly](https://aws.amazon.com/polly/) voices
 with Alexa [SSML](https://developer.amazon.com/en-US/docs/alexa/custom-skills/speech-synthesis-markup-language-ssml-reference.html)
-without further setup of Amazon Polly. You must perform Additional setup only
+without further setup of Amazon Polly. You must perform additional setup only
 if you want to use advanced voice-mixing features like background music.
 
-## Step 1: Set up AWS IAM role
+## Step 1: Set up the required AWS IAM permissions
 
-- Add the following permissions to your custom IAM policy called "SFBLambda" that
-is used by the IAM role for your AWS Lambda function:
+### CloudFormation
+
+If you are using the Lambda Deployer deploy option, skip this step and start from [here](#lambda-deployer).
+If you are using CloudFormation to deploy, ensure that the following permissions to your CloudFormation `skill-stack.yaml` that
+is used by the IAM role for your AWS Lambda function. By default, these permissions are already included.
   - `s3:GetObject` for storing and caching the generated sound files.
   - `s3:PutObject` for storing and caching the generated sound files.
   - `s3:PutObjectAcl` for storing and caching the generated sound files.
@@ -18,13 +21,37 @@ is used by the IAM role for your AWS Lambda function:
 Example:
 
 ```json
-...
+- Effect: Allow
+  Action:
+    - s3:GetObject
+    - s3:PutObject
+    - s3:PutObjectAcl
+    - polly:SynthesizeSpeech
+  Resource:
+    - ...
+```
+
+Read more about CloudFormation templates [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html)
+
+### Lambda Deployer
+
+If you are deploying using CloudFormation, skip to [Step 2](#step-2-set-up-amazon-s3-bucket). If you are using the Lambda deployer deploy option, 
+add the following permissions to your custom IAM policy called "SFBLambda" that is used by the IAM role for your AWS Lambda function:
+- `s3:GetObject` for storing and caching the generated sound files.
+- `s3:PutObject` for storing and caching the generated sound files.
+- `s3:PutObjectAcl` for storing and caching the generated sound files.
+- `polly:SynthesizeSpeech` for using the Amazon Polly service to generate the sound file using the Amazon Polly voices.
+
+Example:
+
+```json
 "s3": "GetObject"
 "s3": "PutObject"
 "s3": "PutObjectAcl"
 "polly": "SynthesizeSpeech"
-...
 ```
+
+Read more about CloudFormation templates [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html)
 
 ## Step 2: Set up Amazon S3 bucket
 
@@ -41,9 +68,7 @@ access options:
 The default Alexa SSML syntax supports voice tags. With the tags you can use
 custom Amazon Polly voices in your skill without additional setup.
 
-For example:
-
-To use Amazon Polly to mix voices with background music, you need to set up a
+For example, to use Amazon Polly to mix voices with background music, you need to set up a
 few configurable properties. Otherwise, you can use Amazon Polly voices alone
 while leaving `polly-config` disabled. The configuration file for the Skill Flow
 Builder is at
@@ -59,7 +84,7 @@ bucket, you need to provide the correct value.
 - `"polly-config -> enabled"`: If true, calls Amazon Polly instead of using
 the built-in `<voice>` tag functionality provided via Alexa SSML.
 - `"polly-config -> combineAudioTags"`: If true, combines multiple audio
-files into a single .mp3 file.
+files into a single `.mp3` file.
 - `"polly-config -> dontUseCache"`: If true, calls the Amazon Polly
 service for every request. If false, the skill tries to use the previously
 generated sound files if already generated.

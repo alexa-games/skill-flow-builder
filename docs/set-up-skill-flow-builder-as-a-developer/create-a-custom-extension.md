@@ -1,6 +1,6 @@
 # Create a custom extension
 
-Similar to the [Skill Flow Builder Life Cycle](./life-cycle), there are a few
+Similar to the [Skill Flow Builder Life Cycle](./life-cycle.md), there are a few
 opportunities to extend the functionality of your Skill Flow Builder project by
 building custom extensions. While you create your content, you might need to
 create a custom command to run your own code during a particular scene, or you
@@ -32,8 +32,7 @@ interface ImporterExtension {
 
 ### Details
 
-- Implement `ImporterExtension` is used to add custom logic for the content
-import step.
+- Implement `ImporterExtension` is used to add custom logic for the content import step.
 - `extendSourceContent` is invoked right before the raw text of the source file
 is imported as a `StoryMetadata`.
 - `extendImportedContent` is invoked after the importing is finished. Typically,
@@ -110,9 +109,7 @@ You might need to pass in parameters from your story to the extension. The
 following example shows how you can pass in parameters.
 
 ```
-    ...
-    setupForCombat person='player' map='garage'
-    ...
+setupForCombat person='player' map='garage'
 ```
 
 When this instruction is executed by Skill Flow Builder, the framework creates
@@ -146,18 +143,18 @@ within the story. The following example shows an implementation of the extension
 
 ```typescript
 async public doSomething(param: InstructionExtensionParameter): Promise<void> {
-    param.storyState.result = "win"
+    param.storyState.result = "winner!";
 }
 ```
 
-The variable named `result` will be assigned with the value "win". The following
+The variable named `result` will be assigned with the value "winner!". The following
 example shows the return value of custom instruction `doSomething`.
 
 ```
 @result routing
     *then
         doSomething
-        if result == 'win' {
+        if result == 'winner!' {
             -> win scene
         }
 
@@ -185,7 +182,7 @@ properties that you can read to perform complex logic.
 ## Add an extension to your project
 
 1. Open `code/extensions/ExtensionLoader.ts`. If this is an unmodified project,
-you should see four extensions already added within the class constructor.
+you should see five extensions already added within the class constructor.
 
 ```typescript
 constructor(param: ExtensionLoaderParameter) {
@@ -193,6 +190,7 @@ constructor(param: ExtensionLoaderParameter) {
         // Alexa SFB extensions
         new AlexaExtension(),
         new AlexaAPLExtension(param.locale, param.configAccessor),
+        new AlexaAudioPlayerExtension(param.locale, param.configAccessor),
         new AlexaMonetizationExtension(param.locale, param.configAccessor),
 
         // sample custom extension

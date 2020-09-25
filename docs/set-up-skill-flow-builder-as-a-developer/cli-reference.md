@@ -10,29 +10,15 @@ the CLI options and commands, and the corresponding tasks you can perform.
 |`-V, -version`| This option will output the version number.|
 |`-v, -verbose`|This option will Increase verbose output.|
 |`-h, -help`|This option outputs usage information.|
-|[`new`](#new-command)|Path to a new story. Use this command to create a new
-story project from a template.|
-|[`deploy`](#deploy-command)|Path to a story. You can build and deploy a story
-to the developer portal and AWS Lambda.|
-|[`deploy-metadata`](#deploy-metadata-command)|Path to a story. You can build
-and deploy updated metadata (skill manifest and voice model), but can’t deploy
-to AWS Lambda. This option is useful when the Lambda function code is large or
-when you upload the Lambda function through an S3 zip file linked to S3.|
-|[`deploy-via-zip`](#deploy-via-zip)|Path to a story. You can build and deploy a
-skill using a zip-file transfer to S3 and AWS Lambda. Use this option when you
-are on a slow remote connection (you upload to S3, which is faster than the
-`aws update-function` command) or when you exceed the command-line 69905067 byte
-limit.|
+|[`new`](#new-command)|Path to a new story. Use this command to create a new story project from a template.|
+|[`deploy`](#deploy-command)|Path to a story. You can build and deploy a story to the developer portal and AWS Lambda.|
+|[`deploy-metadata`](#deploy-metadata-command)|Path to a story. You can build and deploy updated metadata (skill manifest and voice model), but can’t deploy to AWS Lambda. This option is useful when the Lambda function code is large or when you upload the Lambda function through an S3 zip file linked to S3.|
+|[`deploy-via-zip`](#deploy-via-zip-command)|Path to a story. You can build and deploy a skill using a zip-file transfer to S3 and AWS Lambda. Use this option when you are on a slow remote connection (you upload to S3, which is faster than the `aws update-function` command) or when you exceed the command-line 69905067 byte limit.|
 |[`build`](#build-command)|Path to a story. You can build a story without deploying.|
-|[`simulate`](#simulate-command)|Path to a story. Use this command to simulate a
-story.|
-|[`clean`](#clean-command)|Use this command to clean out the `.deploy/`, the
-code `dist/` folder, and any extra `node_modules/` folders for the given story.
-Run this command when you initially create a new stage or locale to force the
-creation of a new skill ID.|
+|[`simulate`](#simulate-command)|Path to a story. Use this command to simulate a story.|
+|[`clean`](#clean-command)|Use this command to clean out the `.deploy/`, the code `dist/` folder, and any extra `node_modules/` folders for the given story. Run this command when you initially create a new stage or locale to force the creation of a new skill ID.|
 |[`upload`](#upload-command)|Path to a story. Upload public resources to S3.|
-|[`vscode`](#vscode-command|Install the vscode extension for Skill Flow Builder
-editor support.|
+|[`vscode`](#vscode-command)|Install the VS Code extension for Skill Flow Builder editor support.|
 
 ## new command
 
@@ -49,13 +35,11 @@ the following command.
 
 ### Usage of the command
 
-- `new [options] story` - Path to new story. You can use this command to create
-a new story project from a template.
+- `new [options] <path_to_new_story>` - You can use this command to create a new story project from a template.
 
 ### Options for the command
 
-- `-t, --template [templateName]` - The template name to use for new skill. The
-options are `example_story`, `tutorial`, `adventure`, and `quiz`.
+- `-t, --template [templateName]` - The template name to use for new skill. The options are `example_story`, `tutorial`, `adventure`, and `quiz`.
 - `-h, --help` - This will output usage information.
 
 ## deploy command
@@ -75,16 +59,15 @@ The command deploys the skill, creating it the first time by using the Alexa
 Skills Kit CLI, then the command builds and deploys your skill's voice model,
 manifest, and Lambda function code.
 
-- **Note:** By default, the Skill Flow Builder command line checks to see if you
+> **Note:** By default, the Skill Flow Builder command line checks to see if you
 are on the latest version of SFB before deploying. To override this check and
 directly `deploy`, pass the `--override` flag.
 
-Full usage details for `deploy` are described as follows.
+Full usage details for `alexa-sfb deploy` are described as follows.
 
 ### Usage of the command
 
-- `deploy [options] story` - Path to a story. You can build and deploy a story
-to developer portal and AWS Lambda.
+- `deploy [options] story` - Path to a story. You can build and deploy a story to developer portal and AWS Lambda.
 
 ### Options for the command
 
@@ -95,7 +78,7 @@ etc.) when using different Lambda functions for each locale.
 - `-h, --help` - This option will output usage information.
 
 If you want to deploy only the metadata for your skill, you can use the
-[`deploy-metadata`](#deploy-metadata-command). This will build your skill
+[`deploy-metadata`](#deploy-metadata-command) command. This will build your skill
 information and deploy manifest or voice model changes, but not upload your
 Lambda function code.
 
@@ -213,7 +196,7 @@ metadata to the Alexa Developer Portal
 - `-o, --override` - Use this option to override version check.
 - `-s, --stage [stageName]` - Use stage to deploy (i.e. dev, test, beta, prod).
 - `-g, --skill-stage <stageName>` The stage of a skill to deploy.
-(`development`, `certified`, `live`). Defaults to `development`
+(development, certified, live). Defaults to `development`
 - `-l, --locale [localeName]` - Use locale to deploy (i.e. en-us, en-gb, fr-fr,
 etc.) when using different Lambda functions for each locale.
 - `-h, --help` - This option will output usage information.
@@ -276,8 +259,8 @@ logs generated by the simulator, and you can only print your own logs.
 The `alexa-sfb clean` command removes the auto-generated parts of your project
 that are used by deployment. These parts can include the `.deploy/` directory
 and the "clean" build script on your code directory. This will clean out the
-`code/.dist`, and any extra `node_modules` folders for the given story. Run
-clean when initially creating a new stage/locale to force the creation of a new
+`code/.dist`, and any extra `node_modules` folders for the given story. Run the
+`clean` command when initially creating a new stage/locale to force the creation of a new
 skill id. The command doesn't delete any actual parts of your source content.
 
 ## upload command
@@ -285,8 +268,8 @@ skill id. The command doesn't delete any actual parts of your source content.
 This command uploads the contents of your locale specific resources to S3 for
 public usage via your skill. Only content within the "public" folder is uploaded
 to S3. The list of folders to upload is in the `abcConfig.json` file under the
-property "public-resource-folders". The S3-bucket used is specified in the same
-config file with the property "s3-bucket-name".
+property `"public-resource-folders"`. The S3-bucket used is specified in the same
+config file with the property `"s3-bucket-name"`.
 
 The following example shoes how to run the command.
 

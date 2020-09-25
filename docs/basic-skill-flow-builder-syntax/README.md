@@ -2,7 +2,7 @@
 
 The Skill Flow Builder provides the following metadata format for games and
 stories. For information about how to format your content, see
-[Skill Flow Builder Reference](../skill-flow-builder-reference/README).
+[Skill Flow Builder Reference](../skill-flow-builder-reference/README.md).
 
 ## Scene properties
 
@@ -32,7 +32,7 @@ The scene name identifies the scene. The scene name has the following criteria:
 - Must be contained within the line
 
 Some scene names are reserved for special purposes. For more information, see
-[special scene terminators](../advanced-skill-flow-builder-syntax/README#special-scene-terminators).
+[special scene terminators](../advanced-skill-flow-builder-syntax/README.md#special-scene-terminators).
 
 ### *say
 
@@ -92,7 +92,7 @@ Like `*say` the `*recap` property:
 ### *show
 
 If the player is on a device that supports visual content, the device displays
-the visual components assigned within this section. See [Add visuals](../use-skill-flow-builder-to-create-content/add-visual-elements).
+the visual components assigned within this section. See [Add visuals](../use-skill-flow-builder-to-create-content/add-visual-elements.md).
 
 ### *then
 
@@ -145,8 +145,8 @@ The `hear` instruction:
 ## Ask for the player name, or an Alexa slot value
 
 To listen for exact phrases or words, write out the phrases or words using the
-[hear instruction](../skill-flow-builder-reference/scene-instructions#hear). See
-the section [Give choices to the player](../basic-skill-flow-builder-syntax/README#give-choices-to-the-player).
+[hear instruction](../skill-flow-builder-reference/scene-instructions.md#hear). See
+the section [Give choices to the player](#give-choices-to-the-player).
 
 In some cases, you cannot anticipate what the player might say, or you cannot
 write out all possible combinations. For eample, if you want to get the player's
@@ -170,7 +170,7 @@ The following is an example of a scene named `@ask player name` that says
 ```
 
 The structure looks similar to the `hear` command from
-[Give choices to the player](../basic-skill-flow-builder-syntax/custom-slots#give-choices-to-the-player).,
+[Give choices to the player](#give-choices-to-the-player).,
 but with the following differences:
 
 - `slot playerName to 'AMAZON.US_FIRST_NAME'`
@@ -180,7 +180,7 @@ information, see the [built-in intents and slot values](https://developer.amazon
 - `hear {playerName}, my name is {playerName} {`
 - This instruction tells Alexa to listen for a `{playerName}` on its own or
 preceded by "my name is". For example, if the player says "my name is max", the
-value of `playerName` becomes "max."
+value of `playerName` becomes "max".
 - `hi {playerName}`
 - Use curly brackets to insert saved values into your content. For example, if
 the player said "my name is max" during `@ask player name` scene, the player
@@ -197,7 +197,7 @@ To learn more about built-in slot types, see the [Slot Type Reference](https://d
 
 You can define your custom slot types by editing the custom slot type
 configuration, which is generated along with your project. You can find the file
-`SlotTypes.json` in `path-to-your-project/content/en-US/resources/SlotTypes.json`.
+`SlotTypes.json` in `content/en-US/resources/SlotTypes.json`.
 
 The following example shows a defined custom slot type and values for fruit.
 
@@ -259,7 +259,7 @@ When using a variable with the `slot` command the captured value is not
 guaranteed to stay.
 
 For advanced custom slot type syntax, see
-[Custom slots: define slot values with synonyms](../advanced-skill-flow-builder-syntax/custom-slots#custom-slots-define-slot-values-with-synonyms).
+[Custom slots: define slot values with synonyms](../advanced-skill-flow-builder-syntax/README.md#custom-slots-define-slot-values-with-synonyms).
 
 ### Create a scene
 
@@ -276,11 +276,11 @@ scene. The following example shows a `start` scene that instructs Alexa to say
 
 Every scene starts with the scene name following `@` on a new line. In the
 example, the scene name is `start`. A few scene names like `start`
-[are reserved](../skill-flow-builder-reference/special-scenes#start) and should
+[are reserved](../skill-flow-builder-reference/special-scenes.md#start) and should
 only be used for special behavior.
 
 Add content to the scene by using a
-[scene property](../skill-flow-builder-reference/scene-properties#say) like
+[scene property](../skill-flow-builder-reference/scene-properties.md#say) like
 `*say`, which tells Alexa what to say during the scene. Specify the scene
 property on a new line with `*` followed by the property name.
 
@@ -331,7 +331,7 @@ be a pirate". If Alexa hears any of the phrases from the player, Alexa executes
 the instructions listed between `{` and `}`.
 
 If the player says "pirate", Alexa executes `-> choose pirate`, which tells
-Alexa to [go to](../skill-flow-builder-reference/scene-instructions#go-to) the
+Alexa to [go to](../skill-flow-builder-reference/scene-instructions.md#--go-to) the
 scene "choose pirate". The transition for the `->` instruction occurs
 immediately, and the remaining instructions within the scene do not execute.
 
@@ -392,7 +392,7 @@ only says the question from the most recent scene.
 You can use any SSML tag that Alexa supports to customize your content. To use
 sound effects and audio files within your content, use the SSML audio tag. For
 more information, see
-[audio](https://developer.amazon.com/en-US/docs/alexa/custom-skills/speech-synthesis-markup-language-ssml-reference.html#audio`)
+[audio](https://developer.amazon.com/en-US/docs/alexa/custom-skills/speech-synthesis-markup-language-ssml-reference.html#audio)
 in the "Speech Synthesis Markup Language (SSML) Reference."
 
 ```
@@ -479,7 +479,7 @@ automatically to a scene called `open door`. If the player unflagged `skeletonke
 earlier in the game or never flagged, the game continues automatically to a
 scene called `door locked`.
 
-Use the [if](../skill-flow-builder-reference/scene-instructions#if) instruction
+Use the [if](../skill-flow-builder-reference/scene-instructions.md#if) instruction
 to tell Alexa to check whether the statements after `if` are true or false. When
 the statement that follows `if` is true, for example a flag that has been set,
 Alexa executes the instructions between `{` and `}`. If the flag is unset, the
@@ -488,7 +488,7 @@ statement is interpreted as `false`, and the instructions listed between `{` and
 
 Any flag that the player never declares evaluates to `false`.
 
-- Note: If you include a `-> (go to)` instruction within the if block, the if
+> **Note:** If you include a `-> (go to)` instruction within the if block, the if
 instruction skips any remaining instructions for the current scene and the
 transition happens immediately.
 
@@ -550,17 +550,14 @@ You might want to use this if you intend for the player to only be able to open
 the door if the player has the skeleton key and has also talked to the wizard.
 In the example, you must set both flags for the statement to be `true`.
 
-The following example shows how to apply `or`.
-
+If you want to check if the player is able open the door or talked to the wizard
+use `or`. In this next example, either flags can be set for the statement to be `true`.
 ```
 *then
     if skeletonkey or talked_to_wizard {
         -> open door
     }
 ```
-
-You might want to use this if you intend the player to open the door if the
-player has the skeleton key or has talked to the wizard, or both.
 
 ### Set and use variables
 
@@ -610,7 +607,7 @@ example shows how to do this.
 ```
 @play introduction
     *say
-        welcome to our mysterious world. Your class is {playerClass}.
+        Welcome to our mysterious world. Your class is {playerClass}.
 ```
 
 The player hears the phrase with `{playerClass}` replaced with the value of the variable.
@@ -622,7 +619,7 @@ Use variables to control game behavior:
 ```
 @play introduction
     *say
-        welcome to our mysterious world. Your class is {playerClass}.
+        Welcome to our mysterious world. Your class is {playerClass}.
     *then
         if playerClass is 'mage' {
             -> mage start
@@ -644,7 +641,8 @@ You can also store numbers in a variable and manipulate the variable as the game
 plays out. The following example shows a starting value for the variable named `playerHealth`:
 
 ```
-set playerHealth as 10
+@start
+    set playerHealth as 10
 ```
 
 The following example reduces the value of the variable:
@@ -667,24 +665,24 @@ example does so by checking whether the value is less than zero.
 
 The `decrease` command decreases the value stored in a variable by the number
 indicated. For instructions related to variables, see
-[Set, increase, decrease, clear, flag, unflag, in Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions#set-increase-decrease-clear-flag-unflag).
+[Set, increase, decrease, clear, flag, unflag, in Skill Flow Builder Reference](../skill-flow-builder-reference/scene-instructions.md#set-increase-decrease-clear-flag-unflag).
 
 If you have never declared a variable, any statement that evaluates the variable
-returns `false`. For example, if you don't declar `playerHealth`, if
+returns `false`. For example, if you don't declare `playerHealth`, if
 `playerHealth <= 0` returns `false`, and the game logic proceeds as if
 `playerHealth` is a positive value.
 
 #### Use randomness to make decisions for players
 
 To make a random decision in your game, or to generate a random number for
-dynamic content for your game, you can use the [roll instruction](../skill-flow-builder-reference/core-extensions#roll-and-rollresult).
+dynamic content for your game, you can use the [roll instruction](../skill-flow-builder-reference/core-extensions.md#roll-and-rollresult).
 
-The [roll instruction](../skill-flow-builder-reference/core-extensions#roll-and-rollresult)
+The [roll instruction](../skill-flow-builder-reference/core-extensions.md#roll-and-rollresult)
 takes one argument that combines the number of dice, and the number sides on the
 dice to roll and returns a result that ranges between 1 and the highest number
 possible. To roll a standard six-sided die, you can write `roll 1d6`, or to flip
 a two-sided coin you can write `roll 1d2`. If you use the
-[roll instruction](../skill-flow-builder-reference/core-extensions#roll-and-rollresult)
+[roll instruction](../skill-flow-builder-reference/core-extensions.md#roll-and-rollresult)
 on a line by itself, the game stores the result in a special variable called
 `rollResult` that you can check on subsequent lines.
 
@@ -751,9 +749,9 @@ Consider the following example:
 ```
 
 The first scene (`@start`), uses the
-[<->](../skill-flow-builder-reference/scene-instructions#go-to-and-return)
+[<->](../skill-flow-builder-reference/scene-instructions.md#--go-to-and-return)
 instruction to go to the `@test your luck` scene and then returns after
-encountering the [» RETURN](../skill-flow-builder-reference/special-terminators#return)
+encountering the [» RETURN](../skill-flow-builder-reference/special-terminators#-return)
 instruction in `@luck result` scene. You can use a utility scene like the
 `@test your luck` scene to add a luck roll at any point in your game.
 
@@ -761,7 +759,7 @@ instruction in `@luck result` scene. You can use a utility scene like the
 
 You might want to add a command to all scenes, for example to allow the player
 to say "restart" at any time to restart the game. The following example shows
-how to use the global scene `@global append` and the [» RESTART](../skill-flow-builder-reference/special-terminators#restart)
+how to use the global scene `@global append` and the [» RESTART](../skill-flow-builder-reference/special-terminators.md#-restart)
 instruction:
 
 ```
@@ -780,7 +778,7 @@ the game that allow the player to restart the game.
 Similar to the [restart example](#let-users-restart-from-anywhere), you might
 want to add a help menu that is accessible from all scenes. You can do this with
 the `@global append` scene and
-[» BACK](../skill-flow-builder-reference/special-terminators#back) instruction.
+[» BACK](../skill-flow-builder-reference/special-terminators.md#-back) instruction.
 
 ```
 @global append
@@ -852,7 +850,7 @@ At some point, you might want to end your game or story.
 ```
 
 In the example, if the
-[flag](../skill-flow-builder-reference/scene-instructions#set-increase-decrease-clear-flag-unflag)
+[flag](../skill-flow-builder-reference/scene-instructions.md#set-increase-decrease-clear-flag-unflag)
 named `someflag` is `true`, Alexa transitions to another scene named
 `keep playing`. If the flag `someflag` is not `true`, `>> END` executes, which
 stops the game, and the player goes to the `@start` scene the next time they play.

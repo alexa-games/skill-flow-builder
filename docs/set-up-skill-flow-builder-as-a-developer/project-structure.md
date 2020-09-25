@@ -48,7 +48,7 @@ skill's Lambda function.
 ## Project content
 
 The Skill Flow Builder packages up the following resources and content in
-`content` to generate artifacts that are used for driving the skill:
+`content/` to generate artifacts that are used for driving the skill:
 
 - `content/en-US` - A directory that contains content resources such as assets,
 ISP, and slot types. You can create your own configuration at this level and
@@ -72,10 +72,10 @@ the given locale, or you can delete the entire file.
 
 - `content/MANIFET.json` - A rule to define the `.abc` files that are included
 in the skill. You can add to the include field, or you can define it using a
-wild-card character *. You can add `.abc` files in subdirectory within the
-`content` directory. Adding the files this way can be useful when you try to
+wild-card character `*`. You can add `.abc` files in subdirectory within the
+`content/` directory. Adding the files this way can be useful when you try to
 organize a large skill by splitting up the content flow into multiple `.abc`
 files in organized directories.
 
 - `content/story.abc` - This is an example of a branching content file for Skill
-Flow Builder. For more information, see [Use Skill Flow Builder to Create Your Content](../use-skill-flow-builder-to-create-content/README).
+Flow Builder. For more information, see [Use Skill Flow Builder to Create Your Content](../use-skill-flow-builder-to-create-content/README.md).
