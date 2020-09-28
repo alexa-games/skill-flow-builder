@@ -21,9 +21,25 @@ requirements:
 
 ### Open the Skill Flow Builder Editor
 
-Open the Skill Flow Builder Editor on: [Windows](http://sfb-framework.s3-website-us-east-1.amazonaws.com/winLatest)
+You can start the editor directly from the root of the `skill-flow-builder` repository
+by running:
 
-Open the Skill Flow Builder Editor on: [Mac](http://sfb-framework.s3-website-us-east-1.amazonaws.com/macLatest)
+```sh
+yarn editor
+```
+
+Alternatively, you can build an installer by running:
+
+```sh
+yarn editor-installer
+```
+
+This will create a platform-specific installer application in the
+`packages/sfb-editor/release` directory that you can run to install the Skill
+Flow Builder Editor on your computer.
+
+- **Mac**: SFB Editor-VERSION.dmg
+- **Windows**: SFB Editor VERSION.msi
 
 ### Set the editor mode
 
