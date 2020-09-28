@@ -46,8 +46,7 @@ deploy option, add the following permissions to your custom IAM policy called
 - `s3:GetObject` for storing and caching the generated sound files.
 - `s3:PutObject` for storing and caching the generated sound files.
 - `s3:PutObjectAcl` for storing and caching the generated sound files.
-- `polly:SynthesizeSpeech` for using the Amazon Polly service to generate the
-sound file using the Amazon Polly voices.
+- `polly:SynthesizeSpeech` for using the Amazon Polly service to generate the sound file using the Amazon Polly voices.
 
 Example:
 
