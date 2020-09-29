@@ -75,6 +75,8 @@ Full usage details for `alexa-sfb deploy` are described as follows.
 - `-s, --stage [stageName]` - Use stage to deploy (i.e. dev, test, beta, prod).
 - `-l, --locale [localeName]` - Use locale to deploy (i.e. en-us, en-gb, fr-fr,
 etc.) when using different Lambda functions for each locale.
+- `-d, --deployer [deployerName]` - ASK deployer to use (cfn or lambda).
+Cannot be changed after deploying your skill. Default is cfn (CloudFormation)
 - `-h, --help` - This option will output usage information.
 
 If you want to deploy only the metadata for your skill, you can use the
@@ -199,6 +201,8 @@ metadata to the Alexa Developer Portal
 (development, certified, live). Defaults to `development`
 - `-l, --locale [localeName]` - Use locale to deploy (i.e. en-us, en-gb, fr-fr,
 etc.) when using different Lambda functions for each locale.
+- `-d, --deployer [deployerName]` - ASK deployer to use (cfn or lambda).
+Cannot be changed after deploying your skill. Default is cfn (CloudFormation)
 - `-h, --help` - This option will output usage information.
 
 ## deploy-via-zip command
@@ -223,6 +227,8 @@ using a zip file transfer to S3/Lambda.
 (`development`, `certified`, `live`). Defaults to `development`
 - `-l, --locale [localeName]` - Use locale to deploy (i.e. en-us, en-gb, fr-fr,
 etc.) when using different Lambda functions for each locale.
+- `-d, --deployer [deployerName]` - ASK deployer to use (cfn or lambda).
+Cannot be changed after deploying your skill. Default is cfn (CloudFormation)
 - `-h, --help` - This option will output usage information.
 
 ## build command

@@ -211,10 +211,16 @@ and need to run the script as an administrator.
 
     `alexa-sfb deploy <your_project_path>`
 
+    > **Note**: By default, `alexa-sfb` will use ASK's 'cfn' deployer, which
+    > uses AWS CloudFormation to deploy resources. If you would instead prefer
+    > to deploy with ASK's 'lambda' deployer, enter the following command instead:
+    >
+    > `alexa-sfb deploy --deployer lambda <your_project_path>`
+
     > **Important**: If you run the script from Windows, you might have to open
-your command prompt as an administrator. You open our command prompt as an
-administrator to avoid a permissions error when the script runs PowerShell
-batch files as part of the deployment process.
+    > your command prompt as an administrator. You open your command prompt as an
+    > administrator to avoid a permissions error when the script runs PowerShell
+    > batch files as part of the deployment process.
 
 2. If your skill fails to publish with the error
 `"AccessDenied: User: arn:aws:iam::... is not authorized to perform: iam:CreateRole on resource: ...`,
@@ -223,8 +229,9 @@ policy described in [Step 1: Set up your ASK profile.](#step-1-set-up-your-ask-p
 
 ### Step 4: Set up the AWS IAM role
 
+> **Note:** This only applies to users deploying with the Lambda deployer by specifying the '`--deployer lambda`' option when running `alexa-sfb deploy`. If you are using the default deployer (CloudFormation), skip to [Step 5](#step-5-launch-your-skill)
+
 After you create the skill in your developer account and create the AWS Lambda function, you need to add permissions.
-> **Note:** This only applies to users deploying with the Lambda deployer option. If you are using CloudFormation, skip to [Step 5](#step-5-launch-your-skill)
 
 #### To setup the AWS IAM
 
