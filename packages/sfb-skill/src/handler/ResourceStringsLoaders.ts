@@ -30,14 +30,9 @@ export class ResourceStringsLoaders {
      * @param contentSource Path where story ABC files source is located.
      */
     public static loadLanguageStrings(contentSource: string): LanguageStrings {
-
-
-console.log(`contentSource=${contentSource}`);
-
         let languageStringPath = path.join(contentSource, LANGUAGE_STRING_FILENAME);
 
         if (fs.existsSync(languageStringPath)) {
-console.log(`Found languageStringPath=${languageStringPath}`);
             const data = readUtf8FileExcludingBomSync(languageStringPath);
             return JSON.parse(data) as LanguageStrings;
         }

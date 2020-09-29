@@ -86,7 +86,7 @@ export class UploadZipLambdaCommand implements Command {
             if(Utilities.isWin32) {
                 await Utilities.runCommandInDirectoryAsync(
                     "7z",
-                    [ 'a', '-r', 'index.zip', lambdaCodeDeployPath + "/*" ],
+                    [ 'a', '-r', 'index.zip', lambdaCodeDeployPath + "\\*" ],
                     dirs.storyPath,
                     this.stdOutput,
                     {shell: true});

@@ -17,6 +17,7 @@
 
 import * as sinon from 'sinon';
 import * as mockFileSystem from 'mock-fs';
+import * as path from 'path';
 import { strict as assert } from 'assert';
 import { TextDocument, DiagnosticCollection } from 'vscode';
 
@@ -44,7 +45,7 @@ describe('vscode.updateDiagnostics', function() {
 
     dummyDocument = {
       languageId: 'abc-format',
-      uri: { fsPath: `${PROJECT_CONTENT_DIR}/foo.abc`, },
+      uri: { fsPath: path.resolve(`${PROJECT_CONTENT_DIR}/foo.abc`), },
       lineAt: sinon.stub().callsFake((lineNumber) => ({ range: `dummy-range-at-line-${lineNumber}` })),
     } as unknown as TextDocument;
 

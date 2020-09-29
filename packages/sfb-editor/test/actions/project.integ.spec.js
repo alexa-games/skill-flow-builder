@@ -20,12 +20,17 @@ import { ConfigAccessor, CoreExtensionLoader } from '@alexa-games/sfb-skill';
 import fs from "fs";
 import * as project from '../../app/actions/project';
 import * as extensionLoaders from '../../app/utils-renderer/extensionLoaders';
-import * as projectIntegData from './project.integ.data';
 import * as projectFs from '../../app/utils-main/fs';
 import { configureStore } from '../../app/store/configureStore';
 import * as _ from 'lodash';
 
 const mockfs = require('mock-fs');
+
+import * as projectIntegData from './project.integ.data';
+
+if (!projectIntegData[process.platform]) {
+  projectIntegData[process.platform] = projectIntegData.darwin;
+}
 
 // eslint-disable-next-line no-unused-vars
 const {getContentPath, getResourcesPath} = jest.requireActual('../../app/utils-main');
@@ -134,7 +139,7 @@ describe('Project integration tests', async () => {
     const state = store.getState();
 
     const importedProject = state.project;
-    const expectedProject = projectIntegData['opens a project file'];
+    const expectedProject = projectIntegData[process.platform]['opens a project file'];
 
     expect(initialState).not.toEqual(state);
 
@@ -154,7 +159,7 @@ describe('Project integration tests', async () => {
     const state = store.getState();
 
     const importedState = state;
-    const expectedState = projectIntegData['opens a project location'];
+    const expectedState = projectIntegData[process.platform]['opens a project location'];
 
     expect(initialState).not.toEqual(state);
 
@@ -288,7 +293,7 @@ describe('Project integration tests', async () => {
     expect(actions).toEqual(expectedAllActions);
     expect(postImportActions).toEqual(expectedSaveActions);
 
-    const expectedState = projectIntegData['saves a project'];
+    const expectedState = projectIntegData[process.platform]['saves a project'];
     const state = store.getState();
     expect(state).toMatchObject(expectedState);
 

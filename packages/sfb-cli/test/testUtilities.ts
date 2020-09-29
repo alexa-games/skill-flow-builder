@@ -21,6 +21,10 @@ import * as fs from 'fs';
 import * as sinon from 'sinon';
 import { strict as assert } from 'assert';
 
+export const isWin32 = () => {
+  return process.platform === "win32";
+}
+
 export const STORY_DIR = '/dummy/project';
 export const DUMMY_SFB_ROOT = '/home/sfb-cli';
 export const ASK_PROFILE_NAME = 'dummy-ask-profile';
@@ -31,20 +35,20 @@ export const AWS_PROFILE_NAME = 'dummy-aws-profile';
 export const SKILL_ID = 'dummy-skill-id';
 export const SFB_VSCODE_EXTENSION_NAME = 'sfb-vscode-extension';
 
-export const BUILD_ARTIFACT_PATH = `${STORY_DIR}/.deploy`;
-export const STAGED_LAMBDA_PATH = `${BUILD_ARTIFACT_PATH}/${ASK_SKILL_DIRECTORY_NAME}/lambda`;
-export const ASK_SKILL_DIRECTORY_PATH = `${BUILD_ARTIFACT_PATH}/${ASK_SKILL_DIRECTORY_NAME}`;
-export const STAGED_CLOUDFORMATION_PATH = `${ASK_SKILL_DIRECTORY_PATH}/infrastructure/cfn-deployer/skill-stack.yaml`;
-export const STAGED_SKILL_JSON_PATH = `${ASK_SKILL_DIRECTORY_PATH}/skill-package/skill.json`;
-export const STAGED_ASK_RESOURCES_PATH = `${ASK_SKILL_DIRECTORY_PATH}/ask-resources.json`;
-export const STAGED_ASK_STATES_PATH = `${ASK_SKILL_DIRECTORY_PATH}/.ask/ask-states.json`;
+export const BUILD_ARTIFACT_PATH = path.join(STORY_DIR, '.deploy');
+export const STAGED_LAMBDA_PATH = path.join(BUILD_ARTIFACT_PATH, ASK_SKILL_DIRECTORY_NAME, 'lambda');
+export const ASK_SKILL_DIRECTORY_PATH = path.join(BUILD_ARTIFACT_PATH, ASK_SKILL_DIRECTORY_NAME);
+export const STAGED_CLOUDFORMATION_PATH = path.join(ASK_SKILL_DIRECTORY_PATH, 'infrastructure', 'cfn-deployer', 'skill-stack.yaml');
+export const STAGED_SKILL_JSON_PATH = path.join(ASK_SKILL_DIRECTORY_PATH, 'skill-package', 'skill.json');
+export const STAGED_ASK_RESOURCES_PATH = path.join(ASK_SKILL_DIRECTORY_PATH, 'ask-resources.json');
+export const STAGED_ASK_STATES_PATH = path.join(ASK_SKILL_DIRECTORY_PATH, '.ask', 'ask-states.json');
 
-export const STORED_METADATA_PATH = `${STORY_DIR}/metadata`;
-export const STORED_LAMBDA_LAYER_PATH = `${STORED_METADATA_PATH}/lambda-layer`;
-export const STORED_SKILL_JSON_PATH = `${STORED_METADATA_PATH}/skill.json`;
-export const STORED_ASK_RESOURCES_PATH = `${STORED_METADATA_PATH}/ask-resources.json`;
-export const STORED_ASK_STATES_PATH = `${STORED_METADATA_PATH}/ask-states.json`;
-export const STORED_LAMBDA_LAYER_CONFIG_PATH = `${STORED_METADATA_PATH}/lambda-layer.json`;
+export const STORED_METADATA_PATH = path.join(STORY_DIR, 'metadata');
+export const STORED_LAMBDA_LAYER_PATH = path.join(STORED_METADATA_PATH, 'lambda-layer');
+export const STORED_SKILL_JSON_PATH = path.join(STORED_METADATA_PATH, 'skill.json');
+export const STORED_ASK_RESOURCES_PATH = path.join(STORED_METADATA_PATH, 'ask-resources.json');
+export const STORED_ASK_STATES_PATH = path.join(STORED_METADATA_PATH, 'ask-states.json');
+export const STORED_LAMBDA_LAYER_CONFIG_PATH = path.join(STORED_METADATA_PATH, 'lambda-layer.json');
 
 /**
  * Dummy file system for use with `mock-fs`.
@@ -211,3 +215,11 @@ export const assertCalledManyTimesWithArgs = (sinonStub: any, calls: any[][]) =>
 export const getArgsForEachCall = (sinonStub: any) => {
   return sinonStub.getCalls().map((c: any) => c.args);
 }
+
+export const OS_EOL = (isWin32()) ? "\r\n": "\n";
+export const MOVE_COMMAND = (isWin32()) ? "move": "mv"
+export const REMOVE_COMMAND = "rm";
+export const REMOVE_DIR_COMMAND = (isWin32()) ? "rmdir": "rm";
+export const REMOVE_FLAGS = (isWin32()) ? ['/s', '/q'] : ['-rf'];
+export const ZIP_COMMAND = (isWin32()) ? "7z" : "zip";
+export const ZIP_FLAGS = (isWin32()) ? ['a', '-r'] : ['-rg', '-D', '-X'];

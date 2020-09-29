@@ -187,6 +187,10 @@ export class Utilities {
         return 'aws';
     }
 
+    public static get eol() {
+        return this.isWin32 ? "\r\n" : "\n";
+    }
+
     private static runCommandAsyncInternal(
         {
             command,

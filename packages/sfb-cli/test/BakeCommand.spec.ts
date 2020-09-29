@@ -37,7 +37,7 @@ import {
   createMockSpawn,
   createMockChildProcess,
   readTextFile,
-  assertCalledManyTimesWithArgs,
+  assertCalledManyTimesWithArgs
 } from './testUtilities';
 
 describe('alexa-sfb bake', () => {
@@ -113,12 +113,12 @@ describe('alexa-sfb bake', () => {
       // Detailed behavior is tested below with real files.
       assertCalledManyTimesWithArgs(bakeAplFiles, [
         [
-          '/dummy/project/.deploy/dist/res/en-US/en-us-apl-templates.json',
-          '/dummy/project/.deploy/dist/res/en-US/en-us-apl-templates.json',
+          path.resolve(path.join('/', 'dummy', 'project', '.deploy', 'dist', 'res', 'en-US', 'en-us-apl-templates.json')),
+          path.resolve(path.join('/', 'dummy', 'project', '.deploy', 'dist', 'res', 'en-US', 'en-us-apl-templates.json'))
         ],
         [
-          '/dummy/project/.deploy/dist/res/en-GB/en-gb-apl-templates.json',
-          '/dummy/project/.deploy/dist/res/en-GB/en-gb-apl-templates.json',
+          path.resolve(path.join('/', 'dummy', 'project', '.deploy', 'dist', 'res', 'en-GB', 'en-gb-apl-templates.json')),
+          path.resolve(path.join('/', 'dummy', 'project', '.deploy', 'dist', 'res', 'en-GB', 'en-gb-apl-templates.json'))
         ]
       ]);
     });

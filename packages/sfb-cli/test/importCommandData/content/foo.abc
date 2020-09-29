@@ -13,8 +13,6 @@
 
 @second scene
   *say
-    You brave soul!
-    [pause]
-    You get nothing. The cake is a lie.
+    You brave soul! [pause] You get nothing. The cake is a lie.
   *then
     >> END

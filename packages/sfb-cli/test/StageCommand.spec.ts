@@ -15,12 +15,13 @@
  * permissions and limitations under the License.
  */
 
-import childProcess from 'child_process';
 import * as fs from 'fs';
+import * as os from 'os'
 import * as path from 'path';
 
 import * as sinon from 'sinon';
 import { strict as assert } from 'assert';
+import * as mockfs from 'mock-fs';
 import mockFileSystem from 'mock-fs';
 
 import { StageCommand } from '../lib/stageCommand';
@@ -38,7 +39,6 @@ import {
   STAGED_SKILL_JSON_PATH,
 
   STORED_METADATA_PATH,
-  STORED_SKILL_JSON_PATH,
 
   DUMMY_ASK_FILE_SYSTEM,
 
@@ -47,6 +47,8 @@ import {
   stubSfbCliRoot,
   readTextFile,
   assertCalledManyTimesWithArgs,
+  REMOVE_DIR_COMMAND,
+  REMOVE_FLAGS
 } from './testUtilities';
 
 describe('alexa-sfb stage', () => {
@@ -56,23 +58,10 @@ describe('alexa-sfb stage', () => {
   let mockedAskNewChild: any;
   let stageCommand: StageCommand; // Subject under test
 
-  const SAMPLE_CLOUDFORMATION_TEMPLATE = `---
-dummy: CloudFormation template
-foo:
-bar: foo-bar-SFB-STORY-ID-baz-quux
-something:
-  SFB-ENVIRONMENT-VARIABLES
-`;
-  const EXPECTED_CLOUDFORMATION_TEMPLATE = `---
-dummy: CloudFormation template
-foo:
-bar: foo-bar-dummy-story-id-baz-quux
-something:
-        Environment:
-        Variables:
-          stage: dummy-stage
+  const SAMPLE_CLOUDFORMATION_TEMPLATE = "---\ndummy: CloudFormation template\nfoo:\nbar: foo-bar-SFB-STORY-ID-baz-quux\nsomething:\n  SFB-ENVIRONMENT-VARIABLES\n";
 
-`;
+  const EXPECTED_CLOUDFORMATION_TEMPLATE = `---\ndummy: CloudFormation template\nfoo:\nbar: foo-bar-dummy-story-id-baz-quux\nsomething:\n        Environment:${os.EOL}        Variables:${os.EOL}          stage: dummy-stage${os.EOL}\n`;
+
   const DUMMY_SKILL_MANIFEST = {
     manifest: {
       apis: {
@@ -85,6 +74,8 @@ something:
       },
     },
   };
+
+  const ONE_HOUR = 60 * 60 * 1000;
 
   /**
    * Helper to re-mock file system after initial mocking
@@ -131,7 +122,10 @@ something:
 
     // `BakeCommand` compiles TS code in `code` into `code/dist`
     dummyFileSystem[STORY_DIR].code.dist = {
-      'index.js': '// Dummy index.js compiled during import command',
+      'index.js': mockfs.file( {
+          content: '// Dummy index.js compiled during import command',
+          mtime: new Date(new Date().getTime() + ONE_HOUR)
+      })
     };
     dummyFileSystem[STORY_DIR].code['package.json'] = JSON.stringify({
       dependencies: {
@@ -245,7 +239,7 @@ something:
       await stageCommand.run();
 
       assertCalledManyTimesWithArgs(mockSpawn, [
-        ['ask', [ '--version' ], { shell: true, cwd: BUILD_ARTIFACT_PATH }],
+        ['ask', [ '--version' ], { shell: true, cwd: path.resolve(BUILD_ARTIFACT_PATH) }],
         [
           'ask',
           [
@@ -257,14 +251,16 @@ something:
             '--template-branch',
             'ask-cli-x',
           ],
-          { shell: true, cwd: BUILD_ARTIFACT_PATH },
+          { shell: true, cwd: path.resolve(BUILD_ARTIFACT_PATH) },
         ],
-        ['rm', ['-rf', `"${ASK_SKILL_DIRECTORY_PATH}/lambda"`], { shell: true }],
-        ['npm', ['install', '--production'], { shell: true, cwd: `${ASK_SKILL_DIRECTORY_PATH}/lambda` }],
+        [REMOVE_DIR_COMMAND, [...REMOVE_FLAGS, `"${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}"`], { shell: true }],
+        ['npm', ['install', '--production'], { shell: true, cwd: `${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}` }],
       ]);
     });
 
-    it('auto-responds correctly to ASK CLI prompts', async () => {
+    it('auto-responds correctly to ASK CLI prompts', async function testAskCli() {
+      this.timeout(5000);
+
       await stageCommand.run();
 
       // Wait for interactive prompts to complete
@@ -299,11 +295,11 @@ something:
       );
     });
 
-    it('stages compiled JavaScript code', async () => {
+    it('stages compiled JavaScript code', async function testJSCodeCopied() {
       await stageCommand.run();
 
       assert.equal(
-        readTextFile(`${ASK_SKILL_DIRECTORY_PATH}/lambda/index.js`),
+        readTextFile(path.resolve(`${ASK_SKILL_DIRECTORY_PATH}/lambda/index.js`)),
         '// Dummy index.js compiled during import command',
       );
     });
@@ -316,7 +312,7 @@ something:
         {
           dependencies: {
             dummy: 'dependency',
-            localDependency: 'file:../../../foo/bar',
+            localDependency: `file:${path.join('..', '..', '..', 'foo', 'bar')}`,
           },
         },
       );
@@ -475,7 +471,7 @@ something:
     it('stores CloudFormation template into project directory', async () => {
       await stageCommand.run();
 
-      assert.equal(
+      assert.strictEqual(
         readTextFile(`${STORED_METADATA_PATH}/dummy-stage-en-GB/skill-stack.yaml`),
         EXPECTED_CLOUDFORMATION_TEMPLATE,
       );
@@ -486,7 +482,7 @@ something:
 
       // ASK CLI calls are never made
       assertCalledManyTimesWithArgs(mockSpawn, [
-        ['npm', ['install', '--production'], { shell: true, cwd: `${ASK_SKILL_DIRECTORY_PATH}/lambda` }],
+        ['npm', ['install', '--production'], { shell: true, cwd: `${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}` }],
       ]);
     });
   });
