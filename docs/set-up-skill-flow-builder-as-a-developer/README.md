@@ -218,7 +218,7 @@ and need to run the script as an administrator.
     > `alexa-sfb deploy --deployer lambda <your_project_path>`
 
     > **Important**: If you run the script from Windows, you might have to open
-    > your command prompt as an administrator. You open our command prompt as an
+    > your command prompt as an administrator. You open your command prompt as an
     > administrator to avoid a permissions error when the script runs PowerShell
     > batch files as part of the deployment process.
 

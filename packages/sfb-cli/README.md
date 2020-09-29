@@ -70,17 +70,17 @@ The resulting `alexa-sfb` binary is built into the `dist/bin/` directory.
 - `<story>` Path to the new story
 - `-t [templateName]` Template to create a new story from. (`example_story`, `tutorial`, `adventure`,`quiz`)
 
-#### `deploy <story> [-o, --override] [-s, --stage <stageName>] [-l, --locale <localeName>]`
+#### `deploy <story> [-o, --override] [-s, --stage <stageName>] [-l, --locale <localeName>] [-d, --deployer <deployerName>]`
 
 - Deploys your story to the Alexa Developer Portal & AWS by running `ask deploy` after building on the deployment payload
 - `<story>` Path to the story to deploy
 - `-o, --override` Overrides the version check
 - `-s, --stage <stageName>` Stage to deploy (i.e. dev, test, beta, prod)
 - `-l, --locale <localeName>` Locale to deploy (i.e. en-us, en-gb, fr-fr, etc.)
-- `-d, --deployer [deployerName]` ASK deployer to use (cfn or lambda).
+- `-d, --deployer <deployerName>` ASK deployer to use (cfn or lambda).
 Cannot be changed after deploying your skill. Default is cfn
 
-#### `deploy-metadata <story> [-o, --override] [-s, --stage <stageName>] [-g, --skill-stage <stageName>] [-l, --locale <localeName>]`
+#### `deploy-metadata <story> [-o, --override] [-s, --stage <stageName>] [-g, --skill-stage <stageName>] [-l, --locale <localeName>] [-d, --deployer <deployerName>]`
 
 - Deploys your skill metadata to the Alexa Developer Portal
 - `<story>` Path to the story to deploy the metadata of
@@ -88,10 +88,10 @@ Cannot be changed after deploying your skill. Default is cfn
 - `-s, --stage <stageName>` Stage to deploy (i.e. dev, test, beta, prod)
 - `-g, --skill-stage <stageName>` The stage of a skill to deploy. (`development`, `certified`,` live`). Defaults to `development`
 - `-l, --locale <localeName>` Locale to deploy (i.e. en-us, en-gb, fr-fr, etc.)
-- `-d, --deployer [deployerName]` ASK deployer to use (cfn or lambda).
+- `-d, --deployer <deployerName>` ASK deployer to use (cfn or lambda).
 Cannot be changed after deploying your skill. Default is cfn
 
-#### `deploy-via-zip <story> [-o, --override] [-s, --stage <stageName>] [-g, --skill-stage <stageName>] [-l, --locale <localeName>]`
+#### `deploy-via-zip <story> [-o, --override] [-s, --stage <stageName>] [-g, --skill-stage <stageName>] [-l, --locale <localeName>] [-d, --deployer <deployerName>]`
 
 - Build and deploy skill using a zip file transfer to S3/Lambda.
 - Used for slow remote connections or when exceeding the command line 69905067 byte limit.
@@ -99,10 +99,10 @@ Cannot be changed after deploying your skill. Default is cfn
 - `-s, --stage <stageName>` Stage to deploy (i.e. dev, test, beta, prod)
 - `-g, --skill-stage <stageName>` The stage of a skill to deploy. (`development`, `certified`,` live`). Defaults to `development`
 - `-l, --locale <localeName>` Locale to deploy (i.e. en-us, en-gb, fr-fr, etc.)
-- `-d, --deployer [deployerName]` ASK deployer to use (cfn or lambda).
+- `-d, --deployer <deployerName>` ASK deployer to use (cfn or lambda).
 Cannot be changed after deploying your skill. Default is cfn
 
-#### `build <story> [-o, --override] [-s, --stage <stageName>] [-l, --locale <localeName>]`
+#### `build <story> [-o, --override] [-s, --stage <stageName>] [-l, --locale <localeName>] [-d, --deployer <deployerName>]`
 
 - Builds a story without deploying.
 - The Build Life Cycle
@@ -115,7 +115,7 @@ Cannot be changed after deploying your skill. Default is cfn
 - `-o, --override` Overrides the version check
 - `-s, --stage <stageName>` Stage to build (i.e. dev, test, beta, prod)
 - `-l, --locale <localeName>` Locale to build (i.e. en-us, en-gb, fr-fr, etc.)
-- `-d, --deployer [deployerName]` ASK deployer to use (cfn or lambda).
+- `-d, --deployer <deployerName>` ASK deployer to use (cfn or lambda).
 Cannot be changed after deploying your skill. Default is cfn
 
 #### `simulate <story> [-o, --override] [-s, --stage <stageName>] [-l, --locale <localeName>] [-q, --quiet]`
@@ -128,7 +128,7 @@ Cannot be changed after deploying your skill. Default is cfn
 
 #### `clean <story>`
 
-- Clean out the .deploy, code .dist folder, and any extra node_modules folders for the given story. Run clean when initially creating a new stage/locale to force the creation of a new skill id.
+- Clean out the `.deploy/`, `code/dist/` folder, and any extra `node_modules/` folders for the given story. Run clean when initially creating a new stage/locale to force the creation of a new skill id.
 - `<story>` Path to the story to clean
 
 #### `upload <story>`
