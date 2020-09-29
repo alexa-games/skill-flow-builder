@@ -53,7 +53,7 @@ Resources:
                     - arn:aws:s3:::SFB-STORY-ID-bucket/*
                 - Effect: Allow
                   Action:
-                    - polly:*
+                    - polly:SynthesizeSpeech
                   Resource: '*'
   AlexaSkillFunction:
     Type: AWS::Lambda::Function
