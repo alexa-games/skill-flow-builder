@@ -16,7 +16,7 @@
  */
 
 import * as fs from 'fs';
-import * as os from 'os'
+import * as os from 'os';
 import * as path from 'path';
 
 import * as sinon from 'sinon';
@@ -471,7 +471,7 @@ describe('alexa-sfb stage', () => {
     it('stores CloudFormation template into project directory', async () => {
       await stageCommand.run();
 
-      assert.strictEqual(
+      assert.equal(
         readTextFile(`${STORED_METADATA_PATH}/dummy-stage-en-GB/skill-stack.yaml`),
         EXPECTED_CLOUDFORMATION_TEMPLATE,
       );

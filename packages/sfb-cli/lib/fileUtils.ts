@@ -217,7 +217,6 @@ export class FileUtils {
                 } else if (!fs.existsSync(destFilePath) || 
                             sourceStat.mtimeMs > fs.statSync(destFilePath).mtimeMs) {
                     copyPromises.push(FileUtils.copyFile(sourceFilePath, destFilePath, options));
-                } else {
                 }
             }
         }

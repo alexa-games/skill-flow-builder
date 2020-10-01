@@ -21,10 +21,6 @@ import * as fs from 'fs';
 import * as sinon from 'sinon';
 import { strict as assert } from 'assert';
 
-export const isWin32 = () => {
-  return process.platform === "win32";
-}
-
 export const STORY_DIR = '/dummy/project';
 export const DUMMY_SFB_ROOT = '/home/sfb-cli';
 export const ASK_PROFILE_NAME = 'dummy-ask-profile';
@@ -214,6 +210,10 @@ export const assertCalledManyTimesWithArgs = (sinonStub: any, calls: any[][]) =>
 
 export const getArgsForEachCall = (sinonStub: any) => {
   return sinonStub.getCalls().map((c: any) => c.args);
+}
+
+export const isWin32 = () => {
+  return process.platform === "win32";
 }
 
 export const OS_EOL = (isWin32()) ? "\r\n": "\n";
