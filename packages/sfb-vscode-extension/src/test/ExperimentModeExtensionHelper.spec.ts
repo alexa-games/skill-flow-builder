@@ -17,6 +17,7 @@
 
 import * as sinon from 'sinon';
 import * as mockFileSystem from 'mock-fs';
+import * as path from 'path';
 import { strict as assert } from 'assert';
 import {
   CompletionItem,
@@ -49,7 +50,7 @@ describe('ExperimentModeExtensionHelper', () => {
 
       dummyDocument = {
         languageId: 'abc-format',
-        uri: { fsPath: `${PROJECT_CONTENT_DIR}/foo.abc`, },
+        uri: { fsPath: path.resolve(`${PROJECT_CONTENT_DIR}/foo.abc`), },
         lineAt: sinon.stub(),
         positionAt: (sourceLocation) => ({ stubType: 'Position', sourceLocation })
       } as unknown as TextDocument;
@@ -84,7 +85,7 @@ describe('ExperimentModeExtensionHelper', () => {
             {
               stubType: 'Location',
               constructorArgs: [
-                { stubType: 'Uri', path: '/dummy/project/content/foo.abc' },
+                { stubType: 'Uri', path: path.resolve('/dummy/project/content/foo.abc') },
                 { stubType: 'Position', sourceLocation: 188 },
               ]
             },
@@ -157,7 +158,7 @@ describe('ExperimentModeExtensionHelper', () => {
 
       dummyDocument = {
         languageId: 'abc-format',
-        uri: { fsPath: `${PROJECT_CONTENT_DIR}/foo.abc`, },
+        uri: { fsPath: path.resolve(`${PROJECT_CONTENT_DIR}/foo.abc`), },
         positionAt: sinon.stub(),
         getText: function getTextMock(range?) {
           return 'this is text';
@@ -349,7 +350,7 @@ describe('ExperimentModeExtensionHelper', () => {
 
       dummyDocument = {
         languageId: 'abc-format',
-        uri: { fsPath: `${PROJECT_CONTENT_DIR}/foo.abc`, },
+        uri: { fsPath: path.resolve(`${PROJECT_CONTENT_DIR}/foo.abc`), },
         lineAt: sinon.stub(),
         positionAt: (sourceLocation) => ({ stubType: 'Position', sourceLocation })
       } as unknown as TextDocument;
@@ -721,7 +722,7 @@ describe('ExperimentModeExtensionHelper', () => {
 
       dummyDocument = {
         languageId: 'abc-format',
-        uri: { fsPath: `${PROJECT_CONTENT_DIR}/foo.abc`, },
+        uri: { fsPath: path.resolve(`${PROJECT_CONTENT_DIR}/foo.abc`), },
         lineAt: sinon.stub().returns({
           text: 'this is some text'
         }),

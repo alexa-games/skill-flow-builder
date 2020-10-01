@@ -33,6 +33,7 @@ import {
   createMockChildProcess,
   readTextFile,
   assertCalledManyTimesWithArgs,
+  OS_EOL
 } from './testUtilities';
 
 describe('alexa-sfb import', () => {
@@ -105,7 +106,7 @@ describe('alexa-sfb import', () => {
           "utterance-yes": "yes",
           "utterance-go to next scene": "go to next scene",
           "utterance-no": "no",
-          "second scene.narration": "You brave soul!\n    <break time='1s'>\n    You get nothing. The cake is a lie.",
+          "second scene.narration": "You brave soul! <break time='1s'> You get nothing. The cake is a lie.",
           "answered no.narration": "Just go to next scene! What say you?",
           "utterance-start over": "start over"
       }
@@ -169,7 +170,7 @@ describe('alexa-sfb import', () => {
           "install",
         ],
         {
-          "cwd": `${STORY_DIR}/code`,
+          "cwd": `${path.resolve(path.join(STORY_DIR, 'code'))}`,
           "shell": true,
         },
       ],
@@ -180,7 +181,7 @@ describe('alexa-sfb import', () => {
           "compile",
         ],
         {
-          "cwd": `${STORY_DIR}/code`,
+          "cwd": `${path.resolve(path.join(STORY_DIR, 'code'))}`,
           "shell": true,
         },
       ],
@@ -209,7 +210,7 @@ describe('alexa-sfb import', () => {
     );
     assert.equal(
       readTextFile(`${STORY_DIR}/.deploy/dist/res/en-US/baz.csv`),
-      'baz,csv,content\n',
+      "baz,csv,content" + OS_EOL,
     );
     assert.ok(fs.existsSync(`${STORY_DIR}/.deploy/dist/res/en-US/isp.json`));
     assert.ok(fs.existsSync(`${STORY_DIR}/.deploy/dist/res/en-US/apl-templates.json`));
@@ -242,16 +243,16 @@ describe('alexa-sfb import', () => {
 
       assert.equal(
         readTextFile(`${STORY_DIR}/.deploy/dist/res/en-GB/foo-bar.txt`),
-        'Sample text file\n',
+        "Sample text file" + OS_EOL,
       );
 
       assert.equal(
         readTextFile(`${STORY_DIR}/.deploy/dist/res/en-GB/additional-resources-1/foo.img`),
-        'Fake image\n',
+        "Fake image" + OS_EOL,
       );
       assert.equal(
         readTextFile(`${STORY_DIR}/.deploy/dist/res/en-GB/additional-resources-2/bar.img`),
-        'Another fake image\n',
+        "Another fake image" + OS_EOL,
       );
     });
   });

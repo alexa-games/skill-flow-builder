@@ -39,6 +39,11 @@ import {
   createMockChildProcess,
   readTextFile,
   assertCalledManyTimesWithArgs,
+  MOVE_COMMAND,
+  REMOVE_DIR_COMMAND, 
+  REMOVE_FLAGS, 
+  ZIP_COMMAND, 
+  ZIP_FLAGS
 } from './testUtilities';
 
 describe('alexa-sfb stage-layer', () => {
@@ -142,36 +147,34 @@ describe('alexa-sfb stage-layer', () => {
 
     assertCalledManyTimesWithArgs(mockSpawn, [
       [
-        "rm",
+        REMOVE_DIR_COMMAND,
         [
-          "-rf",
-          `"${STORED_LAMBDA_LAYER_PATH}"`,
+          ...REMOVE_FLAGS,
+          `"${path.resolve(STORED_LAMBDA_LAYER_PATH)}"`,
         ],
         {
           "shell": true,
         },
       ],
       [
-        "mv",
+        MOVE_COMMAND,
         [
-          `${ASK_SKILL_DIRECTORY_PATH}/lambda/node_modules`,
-          `${STORED_LAMBDA_LAYER_PATH}/nodejs`,
+          `${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda', 'node_modules'))}`,
+          `${path.resolve(path.join(STORED_LAMBDA_LAYER_PATH, 'nodejs'))}`,
         ],
         {
           "shell": true,
         },
       ],
       [
-        "zip",
+        ZIP_COMMAND,
         [
-          "-rg",
-          "-D",
-          "-X",
+          ...ZIP_FLAGS,
           `${ASK_SKILL_DIRECTORY_NAME}-lambda-layer.zip`,
           "nodejs",
         ],
         {
-          "cwd": STORED_LAMBDA_LAYER_PATH,
+          "cwd": path.resolve(STORED_LAMBDA_LAYER_PATH),
           "shell": true,
         },
       ],

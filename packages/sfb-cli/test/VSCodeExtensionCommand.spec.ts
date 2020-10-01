@@ -42,7 +42,7 @@ describe('alexa-sfb vscode', () => {
   let vscodeExtension: VscodeExtensionCommand; // Subject under test
 
   beforeEach(() => {  
-    sinon.stub(process, 'env').value({ HOME: '/home' });
+    sinon.stub(process, 'env').value({ HOME: '/home', USERPROFILE: 'C:\\home' });
 
     mockFileSystem({
       [DUMMY_SFB_ROOT]: {
@@ -88,7 +88,7 @@ describe('alexa-sfb vscode', () => {
     await vscodeExtension.run();
 
     assertCalledManyTimesWithArgs(mockSpawn, [
-      ['npx', ['npm', 'install', '--production'], { cwd: `${vscodeExtDestPath}`, shell: true}]
+      ['npx', ['npm', 'install', '--production'], { cwd: `${path.resolve(vscodeExtDestPath)}`, shell: true}]
     ]);
   });
 });

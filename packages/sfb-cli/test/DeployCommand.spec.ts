@@ -50,6 +50,8 @@ import {
   createMockChildProcess,
   readTextFile,
   assertCalledManyTimesWithArgs,
+  REMOVE_DIR_COMMAND, 
+  REMOVE_FLAGS
 } from './testUtilities';
 
 describe('alexa-sfb deploy', () => {
@@ -149,12 +151,12 @@ describe('alexa-sfb deploy', () => {
         [
           'ask',
           ['--version'],
-          { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH },
+          { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) },
         ],
         [
            'ask',
            ['deploy', '--ignore-hash', '--profile', ASK_PROFILE_NAME],
-           { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH },
+           { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) },
         ],
       ]);
     });
@@ -170,12 +172,12 @@ describe('alexa-sfb deploy', () => {
           [
             'ask',
             ['--version'],
-            { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH },
+            { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) },
           ],
           [
              'npx',
              ['ask-cli@^2.x.x', 'deploy', '--ignore-hash', '--profile', ASK_PROFILE_NAME],
-             { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH },
+             { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) },
           ],
         ]);
       });
@@ -270,23 +272,23 @@ describe('alexa-sfb deploy', () => {
 
       assertCalledManyTimesWithArgs(mockSpawn, [
         // 1. Upgrades build artifacts
-        ['ask', ['--version'], { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH }],
-        ['ask', ['util', 'upgrade-project', '--profile', ASK_PROFILE_NAME], { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH }],
-        ['rm', ['-rf', `"${ASK_SKILL_DIRECTORY_PATH}/lambda"`], { shell: true }],
+        ['ask', ['--version'], { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) }],
+        ['ask', ['util', 'upgrade-project', '--profile', ASK_PROFILE_NAME], { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) }],
+        [REMOVE_DIR_COMMAND, [...REMOVE_FLAGS, `"${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}"`], { shell: true }],
 
         // 2. Deploys with upgraded artifacts
-        ['ask', ['--version'], { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH }],
-        ['ask', ['deploy', '--ignore-hash', '--profile', ASK_PROFILE_NAME], { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH }],
+        ['ask', ['--version'], { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) }],
+        ['ask', ['deploy', '--ignore-hash', '--profile', ASK_PROFILE_NAME], { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) }],
       ]);
 
       assert.equal(
-        readTextFile(`${ASK_SKILL_DIRECTORY_PATH}/lambda/index.js`),
+        readTextFile(`${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda', 'index.js'))}`),
         // Original file content
         DUMMY_ASK_FILE_SYSTEM[STORY_DIR]['.deploy'][ASK_SKILL_DIRECTORY_NAME].lambda['index.js'],
       );
 
       assert.deepEqual(
-        JSON.parse(readTextFile(STAGED_ASK_RESOURCES_PATH)),
+        JSON.parse(readTextFile(path.resolve(STAGED_ASK_RESOURCES_PATH))),
         {
           profiles: {
             [ASK_PROFILE_NAME]: {

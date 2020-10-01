@@ -32,6 +32,8 @@ import {
   DUMMY_ASK_FILE_SYSTEM,
   createMockSpawn,
   assertCalledManyTimesWithArgs,
+  REMOVE_DIR_COMMAND,
+  REMOVE_FLAGS
 } from './testUtilities';
 
 describe('alexa-sfb clean', () => {
@@ -66,9 +68,9 @@ describe('alexa-sfb clean', () => {
     // Hence, instead of using `fs.existsSync` to verify clobbering,
     // We need to check that `spawn` gets called with the right arguments.
     assertCalledManyTimesWithArgs(mockSpawn, [
-      ['rm', ['-rf', `"${STORY_DIR}/.deploy"`], { shell: true }],
-      ['rm', ['-rf', `"${STORY_DIR}/node_modules"`], { shell: true }],
-      ['npm', ['run', 'clean'], { shell: true, cwd: `${STORY_DIR}/code` }],
+      [REMOVE_DIR_COMMAND, [...REMOVE_FLAGS, `"${path.resolve(path.join('/', STORY_DIR, '.deploy'))}"`], { shell: true }],
+      [REMOVE_DIR_COMMAND, [...REMOVE_FLAGS, `"${path.resolve(path.join('/', STORY_DIR, 'node_modules'))}"`], { shell: true }],
+      ['npm', ['run', 'clean'], { shell: true, cwd: path.resolve(path.join('/', STORY_DIR, 'code')) }],
     ]);
   });
 
@@ -87,11 +89,11 @@ describe('alexa-sfb clean', () => {
       await cleanCommand.run();
 
       assertCalledManyTimesWithArgs(mockSpawn, [
-        ['rm', ["-rf", `"${STORY_DIR}/.deploy"`], { shell: true }],
-        ['rm', ["-rf", `"${STORY_DIR}/node_modules"`], { shell: true }],
+        [REMOVE_DIR_COMMAND, [...REMOVE_FLAGS, `"${path.resolve(path.join('/', STORY_DIR, '.deploy'))}"`], { shell: true }],
+        [REMOVE_DIR_COMMAND, [...REMOVE_FLAGS, `"${path.resolve(path.join('/', STORY_DIR, 'node_modules'))}"`], { shell: true }],
 
         // Assert that NPX is run to install yarn
-        ['npx', ['yarn', 'clean'], { shell: true, cwd: `${STORY_DIR}/code` }],
+        ['npx', ['yarn', 'clean'], { shell: true, cwd: path.resolve(path.join('/', STORY_DIR, 'code')) }],
       ]);
     });
   });

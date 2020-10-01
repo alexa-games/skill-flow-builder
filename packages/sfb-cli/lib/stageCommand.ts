@@ -215,6 +215,7 @@ export class StageCommand implements Command {
 
         this.logger.status('Copying build output files...');
         const lambdaCodeDeployPath = SpecialPaths.getLambdaCodeDeployPath(configDirs);
+
         await FileUtils.recursiveCopy(pathModule.join(dirs.buildOutputPath, '*'), lambdaCodeDeployPath, { makeDestinationWritable: true });
 
         await FileUtils.recursiveCopy(pathModule.join(dirs.codeBuildOutputPath, '*'), lambdaCodeDeployPath, { makeDestinationWritable: true });

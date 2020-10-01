@@ -158,7 +158,7 @@ export class FileUtils {
      * @param dst Destination
      * @param options Options that impact the copy operation
      */
-    public static async recursiveCopy(src: string, dst: string, options?: CopyOptions) {
+    public static async recursiveCopy(src: string, dst: string, options?: CopyOptions): Promise<void> {
         // Convert \\ to / so we can handle windows paths.
         const srcPath = src.replace(/\\/g,'/').split('/');
 
@@ -190,7 +190,12 @@ export class FileUtils {
             });
         }
         
+        // Convert / back to \\ for Windows
+        if (Utilities.isWin32) {
+            parentPath = parentPath.replace(/\//g,'\\');
+        }
         const files = fs.readdirSync(parentPath);
+
         if (!files) {
             return;
         }
@@ -212,7 +217,6 @@ export class FileUtils {
                 } else if (!fs.existsSync(destFilePath) || 
                             sourceStat.mtimeMs > fs.statSync(destFilePath).mtimeMs) {
                     copyPromises.push(FileUtils.copyFile(sourceFilePath, destFilePath, options));
-                    
                 }
             }
         }

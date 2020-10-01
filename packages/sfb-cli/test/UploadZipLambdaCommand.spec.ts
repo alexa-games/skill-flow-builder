@@ -37,6 +37,8 @@ import {
   createMockSpawn,
   createMockChildProcess,
   assertCalledManyTimesWithArgs,
+  ZIP_COMMAND,
+  isWin32
 } from './testUtilities';
 
 describe('alexa-sfb deploy-via-zip', () => {
@@ -97,6 +99,12 @@ describe('alexa-sfb deploy-via-zip', () => {
   it('checks ASK CLI version and deploys ASK project', async () => {
     await uploadZipLambdaCommand.run();
 
+    const zipCommandFlags = (isWin32()) ? ['a', '-r'] : ['-rg'];
+    let expectedZipPath = `${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}`;
+    if (isWin32()) {
+      expectedZipPath += '\\*';
+    }
+
     assertCalledManyTimesWithArgs(mockSpawn, [
       [
         "npx",
@@ -105,19 +113,19 @@ describe('alexa-sfb deploy-via-zip', () => {
           "index.zip",
         ],
         {
-          "cwd": STORY_DIR,
+          "cwd": path.resolve(STORY_DIR),
           "shell": true,
         },
       ],
       [
-        "zip",
+        ZIP_COMMAND,
         [
-          "-rg",
+          ...zipCommandFlags,
           "index.zip",
-          `${ASK_SKILL_DIRECTORY_PATH}/lambda`,
+          expectedZipPath,
         ],
         {
-          "cwd": STORY_DIR,
+          "cwd": path.resolve(STORY_DIR),
           "shell": true,
         },
       ],
@@ -133,7 +141,7 @@ describe('alexa-sfb deploy-via-zip', () => {
           ASK_PROFILE_NAME,
         ],
         {
-          "cwd": STORY_DIR,
+          "cwd": path.resolve(STORY_DIR),
           "shell": true,
         },
       ],
@@ -155,7 +163,7 @@ describe('alexa-sfb deploy-via-zip', () => {
           ASK_PROFILE_NAME,
         ],
         {
-          "cwd": STORY_DIR,
+          "cwd": path.resolve(STORY_DIR),
           "shell": true,
         },
       ],

@@ -73,7 +73,7 @@ describe('alexa-sfb upload', () => {
         [
           's3',
           'cp',
-          `"${STORY_DIR}/content/en-US/resources/public/audio-files"`,
+          `"${path.resolve(path.join(STORY_DIR, 'content', 'en-US', 'resources', 'public', 'audio-files'))}"`,
           `"s3://${S3_BUCKET_NAME}/${ASK_SKILL_DIRECTORY_NAME}/en-US/audio-files/"`,
           '--recursive',
           '--acl',
@@ -88,7 +88,7 @@ describe('alexa-sfb upload', () => {
         [
           's3',
           'cp',
-          `"${STORY_DIR}/content/en-US/resources/public/image-files"`,
+          `"${path.resolve(path.join(STORY_DIR, 'content', 'en-US', 'resources', 'public', 'image-files'))}"`,
           `"s3://${S3_BUCKET_NAME}/${ASK_SKILL_DIRECTORY_NAME}/en-US/image-files/"`,
           '--recursive',
           '--acl',
@@ -103,7 +103,7 @@ describe('alexa-sfb upload', () => {
         [
           's3',
           'cp',
-          `"${STORY_DIR}/content/en-GB/resources/public/audio-files"`,
+          `"${path.resolve(path.join(STORY_DIR, 'content', 'en-GB', 'resources', 'public', 'audio-files'))}"`,
           `"s3://${S3_BUCKET_NAME}/${ASK_SKILL_DIRECTORY_NAME}/en-GB/audio-files/"`,
           '--recursive',
           '--acl',
@@ -118,7 +118,7 @@ describe('alexa-sfb upload', () => {
         [
           's3',
           'cp',
-          `"${STORY_DIR}/content/en-GB/resources/public/image-files"`,
+          `"${path.resolve(path.join(STORY_DIR, 'content', 'en-GB', 'resources', 'public', 'image-files'))}"`,
           `"s3://${S3_BUCKET_NAME}/${ASK_SKILL_DIRECTORY_NAME}/en-GB/image-files/"`,
           '--recursive',
           '--acl',

@@ -136,7 +136,7 @@ describe('alexa-sfb deploy-metadata', () => {
       [
         'ask',
         ['--version'],
-        { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH },
+        { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) },
       ],
       [
          'ask',
@@ -148,11 +148,11 @@ describe('alexa-sfb deploy-metadata', () => {
            '--skill-id',
            SKILL_ID,
            '--manifest',
-           `file:${STAGED_SKILL_JSON_PATH}`,
+           `file:${path.resolve(STAGED_SKILL_JSON_PATH)}`,
            '--profile',
            ASK_PROFILE_NAME,
          ],
-         { shell: true, cwd: ASK_SKILL_DIRECTORY_PATH },
+         { shell: true, cwd: path.resolve(ASK_SKILL_DIRECTORY_PATH) },
       ],
     ]);
   });

@@ -38,7 +38,9 @@ import {
   createMockChildProcess,
   STORED_SKILL_JSON_PATH,
   readTextFile,
-  STAGED_LAMBDA_PATH
+  STAGED_LAMBDA_PATH,
+  REMOVE_DIR_COMMAND,
+  REMOVE_FLAGS
 } from './testUtilities';
 
 describe('alexa-sfb deploy-layer', () => {
@@ -79,7 +81,7 @@ describe('alexa-sfb deploy-layer', () => {
         ],
         {
           shell: true,
-          cwd: STORED_LAMBDA_LAYER_PATH
+          cwd: path.resolve(STORED_LAMBDA_LAYER_PATH)
         }
       ],
       ['aws',
@@ -473,16 +475,14 @@ describe('alexa-sfb deploy-layer', () => {
               shell: true,
             }
           ],
-          ['rm',
-            ['-rf', `"${STORED_LAMBDA_LAYER_PATH}"`],
+          [REMOVE_DIR_COMMAND,
+            [...REMOVE_FLAGS, `"${path.resolve(STORED_LAMBDA_LAYER_PATH)}"`],
             {
               shell: true
             }
           ]
         ],
       );
-
-      assert.ok(!fs.existsSync(STORED_LAMBDA_LAYER_PATH));
     });
   });
 
