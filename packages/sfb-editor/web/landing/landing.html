@@ -18,13 +18,13 @@
   Welcome to the Skill Flow Builder.
   </h3>
   <p>
-  Please see our official documentation on the Developer Portal <a href="https://alexa.design/sfb-editor-landing-page" target="_blank" rel="noopener noreferrer">here</a>.
+  Please see our official documentation on GitHub <a href="https://github.com/alexa-games/skill-flow-builder/docs" target="_blank" rel="noopener noreferrer">here</a>.
   </p>
   <p>
   <i>Want to receive the Skill Flow Builder newsletter? Sign-up <a href="https://alexa.au1.qualtrics.com/jfe/form/SV_6LqUYQdGd57MkVD" target="_blank" rel="noopener noreferrer">here</a>!</i>
   </p>
   <p>
-  <i><b>Have a question that you need an answer to? Please search for or submit an issue to either the <a href='https://forums.developer.amazon.com/spaces/23/Alexa+Skills+Kit.html' target="_blank" rel="noopener noreferrer">Alexa Skills Kit forums</a> or the Skill Flow Builder Github Repository's Issues tracker: <a href='https://github.com/alexa-games/skill-flow-builder/issues' target="_blank" rel="noopener noreferrer">Skill Flow Builder on Github</a></b></i>
+  <i><b>Have a question that you need an answer to? Check out the <a href='https://forums.developer.amazon.com/spaces/23/Alexa+Skills+Kit.html' target="_blank" rel="noopener noreferrer">Alexa Skills Kit forums</a> or submit an issue to the <a href='https://github.com/alexa-games/skill-flow-builder/issues' target="_blank" rel="noopener noreferrer">Skill Flow Builder issues tracker on GitHub</a></b></i>
   </p>
   <p>
   <i><b>Skill Flow Builder is now a channel on the Alexa Developer Slack. Search #Skill-Flow-Builder on <a href='http://www.alexaslack.com/' target="_blank" rel="noopener noreferrer">Alexa Developer Slack</a></b></i>
@@ -34,10 +34,13 @@
   <div class="ui raised segment yellow">
   
   
-    <h3>11/25/2019 Release Notes: The current release is version 1.3.0</h3>
-  
-    <h4>Skill Flow Builder Editor download: <a href="http://sfb-framework.s3-website-us-east-1.amazonaws.com/winLatest" target="_blank" rel="noopener noreferrer">Win</a> or <a href="http://sfb-framework.s3-website-us-east-1.amazonaws.com/macLatest" target="_blank" rel="noopener noreferrer">Mac</a></h4>
-  
+    <h3>Release Notes: The current release is version 2.0.0</h3>
+
+    <h4>GitHub</h4>
+    <p>
+      Skill Flow Builder's source code is now available on GitHub! Check it out: <a href="https://github.com/alexa-games/skill-flow-builder" target="_blank" rel="noopener noreferrer">https://github.com/alexa-games/skill-flow-builder</a>
+    </p>
+    
     <h4>Release Changes</h4>
     <p>
       The following features have changed or improved.
@@ -45,43 +48,19 @@
   
     <p>
       <ul>
-    <li><b>Editor</b></li>
-    <ul>
-      <li>
-        We have improved the Editor's ability to handle large (500 scene) files. Tip: use multiple .abc files to structure a skill that is over 500 scenes. This can also make it easier to organize content. 
-      </li>
-      <li>
-        You probably won't notice, but "Writer Mode", represented by the pencil icon, has been removed. Problems with this mode were slowing the Editor, so we removed it in favor of the Editor handling larger skills.
-      </li>
-      <li>
-        Added undo and redo commands to work with guided mode in the Editor. Window size and position are also remembered when you reopen the editor.
-      </li>
-    </ul>
     <li><b>Core Modules</b></li>
     <ul>
       <li>
-        <b>Coming soon:</b> major updates to technical documentation, coverage includes SFB Build Life Cycle, use of custom extensions, and other advanced use cases.
+        The sfb-cli application now depends on ASK CLI v2. Follow the instructions at <a href='https://developer.amazon.com/en-US/docs/alexa/smapi/quick-start-alexa-skills-kit-command-line-interface.html ' target="_blank" rel="noopener noreferrer">Quick Start: Alexa Skills Kit Command Line Interface (ASK CLI)</a> to download the latest version of ASK CLI. If you do not upgrade your ASK CLI to 2.0.0 or later, sfb-cli will automatically download and run the latest version of ASK CLI when needed for deployment.
       </li>
       <li>
-        <b>Customer Request:</b> You can now use multiple stages: if you want to say create a beta stage and a prod stage for your skill, this often involves creating two separate skills in the Developer Console. To make this easier, you can use the --stage argument with the deploy command when using the sfb-cli.
+        By default, new projects created with sfb-cli will use ASK CLI's "cfn" deployer to deploy resources with AWS Cloud Formation. If you wish to use the "lambda" deployer instead, include the <b>--deployer lambda</b> option when running the <b>alexa-sfb build</b> or <b>alexa-sfb deploy</b> commands.
+        <ul>
+          <li><b>Note:</b> You cannot change the deployer once the skill has been deployed, and existing projects will automatically use the "lambda" deployer when upgrading to sfb-cli 2.0.0 or higher.</li>
+        </ul>
       </li>
       <li>
-        <b>Customer Request:</b> With very minimal effort, you can now get better insights into how your users are navigating your SFB skills. The tooling supports various levels of configuration; from plug and play all the way to full BI integration. Check out the <a href='https://gist.github.com/superkew/40045d93e630acc246c0f0df7c902053#file-readme-md' target="_blank" rel="noopener noreferrer">SFB Metrics Extension</a></b></i>
-      </li>
-      <li>
-        Added debug flag to command line simulator to enable quiet mode. Makes it easier to see your project specific logging.
-      </li>
-      <li>
-        Updated core extension classes to make them easier to subclass for your own extensions.
-      </li>
-      <li>
-        Snippets now work in localized content.
-      </li>
-      <li>
-        Fixed an issue where recap/reprompt responses were erroneously combining their output.
-      </li>
-      <li>
-        Updated handling of AMAZON.StopIntent to return "shouldEndSession" flag as true to conform to new Alexa policy.
+        You can now deploy the node_modules directory under your SFB project's code directory as an AWS Lambda layer, which will only get redeployed if the node_modules directory changes. To enable using Lambda layer, set "use-lambda-layer" to <b>true</b> in your projects abcConfig.json file.
       </li>
     </ul>
   </ul>
@@ -89,8 +68,7 @@
   
     <h4>Known Issues</h4>
     <p>
-      Please be aware of the following known issues with this release,
-      we are actively working to fix these in an upcoming release:
+      Please be aware of the following known issues with this release:
     </p>
     <p>
     <ul>
