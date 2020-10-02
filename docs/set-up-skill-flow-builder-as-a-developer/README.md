@@ -266,7 +266,7 @@ In the AWS Management Console, add the following policy:
 ```
 
 To add further permissions to the above policy, see the section
-[Set up Amazon Polly voices (Optional)](./setup-polly-voices).
+[Set up Amazon Polly voices (Optional)](./setup-polly-voices.md).
 
 **Note:** You might need to change some of the default AWS Lambda settings. In
 the AWS console, find your AWS Lambda function and change the following settings:
