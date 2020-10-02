@@ -9,6 +9,8 @@ labels: 'bug'
 
 ## Skill Flow Builder Version
 
+## ASK CLI Version
+
 ## Current Behavior
 
 ## Expected Behavior
