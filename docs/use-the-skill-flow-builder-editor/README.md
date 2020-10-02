@@ -17,6 +17,13 @@ requirements:
 - 1024px x 768px display resolution
 - Install [Node.js](https://nodejs.org/en/download/) version 10.15 or later.
 
+If you haven't done so already, install `yarn` globally with `npm` by opening a command
+prompt or terminal and running:
+
+```sh
+npm install yarn -g.
+```
+
 ## Get Started
 
 ### Open the Skill Flow Builder Editor

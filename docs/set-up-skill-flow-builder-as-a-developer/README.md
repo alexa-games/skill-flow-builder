@@ -24,10 +24,9 @@ Flow Builder.
 
 1. Install the latest version of [Git](https://git-scm.com/downloads)
 2. Install the latest version of the [Amazon Web Services (AWS CLI)](https://aws.amazon.com/cli/).
-3. (Windows only) Install the latest version of the [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) module.
-4. Install Node.js version 10.15 or later.
-    - **Note:** When you install Node.js, the installation includes Node Package
-    Manager (npm). To install the Skill Flow Builder, you must modify the NPM configuration.
+3. Install [Node.js](https://nodejs.org/en/) version 10.15 or later.
+4. Install the latest version of the [Alexa Skills Kit Command Line Interface (ASK CLI)](https://developer.amazon.com/en-US/docs/alexa/smapi/quick-start-alexa-skills-kit-command-line-interface.html)
+5. (Windows only) Install the latest version of the [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) module.
 
 ## Install and set up Skill Flow Builder CLI
 
@@ -128,20 +127,10 @@ steps to deploy your game or story as an Alexa skill.
 Set up your Alexa Skills Kit (ASK) profile with your developer account, and link
 your AWS account. If you have already set up your ASK profile, skip to [Step 2](#step-2-update-the-skill-configuration).
 
-### To begin to deploy your Alexa skill
+### To begin to deploy your Alexa skill with the "default" profile
 
-Open a command prompt, type the following command: `ask init`, and then follow
+1. Open a command prompt, type the following command: `ask configure`, and then follow
 the prompts.
-
-### To use an ASK profile other than "default"
-
-Open `<your_project_path>/abcConfig.json` and then edit the attribute
-`"ask-profile-name"` to specify the profile you want to use.
-
-1. To specify the profile you want to use, open
-`<your_project_path>/abcConfig.json`, and then edit the attribute
-`"ask-profile-name"`. You must provide a working AWS account with AWS account
-security credentials set up for your user.
 2. If you don't have an IAM user with credentials, open the [AWS Management console](https://aws.amazon.com/console/).
 3. Click the **IAM** tab, click **Add User**, and then create a new user name.
 4. Select the check box for **programmatic access**, and then grant a policy
@@ -179,6 +168,16 @@ with the following structure.
     ]
 }
 ```
+
+#### To use an ASK profile other than "default"
+
+Open `<your_project_path>/abcConfig.json` and then edit the attribute
+`"ask-profile-name"` to specify the profile you want to use.
+
+To specify the profile you want to use, open
+`<your_project_path>/abcConfig.json`, and then edit the attribute
+`"ask-profile-name"`. You must provide a working AWS account with AWS account
+security credentials set up for your user.
 
 ### Step 2: Update the skill configuration
 
@@ -229,13 +228,17 @@ policy described in [Step 1: Set up your ASK profile.](#step-1-set-up-your-ask-p
 
 ### Step 4: Set up the AWS IAM role
 
-> **Note:** This only applies to users deploying with the Lambda deployer by specifying the '`--deployer lambda`' option when running `alexa-sfb deploy`. If you are using the default deployer (CloudFormation), skip to [Step 5](#step-5-launch-your-skill)
+> **Note:** This only applies to users deploying with the Lambda deployer by
+> specifying the '`--deployer lambda`' option when running `alexa-sfb deploy`.
+> If you are using the default deployer (CloudFormation), skip to [Step 5](#step-5-launch-your-skill)
 
-After you create the skill in your developer account and create the AWS Lambda function, you need to add permissions.
+After you create the skill in your developer account and create the AWS Lambda
+function, you need to add permissions.
 
 #### To setup the AWS IAM
 
-Add permissions for DynamoDB, Amazon S3, and Amazon Polly to the IAM role created for your AWS Lambda function.
+Add permissions for DynamoDB, Amazon S3, and Amazon Polly to the IAM role
+created for your AWS Lambda function.
 > The name of the default role created for your skill is `ask-lambda-"your skill
 > project name"`
 >
@@ -271,7 +274,7 @@ To add further permissions to the above policy, see the section
 **Note:** You might need to change some of the default AWS Lambda settings. In
 the AWS console, find your AWS Lambda function and change the following settings:
 
-- Verify the runtime environment is Node.js 8.10
+- Verify the runtime environment is Node.js 10.x
 - Verify the timeout is set to at least 15 seconds
 
 ### Step 5: Launch your skill
@@ -283,7 +286,13 @@ saying the wake word and invocation name.
 
 On your Alexa device, test your skill by saying the wake word, followed by
 the invocation name. For example, say, "Alexa, open the High Low Game."
-> **Note:** If you are deploying with the Lambda Deployer option, the first time you launch your skill you will receive an error message. This is because your AWS Lambda function tries to generate the state management DynamoDB table. Wait about 15 seconds for the AWS Lambda function to create the DynamoDB table, and then say the wake word, followed by the skill invocation name. For example, say, "Alexa, open the High Low Game." This does not apply to the CloudFormation deploy process.
+> **Note:** If you are deploying with the Lambda Deployer option, the first time
+> you launch your skill you will receive an error message. This is because your
+> AWS Lambda function tries to generate the state management DynamoDB table.
+> Wait about 15 seconds for the AWS Lambda function to create the DynamoDB
+> table, and then say the wake word, followed by the skill invocation name. For
+> example, say, "Alexa, open the High Low Game." This does not apply to the
+> CloudFormation deploy process.
 
 ## Extra Resources
 

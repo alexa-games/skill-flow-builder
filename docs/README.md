@@ -1,4 +1,4 @@
-# Understand the Skill Flow Builder
+# Skill Flow Builder
 
 The Skill Flow Builder development suite helps you create narrative-driven skills
 more quickly. It includes a Skill Flow Builder Editor application for designers
@@ -7,6 +7,8 @@ writers can quickly prototype and modify content. In parallel, developers can
 build differentiated features and minimize time spent on content changes. The
 tools share a source file format, which helps make hand-offs between teams more
 efficient.
+
+![Skill Flow Builder Editor screenshot showing the Map and Guided views](resources/SkillFlowBuilderEditorScreen.png)
 
 ## Skill Flow Builder Editor
 
