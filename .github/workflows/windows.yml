@@ -1,0 +1,34 @@
+name: Tests on Windows
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - develop
+      - master
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-2016]
+        node: [10]
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+
+      - name: Install Global Dependencies
+        run: choco install microsoft-build-tools-2013
+      
+      - name: Install Yarn
+        run: npm install yarn -g
+
+      - name: Install
+        run: yarn install
+
+      - name: Build Editor Installer
+        run: yarn editor-installer

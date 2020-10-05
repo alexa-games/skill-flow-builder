@@ -33,7 +33,8 @@ import {
     stubSfbCliRoot,
     readTextFile,
     DUMMY_SFB_ROOT,
-    SFB_VSCODE_EXTENSION_NAME
+    SFB_VSCODE_EXTENSION_NAME,
+    isWin32
   } from './testUtilities';
 
 describe('alexa-sfb vscode', () => {
@@ -41,8 +42,10 @@ describe('alexa-sfb vscode', () => {
   let mockSpawn: any;
   let vscodeExtension: VscodeExtensionCommand; // Subject under test
 
+  let homeDir = isWin32() ? '\\home' : '/home';
+
   beforeEach(() => {  
-    sinon.stub(process, 'env').value({ HOME: '/home', USERPROFILE: 'C:\\home' });
+    sinon.stub(process, 'env').value({ HOME: homeDir, USERPROFILE: homeDir });
 
     mockFileSystem({
       [DUMMY_SFB_ROOT]: {
@@ -72,7 +75,7 @@ describe('alexa-sfb vscode', () => {
     sinon.restore();
   });
 
-  const vscodeExtDestPath = path.resolve(`/home/.vscode/extensions/${SFB_VSCODE_EXTENSION_NAME}`);
+  const vscodeExtDestPath = path.resolve(path.join(homeDir, '.vscode', 'extensions', SFB_VSCODE_EXTENSION_NAME));
 
   it('moves the extension in the user\'s .vscode directory', async () => {
     await vscodeExtension.run();
