@@ -5,10 +5,12 @@ on:
     branches:
       - develop
       - master
+      - build-automation-testing
   pull_request:
     branches:
       - develop
       - master
+      - build-automation-testing
 jobs:
   build:
     runs-on: ${{ matrix.os }}
