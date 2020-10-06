@@ -42,7 +42,7 @@ export class VscodeExtensionCommand implements Command {
 
         let dirs = new SpecialPaths('na');
 
-        let homeDir = Utilities.isWin32 ? process.env['USERPROFILE']: process.env['HOME'];
+        let homeDir = Utilities.isWin32 ? process.env['USERPROFILE'] : process.env['HOME'];
 
         const SFB_VSCODE_EXTENSION = 'sfb-vscode-extension';
 

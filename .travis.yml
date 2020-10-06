@@ -1,0 +1,23 @@
+language: node_js
+
+os:
+  - 'osx'
+  - 'linux'
+
+node_js:
+  - '10'
+  - '12'
+  - '14'
+
+git:
+  depth: false
+
+stages:
+  - name: test
+  - name: editor
+jobs:
+  include:
+    - stage: editor
+      name: 'Build Editor Installer for OSX'
+      os: osx
+      script: yarn editor-installer
