@@ -63,14 +63,6 @@ interface for editing the `say` section, graphics, and actions for the currently
 selected scene. On the left side of the Skill Flow Builder Editor, use the
 **Map** view to create or delete scenes.
 
-**Writer mode:** This mode is for localization. The visual content editor shows
-the content that the skill says for each scene and the `hear` utterances that
-Alexa listens for. From the top menu, select a locale and edit the strings for
-the locale, then click **Save**. Then, use the simulator to preview your changes
-for the locale. After you deploy your skill, the skill uses the locale-specific
-strings. If you are not internationalizing your skill, you do not need to use
-the Writer mode.
-
 ### Understand the Map view
 
 The **Map** view shows a diagram of the voice flow of your skill. Each scene in
