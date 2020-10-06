@@ -51,6 +51,27 @@ or if using `yarn`
 yarn global upgrade {SFB}/lib/moduleSrc/alexa-sfb
 ```
 
+## Upgrading from ASK CLI v1
+
+If you previously deployed a skill using ASK CLI v1 (using the SFB CLI v1), then
+you will see the following message when you run `alexa-sfb deploy`:
+
+> It seems that your project was built using ask-cli@1.x.x, which is no longer supported by Skill Flow Builder.
+> Do you want to start deploying your project with ask-cli@2.x.x ?
+> Your existing build artifacts will be modified to work with ask-cli@2.x.x.
+> [Y/n]:
+
+Simply enter 'Y' into the command prompt and press enter/return to continue with
+the deployment. The SFB CLI v2 will run the `ask util upgrade-project` command
+to upgrade the build artifacts in the `.deploy/` directory automatically and
+continue with the deployment.
+
+If you do not wish to upgrade at this time, enter 'n' instead and the deployment
+will stop without making any changes to your `.deploy/` or `metadata/` directories.
+
+For more information on the upgrade process, please see
+[ASK CLI v1 to v2 Migration Guide](https://developer.amazon.com/en-US/docs/alexa/smapi/ask-cli-v1-to-v2-migration-guide.html)
+
 ## Audio mixing fails in the skill
 
 If you are building and installing the `sfb-cli` package directly from this
