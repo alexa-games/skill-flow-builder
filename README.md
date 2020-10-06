@@ -1,5 +1,12 @@
 # Skill Flow Builder
 
+<p align="center">
+    <a href="https://travis-ci.com/alexa-games/skill-flow-builder/"><img src="https://travis-ci.com/alexa-games/skill-flow-builder.svg?token=PX13NfYowpbqCaNHTcBg&branch=master"></a>
+    <a href="https://github.com/alexa-games/skill-flow-builder/actions"><img src="https://github.com/alexa-games/skill-flow-builder/workflows/Tests%20on%20Windows/badge.svg"/></a>
+    <a href="https://www.npmjs.com/package/@alexa-games/sfb-cli"><img src="https://img.shields.io/npm/v/@alexa-games/sfb-cli.svg"/></a>
+    <a href="https://www.npmjs.com/package/@alexa-games/sfb-cli"><img src="https://img.shields.io/npm/dt/@alexa-games/sfb-cli.svg"/></a>
+</p>
+
 Alexa’s Skill Flow Builder is a development suite that helps you create
 narrative-driven Alexa skills more quickly using a simple language that can model
 any narrative structure. It includes the [Skill Flow Builder Editor](packages/sfb-editor/)
