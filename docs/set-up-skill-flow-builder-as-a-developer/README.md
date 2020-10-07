@@ -298,6 +298,7 @@ the invocation name. For example, say, "Alexa, open the High Low Game."
 
 - [Skill Flow Builder Project Structure](./project-structure.md)
 - [Skill Flow Builder Life Cycle](./life-cycle.md)
+- [AWS CloudFormation Templates](./aws-cloudformation-templates.md)
 - [Create a custom extension](./create-a-custom-extension.md)
 - [Skill Flow Builder CLI Reference](./cli-reference.md)
 - [Set up Amazon Polly voices (Optional)](./setup-polly-voices.md)

@@ -8,6 +8,9 @@
     "version": {
       "allowBranch": "master"
     },
+    "publish": {
+      "message": "chore(release): publish %s\n\n[skip ci]"
+    },
     "bootstrap": {
       "ignore": "*"
     }

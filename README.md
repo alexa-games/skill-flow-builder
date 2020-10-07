@@ -49,7 +49,7 @@ the built-in scripting ability called scene instructions.
 The content debugger helps isolate debugging process from the content. You can
 view variables used, save state for later testing, and view content execution steps.
 
-See a more detailed view of the structure of typical SFB [project](docs/set-up-skill-flow-builder-as-a-developer/project-structure).
+See a more detailed view of the structure of typical SFB [project](docs/set-up-skill-flow-builder-as-a-developer/project-structure.md).
 
 For more information, see
 [Set up Skill Flow Builder as a Developer](docs/set-up-skill-flow-builder-as-a-developer/README.md)
