@@ -44,7 +44,8 @@ combination that you build and deploy. Each copy of `skill-stack.yaml`
 will be placed in its respective `metadata/<stage+locale>/` folder.
 You can adjust each stage+locale combination separately, and even
 share resources if desired by updating the associated settings (for example,
-"dynamo-db-session-table-name" and "s3-bucket-name") in the `abcConfig.json` overrides.
+`"dynamo-db-session-table-name"` and `"s3-bucket-name"`) in the `abcConfig.json`
+overrides.
 
 ```json
 "alpha-en-us": {
