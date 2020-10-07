@@ -20,7 +20,11 @@ command, then copy built code, imported story, and assets from
 `content/{locale}/resources` to the resulting deployment payload directory. If
 metadata exists copy `skill.json`, `ask-states.json`, and `ask-resources.json`
 from the `metadata/` directory for appropriate stages.
-6. Deploy: Runs `ask deploy` on the deployment payload.
+6. Infrastructure: If you are using the `cfn` deployer and this is your
+first time building a particular stage and locale, then `skill-stack.yaml` will
+be generated and placed in the `metadata/` directory. This will be copied to the
+`.deploy/` directory every time you deploy your skill.
+7. Deploy: Runs `ask deploy` on the deployment payload.
 > **Note:** This step is if you are running `alexa-sfb deploy` command:
 
 ## Skill Runtime Life Cycle
