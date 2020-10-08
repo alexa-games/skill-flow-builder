@@ -118,7 +118,7 @@ project files.
 This package uses yarn to manage dependencies, you can install yarn globally with
 
 ```sh
-npm install yarn -g.
+npm install -g yarn
 ```
 
 #### FFmpeg & LAME
