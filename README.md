@@ -166,7 +166,13 @@ To get everything up and running, first clone and navigate into this repository 
 git clone https://github.com/alexa-games/skill-flow-builder.git && cd skill-flow-builder/
 ```
 
-To build all the modules in the `packages/` directory, use `yarn build-modules`
+To install the node dependencies and build all the modules in the `packages/` directory:
+
+```sh
+yarn install
+```
+
+To rebuild the packages at any time, run the `yarn build-modules` command.
 
 Tests are run as part of the build process. You can run the full test coverage
 report by running `yarn coverage`. Tests can also be run locally inside any
