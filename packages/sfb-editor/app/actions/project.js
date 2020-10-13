@@ -512,7 +512,7 @@ export function openProject() {
   return dispatch => {
     const {dialog, getCurrentWindow} = remote;
     const win = getCurrentWindow();
-    const folderPaths = dialog.showOpenDialog(win, {
+    const folderPaths = dialog.showOpenDialogSync(win, {
       title: 'Open Project',
       properties: ['openDirectory'],
       filters: [

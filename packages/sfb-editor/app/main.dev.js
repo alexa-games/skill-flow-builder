@@ -97,7 +97,11 @@ const initApp = async () => {
     minWidth: 960,
     minHeight: 780,
     titleBarStyle: 'default',
-    webPreferences: {webviewTag: true}
+    webPreferences: {
+      webviewTag: true,
+      nodeIntegration: true,
+      enableRemoteModule: true
+    }
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);

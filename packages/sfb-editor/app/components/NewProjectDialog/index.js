@@ -105,7 +105,8 @@ class NewProjectDialog extends React.PureComponent {
     event.preventDefault();
 
     const win = getCurrentWindow();
-    const folderPaths = dialog.showOpenDialog(win, {
+
+    const folderPaths = dialog.showOpenDialogSync(win, {
       title: 'New Project',
       defaultPath: projectPath,
       properties: ['openDirectory', 'createDirectory'],
@@ -121,6 +122,7 @@ class NewProjectDialog extends React.PureComponent {
       log.info('User did not select a folder.');
       return;
     }
+
     this.setState({
       projectPath: folderPaths[0]
     });
