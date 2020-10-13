@@ -250,7 +250,6 @@
     "history": "^4.7.2",
     "identity-obj-proxy": "^3.0.0",
     "immutable": "^4.0.0-rc.12",
-    "marked": "^1.2.0",
     "memoize-one": "^5.0.0",
     "mime-types": "^2.1.22",
     "mini-css-extract-plugin": "^0.4.4",
