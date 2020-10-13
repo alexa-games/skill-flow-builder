@@ -47,6 +47,8 @@
     "files": [
       "app/dist/",
       "app/app.html",
+      "app/appBody.js",
+      "app/appHead.js",
       "app/utils-main",
       "app/main.prod.js",
       "app/main.prod.js.map",
