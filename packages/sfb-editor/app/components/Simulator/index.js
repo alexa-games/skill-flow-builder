@@ -128,14 +128,6 @@ class Simulator extends React.PureComponent {
     }
   }
 
-  showVoicePreviewLoginWindow = () => {
-    const modalPath = 'https://sfb-framework.s3.amazonaws.com/pollyPreviewLogin/index.html';
-    let win = new BrowserWindow({ width: 600, height: 600 });
-    win.on('close', () => { win = null });
-    win.loadURL(modalPath);
-    win.show();
-  }
-
   voicePreviewAccessTokenUpdated = (event, arg) => {
     const {
       setIsPollyPreview,
