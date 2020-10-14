@@ -24,7 +24,6 @@ import ResourcesImages from '../../containers/ResourcesImages';
 import ResourcesAudio from '../../containers/ResourcesAudio';
 import ResourcesNotes from '../../containers/ResourcesNotes';
 import FrontPage from '../../containers/FrontPage';
-import ResourcesDocs from '../../containers/ResourcesDocs';
 
 import { WorkspaceSecondaryMode } from '../../data/enums';
 
@@ -48,10 +47,6 @@ function Switch(props) {
       return <ResourcesAudio />;
     case WorkspaceSecondaryMode.Notes:
       return <ResourcesNotes />;
-    case WorkspaceSecondaryMode.Documentation:
-      return <ResourcesDocs content="formatting" />;
-    case WorkspaceSecondaryMode.Readme:
-      return <ResourcesDocs content="readme" />;
     case WorkspaceSecondaryMode.News:
       return <FrontPage editorLocale={workspace.editorLocale} />;
     default:
