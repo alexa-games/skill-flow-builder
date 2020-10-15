@@ -15,9 +15,17 @@ git:
 stages:
   - name: test
   - name: editor
+  - name: nightly
+    if: type = cron AND branch = develop
 jobs:
   include:
     - stage: editor
       name: 'Build Editor Installer for OSX'
       os: osx
       script: yarn editor-installer
+    - stage: nightly
+      name: 'Nightly Build'
+      script:
+        - lerna publish --yes --canary --preid nightly.$TRAVIS_BUILD_ID --dist-tag nightly
+      before_script:
+        - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
