@@ -16,8 +16,8 @@
  */
 
 .container {
-    padding: 20px;
-    min-height: 100%;
+  padding: 20px;
+  min-height: 100%;
 }
 
 .container :global(.ui.menu) {

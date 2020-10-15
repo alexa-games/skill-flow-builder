@@ -20,7 +20,7 @@
   background-color: #333;
   color: white;
   border-radius: 0.3rem;
-  box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.3);
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
 }
 
 .menu:after {
@@ -28,7 +28,7 @@
   left: 50%;
   bottom: 0;
   margin-bottom: -1rem;
-  transform: translate3d(-50%,0,0);
+  transform: translate3d(-50%, 0, 0);
 
   content: '';
   width: 0;
@@ -46,7 +46,7 @@
 }
 
 .menu :global(.ui.basic.buttons .ui.button:hover) {
-  background-color: rgba(255,255,255,0.1) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .hoverMenu {

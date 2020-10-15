@@ -16,16 +16,16 @@
  */
 
 .container {
-    flex: 1;
-    padding: 1em;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  padding: 1em;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .container header {
-    margin: 0 0 1em 0;
-    flex: 0 0 auto;
+  margin: 0 0 1em 0;
+  flex: 0 0 auto;
 }
 
 .container textarea {

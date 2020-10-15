@@ -151,8 +151,8 @@
 
 button.toolboxButton:global(.ui.button) {
   background-color: #eee;
-  margin-left: .05rem;
-  margin-right: .05rem;
+  margin-left: 0.05rem;
+  margin-right: 0.05rem;
   padding: 0.4em !important;
 }
 button.toolboxButton:global(.ui.button):hover {

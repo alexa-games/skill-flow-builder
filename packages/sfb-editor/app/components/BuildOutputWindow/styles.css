@@ -16,15 +16,15 @@
  */
 
 .buildOutputWindow {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #eee;
-    border-top: 1px solid var(--border-color-dark);
-    z-index: 99;
-  }
-  
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #eee;
+  border-top: 1px solid var(--border-color-dark);
+  z-index: 99;
+}
+
 .buildOutputWindow > header {
   display: flex;
   flex-direction: row;
@@ -32,13 +32,13 @@
   border-bottom: 1px solid var(--border-color-dark);
   padding: 0.5em 1em;
 }
-  
+
 .buildOutputWindow > header > button {
   border: none;
   padding: 0;
-  background-color: transparent
+  background-color: transparent;
 }
-  
+
 .buildOutputWindowow > header > button :global(.icon) {
   margin-right: 0;
 }

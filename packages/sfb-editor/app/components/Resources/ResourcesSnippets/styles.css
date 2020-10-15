@@ -32,8 +32,7 @@
 
 .header,
 .content,
-:global(.ui.list) > :global(.item)
-{
+:global(.ui.list) > :global(.item) {
   padding: 0.8em 0.2em 0.8em 1em;
 }
 
