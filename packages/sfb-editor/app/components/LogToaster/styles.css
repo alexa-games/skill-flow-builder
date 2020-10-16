@@ -33,7 +33,7 @@
   margin-bottom: 0.5em;
   background-color: #eee;
   border-radius: 1em;
-  box-shadow: 0 0.3em 0.2em rgba(0,0,0,0.3);
+  box-shadow: 0 0.3em 0.2em rgba(0, 0, 0, 0.3);
 }
 
 .toast {
@@ -41,7 +41,7 @@
   background-color: cornflowerblue;
   color: white;
   padding: 1em;
-  box-shadow: 0 0.3em 0.2em rgba(0,0,0,0.3);
+  box-shadow: 0 0.3em 0.2em rgba(0, 0, 0, 0.3);
 }
 
 .toast + .toast {

@@ -36,7 +36,7 @@
 .logWindow > header > button {
   border: none;
   padding: 0;
-  background-color: transparent
+  background-color: transparent;
 }
 
 .logWindow > header > button :global(.icon) {
