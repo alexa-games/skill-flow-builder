@@ -84,6 +84,7 @@ export const DUMMY_FILE_SYSTEM = {
   },
 };
 
+const FAKE_VS_CODE_DIR_PATH = path.resolve(`${__dirname}/../../node_modules/vscode`);
 const FAKE_VS_CODE_PATH = path.resolve(`${__dirname}/../../node_modules/vscode/index.js`);
 
 /**
@@ -101,6 +102,7 @@ const FAKE_VS_CODE_PATH = path.resolve(`${__dirname}/../../node_modules/vscode/i
  * this function.
  */
 export const mockVsCode = () => {
+  fs.mkdirSync(FAKE_VS_CODE_DIR_PATH, { recursive: true });
   fs.writeFileSync(FAKE_VS_CODE_PATH, `
 exports.TextEditorRevealType = {};
 exports.DiagnosticSeverity = {};
