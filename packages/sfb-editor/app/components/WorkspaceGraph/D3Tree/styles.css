@@ -36,7 +36,6 @@
   fill: rgba(100, 149, 237, 0.2);
 }
 
-
 .edgeHide,
 .nodeHide {
   opacity: 0;
@@ -79,7 +78,7 @@
   font-size: 12px;
   text-anchor: middle;
   font-family: 'Icons';
-  transform: translate3d(0,0.35em,0);
+  transform: translate3d(0, 0.35em, 0);
 }
 
 .nodeSelected:not(.nodeLink) .nodeCircle {
@@ -120,7 +119,7 @@
   font-size: 12px;
   text-anchor: middle;
   font-family: 'Icons';
-  transform: translate3d(0,2em,0);
+  transform: translate3d(0, 2em, 0);
 }
 
 .nodeOpen .nodeToggleIconClosed,
@@ -148,7 +147,7 @@
 
   pointer-events: none;
   transition: opacity 150ms linear;
-  box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.2);
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .tooltip:empty {
@@ -157,14 +156,14 @@
 }
 
 .tooltip.say {
-  transform: translate3d(10px,10px,0);
+  transform: translate3d(10px, 10px, 0);
   background-color: cornflowerblue;
   border-top-left-radius: 0;
   color: white;
 }
 
 .tooltip.hear {
-  transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%, 0, 0);
   background-color: lightgreen;
   border-top-right-radius: 0;
   color: green;
@@ -201,10 +200,9 @@
 
 button.toolboxButton:global(.ui.button) {
   background-color: #f6f6f6;
-  margin-left: .25rem;
-  margin-right: .25rem;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 button.toolboxButton:global(.ui.button):hover {
   background-color: #bbb;
 }
-

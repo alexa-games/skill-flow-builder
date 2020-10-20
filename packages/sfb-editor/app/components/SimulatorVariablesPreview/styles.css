@@ -16,16 +16,15 @@
  */
 
 .headerButton {
-    background-color: transparent !important;
-    border: none !important;
-    opacity: 0.2;
-    transition: opacity 100ms linear;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .headerButton:focus,
-  .headerButton:hover {
-    opacity: 0.5;
-  }
-  
+  background-color: transparent !important;
+  border: none !important;
+  opacity: 0.2;
+  transition: opacity 100ms linear;
+  cursor: pointer;
+  outline: none;
+}
+
+.headerButton:focus,
+.headerButton:hover {
+  opacity: 0.5;
+}

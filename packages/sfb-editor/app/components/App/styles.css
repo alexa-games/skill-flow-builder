@@ -21,9 +21,9 @@
   grid-template-columns: var(--app-rail-width) auto;
   grid-template-rows: var(--app-title-bar) auto var(--app-footer-height);
   grid-template-areas:
-    "app-title-bar app-title-bar"
-    "app-rail app-main"
-    "app-footer app-footer";
+    'app-title-bar app-title-bar'
+    'app-rail app-main'
+    'app-footer app-footer';
 
   overflow: hidden;
 }
