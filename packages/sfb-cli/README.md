@@ -4,8 +4,8 @@ This module interacts with the
 [Alexa Skills Kit (ASK)](https://developer.amazon.com/en-US/alexa/alexa-skills-kit)
 and [AWS CLI](https://github.com/aws/aws-cli) to deploy and update your skill.
 
-Visit [Skill Flow Builder](https://alexa.design/sfb-editor-landing-page) for
-more information.
+Visit [Skill Flow Builder on Github](https://github.com/alexa-games/skill-flow-builder)
+for more information.
 
 ## Installation
 
