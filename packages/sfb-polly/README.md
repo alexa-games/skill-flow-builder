@@ -6,8 +6,8 @@ the SFB editor, and Skill Flow Builder built skills. Handles the making of
 calls out to Polly, the caching the audio files with S3, and the mixing of the
 audio responses using FFmpeg.
 
-Visit [Skill Flow Builder](https://alexa.design/sfb-editor-landing-page) for
-more information.
+Visit [Skill Flow Builder on Github](https://github.com/alexa-games/skill-flow-builder)
+for more information.
 
 ## Getting Started
 

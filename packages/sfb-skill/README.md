@@ -7,8 +7,8 @@ Alexa response to be handled by ASK. This package also includes any extensions
 that enable additional Skill interfaces, such as In-Skill Products and the
 Alexa Presentation Language.
 
-Visit [Skill Flow Builder](https://alexa.design/sfb-editor-landing-page) for
-more information.
+Visit [Skill Flow Builder on Github](https://github.com/alexa-games/skill-flow-builder)
+for more information.
 
 ## Getting Started
 
