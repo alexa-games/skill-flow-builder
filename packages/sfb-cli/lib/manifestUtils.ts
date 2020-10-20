@@ -174,7 +174,14 @@ export class ManifestUtils {
             return;
         }
 
-        if (!semver.satisfies(toolingMetadata.version, versionRange)) {
+        const version = semver.coerce(toolingMetadata.version);
+
+        if (!version || !semver.valid(version)) {
+            logger.warning(`Found invalid version ${toolingMetadata.version} for ${frameworkName}.`);
+            return;
+        }
+
+        if (!semver.satisfies(version, versionRange)) {
             throw new Error(`Skill Flow Builder version ${toolingMetadata.version} is not compatible ` + 
             `because story's package.json specifies ${versionRangeExpression} for ${frameworkName}.`);
         }

@@ -36,8 +36,8 @@ describe('ManifestUtils', () => {
 
     beforeEach(() => {
         readRawPackageVersionStub = stub(ManifestUtils, 'readRawPackageVersion').callsFake(
-            () => { 
-                return '0.5.0-alpha.3' 
+            () => {
+                return '0.5.0-alpha.3'
             });
     });
 
@@ -62,8 +62,8 @@ describe('ManifestUtils', () => {
     it('repairPackageManifest ver 1', async () => {
         readRawPackageVersionStub.restore();
         readRawPackageVersionStub = stub(ManifestUtils, 'readRawPackageVersion').callsFake(
-            () => { 
-                return '1.1.4' 
+            () => {
+                return '1.1.4'
             });
 
         const testManifest = JSON.parse(JSON.stringify(TestManifest));
@@ -77,15 +77,15 @@ describe('ManifestUtils', () => {
 
     it('Multiple package versions', async () => {
         getPackageVersionFromNpmStub = stub(ManifestUtils, 'getPackageVersionsFromNpm').callsFake(async (packageName, stdOutput) => {
-            return "sfb-f@0.1.0 '0.1.0'\nsfb-f@0.1.1 '0.1.1'\nsfb-f@0.2.0 '0.2.0'\nsfb-f@0.2.1 '0.2.1'\n" + 
-            "sfb-f@0.3.0 '0.3.0'\nsfb-f@0.4.0 '0.4.0'\nsfb-f@0.5.0 '0.5.0'\nsfb-f@0.5.1 '0.5.1'";
+            return "sfb-f@0.1.0 '0.1.0'\nsfb-f@0.1.1 '0.1.1'\nsfb-f@0.2.0 '0.2.0'\nsfb-f@0.2.1 '0.2.1'\n" +
+                "sfb-f@0.3.0 '0.3.0'\nsfb-f@0.4.0 '0.4.0'\nsfb-f@0.5.0 '0.5.0'\nsfb-f@0.5.1 '0.5.1'";
         })
 
         const version = await ManifestUtils.getLatestsMajorVersionFromNpm(
-            { 
-                name: '@alexa-games/any-thing', 
-                version: '0.1.0' 
-            }, 
+            {
+                name: '@alexa-games/any-thing',
+                version: '0.1.0'
+            },
             new ConsoleStdOutput());
 
         assert.equal(version, '0.5.1', 'Should match last version.');
@@ -97,10 +97,10 @@ describe('ManifestUtils', () => {
         });
 
         const version = await ManifestUtils.getLatestsMajorVersionFromNpm(
-            { 
-                name: '@alexa-games/any-thing', 
-                version: '0.1.0' 
-            }, 
+            {
+                name: '@alexa-games/any-thing',
+                version: '0.1.0'
+            },
             new ConsoleStdOutput());
 
 
@@ -115,7 +115,7 @@ describe('ManifestUtils', () => {
                 dependencies: {
                     '@alexa-games/sfb-f': '^1.1.0'
                 }
-            }, 
+            },
             {
                 name: '@alexa-games/sfb-cli',
                 version: '1.2.3'
@@ -125,14 +125,14 @@ describe('ManifestUtils', () => {
 
     it('Story package newer', async () => {
 
-        // This should be ok since the sfb-f version range is anything higher than 1.1.0 (but less than 2.0.0)
+        // This should throw an error since the sfb-f version range is anything higher than 1.3.0 (but less than 2.0.0)
         try {
             ManifestUtils.checkDeploymentPackageVersionWithTooling(
                 {
                     dependencies: {
                         '@alexa-games/sfb-f': '^1.3.0'
                     }
-                }, 
+                },
                 {
                     name: '@alexa-games/sfb-cli',
                     version: '1.2.3'
@@ -146,17 +146,72 @@ describe('ManifestUtils', () => {
 
     it('Story wrong major version', async () => {
 
-        // This should be ok since the sfb-f version range is anything higher than 1.1.0 (but less than 2.0.0)
+        // This should throw an error since the sfb-f version range is anything higher than 2.0.0 (but less than 3.0.0)
         try {
             ManifestUtils.checkDeploymentPackageVersionWithTooling(
                 {
                     dependencies: {
                         '@alexa-games/sfb-f': '^2.0.0'
                     }
-                }, 
+                },
                 {
                     name: '@alexa-games/sfb-cli',
                     version: '1.2.3'
+                },
+                new ConsoleLogger());
+            assert(false, 'Should have thrown by now.')
+        } catch (e) {
+            assert(e.message && e.message.indexOf('is not compatible') > 0, 'Should report not compatible.');
+        }
+    });
+
+    it('Story coerced version compatible', async () => {
+        // This should be ok since the sfb-f version range is anything higher than 1.1.0 (but less than 2.0.0)
+        ManifestUtils.checkDeploymentPackageVersionWithTooling(
+            {
+                dependencies: {
+                    '@alexa-games/sfb-f': '^1.1.0'
+                }
+            },
+            {
+                name: '@alexa-games/sfb-cli',
+                version: '1.2.3-nightly.1234567' // This should be coerced into version 1.2.3
+            },
+            new ConsoleLogger());
+    });
+
+    it('Story coerced version newer', async () => {
+        // This should throw an error since the sfb-f version range is anything higher than 1.3.0 (but less than 2.0.0)
+        try {
+            ManifestUtils.checkDeploymentPackageVersionWithTooling(
+                {
+                    dependencies: {
+                        '@alexa-games/sfb-f': '^1.3.0'
+                    }
+                },
+                {
+                    name: '@alexa-games/sfb-cli',
+                    version: '1.2.3-nightly.1234567' // This should be coerced into version 1.2.3
+                },
+                new ConsoleLogger());
+            assert(false, 'Should have thrown by now.')
+        } catch (e) {
+            assert(e.message && e.message.indexOf('is not compatible') > 0, 'Should report not compatible.');
+        }
+    });
+
+    it('Story coerced wrong major version', async () => {
+        // This should throw an error since the sfb-f version range is anything higher than 2.0.0 (but less than 3.0.0)
+        try {
+            ManifestUtils.checkDeploymentPackageVersionWithTooling(
+                {
+                    dependencies: {
+                        '@alexa-games/sfb-f': '^2.0.0'
+                    }
+                },
+                {
+                    name: '@alexa-games/sfb-cli',
+                    version: '1.2.3-nightly.1234567' // This should be coerced into version 1.2.3
                 },
                 new ConsoleLogger());
             assert(false, 'Should have thrown by now.')
