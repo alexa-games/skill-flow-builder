@@ -5,8 +5,8 @@ and driver functionalities that powers the Editor and the CLI. It handles the
 interpretation of SFB’s domain-specific language into a narrative structure,
 i.e., importing, validating, and creating interactive story skills for Alexa.
 
-Visit [Skill Flow Builder](https://alexa.design/sfb-editor-landing-page) for more
-information.
+Visit [Skill Flow Builder on Github](https://github.com/alexa-games/skill-flow-builder)
+for more information.
 
 ## Getting Started
 

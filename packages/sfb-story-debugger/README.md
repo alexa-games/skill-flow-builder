@@ -4,8 +4,8 @@ The Skill Flow Builder Story Debugger. This module enables you to simulate your
 project’s behavior through the command line by running the SFB content locally,
 rather than calling a deployed skill over the network.
 
-Visit [Skill Flow Builder](https://alexa.design/sfb-editor-landing-page) for
-more information.
+Visit [Skill Flow Builder on Github](https://github.com/alexa-games/skill-flow-builder)
+for more information.
 
 ## Getting Started
 
