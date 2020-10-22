@@ -304,7 +304,7 @@ describe('alexa-sfb stage', () => {
       );
     });
 
-    it('modifies package.json to remove dev dependencies and adjust local paths', async () => {
+    it('modifies package.json to adjust local paths', async () => {
       await stageCommand.run();
 
       assert.deepEqual(
@@ -314,6 +314,9 @@ describe('alexa-sfb stage', () => {
             dummy: 'dependency',
             localDependency: `file:${path.join('..', '..', '..', 'foo', 'bar')}`,
           },
+          devDependencies: {
+            another: 'dependency'
+          }
         },
       );
     });
