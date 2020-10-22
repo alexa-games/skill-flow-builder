@@ -54,17 +54,16 @@ export class VscodeExtensionCommand implements Command {
             vscodeExtSoucePath = pathModule.join(dirs.sfbRootPath, '..', SFB_VSCODE_EXTENSION);
         }
 
-        await FileUtils.recursiveCopy(
-            pathModule.join(vscodeExtSoucePath, '*'), 
-            vscodeExtDestPath);
-
-        // Ensure module is fully resolved once moved. Do this in the destination since user won't need to be root.
         await Utilities.runCommandInDirectoryAsync(
             Utilities.npxBin,
             [ 'npm', 'install', '--production' ],
-            vscodeExtDestPath,
+            vscodeExtSoucePath,
             this.stdOutput,
             { shell: true });
+
+        await FileUtils.recursiveCopy(
+            pathModule.join(vscodeExtSoucePath, '*'),
+            vscodeExtDestPath);
 
         this.logger.success('Success. Restart vscode to pickup extension features.');
     }
