@@ -267,7 +267,6 @@ export class StageCommand implements Command {
         const lambdaPackageManifestFilePath = pathModule.join(lambdaCodeDeployPath, PACKAGE_MANIFEST_FILE);
 
         const packageManifest = JSON.parse(fs.readFileSync(pathModule.join(dirs.codePath, PACKAGE_MANIFEST_FILE), "utf8"));
-        delete packageManifest.devDependencies;
 
         // Since we're moving the manifest to a different directory for deployment, we need to updated any local runtime
         // dependencies that are using relative paths.
