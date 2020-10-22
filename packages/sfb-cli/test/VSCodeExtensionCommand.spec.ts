@@ -90,9 +90,9 @@ describe('alexa-sfb vscode', () => {
   it('ensures the extension is fully resolved', async () => {
     await vscodeExtension.run();
 
-    const vscodeSrcPath = path.resolve(path.join(homeDir, 'sfb-cli', 'node_modules', '@alexa-games', 'sfb-vscode-extension'));
+    const vscodeExtSrcPath = path.join(homeDir, 'sfb-cli', 'node_modules', '@alexa-games', 'sfb-vscode-extension');
     assertCalledManyTimesWithArgs(mockSpawn, [
-      ['npx', ['npm', 'install', '--production'], { cwd: `${path.resolve(vscodeSrcPath)}`, shell: true}]
+      ['npx', ['npm', 'install', '--production'], { cwd: `${vscodeExtSrcPath}`, shell: true}]
     ]);
   });
 });
