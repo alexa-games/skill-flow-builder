@@ -17,13 +17,14 @@
 
 import { Utilities } from './utilities';
 import { FileUtils } from './fileUtils';
-import { SpecialPaths } from './specialPaths';
+import { PACKAGE_MANIFEST_FILE, SpecialPaths } from './specialPaths';
 import { Logger } from './logger';
 import { StdOutput } from './stdOutput';
 import { Command } from './command';
 import { existsSync } from 'fs';
 
 const pathModule = require('path');
+const fs = require('fs');
 
 /**
  * Converts user's story to a runnable format.
@@ -54,16 +55,36 @@ export class VscodeExtensionCommand implements Command {
             vscodeExtSoucePath = pathModule.join(dirs.sfbRootPath, '..', SFB_VSCODE_EXTENSION);
         }
 
-        await Utilities.runCommandInDirectoryAsync(
-            Utilities.npxBin,
-            [ 'npm', 'install', '--production' ],
-            vscodeExtSoucePath,
-            this.stdOutput,
-            { shell: true });
+        await FileUtils.deleteDir(vscodeExtDestPath, this.stdOutput); // Delete any previous installation
 
         await FileUtils.recursiveCopy(
             pathModule.join(vscodeExtSoucePath, '*'),
             vscodeExtDestPath);
+
+        const packageJson = FileUtils.loadJson(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE));
+
+        const packageMatch = new RegExp(/^@alexa-games\/(sfb-[a-z].*)/);
+
+        let manifestModified = false;
+        for (const dependency in packageJson.dependencies) {
+            const match = packageMatch.exec(dependency);
+            if (packageJson.dependencies[dependency].startsWith('file:') && match) {
+                packageJson.dependencies[dependency] = `file:${pathModule.join(dirs.sfbRootPath, '..', match[1])}`;
+                manifestModified = true;
+            }
+        }
+
+        if (manifestModified) {
+            fs.writeFileSync(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE), JSON.stringify(packageJson, null, 4));
+        }
+
+        // Ensure module is fully resolved once moved. Do this in the destination since user won't need to be root.
+        await Utilities.runCommandInDirectoryAsync(
+            Utilities.npxBin,
+            ['npm', 'install', '--production'],
+            vscodeExtDestPath,
+            this.stdOutput,
+            { shell: true });
 
         this.logger.success('Success. Restart vscode to pickup extension features.');
     }
