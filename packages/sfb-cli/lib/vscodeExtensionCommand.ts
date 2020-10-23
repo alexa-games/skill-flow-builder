@@ -54,16 +54,62 @@ export class VscodeExtensionCommand implements Command {
             vscodeExtSoucePath = pathModule.join(dirs.sfbRootPath, '..', SFB_VSCODE_EXTENSION);
         }
 
-        await Utilities.runCommandInDirectoryAsync(
-            Utilities.npxBin,
-            [ 'npm', 'install', '--production' ],
-            vscodeExtSoucePath,
-            this.stdOutput,
-            { shell: true });
+        try { // Case: the package was installed locally/remotely with user permissions
+            await Utilities.runCommandInDirectoryAsync(
+                Utilities.npxBin,
+                ['npm', 'install', '--production'],
+                vscodeExtSoucePath,
+                this.stdOutput,
+                { shell: true });
 
-        await FileUtils.recursiveCopy(
-            pathModule.join(vscodeExtSoucePath, '*'),
-            vscodeExtDestPath);
+            await FileUtils.recursiveCopy(
+                pathModule.join(vscodeExtSoucePath, '*'),
+                vscodeExtDestPath);
+        } catch (e) { // Case: the package was installed remotely with root permissions
+            this.logger.warning('Unable to access related modules, copying the extension over before installing...');
+
+            await FileUtils.recursiveCopy(
+                pathModule.join(vscodeExtSoucePath, '*'),
+                vscodeExtDestPath);
+
+            try { // Ensure module is fully resolved once moved. Do this in the destination since user won't need to be root.
+                await Utilities.runCommandInDirectoryAsync(
+                    Utilities.npxBin,
+                    ['npm', 'install', '--production'],
+                    vscodeExtDestPath,
+                    this.stdOutput,
+                    { shell: true });
+            } catch (e) { // Case: the package was installed locally with root permissions
+                this.logger.warning('CLI was installed locally, moving related modules over...');
+
+                const neededModules = ['sfb-f', 'sfb-util', 'sfb-polly'];
+
+                neededModules.forEach(async (moduleName: string) => {
+                    const sourcePath = pathModule.join(dirs.sfbRootPath, '..', moduleName);
+                    const destPath = FileUtils.fixpath(`${homeDir}/.vscode/extensions/${moduleName}`);
+
+                    await FileUtils.recursiveCopy(
+                        pathModule.join(sourcePath, '*'),
+                        destPath);
+                });
+
+                try {
+                    await Utilities.runCommandInDirectoryAsync(
+                        Utilities.npxBin,
+                        ['npm', 'install', '--production'],
+                        vscodeExtDestPath,
+                        this.stdOutput,
+                        { shell: true });
+                } catch (e) {
+                    this.logger.error(e);
+                } finally {
+                    neededModules.forEach(async (moduleName: string) => {
+                        const destPath = FileUtils.fixpath(`${homeDir}/.vscode/extensions/${moduleName}`);
+                        await FileUtils.deleteDir(destPath, this.stdOutput);
+                    });
+                }
+            }
+        }
 
         this.logger.success('Success. Restart vscode to pickup extension features.');
     }
