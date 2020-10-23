@@ -28,14 +28,14 @@ import { ConsoleLogger } from '../lib/consoleLogger';
 import { ConsoleStdOutput } from '../lib/consoleStdOutput';
 
 import {
-    createMockSpawn,
-    assertCalledManyTimesWithArgs,
-    stubSfbCliRoot,
-    readTextFile,
-    DUMMY_SFB_ROOT,
-    SFB_VSCODE_EXTENSION_NAME,
-    isWin32
-  } from './testUtilities';
+  createMockSpawn,
+  assertCalledManyTimesWithArgs,
+  stubSfbCliRoot,
+  readTextFile,
+  DUMMY_SFB_ROOT,
+  SFB_VSCODE_EXTENSION_NAME,
+  isWin32
+} from './testUtilities';
 
 describe('alexa-sfb vscode', () => {
   let dummyFileSystem: any;
@@ -44,7 +44,7 @@ describe('alexa-sfb vscode', () => {
 
   let homeDir = isWin32() ? '\\home' : '/home';
 
-  beforeEach(() => {  
+  beforeEach(() => {
     sinon.stub(process, 'env').value({ HOME: homeDir, USERPROFILE: homeDir });
 
     mockFileSystem({
@@ -58,7 +58,7 @@ describe('alexa-sfb vscode', () => {
         }
       }
     });
-    
+
     stubSfbCliRoot();
 
     mockSpawn = createMockSpawn();
@@ -90,9 +90,8 @@ describe('alexa-sfb vscode', () => {
   it('ensures the extension is fully resolved', async () => {
     await vscodeExtension.run();
 
-    const vscodeExtSrcPath = path.join(homeDir, 'sfb-cli', 'node_modules', '@alexa-games', 'sfb-vscode-extension');
     assertCalledManyTimesWithArgs(mockSpawn, [
-      ['npx', ['npm', 'install', '--production'], { cwd: `${vscodeExtSrcPath}`, shell: true}]
+      ['npx', ['npm', 'install', '--production'], { cwd: `${vscodeExtDestPath}`, shell: true }]
     ]);
   });
 });
