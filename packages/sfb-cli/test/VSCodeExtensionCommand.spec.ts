@@ -99,7 +99,7 @@ describe('alexa-sfb vscode', () => {
 
     const expectedDependencies = {
       "dummy-dependency": "// dummy dependency",
-      "@alexa-games/sfb-util": `file:${path.join(DUMMY_SFB_ROOT, '..')}/sfb-util`, // Expected local reference
+      "@alexa-games/sfb-util": `file:${path.join(DUMMY_SFB_ROOT, '..', 'sfb-util')}`, // Expected local reference
       "@alexa-games/sfb-f": "^1.2.3" // Simulated remote location
     };
 
