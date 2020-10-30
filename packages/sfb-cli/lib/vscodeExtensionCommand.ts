@@ -17,13 +17,14 @@
 
 import { Utilities } from './utilities';
 import { FileUtils } from './fileUtils';
-import { SpecialPaths } from './specialPaths';
+import { PACKAGE_MANIFEST_FILE, SpecialPaths } from './specialPaths';
 import { Logger } from './logger';
 import { StdOutput } from './stdOutput';
 import { Command } from './command';
-import { existsSync, readdirSync } from 'fs';
+import { existsSync, fstat, readdirSync } from 'fs';
 
 const pathModule = require('path');
+const fs = require('fs');
 
 /**
  * Converts user's story to a runnable format.
@@ -69,20 +70,20 @@ export class VscodeExtensionCommand implements Command {
                 this.stdOutput,
                 { shell: true });
         } catch (e) { // Case: the package was installed locally
-            this.logger.warning('Package was installed locally, moving modules over for the installation...');
+            this.logger.warning('Package was installed locally, updating package manifest paths...');
 
-            const moduleNames = readdirSync(pathModule.join(dirs.sfbRootPath, '..'))
+            const packageJson = FileUtils.loadJson(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE));
 
-            moduleNames.forEach(async moduleName => {
-                if (moduleName === SFB_VSCODE_EXTENSION) return;
+            const packageMatch = new RegExp(/^@alexa-games\/(sfb-[a-z].*)/);
+            
+            for (const dependency in packageJson.dependencies) {
+                const match = packageMatch.exec(dependency);
+                if (match) {
+                    packageJson.dependencies[dependency] = `file:${pathModule.join(dirs.sfbRootPath, '..', match[1])}`;
+                }
+            }
 
-                const sourcePath = pathModule.join(dirs.sfbRootPath, '..', moduleName);
-                const destPath = FileUtils.fixpath(`${homeDir}/.vscode/extensions/${moduleName}`);
-
-                await FileUtils.recursiveCopy(
-                    pathModule.join(sourcePath, '*'),
-                    destPath);
-            });
+            fs.writeFileSync(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE), JSON.stringify(packageJson, null, 4));
 
             try {
                 await Utilities.runCommandInDirectoryAsync(
@@ -93,16 +94,8 @@ export class VscodeExtensionCommand implements Command {
                     { shell: true });
             } catch (e) {
                 this.logger.error(e);
-            } finally { // Cleanup the moved sfb-* modules
-                moduleNames.forEach(async moduleName => {
-                    if (moduleName === SFB_VSCODE_EXTENSION) return;
-
-                    const destPath = FileUtils.fixpath(`${homeDir}/.vscode/extensions/${moduleName}`);
-                    await FileUtils.deleteDir(destPath, this.stdOutput);
-                });
             }
         }
-
 
         this.logger.success('Success. Restart vscode to pickup extension features.');
     }
