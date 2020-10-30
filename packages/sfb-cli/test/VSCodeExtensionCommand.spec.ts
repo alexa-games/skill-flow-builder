@@ -52,7 +52,14 @@ describe('alexa-sfb vscode', () => {
         node_modules: {
           ['@alexa-games']: {
             [SFB_VSCODE_EXTENSION_NAME]: { // Directory to copy the extension from
-              'dummy-file': 'dummy-contents'
+              'dummy-file': 'dummy-contents',
+              'package.json': JSON.stringify({
+                "dependencies": {
+                  "dummy-dependency": "// dummy dependency",
+                  "@alexa-games/sfb-util": "file:../dummy/local/reference",
+                  "@alexa-games/sfb-f": "^1.2.3" // Simulated remote location
+                }
+              }, null, 4)
             }
           }
         }
@@ -85,6 +92,18 @@ describe('alexa-sfb vscode', () => {
     );
 
     assert.equal(readTextFile(vscodeExtDestPath + '/dummy-file'), 'dummy-contents');
+  });
+
+  it('fixes the local module references', async () => {
+    await vscodeExtension.run();
+
+    const expectedDependencies = {
+      "dummy-dependency": "// dummy dependency",
+      "@alexa-games/sfb-util": "file:/home/sfb-util", // Expected local reference
+      "@alexa-games/sfb-f": "^1.2.3" // Dummy remote location
+    }
+
+    assert.deepEqual(JSON.parse(readTextFile(vscodeExtDestPath + '/package.json')).dependencies, expectedDependencies);
   });
 
   it('ensures the extension is fully resolved', async () => {

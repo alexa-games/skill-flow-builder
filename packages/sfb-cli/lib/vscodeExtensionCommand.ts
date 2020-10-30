@@ -74,6 +74,7 @@ export class VscodeExtensionCommand implements Command {
 
         fs.writeFileSync(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE), JSON.stringify(packageJson, null, 4));
 
+        // Ensure module is fully resolved once moved. Do this in the destination since user won't need to be root.
         await Utilities.runCommandInDirectoryAsync(
             Utilities.npxBin,
             ['npm', 'install', '--production'],
