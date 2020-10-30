@@ -21,7 +21,7 @@ import { PACKAGE_MANIFEST_FILE, SpecialPaths } from './specialPaths';
 import { Logger } from './logger';
 import { StdOutput } from './stdOutput';
 import { Command } from './command';
-import { existsSync, fstat, readdirSync } from 'fs';
+import { existsSync } from 'fs';
 
 const pathModule = require('path');
 const fs = require('fs');
