@@ -67,7 +67,6 @@ export class VscodeExtensionCommand implements Command {
 
         for (const dependency in packageJson.dependencies) {
             const match = packageMatch.exec(dependency);
-            console.log(packageJson.dependencies[dependency]);
             if (packageJson.dependencies[dependency].startsWith('file:') && match) {
                 packageJson.dependencies[dependency] = `file:${pathModule.join(dirs.sfbRootPath, '..', match[1])}`;
             }
