@@ -57,45 +57,30 @@ export class VscodeExtensionCommand implements Command {
 
         await FileUtils.deleteDir(vscodeExtDestPath, this.stdOutput); // Delete any previous installation
 
-        try { // Case: the package was installed remotely
+        await FileUtils.recursiveCopy(
+            pathModule.join(vscodeExtSoucePath, '*'),
+            vscodeExtDestPath);
 
-            await FileUtils.recursiveCopy(
-                pathModule.join(vscodeExtSoucePath, '*'),
-                vscodeExtDestPath);
+        const packageJson = FileUtils.loadJson(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE));
 
-            await Utilities.runCommandInDirectoryAsync( // Ensure module is fully resolved once moved. Do this in the destination since user won't need to be root.
-                Utilities.npxBin,
-                ['npm', 'install', '--production'],
-                vscodeExtDestPath,
-                this.stdOutput,
-                { shell: true });
-        } catch (e) { // Case: the package was installed locally
-            this.logger.warning('Package was installed locally, updating package manifest paths...');
+        const packageMatch = new RegExp(/^@alexa-games\/(sfb-[a-z].*)/);
 
-            const packageJson = FileUtils.loadJson(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE));
-
-            const packageMatch = new RegExp(/^@alexa-games\/(sfb-[a-z].*)/);
-            
-            for (const dependency in packageJson.dependencies) {
-                const match = packageMatch.exec(dependency);
-                if (match) {
-                    packageJson.dependencies[dependency] = `file:${pathModule.join(dirs.sfbRootPath, '..', match[1])}`;
-                }
-            }
-
-            fs.writeFileSync(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE), JSON.stringify(packageJson, null, 4));
-
-            try {
-                await Utilities.runCommandInDirectoryAsync(
-                    Utilities.npxBin,
-                    ['npm', 'install', '--production'],
-                    vscodeExtDestPath,
-                    this.stdOutput,
-                    { shell: true });
-            } catch (e) {
-                this.logger.error(e);
+        for (const dependency in packageJson.dependencies) {
+            const match = packageMatch.exec(dependency);
+            console.log(packageJson.dependencies[dependency]);
+            if (packageJson.dependencies[dependency].startsWith('file:') && match) {
+                packageJson.dependencies[dependency] = `file:${pathModule.join(dirs.sfbRootPath, '..', match[1])}`;
             }
         }
+
+        fs.writeFileSync(pathModule.join(vscodeExtDestPath, PACKAGE_MANIFEST_FILE), JSON.stringify(packageJson, null, 4));
+
+        await Utilities.runCommandInDirectoryAsync(
+            Utilities.npxBin,
+            ['npm', 'install', '--production'],
+            vscodeExtDestPath,
+            this.stdOutput,
+            { shell: true });
 
         this.logger.success('Success. Restart vscode to pickup extension features.');
     }
