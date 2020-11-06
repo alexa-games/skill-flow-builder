@@ -88,7 +88,7 @@ function printAllLogMessagesToConsole(actionValues) {
   });
 }
 
-describe('Project integration tests', async () => {
+describe('Project integration tests', () => {
   beforeAll(() => {
     jest.spyOn(extensionLoaders, 'getCustomExtensionLoader')
       .mockImplementation((customExtensionPath, locale, storyConfigPath, contentSource) => {
