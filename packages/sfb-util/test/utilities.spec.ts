@@ -15,8 +15,12 @@
  * permissions and limitations under the License.
  */
 
-import { readUtf8FileExcludingBom, readUtf8FileExcludingBomSync } from '../utilities';
-import { strict as assert } from 'assert';
+import {
+    readUtf8FileExcludingBom,
+    readUtf8FileExcludingBomSync,
+    sanitizeCommandLineParameter
+} from '../utilities';
+import { fail, strict as assert } from 'assert';
 
 describe('utilities', () => {
 
@@ -46,5 +50,31 @@ describe('utilities', () => {
         const output = await readUtf8FileExcludingBom(TestReadUtf8FileWithBomPath);
 
         assert.equal(output, ExpectedOutput);
+    });
+
+    describe('sanitizeCommandLineParameter', () => {
+        it('removes double quotes', () => {
+            const actual = sanitizeCommandLineParameter('fake" && rm -rf / && echo "');
+
+            assert.equal(actual, 'fake && rm -rf / && echo ');
+        });
+
+        it('removes single quotes', () => {
+            const actual = sanitizeCommandLineParameter("fake' && rm -rf / && echo '");
+
+            assert.equal(actual, 'fake && rm -rf / && echo ');
+        });
+
+        it('removes line breaks', () => {
+            const actual = sanitizeCommandLineParameter('fake\\\r\n" && rm -rf / && echo "');
+
+            assert.equal(actual, 'fake && rm -rf / && echo ');
+        });
+
+        it('removes environment variable syntax', () => {
+            const actual = sanitizeCommandLineParameter('fake" && echo ${MY_SECRET_CREDENTIALS} "');
+
+            assert.equal(actual, 'fake && echo MY_SECRET_CREDENTIALS ');
+        });
     });
 });

@@ -65,7 +65,7 @@ describe('alexa-sfb deploy-layer', () => {
   };
 
 
-  const mockDeployShellCommands = (deployOptions: any) => {
+  const mockDeployShellCommands = (deployOptions: { layerNames: string[], functionName: string }) => {
     const {
       layerNames,
       functionName
@@ -74,9 +74,9 @@ describe('alexa-sfb deploy-layer', () => {
     return [
       ['aws',
         ['lambda', 'publish-layer-version',
-          '--layer-name', `${ASK_SKILL_DIRECTORY_NAME}-lambda-layer`,
-          '--zip-file', `fileb://${ASK_SKILL_DIRECTORY_NAME}-lambda-layer.zip`,
-          '--compatible-runtimes', 'nodejs10.x',
+          '--layer-name', `"${ASK_SKILL_DIRECTORY_NAME}-lambda-layer"`,
+          '--zip-file', `"fileb://${ASK_SKILL_DIRECTORY_NAME}-lambda-layer.zip"`,
+          '--compatible-runtimes', '"nodejs10.x"',
           '--cli-connect-timeout 30000'
         ],
         {
@@ -86,7 +86,7 @@ describe('alexa-sfb deploy-layer', () => {
       ],
       ['aws',
         ['lambda', 'get-function-configuration',
-          '--function-name', functionName,
+          '--function-name', `"${functionName}"`,
         ],
         {
           shell: true,
@@ -94,8 +94,8 @@ describe('alexa-sfb deploy-layer', () => {
       ],
       ['aws',
         ['lambda', 'update-function-configuration',
-          '--function-name', functionName,
-          '--layers', layerNames.join(' ')
+          '--function-name', `"${functionName}"`,
+          '--layers', layerNames.map((name: string) => `"${name}"`).join(' ')
         ],
         {
           shell: true,
@@ -208,7 +208,7 @@ describe('alexa-sfb deploy-layer', () => {
         mockSpawn,
         mockDeployShellCommands({
           functionName: 'dummy-lambda-uri',
-          layerNames: ['dummy-existing-random-layer-verison-arn dummy-layer-version-arn']
+          layerNames: ['dummy-existing-random-layer-verison-arn', 'dummy-layer-version-arn']
         })
       );
 
@@ -460,7 +460,7 @@ describe('alexa-sfb deploy-layer', () => {
         [
           ['aws',
             ['lambda', 'get-function-configuration',
-              '--function-name', `dummy-lambda-arn`,
+              '--function-name', '"dummy-lambda-arn"',
             ],
             {
               shell: true,
@@ -468,8 +468,8 @@ describe('alexa-sfb deploy-layer', () => {
           ],
           ['aws',
             ['lambda', 'update-function-configuration',
-              '--function-name', `dummy-lambda-arn`,
-              '--layers', 'dummy-other-layer-arn:version'
+              '--function-name', '"dummy-lambda-arn"',
+              '--layers', '"dummy-other-layer-arn:version"'
             ],
             {
               shell: true,

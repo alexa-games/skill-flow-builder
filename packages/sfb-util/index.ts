@@ -17,7 +17,8 @@
 
 export {
     readUtf8FileExcludingBom,
-    readUtf8FileExcludingBomSync
+    readUtf8FileExcludingBomSync,
+    sanitizeCommandLineParameter
 } from './utilities';
 
 export {
