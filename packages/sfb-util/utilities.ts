@@ -51,3 +51,10 @@ function stripBom(content: string): string {
         return content;
     }
 }
+
+export function sanitizeCommandLineParameter(parameterValue: string | number): string {
+    if (parameterValue === null || parameterValue === undefined) {
+        throw new Error('parameterValue must have a value');
+    }
+    return parameterValue.toString().replace(/[\\"'${}\r\n]/g, '');
+}

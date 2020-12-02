@@ -3,6 +3,7 @@
     "name": "Amazon.com"
   },
   "dependencies": {
+    "@alexa-games/sfb-util": "file:../sfb-util",
     "aws-sdk": "^2.163.0",
     "mp3-duration": "^1.1.0"
   },

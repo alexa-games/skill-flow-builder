@@ -15,6 +15,7 @@
  * permissions and limitations under the License.
  */
 
+import { sanitizeCommandLineParameter as sanitize } from '@alexa-games/sfb-util';
 import { Logger } from './logger';
 import { StringDecoder } from 'string_decoder';
 import semver from 'semver';
@@ -149,7 +150,7 @@ export class ManifestUtils {
             }
         }
 
-        await Utilities.runCommandAsync('npm', ['view', packageRange, 'version'],
+        await Utilities.runCommandAsync('npm', ['view', `"${sanitize(packageRange)}"`, 'version'],
             outputCapture, { shell: true });
 
         return result.trim();
