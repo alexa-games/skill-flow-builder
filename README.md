@@ -214,6 +214,43 @@ This will launch the SFB editor, which will visualize your skill’s behavior an
 content. You can create a new project, or open an existing project using the
 buttons on the top left.
 
+### Using Modifications to Core Libraries
+
+If you want to use any modifications to the core SFB libraries, you must add them
+all as a local file path dependency in your skill's `code/package.json` file.
+
+```json
+...
+"dependencies": {
+    "@alexa-games/sfb-f": "file:/path/to/skill-flow-builder/packages/sfb-f",
+    "@alexa-games/sfb-polly": "file:/path/to/skill-flow-builder/packages/sfb-polly",
+    "@alexa-games/sfb-skill": "file:/path/to/skill-flow-builder/packages/sfb-skill",
+    "@alexa-games/sfb-util": "file:/path/to/skill-flow-builder/packages/sfb-util",
+    "ask-sdk": "latest"
+},
+...
+```
+
+Next, add the `sfbLocalTesting` and `ask-hooks-directory` property to your
+abcConfig.json file:
+
+```json
+...
+"default": {
+    ...
+    "sfbLocalTesting": true,
+    "ask-hooks-directory": "hooks",
+    ...
+}
+...
+```
+
+Finally, copy the `scripts/local-packages/hooks` folder into your SFB project
+folder (i.e. there should be a `hooks` folder at the same level as your `code` and
+`content` folders). These two changes will force the SFB CLI and the ASK CLI to
+use `yarn` instead of `npm` when building your skill, allowing you to properly
+reference the local dependency packages.
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.

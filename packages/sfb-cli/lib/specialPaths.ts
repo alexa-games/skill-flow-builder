@@ -44,6 +44,7 @@ export const CLOUDFORMATION_TEMPLATE = 'skill-stack.yaml';
 export const LAMBDA_LAYER_DIRECTORY = 'lambda-layer';
 export const LAMBDA_LAYER_MODULE_DIRECTORY = 'nodejs';
 export const LAMBDA_LAYER_CONFIG_FILE = 'lambda-layer.json';
+export const HOOKS_DIRECTORY = 'hooks';
 
 export interface ConfigPaths {
     askSkillDirectoryName: string;
@@ -160,5 +161,11 @@ export class SpecialPaths {
         return SpecialPaths.isAskCliV1(configPaths)
             ? pathModule.join(configPaths.askSkillFullPath, 'models')
             : pathModule.join(configPaths.skillPackagePath, 'interactionModels', 'custom');
+    }
+
+    public static getAskLambdaCodeDeployPath(configPaths: ConfigPaths) {
+        return SpecialPaths.isAskCliV1(configPaths)
+        ? SpecialPaths.getLambdaCodeDeployPath(configPaths)
+        : pathModule.join(configPaths.askSkillFullPath, ASK_METADATA_DIRECTORY, 'lambda')
     }
 }
