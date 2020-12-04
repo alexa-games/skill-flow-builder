@@ -20,6 +20,9 @@ declare var require: any;
 import * as fs from 'fs';
 import * as pathModule from 'path';
 
+import { ConfigAccessor } from '@alexa-games/sfb-skill';
+import { sanitizeCommandLineParameter as sanitize } from '@alexa-games/sfb-util';
+
 import { FileUtils } from './fileUtils';
 import { Utilities } from './utilities';
 import { Logger } from './logger';
@@ -33,7 +36,6 @@ import {
     LAMBDA_LAYER_DIRECTORY,
     LAMBDA_LAYER_MODULE_DIRECTORY
 } from './specialPaths';
-import { ConfigAccessor } from '@alexa-games/sfb-skill';
 import { Command } from './command';
 import { StdOutput } from './stdOutput';
 
@@ -66,10 +68,11 @@ export class DeployLayerCommand implements Command {
         } 
     }
 
-    private async setupLambdaLayer(dirs: SpecialPaths, configDirs: ConfigPaths, configHelper: ConfigAccessor) {
+    private async setupLambdaLayer(dirs: SpecialPaths, configHelper: ConfigAccessor) {
         this.logger.status('Setting up a Lambda layer...');
 
-        const skillDirectoryName = configHelper.askSkillDirectoryName;
+        const skillDirectoryNameConfig = configHelper.askSkillDirectoryName;
+        const skillDirectoryName = sanitize(skillDirectoryNameConfig.split(' ')[0]);
         const lambdaLayerName = `${skillDirectoryName}-lambda-layer`;
         const lambdaLayerZipName = lambdaLayerName + '.zip';
 
@@ -97,8 +100,8 @@ export class DeployLayerCommand implements Command {
         this.logger.success('Lambda layer code successfully uploaded.');
     };
 
-    private async deployLambdaLayer(dirs: SpecialPaths, lambdaLayerName: string, lambdaLayerZipName: string, layerOptions: any) {
-        const compatibleRuntimes = layerOptions.compatibleRuntimes || ['nodejs10.x'];
+    private async deployLambdaLayer(dirs: SpecialPaths, lambdaLayerName: string, lambdaLayerZipName: string, layerOptions: { compatibleRuntimes?: string[] }) {
+        const compatibleRuntimes: string[] = layerOptions.compatibleRuntimes || ['nodejs10.x'];
         const metadataFilePath = pathModule.join(dirs.metaDataStoragePath, SKILL_MANIFEST_FILE);
 
         let skillManifest;
@@ -112,10 +115,11 @@ export class DeployLayerCommand implements Command {
         }
 
         const lambdaLayerConfigPath = pathModule.join(dirs.metaDataStoragePath, LAMBDA_LAYER_DIRECTORY);
+        const sanitizedCompatibleRuntimes = compatibleRuntimes.map((x: string) => `"${sanitize(x.split(' ')[0])}"`).join(' ').trim();
         
         const publishLayerOutput = await Utilities.runCommandInDirectoryAsync(
             Utilities.awsBin,
-            ['lambda', 'publish-layer-version', '--layer-name', lambdaLayerName, '--zip-file', `fileb://${lambdaLayerZipName}`, '--compatible-runtimes', compatibleRuntimes.join(','), '--cli-connect-timeout 30000'],
+            ['lambda', 'publish-layer-version', '--layer-name', `"${sanitize(lambdaLayerName)}"`, '--zip-file', `"fileb://${sanitize(lambdaLayerZipName)}"`, '--compatible-runtimes', sanitizedCompatibleRuntimes, '--cli-connect-timeout 30000'],
             lambdaLayerConfigPath,
             this.stdOutput,
             {shell: true}
@@ -127,7 +131,7 @@ export class DeployLayerCommand implements Command {
         
         const getFunctionConfigurationOutput = await Utilities.runCommandAsync(
             Utilities.awsBin,
-            ['lambda', 'get-function-configuration', '--function-name', lambdaArn],
+            ['lambda', 'get-function-configuration', '--function-name', `"${sanitize(lambdaArn)}"`],
             this.stdOutput,
             {shell: true}
         );
@@ -139,13 +143,13 @@ export class DeployLayerCommand implements Command {
         if (prevLambdaConfiguration.Layers && Array.isArray(prevLambdaConfiguration.Layers)) {
             prevLayersNames = prevLambdaConfiguration.Layers
             .filter((e: any) => !e.Arn.includes(lambdaLayerArn))
-            .map((e: any) => e.Arn)
+            .map((e: any) => `"${sanitize(e.Arn)}"`)
             .join(' ');
         }
 
         const updateFunctionConfigOutput = await Utilities.runCommandAsync(
             Utilities.awsBin,
-            ['lambda', 'update-function-configuration', '--function-name', lambdaArn, '--layers', `${prevLayersNames} ${lambdaLayerVersionArn}`.trim()],
+            ['lambda', 'update-function-configuration', '--function-name', `"${sanitize(lambdaArn)}"`, '--layers', `${prevLayersNames} "${sanitize(lambdaLayerVersionArn)}"`.trim()],
             this.stdOutput,
             {shell: true}
         );
@@ -189,7 +193,7 @@ export class DeployLayerCommand implements Command {
 
             const getFunctionConfigurationOutput = await Utilities.runCommandAsync(
                 Utilities.awsBin,
-                ['lambda', 'get-function-configuration', '--function-name', lambdaArn],
+                ['lambda', 'get-function-configuration', '--function-name', `"${sanitize(lambdaArn)}"`],
                 this.stdOutput,
                 {shell: true}
             );
@@ -201,13 +205,14 @@ export class DeployLayerCommand implements Command {
             if (prevLambdaConfiguration.Layers && Array.isArray(prevLambdaConfiguration.Layers)) {
                 prevLayersNames = prevLambdaConfiguration.Layers
                 .filter((e: any) => !e.Arn.includes(lambdaLayerArn))
-                .map((e: any) => e.Arn)
-                .join(' ');
+                .map((e: any) => `"${sanitize(e.Arn)}"`)
+                .join(' ')
+                .trim();
             }
 
             const updateFunctionConfigOutput = await Utilities.runCommandAsync(
                 Utilities.awsBin,
-                ['lambda', 'update-function-configuration', '--function-name', lambdaArn, '--layers', prevLayersNames.trim()],
+                ['lambda', 'update-function-configuration', '--function-name', `"${sanitize(lambdaArn)}"`, '--layers', prevLayersNames],
                 this.stdOutput,
                 {shell: true}
             );
@@ -243,7 +248,7 @@ export class DeployLayerCommand implements Command {
         const startTime = Date.now();
 
         try {
-            await this.setupLambdaLayer(dirs, configDirs, config);
+            await this.setupLambdaLayer(dirs, config);
             const duration = Date.now() - startTime;
             await this.rollbackCodeDirectory(dirs, configDirs);
             return this.logger.success(`Layer deployment finished in ${duration} ms.`);

@@ -19,6 +19,7 @@ import * as fs from 'fs';
 import * as pathModule from 'path';
 
 import { ConfigAccessor } from '@alexa-games/sfb-skill';
+import { sanitizeCommandLineParameter as sanitize } from '@alexa-games/sfb-util'
 import { FileUtils } from './fileUtils';
 import { SpecialPaths } from './specialPaths';
 import { Utilities } from './utilities';
@@ -61,13 +62,14 @@ export class UploadResourcesCommand implements Command {
         let awsProfileName = config.getValue('aws-profile-name', undefined, locale) || config.getValue('ask-profile-name', undefined, locale);
 
         const sourceFolder = FileUtils.fixpath(`${localeResourcePath}/public`);
-        const destFolder = `s3://${s3BucketName}/${askSkillDirectoryName}/${locale}`;
+        const destFolder = sanitize(`s3://${s3BucketName}/${askSkillDirectoryName}/${locale}`);
 
         for(let folderName of publicResourceFolders) {
+            const sanitizedFolderName = sanitize(folderName);
             this.logger.status(`Using config value for 'aws-profile-name' of '${awsProfileName}' from abcConfig.json`)
             this.logger.status(`Uploading ${sourceFolder} ...`)
 
-            const folderToUpload = pathModule.join(sourceFolder, folderName);
+            const folderToUpload = FileUtils.fixpath(pathModule.join(sourceFolder, sanitizedFolderName));
 
             if(!fs.existsSync(folderToUpload)) {
                 // Tell the user we are skipping the folder, but this is not an error
@@ -81,7 +83,7 @@ export class UploadResourcesCommand implements Command {
                     's3',
                     'cp',
                     `"${folderToUpload}"`,
-                    `"${destFolder}/${folderName}/"`,
+                    `"${destFolder}/${sanitizedFolderName}/"`,
                     '--recursive',
                     '--acl',
                     'public-read',
