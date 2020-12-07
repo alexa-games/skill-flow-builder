@@ -166,6 +166,6 @@ export class SpecialPaths {
     public static getAskLambdaCodeDeployPath(configPaths: ConfigPaths) {
         return SpecialPaths.isAskCliV1(configPaths)
         ? SpecialPaths.getLambdaCodeDeployPath(configPaths)
-        : pathModule.join(configPaths.askSkillFullPath, ASK_METADATA_DIRECTORY, 'lambda')
+        : pathModule.join(configPaths.askSkillFullPath, ASK_METADATA_DIRECTORY, 'lambda');
     }
 }

@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Copyright 2020 Amazon.com, Inc. and its affiliates. All Rights Reserved.
 #
 # SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
@@ -15,7 +13,5 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-set -euo pipefail
-
 npx yarn install --production
-zip -r $1 *
+7z a -r $args[0] *
