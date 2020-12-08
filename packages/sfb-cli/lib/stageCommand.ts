@@ -224,7 +224,7 @@ export class StageCommand implements Command {
         
         await this.adjustLocalDependencyPaths(dirs, configDirs, lambdaCodeDeployPath);
 
-        const hooksDestPath = FileUtils.fixpath(pathModule.join(configDirs.askSkillFullPath, HOOKS_DIRECTORY))
+        const hooksDestPath = FileUtils.fixpath(pathModule.join(configDirs.askSkillFullPath, HOOKS_DIRECTORY));
         if (fs.existsSync(hooksDestPath)) {
             await FileUtils.deleteDir(hooksDestPath, this.stdOutput);
         }
