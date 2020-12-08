@@ -114,7 +114,7 @@ export class ConfigAccessor {
     }
 
     public getSnippetMapFilePath(locale: string): string {
-        return path.join(this.getResourcePath(locale), this.getValue("snippet-map-filename", undefined, locale));;
+        return path.join(this.getResourcePath(locale), this.getValue("snippet-map-filename", undefined, locale));
     }
 
     public getAskSkillPath(locale: string): string {

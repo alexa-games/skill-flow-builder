@@ -21,6 +21,7 @@ import {
     PACKAGE_MANIFEST_FILE,
     SKILL_MANIFEST_FILE,
     CLOUDFORMATION_TEMPLATE,
+    HOOKS_DIRECTORY,
 } from './specialPaths';
 import { Utilities } from './utilities';
 import { Logger } from './logger';
@@ -40,6 +41,7 @@ const SFB_ENV_VAR_PLACEHOLDER = "SFB-ENVIRONMENT-VARIABLES"
 
 const SKIP_FFMPEG_COPY_PROPERTY = "skipFFMPEGInclude";
 const SKILL_FFMPEG_LOCATION_PROPERTY = "ffmpeg-location-for-skill";
+const HOOKS_DIRECTORY_PROPERTY = "ask-hooks-directory";
 
 /**
  * Gathers all files to the deployment folder.
@@ -219,8 +221,19 @@ export class StageCommand implements Command {
         await FileUtils.recursiveCopy(pathModule.join(dirs.buildOutputPath, '*'), lambdaCodeDeployPath, { makeDestinationWritable: true });
 
         await FileUtils.recursiveCopy(pathModule.join(dirs.codeBuildOutputPath, '*'), lambdaCodeDeployPath, { makeDestinationWritable: true });
+        
+        await this.adjustLocalDependencyPaths(dirs, configDirs, lambdaCodeDeployPath);
 
-        await this.setupNodeModulesUsingInstallProduction(dirs, lambdaCodeDeployPath, configHelper.getValue("sfbLocalTesting", undefined, "en-US"));
+        const hooksDestPath = FileUtils.fixpath(pathModule.join(configDirs.askSkillFullPath, HOOKS_DIRECTORY));
+        if (fs.existsSync(hooksDestPath)) {
+            await FileUtils.deleteDir(hooksDestPath, this.stdOutput);
+        }
+        
+        const hooksDirectoryName = configHelper.getValue(HOOKS_DIRECTORY_PROPERTY, undefined, "en-US");
+        if (hooksDirectoryName) {
+            const hooksSrcPath = FileUtils.fixpath(pathModule.join(this.storyPath, hooksDirectoryName));
+            await FileUtils.recursiveCopy(pathModule.join(hooksSrcPath, '*'), hooksDestPath, { makeDestinationWritable: true });
+        }
 
         if(!configHelper.getValue(SKIP_FFMPEG_COPY_PROPERTY, undefined, "en-US")) {
             let srcFFmpegPath = configHelper.getValue(SKILL_FFMPEG_LOCATION_PROPERTY, undefined, "en-US");
@@ -249,55 +262,42 @@ export class StageCommand implements Command {
             if (fs.existsSync(modelOutput)) {
                 fs.copyFileSync(modelOutput, pathModule.join(modelsDeployPath, `${locale}.json`));
             } else {
-                this.logger.status(`${modelOutput} does not exist.`)
+                this.logger.status(`${modelOutput} does not exist.`);
                 failure = true;
             }
         }
 
         if (failure) {
-            throw new Error('Error copying models to deployment folder.')
+            throw new Error('Error copying models to deployment folder.');
         }
 
         this.logger.success('Story specific files copied over.');
     }
 
-    private async setupNodeModulesUsingInstallProduction(dirs: SpecialPaths, lambdaCodeDeployPath: string, isLocalTest: boolean) {
-        this.logger.status('Installing production node_modules...');
-
-        const lambdaPackageManifestFilePath = pathModule.join(lambdaCodeDeployPath, PACKAGE_MANIFEST_FILE);
+    private async adjustLocalDependencyPaths(dirs: SpecialPaths, configDirs: ConfigPaths, lambdaCodeDeployPath: string) {
+        this.logger.status('Adjusting local dependency paths...');
 
         const packageManifest = JSON.parse(fs.readFileSync(pathModule.join(dirs.codePath, PACKAGE_MANIFEST_FILE), "utf8"));
 
-        // Since we're moving the manifest to a different directory for deployment, we need to updated any local runtime
-        // dependencies that are using relative paths.
-        for (const [name, path] of Object.entries(packageManifest.dependencies as Record<string, string>)) {
+        const askLambdaCodeDeployPath = SpecialPaths.getAskLambdaCodeDeployPath(configDirs);
+
+        this.adjustDependencyRelativePaths(dirs, askLambdaCodeDeployPath, packageManifest.dependencies);
+        this.adjustDependencyRelativePaths(dirs, askLambdaCodeDeployPath, packageManifest.devDependencies);
+
+        const lambdaPackageManifestFilePath = pathModule.join(lambdaCodeDeployPath, PACKAGE_MANIFEST_FILE);
+        fs.writeFileSync(lambdaPackageManifestFilePath, JSON.stringify(packageManifest, null, 4));
+    }
+
+    private adjustDependencyRelativePaths(dirs: SpecialPaths, lambdaCodeDeployPath: string, dependencies: any): void {
+        for (const [name, path] of Object.entries(dependencies as Record<string, string>)) {
             if (path.match(/^file:[^\/]/)) { // package path starts with non-root file path -> relative local dependency
                 const relativePath = path.replace(/^file:/, '');
                 const absolutePath = pathModule.resolve(dirs.codePath, relativePath);
                 // Adjust the relative path for the deployment path we're moving the manifest to.
                 const adjustedRelativePath = pathModule.relative(lambdaCodeDeployPath, absolutePath);
                 // Updated the manifest with the corrected relative path.
-                packageManifest.dependencies[name] = `file:${adjustedRelativePath}`;
+                dependencies[name] = `file:${adjustedRelativePath}`;
             }
-        }
-
-        fs.writeFileSync(lambdaPackageManifestFilePath, JSON.stringify(packageManifest, null, 4));
-        // End of alternate solution
-
-        if (isLocalTest) {
-            await Utilities.runCommandInDirectoryAsync(
-                Utilities.npxBin,
-                [ Utilities.yarnBin, 'install', '--production' ],
-                lambdaCodeDeployPath,
-                this.stdOutput,
-                {shell: true});
-        } else {
-            await Utilities.runCommandInDirectoryAsync(
-                Utilities.npmBin,
-                [ 'install', '--production' ],
-                lambdaCodeDeployPath,
-                this.stdOutput,
-                {shell: true});
         }
     }
 
