@@ -3,6 +3,7 @@
   "productName": "SFB Editor",
   "version": "2.0.0",
   "description": "Alexa branched content design tool for rapid content management",
+  "private": true,
   "scripts": {
     "build": "yarn prebuild && npx concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
