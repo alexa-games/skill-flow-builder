@@ -50,9 +50,10 @@ export class CoreExtensionLoader {
 
     constructor(locale: string, configAccessor: ConfigAccessor, param: CoreExtensionLoaderParams) {
         const s3ResourcesUri = configAccessor.getS3ResourcesUri(locale);
-        const s3BuketName = configAccessor.getS3BucketName(locale);
+        const s3BucketName = configAccessor.getS3BucketName(locale);
+        const s3DomainName = configAccessor.getS3DomainName(locale);
 
-        this.voiceOverExtension = new SFBExtension.VoiceOverExtension(`https://${s3BuketName}.s3.amazonaws.com/vo/{{file_name}}`);
+        this.voiceOverExtension = new SFBExtension.VoiceOverExtension(`https://${s3BucketName}.${s3DomainName}/vo/{{file_name}}`);
 
         let globalSceneExceptions: string[] = []; // list of scene names which should not have the global scene applied.
 

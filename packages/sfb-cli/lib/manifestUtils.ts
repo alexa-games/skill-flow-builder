@@ -15,6 +15,7 @@
  * permissions and limitations under the License.
  */
 
+import { sanitizeCommandLineParameter as sanitize } from '@alexa-games/sfb-util';
 import { Logger } from './logger';
 import { StringDecoder } from 'string_decoder';
 import semver from 'semver';
@@ -149,7 +150,7 @@ export class ManifestUtils {
             }
         }
 
-        await Utilities.runCommandAsync('npm', ['view', packageRange, 'version'],
+        await Utilities.runCommandAsync('npm', ['view', `"${sanitize(packageRange)}"`, 'version'],
             outputCapture, { shell: true });
 
         return result.trim();
@@ -174,7 +175,14 @@ export class ManifestUtils {
             return;
         }
 
-        if (!semver.satisfies(toolingMetadata.version, versionRange)) {
+        const version = semver.coerce(toolingMetadata.version);
+
+        if (!version || !semver.valid(version)) {
+            logger.warning(`Found invalid version ${toolingMetadata.version} for ${frameworkName}.`);
+            return;
+        }
+
+        if (!semver.satisfies(version, versionRange)) {
             throw new Error(`Skill Flow Builder version ${toolingMetadata.version} is not compatible ` + 
             `because story's package.json specifies ${versionRangeExpression} for ${frameworkName}.`);
         }

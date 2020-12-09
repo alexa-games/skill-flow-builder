@@ -15,6 +15,7 @@
  * permissions and limitations under the License.
  */
 
+import { sanitizeCommandLineParameter as sanitize } from '@alexa-games/sfb-util';
 import { createHash } from 'crypto';
 import { execSync } from 'child_process';
 
@@ -222,14 +223,14 @@ export class AudioMixer {
 			for (let i = 0; i < audioSequence.length; i++) {
 				const sequence = audioSequence[i];
 				
-				inputFiles += ` -i "${path.join(this.audioWorkingDir, sequence.filename)}" `;
+				inputFiles += ` -i "${sanitize(path.join(this.audioWorkingDir, sequence.filename))}" `;
 	
 				// Use adelay filter to add a delay to the start of various sounds
 				// List this  [1:a] adelay=2500|2500 [delayed];  // 2500 listed for each audio channel
-				const volumeFilter = (sequence.volume != 1.0) ? "volume=volume=" + sequence.volume : "";
-				const fadeInFilter = (sequence.fadeInDuration) ? "afade=t=in:start_time=0:d=" + sequence.fadeInDuration: "";
-				const fadeOutFilter = (sequence.fadeOutTime && sequence.fadeOutDuration) ? "afade=t=out:start_time=" + sequence.fadeOutTime + ":d=" + sequence.fadeOutDuration + ",atrim=duration=" + (sequence.fadeOutTime + sequence.fadeOutDuration): "";
-				const adelayFilter = (sequence.delayMs) ? "adelay=" + sequence.delayMs + "|" + sequence.delayMs : "";
+				const volumeFilter = (sequence.volume != 1.0) ? `volume=volume=${sanitize(sequence.volume)}` : "";
+				const fadeInFilter = (sequence.fadeInDuration) ? `afade=t=in:start_time=0:d=${sanitize(sequence.fadeInDuration)}` : "";
+				const fadeOutFilter = (sequence.fadeOutTime && sequence.fadeOutDuration) ? `afade=t=out:start_time=${sanitize(sequence.fadeOutTime)}:d=${sanitize(sequence.fadeOutDuration)},atrim=duration=${sanitize(sequence.fadeOutTime + sequence.fadeOutDuration)}` : "";
+				const adelayFilter = (sequence.delayMs) ? `adelay=${sanitize(sequence.delayMs)}|${sanitize(sequence.delayMs)}` : "";
 	
 				let filtersString = "";
 				if(fadeInFilter) {
@@ -265,34 +266,25 @@ export class AudioMixer {
 				}
 			};
 	
-			const trimCommand = setting.trim? setting.trim : TrimOption.LONGEST;
+			const trimCommand = setting.trim ? sanitize(setting.trim) : TrimOption.LONGEST;
 	
-			const ffmpegOptions = ` -filter_complex "${streamProcessingList} ${streamList} amix=inputs=${this.audioSequence.length}:duration=${trimCommand}:dropout_transition=0[out];[out]volume=${this.audioSequence.length}" -t 240 -ac 1 -c:a libmp3lame -b:a 48k -ar 24000 -write_xing 0 "${postMixFilepath}" -loglevel fatal`;
-			const ffmpegCommand = `"${this.ffmpegPath}" -y ${inputFiles} ${ffmpegOptions}`;
+			const ffmpegOptions = ` -filter_complex "${streamProcessingList} ${streamList} amix=inputs=${this.audioSequence.length}:duration=${trimCommand}:dropout_transition=0[out];[out]volume=${this.audioSequence.length}" -t 240 -ac 1 -c:a libmp3lame -b:a 48k -ar 24000 -write_xing 0 "${sanitize(postMixFilepath)}" -loglevel fatal`;
+			const ffmpegCommand = `"${sanitize(this.ffmpegPath)}" -y ${inputFiles} ${ffmpegOptions}`;
 	
 			return ffmpegCommand;
 		} else {
 			let inputFiles = "";
-			let delayFilter = "";
 			let concatenatingStreams = "";
 	
 			for (let i = 0; i < audioSequence.length; i++) {
 				const sequence = audioSequence[i];
 				const inputStream = `[${i}:0]`;
-				const delayedStream = `[d${i}]`;
 
-				inputFiles += ` -i "${path.join(this.audioWorkingDir, sequence.filename)}" `;
-
-				/*if (i > 0) {
-					// add 400ms between concatenating audio
-					delayFilter += `${inputStream}adelay=400|400${delayedStream};`;
-					concatenatingStreams += delayedStream;
-				} else {*/
-					concatenatingStreams += inputStream;
-				//}
+				inputFiles += ` -i "${sanitize(path.join(this.audioWorkingDir, sequence.filename))}" `;
+				concatenatingStreams += inputStream;
 			};
 
-			const concatCommand = `"${this.ffmpegPath}" -y ${inputFiles} -filter_complex "${delayFilter}${concatenatingStreams} concat=n=${audioSequence.length}:v=0:a=1" -t 240 -ac 1 -c:a libmp3lame -b:a 48k -ar 24000 -write_xing 0 "${postMixFilepath}" -loglevel fatal`;
+			const concatCommand = `"${sanitize(this.ffmpegPath)}" -y ${inputFiles} -filter_complex "${concatenatingStreams} concat=n=${audioSequence.length}:v=0:a=1" -t 240 -ac 1 -c:a libmp3lame -b:a 48k -ar 24000 -write_xing 0 "${sanitize(postMixFilepath)}" -loglevel fatal`;
 
 			return concatCommand;
 		}

@@ -152,6 +152,10 @@ describe('alexa-sfb stage', () => {
       },
     };
 
+    dummyFileSystem[STORY_DIR]['dummy-hooks'] = {
+      'build.sh': 'dummy build script'
+    };
+
     // Sample CloudFormation template in the SFB CLI installation location
     dummyFileSystem[DUMMY_SFB_ROOT] = {
       'skill-stack.yaml': SAMPLE_CLOUDFORMATION_TEMPLATE,
@@ -253,8 +257,7 @@ describe('alexa-sfb stage', () => {
           ],
           { shell: true, cwd: path.resolve(BUILD_ARTIFACT_PATH) },
         ],
-        [REMOVE_DIR_COMMAND, [...REMOVE_FLAGS, `"${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}"`], { shell: true }],
-        ['npm', ['install', '--production'], { shell: true, cwd: `${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}` }],
+        [REMOVE_DIR_COMMAND, [...REMOVE_FLAGS, `"${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}"`], { shell: true }]
       ]);
     });
 
@@ -304,7 +307,7 @@ describe('alexa-sfb stage', () => {
       );
     });
 
-    it('modifies package.json to remove dev dependencies and adjust local paths', async () => {
+    it('modifies package.json to adjust local paths', async () => {
       await stageCommand.run();
 
       assert.deepEqual(
@@ -312,8 +315,11 @@ describe('alexa-sfb stage', () => {
         {
           dependencies: {
             dummy: 'dependency',
-            localDependency: `file:${path.join('..', '..', '..', 'foo', 'bar')}`,
+            localDependency: `file:${path.join('..', '..', '..', '..', 'foo', 'bar')}`,
           },
+          devDependencies: {
+            another: 'dependency'
+          }
         },
       );
     });
@@ -373,6 +379,47 @@ describe('alexa-sfb stage', () => {
         JSON.parse(readTextFile(`${metadataDir}/skill.json`)),
         JSON.parse(readTextFile(STAGED_SKILL_JSON_PATH)),
       );
+    });
+
+    it('stages hooks if ask-hooks-directory is defined', async () => {
+      const abcConfig = JSON.parse(dummyFileSystem[STORY_DIR]['abcConfig.json']);
+      abcConfig.default['ask-hooks-directory'] = 'dummy-hooks';
+      dummyFileSystem[STORY_DIR]['abcConfig.json'] = JSON.stringify(abcConfig);
+
+      reMockFileSystem(dummyFileSystem);
+
+      await stageCommand.run();
+
+      assert.equal(
+        readTextFile(`${ASK_SKILL_DIRECTORY_PATH}/hooks/build.sh`),
+        'dummy build script',
+      );
+    });
+
+    it('deletes previous hooks directory if redeployed', async () => {
+      // mock previously deployed state
+      dummyFileSystem[STORY_DIR]['.deploy'] = {
+        'dist': {
+          'abcConfig': dummyFileSystem[STORY_DIR]['abcConfig.json'],
+          'res': {
+            'en-US': {
+              'en-US.json': 'dummy en-US interaction model'
+            },
+            'en-GB': {
+              'en-GB.json': 'dummy en-GB interaction model'
+            }
+          }
+        },
+        ASK_SKILL_DIRECTORY_NAME: {
+          'hooks': {
+            'old-build.sh': 'this should be deleted'
+          }
+        }
+      };
+
+      await stageCommand.run();
+
+      assert.ok(!fs.existsSync(`${ASK_SKILL_DIRECTORY_PATH}/hooks/old-build.sh`));
     });
   };
 
@@ -481,9 +528,7 @@ describe('alexa-sfb stage', () => {
       await stageCommand.run();
 
       // ASK CLI calls are never made
-      assertCalledManyTimesWithArgs(mockSpawn, [
-        ['npm', ['install', '--production'], { shell: true, cwd: `${path.resolve(path.join(ASK_SKILL_DIRECTORY_PATH, 'lambda'))}` }],
-      ]);
+      assertCalledManyTimesWithArgs(mockSpawn, []);
     });
   });
 

@@ -45,16 +45,16 @@ body {
   --app-header-height: 40px;
   --app-footer-height: 30px;
 
-  --border-color-dark: rgba(0,0,0,0.1);
-  --border-color-light: rgba(255,255,255,0.1);
+  --border-color-dark: rgba(0, 0, 0, 0.1);
+  --border-color-light: rgba(255, 255, 255, 0.1);
   --color-red: #db2828;
 }
 
 .editorHighlight {
-    background: rgba(223, 223, 130, 0.155);
-    position: absolute;
-    width: 100% !important;
-    left: 0 !important;
+  background: rgba(223, 223, 130, 0.155);
+  position: absolute;
+  width: 100% !important;
+  left: 0 !important;
 }
 
 button {

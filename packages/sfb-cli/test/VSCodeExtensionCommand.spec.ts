@@ -28,14 +28,14 @@ import { ConsoleLogger } from '../lib/consoleLogger';
 import { ConsoleStdOutput } from '../lib/consoleStdOutput';
 
 import {
-    createMockSpawn,
-    assertCalledManyTimesWithArgs,
-    stubSfbCliRoot,
-    readTextFile,
-    DUMMY_SFB_ROOT,
-    SFB_VSCODE_EXTENSION_NAME,
-    isWin32
-  } from './testUtilities';
+  createMockSpawn,
+  assertCalledManyTimesWithArgs,
+  stubSfbCliRoot,
+  readTextFile,
+  DUMMY_SFB_ROOT,
+  SFB_VSCODE_EXTENSION_NAME,
+  isWin32
+} from './testUtilities';
 
 describe('alexa-sfb vscode', () => {
   let dummyFileSystem: any;
@@ -44,7 +44,7 @@ describe('alexa-sfb vscode', () => {
 
   let homeDir = isWin32() ? '\\home' : '/home';
 
-  beforeEach(() => {  
+  beforeEach(() => {
     sinon.stub(process, 'env').value({ HOME: homeDir, USERPROFILE: homeDir });
 
     mockFileSystem({
@@ -52,13 +52,20 @@ describe('alexa-sfb vscode', () => {
         node_modules: {
           ['@alexa-games']: {
             [SFB_VSCODE_EXTENSION_NAME]: { // Directory to copy the extension from
-              'dummy-file': 'dummy-contents'
+              'dummy-file': 'dummy-contents',
+              'package.json': JSON.stringify({
+                "dependencies": {
+                  "dummy-dependency": "// dummy dependency",
+                  "@alexa-games/sfb-util": "file:../dummy/local/reference",
+                  "@alexa-games/sfb-f": "^1.2.3" // Simulated remote location
+                }
+              }, null, 4)
             }
           }
         }
       }
     });
-    
+
     stubSfbCliRoot();
 
     mockSpawn = createMockSpawn();
@@ -87,11 +94,23 @@ describe('alexa-sfb vscode', () => {
     assert.equal(readTextFile(vscodeExtDestPath + '/dummy-file'), 'dummy-contents');
   });
 
+  it('fixes the local module references', async () => {
+    await vscodeExtension.run();
+
+    const expectedDependencies = {
+      "dummy-dependency": "// dummy dependency",
+      "@alexa-games/sfb-util": `file:${path.join(DUMMY_SFB_ROOT, '..', 'sfb-util')}`, // Expected local reference
+      "@alexa-games/sfb-f": "^1.2.3" // Simulated remote location
+    };
+
+    assert.deepEqual(JSON.parse(readTextFile(vscodeExtDestPath + '/package.json')).dependencies, expectedDependencies);
+  });
+
   it('ensures the extension is fully resolved', async () => {
     await vscodeExtension.run();
 
     assertCalledManyTimesWithArgs(mockSpawn, [
-      ['npx', ['npm', 'install', '--production'], { cwd: `${path.resolve(vscodeExtDestPath)}`, shell: true}]
+      ['npx', ['npm', 'install', '--production'], { cwd: `${vscodeExtDestPath}`, shell: true }]
     ]);
   });
 });

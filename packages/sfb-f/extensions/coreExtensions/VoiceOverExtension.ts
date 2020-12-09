@@ -16,7 +16,7 @@
  */
 
 
-import * as _http from 'http';
+import * as _https from 'https';
 import * as url from 'url';
 import { ImporterExtension } from '../SFBExtension';
 import { SourceContentHelper } from '../../importPlugins/sourceContentHelper';
@@ -29,7 +29,7 @@ async function urlExists(urlString : string, http: any): Promise<boolean> {
         let options: any = {
             method: 'HEAD',
             host: url.parse(urlString).host,
-            port: 80,
+            port: 443,
             path: url.parse(urlString).pathname
         };
     
@@ -57,7 +57,7 @@ export class VoiceOverExtension implements ImporterExtension {
     public constructor(urlFormat: string, http?: any) {
         this.urlFormat = urlFormat;
         this.recordingScript = "";
-        this.http =  http || _http;
+        this.http =  http || _https;
     }
 
     async extendSourceContent(sourceHelper: SourceContentHelper): Promise<void> {
