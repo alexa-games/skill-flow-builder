@@ -34,7 +34,7 @@
   <div class="ui raised segment yellow">
   
   
-    <h3>Release Notes: The current release is version 2.0.0</h3>
+    <h3>Release Notes: The current release is version 2.1.0</h3>
 
     <h4>GitHub</h4>
     <p>
@@ -51,16 +51,7 @@
     <li><b>Core Modules</b></li>
     <ul>
       <li>
-        The sfb-cli application now depends on ASK CLI v2. Follow the instructions at <a href='https://developer.amazon.com/en-US/docs/alexa/smapi/quick-start-alexa-skills-kit-command-line-interface.html' target="_blank" rel="noopener noreferrer">Quick Start: Alexa Skills Kit Command Line Interface (ASK CLI)</a> to download the latest version of ASK CLI. If you do not upgrade your ASK CLI to 2.0.0 or later, sfb-cli will automatically download and run the latest version of ASK CLI when needed for deployment.
-      </li>
-      <li>
-        By default, new projects created with sfb-cli will use ASK CLI's "cfn" deployer to deploy resources with AWS Cloud Formation. If you wish to use the "lambda" deployer instead, include the <b>--deployer lambda</b> option when running the <b>alexa-sfb build</b> or <b>alexa-sfb deploy</b> commands.
-        <ul>
-          <li><b>Note:</b> You cannot change the deployer once the skill has been deployed, and existing projects will automatically use the "lambda" deployer when upgrading to sfb-cli 2.0.0 or higher.</li>
-        </ul>
-      </li>
-      <li>
-        You can now deploy the node_modules directory under your SFB project's code directory as an AWS Lambda layer, which will only get redeployed if the node_modules directory changes. To enable using Lambda layer, set "use-lambda-layer" to <b>true</b> in your projects abcConfig.json file.
+        You can now include ASK CLI build hooks when deploying your project. Add the "ask-hooks-directory" property to your abcConfig.json to specify a directory name relative to your project root, and the contents of that directory will be copied to the ASK "hooks" directory during deployment. Including a "build.sh" or "build.ps1" script in that directory will cause the ASK CLI to run your own custom build script instead of the default NPM build. For more information, see: <a href='https://github.com/alexa/ask-cli/blob/master/docs/concepts/Deploy-Command.md#code-builder' target="_blank" rel="noopener noreferrer">ASK CLI Deploy Command</a>
       </li>
     </ul>
   </ul>
