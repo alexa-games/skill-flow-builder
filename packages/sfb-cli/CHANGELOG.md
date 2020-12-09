@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/alexa-games/skill-flow-builder/compare/v2.0.0...v2.1.0) (2020-12-09)
+
+
+### Bug Fixes
+
+* added support for different installation methods for alexa-sfb vscode ([71fed34](https://github.com/alexa-games/skill-flow-builder/commit/71fed34b792852520627305d9b28ce7104fea80a))
+* edit semantic version checking to allow nightly builds to deploy ([#22](https://github.com/alexa-games/skill-flow-builder/issues/22)) ([180de78](https://github.com/alexa-games/skill-flow-builder/commit/180de7881fcff25a85bc535f34966b6f2c165106))
+* fix alexa-sfb vscode when installed locally ([4dea92c](https://github.com/alexa-games/skill-flow-builder/commit/4dea92cdd8ceaba33859f18891217f80bcfa6bad))
+* stop the deletion of devDependencies in stageCommand ([#24](https://github.com/alexa-games/skill-flow-builder/issues/24)) ([a9ab8bd](https://github.com/alexa-games/skill-flow-builder/commit/a9ab8bd60cf6f4354b85047c226f5c535dcd2aa8))
+* windows path issue ([70491f0](https://github.com/alexa-games/skill-flow-builder/commit/70491f091d917e3e94e9684f953128ab0c825cfe))
+
+
+### Features
+
+* Added ability to use ASK custom build hooks for local package linking ([#29](https://github.com/alexa-games/skill-flow-builder/issues/29)) ([7b09c83](https://github.com/alexa-games/skill-flow-builder/commit/7b09c83371129df0fe5ad82f64382bd0b229488c))
+* Added input sanitization to exec/spawn calls ([#28](https://github.com/alexa-games/skill-flow-builder/issues/28)) ([205254f](https://github.com/alexa-games/skill-flow-builder/commit/205254fd6096f8a88820f77908096b1ef48d6156))
+
+
+
+
+
 # 2.0.0 (2020-10-12)
 
 

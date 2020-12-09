@@ -4,7 +4,7 @@
   "bin": {
     "alexa-sfb": "./dist/bin/alexa-sfb"
   },
-  "version": "2.0.0",
+  "version": "2.1.0",
   "files": [
     "THIRD-PARTY",
     "dist",

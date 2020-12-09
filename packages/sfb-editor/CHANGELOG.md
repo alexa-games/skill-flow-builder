@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/alexa-games/skill-flow-builder/compare/v2.0.0...v2.1.0) (2020-12-09)
+
+
+### Bug Fixes
+
+* Removed unnecessary async in test ([#26](https://github.com/alexa-games/skill-flow-builder/issues/26)) ([83ac117](https://github.com/alexa-games/skill-flow-builder/commit/83ac1171d88eb7f0abe51099d1592769cd0e4ab5))
+
+
+
+
+
 # 2.0.0 (2020-10-12)
 
 
