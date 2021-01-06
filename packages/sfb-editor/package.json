@@ -234,7 +234,6 @@
     "@alexa-games/sfb-skill": "file:../sfb-skill",
     "@alexa-games/sfb-story-debugger": "file:../sfb-story-debugger",
     "@alexa-games/sfb-util": "file:../sfb-util",
-    "axios": "^0.19.0",
     "bumpit": "^1.0.2",
     "commander": "^2.19.0",
     "connected-react-router": "^5.0.1",
