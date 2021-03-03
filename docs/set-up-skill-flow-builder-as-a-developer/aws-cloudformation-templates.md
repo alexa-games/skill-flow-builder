@@ -41,16 +41,39 @@ DynamoDB capacity, see [Read/Write Capacity Mode](https://docs.aws.amazon.com/am
 
 To further monitor your S3 buckets, we recommend turning on server access logging. This will provide you with detailed records of all the requests made to a specified S3 bucket. For more information on what this is, see [S3 server access logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html).
 
-To enable this feature, you can attach something like the below to the `skill-stack` configuration.
+To enable this feature, you can attach something like the below to the `skill-stack.yaml` configuration.
 
 ```yaml
 AccessLogsBucket # Create a separate bucket to log requests
   Type: AWS::S3::Bucket
   DeletionPolicy: Retain
   Properties:
-    BucketName: SFB-STORY-ID-access-logs-bucket
+    BucketName: SFB-STORY-ID-access-logs-bucket # This should be edited to whatever bucket name is appropriate
     AccessControl: LogDeliveryWrite
-
+    BucketEncryption:
+      ServerSideEncryptionConfiguration:
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: AES256
+AccessLogsBucketPolicy # Create a policy for the new bucket to enforce HTTPS
+  Type: AWS::S3::BucketPolicy
+  Properties:
+    Bucket:
+      Ref: AccessLogsBucket
+    PolicyDocument:
+      Statement:
+      - Effect: Deny
+        Principal: '*'
+        Action: s3:*
+        Resource:
+          Fn::Sub: 'arn:aws:s3:::${AccessLogsBucket}'
+        Condition: { Bool: { 'aws:SecureTransport': false } }
+      - Effect: Deny
+        Principal: '*'
+        Action: s3:*
+        Resource:
+          Fn::Sub: 'arn:aws:s3:::${AccessLogsBucket}/*'
+        Condition: { Bool: { 'aws:SecureTransport': false } }
+...
 AlexaSkillBucket # Edit the existing AlexaSkillBucket's properties
 ...
   LoggingConfiguration:
