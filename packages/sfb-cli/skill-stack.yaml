@@ -109,6 +109,30 @@ SFB-ENVIRONMENT-VARIABLES
       BucketName: SFB-STORY-ID-bucket
       VersioningConfiguration:
         Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+  AlexaSkillBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: AlexaSkillBucket
+      PolicyDocument:
+        Statement:
+        # Force HTTPS always
+        - Effect: Deny
+          Principal: '*'
+          Action: s3:*
+          Resource:
+            Fn::Sub: 'arn:aws:s3:::${AlexaSkillBucket}'
+          Condition: { Bool: { 'aws:SecureTransport': false } }
+        - Effect: Deny
+          Principal: '*'
+          Action: s3:*
+          Resource:
+            Fn::Sub: 'arn:aws:s3:::${AlexaSkillBucket}/*'
+          Condition: { Bool: { 'aws:SecureTransport': false } }
 
 Outputs:
   SkillEndpoint:

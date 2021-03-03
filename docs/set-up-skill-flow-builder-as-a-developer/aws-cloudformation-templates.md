@@ -37,6 +37,30 @@ As your skill becomes more popular, you may need to increase the provisioned
 throughput to keep up with requests to your skill. For more information on
 DynamoDB capacity, see [Read/Write Capacity Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html).
 
+### Enabling Access Logging
+
+To further monitor your S3 buckets, we recommend turning on server access logging. This will provide you with detailed records of all the requests made to a specified S3 bucket. For more information on what this is, see [S3 server access logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html).
+
+To enable this feature, you can attach something like the below to the `skill-stack` configuration.
+
+```yaml
+AccessLogsBucket # Create a separate bucket to log requests
+  Type: AWS::S3::Bucket
+  DeletionPolicy: Retain
+  Properties:
+    BucketName: SFB-STORY-ID-access-logs-bucket
+    AccessControl: LogDeliveryWrite
+
+AlexaSkillBucket # Edit the existing AlexaSkillBucket's properties
+...
+  LoggingConfiguration:
+    DestinationBucketName:
+      Ref: AccessLogsBucket
+    LogFilePrefix: access-logs-
+```
+
+*Please note: This will increase the S3 usage costs associated with the related AWS account.*
+
 ## Deploying to multiple stages and locales
 
 A separate `skill-stack.yaml` will be generated for each stage+locale
