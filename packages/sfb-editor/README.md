@@ -32,7 +32,7 @@ The SFB Editor requires that the core modules are built, build all the packages
 in the `packages/` directory by running `yarn build-modules`.
 
 Navigate into the `sfb-editor/` directory with `cd packages/sfb-editor/`,
-and run `yarn install && yarn start`. This should conclude launching the editor.
+and run `yarn start`. This should conclude launching the editor.
 
 ## Package Structure
 
