@@ -33,7 +33,7 @@ Resources:
   AlexaSkillIAMPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
-      Description: Managed Policy for a SkillFlowBuilder deployed skill
+      Description: Managed Policy for the SkillFlowBuilder deployed skill SFB-STORY-ID
       Path: /
       PolicyDocument:
         Version: 2012-10-17
