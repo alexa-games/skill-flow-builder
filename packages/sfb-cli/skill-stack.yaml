@@ -28,39 +28,44 @@ Resources:
               Action:
                 - sts:AssumeRole
         Path: /
-        Policies:
-          - PolicyName: alexaSkillExecutionPolicy
-            PolicyDocument:
-              Version: 2012-10-17
-              Statement:
-                - Effect: Allow
-                  Action:
-                    - logs:*
-                  Resource:
-                    - arn:aws:logs:*:*:log-group:/aws/lambda/SFB-STORY-ID-function
-                    - arn:aws:logs:*:*:log-group:/aws/lambda/SFB-STORY-ID-function:log-stream:*
-                - Effect: Allow
-                  Action:
-                    - dynamodb:CreateTable
-                    - dynamodb:GetItem
-                    - dynamodb:DeleteItem
-                    - dynamodb:DescribeTable
-                    - dynamodb:PutItem
-                  Resource:
-                    - arn:aws:dynamodb:*:*:table/SFB-STORY-ID-sessions
-                    - arn:aws:dynamodb:*:*:table/SFB-STORY-ID-sessions/*
-                - Effect: Allow
-                  Action:
-                    - s3:GetObject
-                    - s3:PutObject
-                    - s3:PutObjectAcl
-                  Resource:
-                    - arn:aws:s3:::SFB-STORY-ID-bucket
-                    - arn:aws:s3:::SFB-STORY-ID-bucket/*
-                - Effect: Allow
-                  Action:
-                    - polly:SynthesizeSpeech
-                  Resource: '*'
+        ManagedPolicyArns:
+        - !Ref AlexaSkillIAMPolicy
+  AlexaSkillIAMPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: Managed Policy for the SkillFlowBuilder deployed skill SFB-STORY-ID
+      Path: /
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - arn:aws:logs:*:*:log-group:/aws/lambda/SFB-STORY-ID-function
+              - arn:aws:logs:*:*:log-group:/aws/lambda/SFB-STORY-ID-function:log-stream:*
+          - Effect: Allow
+            Action:
+              - dynamodb:CreateTable
+              - dynamodb:GetItem
+              - dynamodb:DeleteItem
+              - dynamodb:DescribeTable
+              - dynamodb:PutItem
+            Resource:
+              - arn:aws:dynamodb:*:*:table/SFB-STORY-ID-sessions
+              - arn:aws:dynamodb:*:*:table/SFB-STORY-ID-sessions/*
+          - Effect: Allow
+            Action:
+              - s3:GetObject
+              - s3:PutObject
+              - s3:PutObjectAcl
+            Resource:
+              - arn:aws:s3:::SFB-STORY-ID-bucket
+              - arn:aws:s3:::SFB-STORY-ID-bucket/*
+          - Effect: Allow
+            Action:
+              - polly:SynthesizeSpeech
+            Resource: '*'
   AlexaSkillFunction:
     Type: AWS::Lambda::Function
     Properties:
