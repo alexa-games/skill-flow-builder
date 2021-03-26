@@ -102,6 +102,8 @@ SFB-ENVIRONMENT-VARIABLES
       ProvisionedThroughput:
         ReadCapacityUnits: '5'
         WriteCapacityUnits: '5'
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
   AlexaSkillBucket:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain

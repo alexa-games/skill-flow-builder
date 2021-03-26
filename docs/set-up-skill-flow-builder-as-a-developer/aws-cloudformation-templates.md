@@ -24,18 +24,21 @@ While the above resources are required for SFB to function, you can add
 more resources or adjust these resources' settings to fine-tune your skill's
 infrastructure.
 
-For example, the DynamoDB table starts with the following default capacity:
+For example, the DynamoDB table starts with the following configurations:
 
 ```yaml
 # Remember to scale up the capacity as your customer size grows!
 ProvisionedThroughput:
   ReadCapacityUnits: '5'
   WriteCapacityUnits: '5'
+PointInTimeRecoverySpecification: # Automatic backups for any point in time
+  PointInTimeRecoveryEnabled: true
 ```
 
 As your skill becomes more popular, you may need to increase the provisioned
-throughput to keep up with requests to your skill. For more information on
-DynamoDB capacity, see [Read/Write Capacity Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html).
+throughput to keep up with requests to your skill. For more information on these configurations, see:
+- [Read/Write Capacity Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html)
+- [Point-In-Time Recovery](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PointInTimeRecovery.html)
 
 ## Deploying to multiple stages and locales
 
