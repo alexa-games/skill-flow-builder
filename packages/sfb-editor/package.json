@@ -219,11 +219,11 @@
     "testcafe-react-selectors": "~3.0.0",
     "version-bump-prompt": "~4.3.0",
     "webpack": "~4.26.0",
-    "webpack-bundle-analyzer": "~3.0.3",
+    "webpack-bundle-analyzer": "~3.3.2",
     "webpack-cli": "~3.1.2",
     "webpack-dev-server": "~3.1.10",
     "webpack-merge": "~4.1.4",
-    "yarn": "~1.12.3"
+    "yarn": "~1.22.0"
   },
   "dependencies": {
     "@alexa-games/sfb-cli": "file:../sfb-cli",
