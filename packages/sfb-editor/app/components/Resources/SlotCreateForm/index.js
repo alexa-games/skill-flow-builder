@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
  *
  * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
@@ -30,7 +30,7 @@ class SlotTypeCreateForm extends React.PureComponent {
     let error = false;
     let errorMessage = '';
 
-    if (!(/^[a-zA-Z](([a-zA-Z_])*[a-zA-Z])*$/.test(value))) {
+    if (!(/^[a-zA-Z](([a-zA-Z_]){0,98}[a-zA-Z])?$/.test(value))) {
       error = true;
       errorMessage = 'The name of a custom slot type must begin and end with an alphabetic character and can consist only of alphabetic characters or underscores.';
     }
