@@ -78,7 +78,7 @@ describe('utilities', () => {
             if (isWin32) {
                 assert.equal(actual, 'fake \\ && rm -rf / && echo ');
             } else {
-                assert.equal(actual, 'fake && rm -rf / && echo ');
+                assert.equal(actual, 'fake  && rm -rf / && echo ');
             }
         });
 
