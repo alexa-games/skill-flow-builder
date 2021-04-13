@@ -66,9 +66,20 @@ describe('utilities', () => {
         });
 
         it('removes line breaks', () => {
-            const actual = sanitizeCommandLineParameter('fake\\\r\n" && rm -rf / && echo "');
+            const actual = sanitizeCommandLineParameter('fake\r\n" && rm -rf / && echo "');
 
             assert.equal(actual, 'fake && rm -rf / && echo ');
+        });
+
+        it('removes backslash on non-Windows OS', () => {
+            const actual = sanitizeCommandLineParameter('fake \\ && rm -rf / && echo "');
+
+            const isWin32 = (process.platform === "win32");
+            if (isWin32) {
+                assert.equal(actual, 'fake \\ && rm -rf / && echo ');
+            } else {
+                assert.equal(actual, 'fake && rm -rf / && echo ');
+            }
         });
 
         it('removes environment variable syntax', () => {
