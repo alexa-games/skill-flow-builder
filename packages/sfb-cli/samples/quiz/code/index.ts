@@ -30,9 +30,10 @@ const configAccessor = new ConfigAccessor(require(path.resolve("abcConfig", "abc
 export async function handler(event: any, context: any, callback: any) {
     const debug = configAccessor.isDebug();
 
-    if(debug)
+    if(debug) {
 	  console.log(`[INFO] Request Received: ${JSON.stringify(event, ((key, value) =>
 	    key === 'apiAccessToken' ? null : value), 4)}`);
+    }
 
 	const customExtensionLoader = new ExtensionLoader({
 		locale: event.request.locale,
@@ -61,7 +62,8 @@ export async function handler(event: any, context: any, callback: any) {
 	
 	const response = await skill.invoke(event, context);
 
-    if(debug)
+    if(debug) {
     	console.log(`[INFO] Outgoing Response: ${JSON.stringify(response, null, 4)}`);
+	}
 	return response;
 }
