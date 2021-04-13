@@ -203,4 +203,8 @@ export class ConfigAccessor {
         const data = await readUtf8FileExcludingBom(configFile);
         return new ConfigAccessor(JSON.parse(data), contentPath);
     }
+
+    public isDebug(): boolean {
+        return this.getValue("debug");
+    }
 }

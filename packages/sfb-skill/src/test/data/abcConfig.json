@@ -59,6 +59,7 @@
 		"snippet-map-filename": "Snippets.json",
 		"apl-templates-filename": "apl-templates.json",
 		"custom-slottype-filename": "SlotTypes.json",
-		"isp-config-filename": "ProductISPs.json"
+		"isp-config-filename": "ProductISPs.json",
+		"debug": false
 	}
 }

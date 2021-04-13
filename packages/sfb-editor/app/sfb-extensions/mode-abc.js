@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
  *
  * SPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0
@@ -165,7 +165,7 @@ define("ace/mode/abc_highlight_rules",["require","exports","module","ace/lib/oop
             "text",
             "entity.name.class"
           ],
-          regex: /^([\s]*)(go to)([\s]+)(?:([\s\S]*?)(?=,[\s]*$|\.[\s]*$|$))?/
+          regex: /^([\s]*)(go to)([\s]+)(?:([\s\S]*?)(?=$))?/
         },
         {
           token: [
@@ -174,7 +174,7 @@ define("ace/mode/abc_highlight_rules",["require","exports","module","ace/lib/oop
             "text",
             "entity.name.class"
           ],
-          regex: /^([\s]*)(->)([\s]*)(?:([\s\S]*?)(?=,[\s]*$|\.[\s]*$|$))?/
+          regex: /^([\s]*)(->)([\s]*)(?:([\s\S]*?)(?=$))?/
         },
         {
           token: "keyword.function",
@@ -187,7 +187,7 @@ define("ace/mode/abc_highlight_rules",["require","exports","module","ace/lib/oop
             "text",
             "string"
           ],
-          regex: /^([\s]*)(roll)([\s]+)(?:([\S\s]+?)(?=,[\s]*$|\.[\s]*$|$))?/
+          regex: /^([\s]*)(roll)([\s]+)(?:([\S\s]+?)(?=$))?/
         },
         {
           token: [
@@ -196,7 +196,7 @@ define("ace/mode/abc_highlight_rules",["require","exports","module","ace/lib/oop
             "text",
             "variable"
           ],
-          regex: /^([\s]*)(flag|unflag|clear|pop|dequeue)([\s]+)(?:([\S]+?)(?=,[\s]*$|\.[\s]*$|$))?/
+          regex: /^([\s]*)(flag|unflag|clear|pop|dequeue)([\s]+)(?:([\S]+?)(?=[\s]*$))?/
         },
         {
           token: [
@@ -211,7 +211,7 @@ define("ace/mode/abc_highlight_rules",["require","exports","module","ace/lib/oop
             "string",
             "variable"
           ],
-          regex: /^([\s]*)(set)([\s]+)(?:([\S]+?)([\s]+)(?:(to|as)([\s]+)(?:([\d]+?)|('[\S\s]+?'?)|([\S]+?))(?=,[\s]*$|\.[\s]*$|$))?)?/
+          regex: /^([\s]*)(set)([\s]+)(?:([\S]+?)([\s]+)(?:(to|as)([\s]+)(?:([\d]+?)|('[\S\s]+?'?)|([\S]+?))(?=[\s]*$))?)?/
         },
         {
           token: [
@@ -285,7 +285,7 @@ define("ace/mode/abc_highlight_rules",["require","exports","module","ace/lib/oop
             "text",
             "variable"
           ],
-          regex: /^([\s]*)(enqueue|put)([\s]+)(?:(?:([\d]+?)|('[\S\s]+?'?)|([\S]+?))([\s]+)(?:(into)([\s]+)([\S]+?)(?=,[\s]*$|\.[\s]*$|$))?)?/
+          regex: /^([\s]*)(enqueue|put)([\s]+)(?:(?:([\d]+?)|('[\S\s]+?'?)|([\S]+?))([\s]+)(?:(into)([\s]+)([\S]+?)(?=[\s]*$))?)?/
         },
         {
           token: [
@@ -300,7 +300,7 @@ define("ace/mode/abc_highlight_rules",["require","exports","module","ace/lib/oop
             "text",
             "variable"
           ],
-          regex: /^([\s]*)(remove)([\s]+)(?:(?:([\d]+?)|('[\S\s]+?'?)|([\S]+?))([\s]+)(?:(from)([\s]+)([\S]+?)(?=,[\s]*$|\.[\s]*$|$))?)?/
+          regex: /^([\s]*)(remove)([\s]+)(?:(?:([\d]+?)|('[\S\s]+?'?)|([\S]+?))([\s]+)(?:(from)([\s]+)([\S]+?)(?=[\s]*$))?)?/
         },
         {
           token: [
