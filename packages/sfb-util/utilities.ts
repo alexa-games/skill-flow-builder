@@ -56,5 +56,9 @@ export function sanitizeCommandLineParameter(parameterValue: string | number): s
     if (parameterValue === null || parameterValue === undefined) {
         throw new Error('parameterValue must have a value');
     }
+    const isWin32 = (process.platform === "win32");
+    if (isWin32) {
+        return parameterValue.toString().replace(/["'${}\r\n]/g, '');
+    }
     return parameterValue.toString().replace(/[\\"'${}\r\n]/g, '');
 }
