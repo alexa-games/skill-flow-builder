@@ -130,10 +130,9 @@ your AWS account. If you have already set up your ASK profile, skip to [Step 2](
 ### To begin to deploy your Alexa skill with the "default" profile
 
 1. Open a command prompt, type the following command: `ask configure`, and then follow
-the prompts.
-2. If you don't have an IAM user with credentials, open the [AWS Management console](https://aws.amazon.com/console/).
-3. Click the **IAM** tab, click **Add User**, and then create a new user name.
-4. Select the check box for **programmatic access**, and then grant a policy
+the prompts to create an IAM user and profile with the necessary ASK permissions.
+> Alternatively, you can manually create the IAM user in the [AWS Management console](https://aws.amazon.com/console/). Click the **IAM** tab, click **Add User**, and then create a new user name. Assign the AWS Manager policies IAMFullAccess, AWSCloudFormationFullAccess, AmazonS3FullAccess and AWSLambdaFullAccess. These policies are automatically added if the user is created using `ask configure`.
+2. Select the check box for **programmatic access**, and then grant a policy
 with the following structure.
 
 ```json

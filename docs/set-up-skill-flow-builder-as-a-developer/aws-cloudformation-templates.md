@@ -24,18 +24,68 @@ While the above resources are required for SFB to function, you can add
 more resources or adjust these resources' settings to fine-tune your skill's
 infrastructure.
 
-For example, the DynamoDB table starts with the following default capacity:
+For example, the DynamoDB table starts with the following configurations:
 
 ```yaml
 # Remember to scale up the capacity as your customer size grows!
 ProvisionedThroughput:
   ReadCapacityUnits: '5'
   WriteCapacityUnits: '5'
+PointInTimeRecoverySpecification: # Automatic backups for any point in time
+  PointInTimeRecoveryEnabled: true
 ```
 
 As your skill becomes more popular, you may need to increase the provisioned
-throughput to keep up with requests to your skill. For more information on
-DynamoDB capacity, see [Read/Write Capacity Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html).
+throughput to keep up with requests to your skill. For more information on these configurations, see:
+- [Read/Write Capacity Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html)
+- [Point-In-Time Recovery](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PointInTimeRecovery.html)
+
+### Enabling Access Logging
+
+To further monitor your S3 buckets, we recommend turning on server access logging. This will provide you with detailed records of all the requests made to a specified S3 bucket. For more information on what this is, see [S3 server access logging](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html).
+
+To enable this feature, you can attach something like the below to the `skill-stack.yaml` configuration.
+
+```yaml
+AccessLogsBucket # Create a separate bucket to log requests
+  Type: AWS::S3::Bucket
+  DeletionPolicy: Retain
+  Properties:
+    BucketName: SFB-STORY-ID-access-logs-bucket # This should be edited to whatever bucket name is appropriate
+    AccessControl: LogDeliveryWrite
+    BucketEncryption:
+      ServerSideEncryptionConfiguration:
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: AES256
+AccessLogsBucketPolicy # Create a policy for the new bucket to enforce HTTPS
+  Type: AWS::S3::BucketPolicy
+  Properties:
+    Bucket:
+      Ref: AccessLogsBucket
+    PolicyDocument:
+      Statement:
+      - Effect: Deny
+        Principal: '*'
+        Action: s3:*
+        Resource:
+          Fn::Sub: 'arn:aws:s3:::${AccessLogsBucket}'
+        Condition: { Bool: { 'aws:SecureTransport': false } }
+      - Effect: Deny
+        Principal: '*'
+        Action: s3:*
+        Resource:
+          Fn::Sub: 'arn:aws:s3:::${AccessLogsBucket}/*'
+        Condition: { Bool: { 'aws:SecureTransport': false } }
+...
+AlexaSkillBucket # Edit the existing AlexaSkillBucket's properties
+...
+  LoggingConfiguration:
+    DestinationBucketName:
+      Ref: AccessLogsBucket
+    LogFilePrefix: access-logs-
+```
+
+*Please note: This will increase the S3 usage costs associated with the related AWS account.*
 
 ## Deploying to multiple stages and locales
 
