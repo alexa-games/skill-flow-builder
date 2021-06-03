@@ -697,6 +697,11 @@ export class SFBDriver {
                 sceneNarration = this.stage.getRecapSceneAudio().foreground;
             }
 
+            // If scene property is 'then' section, then clear out any speech for this scene
+            if (sceneProperty && sceneProperty.trim().toLowerCase() === "then") {
+                sceneNarration = [];
+            }
+
             this.stage.appendSceneSpeechForeground(sceneNarration);
 
             break; // Only one of the scene variations are played.
