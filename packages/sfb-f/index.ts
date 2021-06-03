@@ -23,7 +23,7 @@
 import  * as SFBExtensions from './extensions/SFBExtension';
 
 export { SFBDriver } from './driver/driver';
-export { SFBImporter } from './importer/importer';
+export { SFBImporter, ImportOption } from './importer/importer';
 export { SFBExtensions as SFBExtension };
 
 export { StoryMetadata, InstructionType, Instruction, Scene, SceneVariation } from './story/storyMetadata';

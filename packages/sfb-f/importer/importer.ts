@@ -27,6 +27,7 @@ import { ImportResult, ImportErrorLine, ImportError } from "./importerEntity";
 import { ABCImportPlugin } from './../importPlugins/importerPlugin';
 import { ABCExporter } from './../exportHandlers/exporter';
 import { StoryMetadata, InstructionType } from './../story/storyMetadata';
+import { VoiceModel } from '../bakeUtilities/languageModel';
 import { ModelBuilder, AlexaVoiceModelBuilder } from '../bakeUtilities/VoiceModelBuilder';
 import { BUILT_IN_INTENT_UTTERANCES as builtInIntents } from '../bakeUtilities/BuiltInIntents';
 import { DriverExtension, ImporterExtension, InstructionExtension, isImporterExtension } from "../extensions/SFBExtension";
@@ -42,7 +43,7 @@ export interface ContentItem {
     text: string
 }
 
-interface ImportOption {
+export interface ImportOption {
 	/**
 	 * raw string of content to import.
 	 */
@@ -64,6 +65,12 @@ interface ImportOption {
 	 */
 	ignoreSyntaxError?: boolean;
 	modelBuilder?: ModelBuilder;
+	/**
+	 * Base Alexa interaction model. If provided the importer will try to match the utterances in the story to this model.
+	 */
+	baseModel?: {
+	    interactionModel: VoiceModel;
+	};
 	invocationName?: string;
 	customSlots?: {[key: string]: string[]};
 }
@@ -94,7 +101,7 @@ export class SFBImporter
 			importPlugins = importPlugins.concat(customImporters);
 		}
 
-		for (let importPlug of importPlugins) {
+		for (const importPlug of importPlugins) {
 			this.importHandlersByType[importPlug.pluginName] = importPlug;
 		}
 
@@ -125,7 +132,7 @@ export class SFBImporter
 		}
 		
 
-		for (let extension of this.importExtensions) {
+		for (const extension of this.importExtensions) {
 			if (isImporterExtension(extension)) {
 				const sourceHelper = new SourceContentHelper(contents);
 				await extension.extendSourceContent(sourceHelper);
@@ -133,7 +140,7 @@ export class SFBImporter
 			}
 		}
 
-		let importHandler : ABCImportPlugin = this.importHandlersByType[format];
+		const importHandler : ABCImportPlugin = this.importHandlersByType[format];
 
 		const contentVersion: number = param.version || 1;
 		const optimalVersion = importHandler.getVersion();
@@ -141,7 +148,7 @@ export class SFBImporter
 			throw new Error(`Unsupported Language Version: Importer expected content version ${optimalVersion}, but detected version ${contentVersion}.`);
 		}
 
-		let thisObj = this;
+		const thisObj = this;
 		const importResult: ImportResult = await importHandler.importData(contents, param);
 		const importedScenes = importResult.importedScenes;
 		const importErrors = importResult.errors || [];
@@ -153,7 +160,7 @@ export class SFBImporter
 			storyTitle: storyTitle
 		}
 
-		for (let extension of this.importExtensions) {
+		for (const extension of this.importExtensions) {
 			try {
 				if (isImporterExtension(extension)) {
 					const metadataHelper = new StoryMetadataHelper(jsonObjOutput);
@@ -201,6 +208,7 @@ export class SFBImporter
 				invocationName: jsonObjOutput.storyTitle,
 				story: storyHelper,
 				locale: locale,
+				baseVoiceModel: param.baseModel ? param.baseModel.interactionModel : undefined
 			});
 
 			const finalStoryMetadata = await storyHelper.getStoryMetadata();
@@ -243,10 +251,10 @@ export class SFBImporter
 		}
 
 		if (importErrors && importErrors.length > 0) {
-			throw (<ImportError> {
+			throw ({
 				errorItems: importErrors,
 				importedData: jsonObjOutput
-			});
+			} as ImportError);
 		} else {
 			return jsonObjOutput;
 		}
@@ -254,11 +262,11 @@ export class SFBImporter
 
 	public exportTo(format : string, filename : string, outputFilename : string) {
 
-		let fileData = readUtf8FileExcludingBomSync(filename);
+		const fileData = readUtf8FileExcludingBomSync(filename);
 
-		let jsonInputObj = JSON.parse(fileData);
+		const jsonInputObj = JSON.parse(fileData);
 
-		let exportHandler : ABCExporter = this.exportHandlersByType[format];
+		const exportHandler : ABCExporter = this.exportHandlersByType[format];
 
 		console.log(this.exportHandlersByType);
 
