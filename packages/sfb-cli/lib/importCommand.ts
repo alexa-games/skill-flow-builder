@@ -39,6 +39,8 @@ import { StdOutput } from './stdOutput';
 import { FileUtils } from './fileUtils';
 import { Command } from './command';
 import { ManifestUtils, PackageMetadata } from './manifestUtils';
+import { ImportOption } from '@alexa-games/sfb-f';
+
 import semver from 'semver';
 
 interface ContentItem {
@@ -243,6 +245,9 @@ export class ImportCommand implements Command {
         const customSlotTypeFilePath = path.join(resourcePath, 
             config.getValue("custom-slottype-filename", undefined, locale));
 
+        const baseModelConfiguredName = config.getValue("base-interaction-model-filename", undefined, locale);
+        const baseInteractionModelPath: string | undefined = (baseModelConfiguredName) ? path.join(resourcePath, baseModelConfiguredName) : undefined;
+
         const manifestFilePath = path.join(contentPath, "MANIFEST.json");
 
         let storyManifest: any = {};
@@ -286,12 +291,16 @@ export class ImportCommand implements Command {
         }
 
         try {
-            let importedStory = await importer.importABCStory(DEFAULT_IMPORT_PLUGIN_NAME, "", storyTitle, storyId, true, {
+            const importerParam: ImportOption = {
                 customSlots: customSlots,
                 contents: combinedContent,
                 version: storyManifest.version || 1,
                 locale: locale
-            });
+            };
+            if (baseInteractionModelPath && fs.existsSync(baseInteractionModelPath)) {
+                importerParam.baseModel = JSON.parse(fs.readFileSync(baseInteractionModelPath, "utf8"));
+            }
+            let importedStory = await importer.importABCStory(DEFAULT_IMPORT_PLUGIN_NAME, "", storyTitle, storyId, true, importerParam);
 
             importedStory.alexaVoiceModel.languageModel.invocationName = invocationName;
 
