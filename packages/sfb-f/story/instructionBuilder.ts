@@ -26,30 +26,12 @@ export class InstructionBuilder {
     constructor() {
     }
 
-
-    public registerChoiceDirections(utterances: string[], directions: Instruction[], narration?: string, saveToHistory: boolean = true) {
-        let parameters: any = {
-            utterances: utterances,
-            saveToHistory: String(saveToHistory),
-            directions: directions
-        }
-
-        if (narration) {
-            parameters.narration = narration;
-        }
-
-        this.instructions.push({
-            directionType: InstructionType.CHOICE,
-            parameters: parameters
-        });
-
-        return this;
-    }
-
     public startChoice(utterances: string[], narration?: string, saveToHistory: boolean = true) {
         let parameters: any = {
             utterances: utterances,
-            saveToHistory: String(saveToHistory)
+            saveToHistory: String(saveToHistory),
+            lines: 0,
+            directions: []
         }
 
         if (narration) {
@@ -62,10 +44,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);   
@@ -76,23 +54,11 @@ export class InstructionBuilder {
         return this;
     }
 
-    public registerCondition(conditionString: string, directions: Instruction[]) {
-        let parameters: any = {
-            condition: conditionString,
-            directions: directions
-        }
-
-        this.instructions.push({
-            directionType: InstructionType.CONDITION,
-            parameters: parameters
-        });
-
-        return this;
-    }
-
     public startCondition(conditionString: string) {
         let parameters: any = {
             condition: conditionString,
+            lines: 0,
+            directions: []
         }
 
         let direction: Instruction = {
@@ -101,10 +67,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);   
@@ -130,10 +92,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -157,10 +115,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -176,10 +130,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -195,10 +145,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -214,10 +160,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -233,10 +175,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -252,10 +190,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -273,10 +207,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -294,10 +224,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);
@@ -356,10 +282,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -378,10 +300,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -400,10 +318,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -422,10 +336,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -444,10 +354,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -466,10 +372,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -488,10 +390,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -509,10 +407,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -530,10 +424,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -551,10 +441,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -572,10 +458,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -596,10 +478,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -624,10 +502,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -646,10 +520,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -667,10 +537,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -688,10 +554,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -709,10 +571,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -728,10 +586,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -741,7 +595,17 @@ export class InstructionBuilder {
 
     public closeChoice() {
         if (this.nestingStack.length > 0) {
-            this.nestingStack.splice(this.nestingStack.length - 1, 1);
+            const closingIndex = this.nestingStack.length - 1;
+
+            const previousIndex = this.nestingStack.length - 2;
+
+            this.nestingStack[closingIndex].parameters.lines += this.nestingStack[closingIndex].parameters.directions.length;
+
+            if (this.nestingStack[previousIndex]) {
+                this.nestingStack[previousIndex].parameters.lines += this.nestingStack[closingIndex].parameters.lines;
+            }
+
+            this.nestingStack.splice(closingIndex, 1);
         }
 
         return this;
@@ -749,7 +613,17 @@ export class InstructionBuilder {
 
     public closeCondition() {
         if (this.nestingStack.length > 0) {
-            this.nestingStack.splice(this.nestingStack.length - 1, 1);
+            const closingIndex = this.nestingStack.length - 1;
+
+            const previousIndex = this.nestingStack.length - 2;
+
+            this.nestingStack[closingIndex].parameters.lines += this.nestingStack[closingIndex].parameters.directions.length;
+
+            if (this.nestingStack[previousIndex]) {
+                this.nestingStack[previousIndex].parameters.lines += this.nestingStack[closingIndex].parameters.lines;
+            }
+
+            this.nestingStack.splice(closingIndex, 1);
         }
 
         return this;
@@ -760,10 +634,6 @@ export class InstructionBuilder {
      */
     public addSceneDirection(direction: Instruction) {
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
         this.instructions.push(JSON.parse(JSON.stringify(direction)));
@@ -773,10 +643,6 @@ export class InstructionBuilder {
 
     public addInstruction(direction: Instruction) {
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
         this.instructions.push(JSON.parse(JSON.stringify(direction)));
@@ -793,10 +659,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -812,10 +674,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
@@ -834,10 +692,6 @@ export class InstructionBuilder {
         };
 
         if (this.nestingStack.length > 0) {
-            if (!this.nestingStack[this.nestingStack.length - 1].parameters.directions) {
-                this.nestingStack[this.nestingStack.length - 1].parameters.directions = [];
-            }
-
             this.nestingStack[this.nestingStack.length - 1].parameters.directions.push(direction);
         } else {
             this.instructions.push(direction);    
