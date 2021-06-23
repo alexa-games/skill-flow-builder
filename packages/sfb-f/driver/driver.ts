@@ -38,19 +38,19 @@ import { isDriverExtension, isInstructionExtension,
 
 import { StoryStateHelper } from './storyStateHelper';
 
-import { createHash } from 'crypto';
 import { PlayStage } from './PlayStage';
 import { UserInputHelper } from '../importPlugins/userInputHelper';
 
-import { AudioFileAccessor, PollyUtil, S3AudioAccessor } from '@alexa-games/sfb-polly';
-
 import { TokenReplacer } from '../transformers/tokenReplacer';
 import { SegmenterBuilder } from '../transformers/segmenter';
-
 import { AudioItemUtil } from './AudioItemUtil';
 import { CallStackUtil } from './callStackUtil';
 
+import { AudioFileAccessor, PollyUtil, S3AudioAccessor } from '@alexa-games/sfb-polly';
+import { createHash } from 'crypto';
+
 const TOTAL_SCENES_PROCESS_SAFEGUARD = 1000;
+
 const isWin = (process.platform === "win32");
 
 type SFBExtensionType = ImporterExtension | DriverExtension | InstructionExtension;
@@ -187,7 +187,7 @@ export class SFBDriver {
      *
      * @param startingStoryState
      */
-    public async resetStory(startingStoryState?: {[key: string]: any}) {
+    public resetStory(startingStoryState?: {[key: string]: any}) {
         this.storyState = JSON.parse(JSON.stringify(startingStoryState || this.storyState));
 
         StoryStateHelper.setCurrentSceneID(this.storyState, BuiltInScenes.StartScene);
@@ -395,21 +395,6 @@ export class SFBDriver {
         StoryStateHelper.setCurrentSceneID(this.storyState, savingSceneID === null ? BuiltInScenes.StartScene: savingSceneID);
 
         StoryStateHelper.setStoryPaused(this.storyState, true);
-
-        // apply user input extension by DriverExtensions
-        const inputHelper = new UserInputHelper(_userInput);
-        for (let extension of this.customExtensions) {
-            if (!isDriverExtension(extension)) {
-                continue;
-            }
-
-            await extension.post({
-                driver: this,
-                storyState: this.storyState,
-                userInputHelper: inputHelper,
-                locale: this.locale
-            });
-        }
 
         return;
     }
@@ -964,7 +949,7 @@ export class SFBDriver {
                 break;
             }
             case InstructionType.RESTART: {
-                await this.resetStory();
+                this.resetStory();
                 this.playQueue.push({
                     sceneID: BuiltInScenes.StartScene,
                     property: parameters.targetSceneProperty || "narration",
@@ -1064,7 +1049,7 @@ export class SFBDriver {
             }
             case InstructionType.END: {
                 StoryStateHelper.setEndingReached(this.storyState, true);
-                await this.resetStory();
+                this.resetStory();
                 this.isRepeating = true;
 
                 if (SFBDriver.testing) console.log(`END`);
