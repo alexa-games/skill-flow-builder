@@ -106,7 +106,7 @@ project files.
 
 ### Prerequisites
 
-* Install [Node.js (with npm)](https://nodejs.org/en/download/) version 10.15 or later.
+* Install [Node.js (with npm)](https://nodejs.org/en/download/) version 12.13 or later.
 * Install the latest version of the [Amazon Web Services Command Line Interface (AWS CLI)](https://aws.amazon.com/cli/).
 * Install the latest version of the [Alexa Skills Kit Command Line Interface (ASK CLI)](https://www.npmjs.com/package/ask-cli)
 * (Windows only) Install the latest version of the [windows-build-tools module](https://www.npmjs.com/package/windows-build-tools).
