@@ -15,9 +15,8 @@
  * permissions and limitations under the License.
  */
 
-import { VoiceModel } from "./languageModel";
 import { StoryMetadataHelper } from "./../importPlugins/storyMetadataHelper";
-import { LanguageModelValue } from "./languageModel";
+import { LanguageModelValue, VoiceModel } from "./languageModel";
 import { ModelBuildHelper } from "./modelBuildHelper";
 
 export interface ModelBuildParameter {
