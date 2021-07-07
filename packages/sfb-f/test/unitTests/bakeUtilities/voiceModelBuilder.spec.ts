@@ -304,10 +304,10 @@ describe("auto voice model generating utility test", function() {
             }
         }
 
-        assert.ok(hasBuiltIn, "Expected intent 'BuiltInIntent' does not exist in the reuslt");
-        assert.ok(hasAutoSlot, "Expected category type 'Auto Slot' does not exist in the reuslt");
-        assert.ok(!hasCustomSlot, "Expected category type 'Custom Slot' does not exist in the reuslt");
-        assert.ok(hasIntent, "Expected category type 'Intent' does not exist in the reuslt");
+        assert.ok(hasBuiltIn, "Expected intent 'BuiltInIntent' does not exist in the result");
+        assert.ok(hasAutoSlot, "Expected category type 'Auto Slot' does not exist in the result");
+        assert.ok(!hasCustomSlot, "Expected category type 'Custom Slot' does exist in the result");
+        assert.ok(hasIntent, "Expected category type 'Intent' does not exist in the result");
     });
 
     it ("copyAdditionalAttributes() - copies unknown field from base model into generated model", async function() {
