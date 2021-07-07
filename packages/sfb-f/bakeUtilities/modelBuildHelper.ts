@@ -18,8 +18,7 @@
 import { StoryMetadataHelper } from "./../importPlugins/storyMetadataHelper";
 import { Instruction, InstructionType, SceneVariation } from "./../story/storyMetadata";
 import { Segmenter, SegmentType } from "./../transformers/segmenter";
-import { VoiceModel } from "./languageModel";
-import { LanguageModelBuilder, LanguageModelSlot, LanguageModelValue } from "./languageModel";
+import { LanguageModelBuilder, LanguageModelSlot, LanguageModelValue, VoiceModel } from "./languageModel";
 
 export interface IntentCategory {
     id: string,
