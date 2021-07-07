@@ -38,19 +38,19 @@ import { isDriverExtension, isInstructionExtension,
 
 import { StoryStateHelper } from './storyStateHelper';
 
-import { createHash } from 'crypto';
 import { PlayStage } from './PlayStage';
 import { UserInputHelper } from '../importPlugins/userInputHelper';
 
-import { AudioFileAccessor, PollyUtil, S3AudioAccessor } from '@alexa-games/sfb-polly';
-
 import { TokenReplacer } from '../transformers/tokenReplacer';
 import { SegmenterBuilder } from '../transformers/segmenter';
-
 import { AudioItemUtil } from './AudioItemUtil';
 import { CallStackUtil } from './callStackUtil';
 
+import { AudioFileAccessor, PollyUtil, S3AudioAccessor } from '@alexa-games/sfb-polly';
+import { createHash } from 'crypto';
+
 const TOTAL_SCENES_PROCESS_SAFEGUARD = 1000;
+
 const isWin = (process.platform === "win32");
 
 type SFBExtensionType = ImporterExtension | DriverExtension | InstructionExtension;
@@ -105,7 +105,9 @@ export class SFBDriver {
 
     private playQueue: {
         sceneID: string,
-        property: string
+        property: string,
+        variationIndex: number,
+        lineNumber: number
     }[] = [];
 
     private unhandledChoiceFlag = false;
@@ -185,7 +187,7 @@ export class SFBDriver {
      *
      * @param startingStoryState
      */
-    public async resetStory(startingStoryState?: {[key: string]: any}) {
+    public resetStory(startingStoryState?: {[key: string]: any}) {
         this.storyState = JSON.parse(JSON.stringify(startingStoryState || this.storyState));
 
         StoryStateHelper.setCurrentSceneID(this.storyState, BuiltInScenes.StartScene);
@@ -249,7 +251,9 @@ export class SFBDriver {
 
                     this.playQueue.push({
                         sceneID: BuiltInScenes.StartScene,
-                        property: "narration"
+                        property: "narration",
+                        variationIndex: 0,
+                        lineNumber: -1
                     });
                 } else {
                     let resumeExists: boolean = false;
@@ -272,14 +276,18 @@ export class SFBDriver {
                         }
                         this.playQueue.push({
                             sceneID: BuiltInScenes.ResumeScene,
-                            property: "narration"
+                            property: "narration",
+                            variationIndex: 0,
+                            lineNumber: -1
                         });
                     } else {
                         if(SFBDriver.debug) console.log("[DEBUG] Enqueue saved scene: " + bookmarkedSceneID);
 
                         this.playQueue.push({
                             sceneID: bookmarkedSceneID,
-                            property: "narration"
+                            property: "narration",
+                            variationIndex: 0,
+                            lineNumber: -1
                         });
                     }
 
@@ -305,19 +313,14 @@ export class SFBDriver {
 
             while (this.playQueue.length > 0 && !this.isPausing) {
 
-                let dequeuedSceneID: {
-                    sceneID: string,
-                    property: string
-                } = this.playQueue.splice(0, 1)[0];
+                let dequeuedSceneID = this.playQueue.splice(0, 1)[0];
 
                 if(SFBDriver.debug) console.log("[DEBUG] Setting the current scene to: " + dequeuedSceneID);
                 this.stage.logVisitedScene(dequeuedSceneID.sceneID);
 
-                StoryStateHelper.setCurrentSceneID(this.storyState, dequeuedSceneID.sceneID);
-
                 let preProcessState: string = JSON.stringify(this.storyState);
 
-                await this.processScene.call(this, undefined, dequeuedSceneID.property);
+                await this.processScene.call(this, dequeuedSceneID.sceneID, dequeuedSceneID.property, dequeuedSceneID.variationIndex, dequeuedSceneID.lineNumber);
 
                 if (SFBDriver.testing) {
                     let beforeStructure: any = JSON.parse(preProcessState);
@@ -354,6 +357,10 @@ export class SFBDriver {
                 locale: this.locale
             });
         }
+
+        if (!StoryStateHelper.isStoryPaused(this.storyState) && StoryStateHelper.getCurrentSceneID(this.storyState) !== BuiltInScenes.ResumeScene) {
+            StoryStateHelper.saveForResume(this.storyState);
+        }
     }
 
     public pauseStory() {
@@ -374,11 +381,9 @@ export class SFBDriver {
             savingSceneID = this.storyState.resume
         }
 
-        StoryStateHelper.setCurrentSceneID(this.storyState, BuiltInScenes.PauseScene);
-
         let preProcessState: string = JSON.stringify(this.storyState);
 
-        await this.processScene.call(this);
+        await this.processScene.call(this, BuiltInScenes.PauseScene, "narration", 0, -1);
 
         if (SFBDriver.testing) {
             let beforeStructure: any = JSON.parse(preProcessState);
@@ -390,21 +395,6 @@ export class SFBDriver {
         StoryStateHelper.setCurrentSceneID(this.storyState, savingSceneID === null ? BuiltInScenes.StartScene: savingSceneID);
 
         StoryStateHelper.setStoryPaused(this.storyState, true);
-
-        // apply user input extension by DriverExtensions
-        const inputHelper = new UserInputHelper(_userInput);
-        for (let extension of this.customExtensions) {
-            if (!isDriverExtension(extension)) {
-                continue;
-            }
-
-            await extension.post({
-                driver: this,
-                storyState: this.storyState,
-                userInputHelper: inputHelper,
-                locale: this.locale
-            });
-        }
 
         return;
     }
@@ -580,16 +570,31 @@ export class SFBDriver {
 
                 const beforeState: any = JSON.parse(JSON.stringify(this.storyState));
 
+                this.stage.startNewScene(StoryStateHelper.getCurrentSceneID(this.storyState) || "");
                 try {
                     if (selectedChoice.sceneDirections) {
                         // Keep for backwards compatibility.
                         let tempChoiceInstructionAddress: string = StoryStateHelper.getCurrentSceneID(this.storyState) + ":" + selectedChoice.id + ":" + -1;
                         this.storyState.system_instruction_mem = this.storyState.system_instruction_mem || [];
                         this.storyState.system_instruction_mem[tempChoiceInstructionAddress] = selectedChoice.sceneDirections;
-    
+
                         await this.performInstructions.call(this, tempChoiceInstructionAddress);
                     } else if (selectedChoice.instructionAddress) {
-                        await this.performInstructions.call(this, selectedChoice.instructionAddress);
+                        const address = this.callStack.deserialize(selectedChoice.instructionAddress);
+
+                        if (address.version == 1) {
+                            selectedChoice.instructionAddress = this.callStack.updateAddressVersion(selectedChoice.instructionAddress);
+                        }
+
+                        // address was legacy version
+                        const dest = this.callStack.getDestination(selectedChoice.instructionAddress);
+
+                        this.playQueue.push({
+                            sceneID: dest.scene,
+                            property: "narration",
+                            variationIndex: dest.i,
+                            lineNumber: dest.line
+                        });
                     }
                 } catch (err) {
                     reject(err);
@@ -612,35 +617,30 @@ export class SFBDriver {
     /**
      * Process the current scene. Updating speech, reprompt, variables as indicated by the scene.
      */
-    private async processScene(sceneID?: string, sceneProperty?: string): Promise<any> {
+    private async processScene(sceneID: string, sceneProperty: string, variationIndex: number, lineNumber: number): Promise<any> {
         if (SFBDriver.debug) console.log("[INFO] Calling processScene.");
 
-        let currentSceneID: string | null = StoryStateHelper.getCurrentSceneID(this.storyState);
-
-        if (sceneID) {
-            currentSceneID = sceneID;
-        }
-
         if (SFBDriver.testing) {
-            console.log("\n\nSCENE '" + currentSceneID + "'");
+            console.log(`\n\nSCENE '${sceneID}' *${sceneProperty}, content=${variationIndex}, line=${lineNumber}`);
             console.log("........................");
         }
 
-        let currentScene: Scene | undefined = undefined;
-        if (currentSceneID != null) {
-            currentScene = this.storyAccessor.getSceneByID(currentSceneID || "");
-        }
+        const currentScene: Scene = this.storyAccessor.getSceneByID(sceneID);
 
         if (!currentScene) {
-            if (SFBDriver.debug) throw new Error(`[WARN] Cannot find the Scene=[${currentSceneID}]`);
+            if (SFBDriver.debug) throw new Error(`[WARN] Cannot find the Scene=[${sceneID}]`);
             else return;
         }
 
-        this.stage.startNewScene(currentSceneID || "");
+        StoryStateHelper.setCurrentSceneID(this.storyState, sceneID);
+
+        this.stage.startNewScene(sceneID);
 
         StoryStateHelper.clearRecap(this.storyState);
 
-        for (let variation of currentScene.contents) {
+        for (let currentVariation = variationIndex; currentVariation < currentScene.contents.length; currentVariation++) {
+            const variation = currentScene.contents[currentVariation];
+
             // evaluate body's conditional
             let conditionPassed: boolean = true;
 
@@ -669,7 +669,7 @@ export class SFBDriver {
             */
             let sceneNarration: AudioItem[] = [];
 
-            if (variation.narration) {
+            if (lineNumber === -1 && variation.narration) {
                 let narrationText: string = replaceVariables(variation.narration, this.storyState, false)
                     .replace(/\n/g, " ")
                     .replace(/[\s]+/g, " ");
@@ -683,10 +683,11 @@ export class SFBDriver {
             /*
             * Scene Directions
             */
+            let isTerminating = false;
             if (variation.sceneDirections && variation.sceneDirections.length > 0) {
-                const instructionSetAddress = this.callStack.getSceneAddress(currentSceneID || "", 0);
+                const instructionSetAddress = this.callStack.getSceneAddress(sceneID, currentVariation, lineNumber == -1 ? 0 : lineNumber);
 
-                await this.performInstructions(instructionSetAddress);
+                isTerminating = await this.performInstructions(instructionSetAddress);
             }
 
             if (sceneProperty && sceneProperty.trim().toLowerCase() == "reprompt" && this.stage.getRepromptSceneAudio().foreground.length > 0) {
@@ -697,9 +698,18 @@ export class SFBDriver {
                 sceneNarration = this.stage.getRecapSceneAudio().foreground;
             }
 
-            this.stage.appendSceneSpeechForeground(sceneNarration);
+            // If scene property is 'then' section, then clear out any speech for this scene
+            if (sceneProperty && sceneProperty.trim().toLowerCase() === "then") {
+                sceneNarration = [];
+            }
 
-            break; // Only one of the scene variations are played.
+            if (sceneNarration.length > 0) {
+                this.stage.appendSceneSpeechForeground(sceneNarration);
+            }
+
+            if (isTerminating) {
+                break;
+            }
         }
 
         this.stage.closeScene();
@@ -726,6 +736,8 @@ export class SFBDriver {
         } else {
             directions = this.callStack.getInstructions(instructionAddress, this.storyState);
         }
+
+        let effectiveLineNumber = 0;
 
         for (let lineNumber = 0 ; lineNumber < directions.length; lineNumber++) {
             let parameters: {[key: string]: any;} = JSON.parse(JSON.stringify(directions[lineNumber].parameters));
@@ -806,10 +818,12 @@ export class SFBDriver {
 
                 let choice: Choice = {
                     id: choiceID,
-                    instructionAddress: this.callStack.getChoiceAddress(instructionAddress, lineNumber),
+                    instructionAddress: this.callStack.getUpdatedAddress(instructionAddress, effectiveLineNumber + 1),
                     utterances: utterances,
                     saveToHistory: false//parameters.saveToHistory && parameters.saveToHistory.trim().toLowerCase() == 'true'? true: false
                 }
+
+                effectiveLineNumber += parameters.lines;
 
                 if (parameters.narration) {
                     choice.narration = parameters.narration;
@@ -843,7 +857,7 @@ export class SFBDriver {
                     
                     if (parameters.directions && parameters.directions.length > 0) {
 
-                        const conditionInstructionAddress: string = this.callStack.getConditionAddress(instructionAddress, lineNumber);
+                        const conditionInstructionAddress: string = this.callStack.getUpdatedAddress(instructionAddress, effectiveLineNumber + 1);
 
                         await this.performInstructions.call(this, conditionInstructionAddress);
 
@@ -851,21 +865,27 @@ export class SFBDriver {
                     }
                 }
 
+                effectiveLineNumber += parameters.lines;
+
                 break;
             }
             case InstructionType.GO_TO: {
                 let destinationPage: string = parameters.target;
 
                 if (this.storyState[destinationPage] && this.storyState[destinationPage].type == 'sceneID') {
-                    this.playQueue.push({
+                    this.playQueue.unshift({
                         sceneID: this.storyState[destinationPage].value,
-                        property: parameters.targetSceneProperty || "narration"
+                        property: parameters.targetSceneProperty || "narration",
+                        variationIndex: 0,
+                        lineNumber: -1
                     });
 
                 } else {
-                    this.playQueue.push({
+                    this.playQueue.unshift({
                         sceneID: destinationPage.toLowerCase(),
-                        property: parameters.targetSceneProperty || "narration"
+                        property: parameters.targetSceneProperty || "narration",
+                        variationIndex: 0,
+                        lineNumber: -1
                     });
                 }
 
@@ -877,7 +897,7 @@ export class SFBDriver {
             case InstructionType.SAVE_AND_GO: {
                 let destinationPage: string = parameters.target.toLowerCase();
 
-                const savingAddress: string = this.callStack.getReturnAddress(instructionAddress, lineNumber);
+                const savingAddress: string = this.callStack.getUpdatedAddress(instructionAddress, effectiveLineNumber + 1);
 
                 if (!this.storyState.system_call_stack) {
                     this.storyState.system_call_stack = [];
@@ -887,9 +907,11 @@ export class SFBDriver {
 
                 if (SFBDriver.testing) console.log(`${padString("CALL",8)}\t>scene '${destinationPage}'`);
 
-                this.playQueue.push({
+                this.playQueue.unshift({
                     sceneID: destinationPage,
-                    property: parameters.targetSceneProperty || "narration"
+                    property: parameters.targetSceneProperty || "narration",
+                    variationIndex: 0,
+                    lineNumber: -1
                 });
 
                 isTerminatingDirection = true;
@@ -902,10 +924,22 @@ export class SFBDriver {
 
                     if (SFBDriver.testing) console.log(`${padString("RETURN",8)}\t> Returning to address ${returnAddress}.'`);
 
-                    const popSceneID = this.callStack.getSourceScene(returnAddress);
-                    StoryStateHelper.setCurrentSceneID(this.storyState, popSceneID);
-                    
-                    await this.performInstructions.call(this, returnAddress);
+                    if (this.callStack.deserialize(returnAddress).version > 1) {
+                        const destination = this.callStack.getDestination(returnAddress);
+
+                        this.playQueue.unshift({
+                            sceneID: destination.scene,
+                            property: parameters.targetSceneProperty || "narration",
+                            variationIndex: destination.i,
+                            lineNumber: destination.line
+                        });
+                    } else {
+                        const popSceneID = this.callStack.getSourceScene(returnAddress);
+
+                        StoryStateHelper.setCurrentSceneID(this.storyState, popSceneID);
+
+                        await this.performInstructions.call(this, returnAddress);
+                    }
                 } else {
                     if (SFBDriver.testing) console.log(`${padString("RETURN",8)}\t> There is instructions to return to.'`);
                 }
@@ -915,10 +949,12 @@ export class SFBDriver {
                 break;
             }
             case InstructionType.RESTART: {
-                await this.resetStory();
+                this.resetStory();
                 this.playQueue.push({
                     sceneID: BuiltInScenes.StartScene,
-                    property: parameters.targetSceneProperty || "narration"
+                    property: parameters.targetSceneProperty || "narration",
+                    variationIndex: 0,
+                    lineNumber: -1
                 });
 
                 if (SFBDriver.testing) console.log(`${padString("RESTART",8)}\t> Refresh and restart the story.`);
@@ -927,11 +963,14 @@ export class SFBDriver {
                 break;
             }
             case InstructionType.REPEAT: {
-                if (this.storyState.system_prevSpeech && this.storyState.system_prevSpeech.length > 0) {
-                    this.stage.appendStageSpeechAudioSequence(this.storyState.system_prevSpeech);
-                    this.stage.appendStageRepromptAudioSequence(this.storyState.system_prevReprompt);
+                const loadedSpeech = StoryStateHelper.loadForResume(this.storyState, this.stage);
 
-                    if (SFBDriver.testing) console.log(`${padString("REPEAT",8)}\t> Repeating previously heard speech:\n${JSON.stringify(this.storyState.system_prevSpeech, null, 4)}\nreprompt:\n${JSON.stringify(this.storyState.system_prevReprompt, null, 4)}`);
+                if (loadedSpeech.speech && loadedSpeech.speech.length > 0) {
+                    this.stage.appendStageSpeechAudioSequence(loadedSpeech.speech);
+                    this.stage.appendStageRepromptAudioSequence(loadedSpeech.reprompt);
+                    this.stage.appendStageRecapAudioSequence(loadedSpeech.recap);
+
+                    if (SFBDriver.testing) console.log(`${padString("REPEAT",8)}\t> Repeating previously heard speech:\n${JSON.stringify(loadedSpeech.speech, null, 4)}\nreprompt:\n${JSON.stringify(loadedSpeech.reprompt, null, 4)}`);
                 } else {
                     if (SFBDriver.testing) console.log(`${padString("REPEAT",8)}\t> Nothing to repeat.'`);
                 }
@@ -942,11 +981,14 @@ export class SFBDriver {
                 break;
             }
             case InstructionType.REPEAT_REPROMPT: {
-                if (this.storyState.system_prevReprompt && this.storyState.system_prevReprompt.length > 0) {
-                    this.stage.setStageSpeechAudioSequence(this.stage.getStageRepromptAudioSequence().concat(this.storyState.system_prevReprompt));
-                    this.stage.appendStageRepromptAudioSequence(this.storyState.system_prevReprompt);
+                const loadedSpeech = StoryStateHelper.loadForResume(this.storyState, this.stage);
 
-                    if (SFBDriver.testing) console.log(`${padString("RE-REPROMPT",8)}\t> Repeating previously heard reprompt:\n${JSON.stringify(this.storyState.system_prevReprompt, null, 4)}`);
+                if (loadedSpeech.speech && loadedSpeech.speech.length > 0) {
+                    this.stage.appendStageSpeechAudioSequence(loadedSpeech.reprompt);
+                    this.stage.appendStageRepromptAudioSequence(loadedSpeech.reprompt);
+                    this.stage.appendStageRecapAudioSequence(loadedSpeech.recap);
+
+                    if (SFBDriver.testing) console.log(`${padString("RE-REPROMPT",8)}\t> Repeating previously heard reprompt:\n${JSON.stringify(loadedSpeech.reprompt, null, 4)}`);
                 } else {
                     if (SFBDriver.testing) console.log(`${padString("RE-REPROMPT",8)}\t> Nothing to reprompt.'`);
                 }
@@ -970,7 +1012,14 @@ export class SFBDriver {
                         destinationScene = transitionStack.splice(-1, 1)[0];
                     }
 
-                    this.playQueue.push(destinationScene);
+                    if (destinationScene) {
+                        this.playQueue.push({
+                            sceneID: destinationScene.sceneID,
+                            property: destinationScene.property,
+                            variationIndex: 0,
+                            lineNumber: -1
+                        });
+                    }
 
                     this.storyState.system_originStack = transitionStack;
                     if (SFBDriver.testing) console.log(`${padString("BACK",8)}\t> back count=${parameters.count} to scene '${JSON.stringify(destinationScene)}'`);
@@ -1000,7 +1049,7 @@ export class SFBDriver {
             }
             case InstructionType.END: {
                 StoryStateHelper.setEndingReached(this.storyState, true);
-                await this.resetStory();
+                this.resetStory();
                 this.isRepeating = true;
 
                 if (SFBDriver.testing) console.log(`END`);
@@ -1317,6 +1366,8 @@ export class SFBDriver {
                 }
                 break;
             }
+
+            effectiveLineNumber++;
         }
 
         return isTerminatingDirection;

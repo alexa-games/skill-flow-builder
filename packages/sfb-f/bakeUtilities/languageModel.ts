@@ -28,6 +28,7 @@ export interface LanguageModel {
     invocationName: string;
     intents: LanguageModelIntent[];
     types?: LanguageModelSlotType[];
+    [key: string]: any;
 }
 
 export interface LanguageModelIntent {

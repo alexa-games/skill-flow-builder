@@ -18,6 +18,7 @@
 import { pickBestResponse } from '@alexa-games/sfb-util';
 
 import { Choice, UserInput, ChoiceHistoryItem, StateDiffItem, Slot } from './driverEntity';
+import { PlayStage } from './PlayStage';
 
 import { BUILT_IN_INTENT_UTTERANCES } from '../bakeUtilities/BuiltInIntents';
 
@@ -242,6 +243,60 @@ export class StoryStateHelper {
         delete storyState.system_branch;
         delete storyState.system_utteranceChoiceMap;
         delete storyState.system_expectedSlots;
+    }
+
+    /**
+    * Save necessary state variables for resuming later
+    * @param storyState
+    */
+    public static saveForResume(storyState: {[key: string]: any}): void {
+        const resumePartial: any = {
+            branch: storyState.system_branch,
+            utteranceMap: storyState.system_utteranceChoiceMap,
+            expectedSlots: storyState.system_expectedSlots,
+            speech: storyState.system_prevSpeech,
+            reprompt: storyState.system_prevReprompt,
+            recap: storyState.system_prevRecap
+        };
+
+        const sceneName = this.getCurrentSceneID(storyState);
+        if (sceneName == null) {
+            throw new Error("Something went wrong. There is no current scene information to save for resume.");
+        } else {
+            resumePartial.resumeScene = sceneName;
+        }
+
+        storyState.system_resume_save = resumePartial;
+    }
+
+    /**
+    * Load states saved from [[StoryStateHelper.saveForResume()]] in preparation for resuming.
+    * @param storyState
+    */
+    public static loadForResume(storyState: {[ket: string]: any}, stage: PlayStage): any {
+        const resumeAttributes: any = storyState.system_resume_save;
+
+        storyState.system_branch = resumeAttributes.branch;
+
+        storyState.system_expectedSlots = resumeAttributes.expectedSlots;
+
+        storyState.system_utteranceChoiceMap = resumeAttributes.utteranceMap;
+
+        this.setCurrentSceneID(storyState, resumeAttributes.resumeScene);
+
+        return {
+            speech: resumeAttributes.speech,
+            reprompt: resumeAttributes.reprompt,
+            recap: resumeAttributes.recap
+        };
+    }
+
+    public static clearResumeSave(storyState: {[key: string]: any}): void {
+        delete storyState.system_resume_save;
+    }
+
+    public static hasResumeSave(storyState: {[key: string]: any}): boolean {
+        return !!storyState.system_resume_save;
     }
 
     /**

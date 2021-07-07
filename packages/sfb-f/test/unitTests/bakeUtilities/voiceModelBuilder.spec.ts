@@ -15,18 +15,19 @@
  * permissions and limitations under the License.
  */
 
-import { ModelBuilderHelper, CategoryType, IntentCategory } from './../../../bakeUtilities/VoiceModelBuilder';
-import { strict as assert } from 'assert';
+import { VoiceModel } from "./../../../bakeUtilities/languageModel";
+import { ModelBuildHelper, CategoryType, IntentCategory } from "./../../../bakeUtilities/modelBuildHelper";
+import { strict as assert } from "assert";
 
-const numberToAlphabetCounting = ModelBuilderHelper.numberToAlphabetCounting;
+const numberToAlphabetCounting = ModelBuildHelper.numberToAlphabetCounting;
 
-describe("auto voice model generating utility test", function () {
+describe("auto voice model generating utility test", function() {
     before(async function() {
-        ModelBuilderHelper.autoSlotCount = 0;
-        ModelBuilderHelper.autoIntentCount = 0;
+        ModelBuildHelper.autoSlotCount = 0;
+        ModelBuildHelper.autoIntentCount = 0;
     });
     
-    it("Slot Number to Alphabet Conversion", async function () {
+    it("Slot Number to Alphabet Conversion", async function() {
         assert.equal(numberToAlphabetCounting(0), 'a');
         assert.equal(numberToAlphabetCounting(1), 'b');
         assert.equal(numberToAlphabetCounting(2), 'c');
@@ -58,18 +59,18 @@ describe("auto voice model generating utility test", function () {
         assert.equal(numberToAlphabetCounting(100), 'dw');
     });
 
-    it("buildCategoriesFromUtteranceTyping() - empty utterance lists", async function () {
-        const result = ModelBuilderHelper.buildCategoriesFromUtteranceTyping([], [], [], [], {}, {});
+    it("buildCategoriesFromUtteranceTyping() - empty utterance lists", async function() {
+        const result = ModelBuildHelper.buildCategoriesFromUtteranceTyping([], [], [], [], {}, {});
         assert.equal(result.length, 0);
     });
 
-    it("buildCategoriesFromUtteranceTyping() - generate new intent category", async function () {
-        const result = ModelBuilderHelper.buildCategoriesFromUtteranceTyping([], ["test one", "test two", "test three"], [], [], {}, {});
+    it("buildCategoriesFromUtteranceTyping() - generate new intent category", async function() {
+        const result = ModelBuildHelper.buildCategoriesFromUtteranceTyping([], ["test one", "test two", "test three"], [], [], {}, {});
         assert.equal(result.length, 1);
         assert.equal(result[0].id, "flexaIntent");
     });
 
-    it("buildCategoriesFromUtteranceTyping() - intent utterances already used in existing categories", async function () {
+    it("buildCategoriesFromUtteranceTyping() - intent utterances already used in existing categories", async function() {
         const testingCategoryName = "already used intent";
         const testingCategoryName2 = "already used intent2";
 
@@ -84,9 +85,9 @@ describe("auto voice model generating utility test", function () {
                 type: CategoryType.INTENT,
                 utterances: ["test four"]
             }
-        }
+        };
 
-        const oneOverlapResult = ModelBuilderHelper.buildCategoriesFromUtteranceTyping([], ["test one", "test two", "test three"], [], [], {}, existingCategoryMap);
+        const oneOverlapResult = ModelBuildHelper.buildCategoriesFromUtteranceTyping([], ["test one", "test two", "test three"], [], [], {}, existingCategoryMap);
 
         assert.equal(oneOverlapResult.length, 1);
         assert.equal(oneOverlapResult[0].utterances.length, 3);
@@ -94,7 +95,7 @@ describe("auto voice model generating utility test", function () {
         assert.ok(oneOverlapResult[0].utterances.includes("test two"));
         assert.ok(oneOverlapResult[0].utterances.includes("test three"));
 
-        const twoOverlapResult = ModelBuilderHelper.buildCategoriesFromUtteranceTyping([], ["test one", "test two", "test three", "test four", "test five"], [], [], {}, existingCategoryMap);
+        const twoOverlapResult = ModelBuildHelper.buildCategoriesFromUtteranceTyping([], ["test one", "test two", "test three", "test four", "test five"], [], [], {}, existingCategoryMap);
 
         assert.equal(twoOverlapResult.length, 2);
         assert.equal(twoOverlapResult[0].utterances.length, 3);
@@ -125,11 +126,10 @@ describe("auto voice model generating utility test", function () {
             },
         ];
 
-        const result = ModelBuilderHelper.buildVoiceModelFromCategory(testCategories, "testInvocation", {}, {});
+        const result = ModelBuildHelper.buildVoiceModelFromCategory(testCategories, "testInvocation", {}, {});
 
         assert.equal(result.languageModel.intents.length, 1, "Unexpected number of resulting intents.");
-        for (let i = 0; i < result.languageModel.intents.length; i ++) {
-            const intent = result.languageModel.intents[i];
+        for (const intent of result.languageModel.intents) {
             if (intent.samples) {
                 assert.notEqual(intent.samples.length, 0, "Detected intents with 0 samples");
             } else {
@@ -159,7 +159,7 @@ describe("auto voice model generating utility test", function () {
             },
         ];
 
-        const result = ModelBuilderHelper.buildVoiceModelFromCategory(testCategories, "testInvocation", {}, {});
+        const result = ModelBuildHelper.buildVoiceModelFromCategory(testCategories, "testInvocation", {}, {});
 
         assert.equal(result.languageModel.intents.length, 1, "Unexpected number of resulting intents.");
         if (result.languageModel.intents[0].samples) {
@@ -178,7 +178,7 @@ describe("auto voice model generating utility test", function () {
     });
 
     it("buildBuiltInSampleToIntentMap() - generate utterance to intent name map for built-in intent", async function() {
-        const resultMap = ModelBuilderHelper.buildBuiltInSampleToIntentMap({
+        const resultMap = ModelBuildHelper.buildBuiltInSampleToIntentMap({
             "TestBuiltInIntent1": [
                 "utterance 1 for TestBuiltInIntent1",
                 "utterance 2 for TestBuiltInIntent1",
@@ -201,7 +201,7 @@ describe("auto voice model generating utility test", function () {
     });
 
     it("buildBuiltInSampleToIntentMap() - non EN lower casing test", async function() {
-        const resultMap = ModelBuilderHelper.buildBuiltInSampleToIntentMap({
+        const resultMap = ModelBuildHelper.buildBuiltInSampleToIntentMap({
             "TestBuiltInIntent1": [
                 "TestBuiltInIntent1の発話1",
                 "TestBuiltInIntent1の発話2",
@@ -229,7 +229,7 @@ describe("auto voice model generating utility test", function () {
         const customSlotTarget = "{slotName} woo hoo";
         const builtInTarget = "built in utterance";
 
-        const result = ModelBuilderHelper.splitUtteranceType([autoIntentTarget, autoSlotNumericTarget, customSlotTarget, builtInTarget],
+        const result = ModelBuildHelper.splitUtteranceType([autoIntentTarget, autoSlotNumericTarget, customSlotTarget, builtInTarget],
             {
                 [builtInTarget]: 'BuiltInIntent' 
             },
@@ -267,7 +267,7 @@ describe("auto voice model generating utility test", function () {
             ]
         }
 
-        const result = ModelBuilderHelper.buildCategoriesForChoice(testUtterances, {
+        const result = ModelBuildHelper.buildCategoriesForChoice(testUtterances, {
             [existingCategory.id]: true
         },
         {
@@ -286,7 +286,7 @@ describe("auto voice model generating utility test", function () {
         let hasAutoSlot = false;
         let hasCustomSlot = false;
         let hasIntent = false;
-        for (let category of result) {
+        for (const category of result) {
             if (category.type === CategoryType.BUILT_IN_INTENT) {
                 hasBuiltIn = true;
                 assert.equal(category.utterances.length, 0, "BuiltInIntent utterances should always be empty.");
@@ -296,19 +296,148 @@ describe("auto voice model generating utility test", function () {
                 assert.ok(category.utterances.includes(autoSlotNumericTarget), `Expected utterance for auto slot '${autoSlotNumericTarget}' is not found.`);
             } else if (category.type === CategoryType.CUSTOM_SLOT) {
                 hasCustomSlot = true;
-                assert.equal(category.utterances.length, 1);
-                assert.equal(category.utterances[0], customSlotTarget.replace("{slotName}", "{slotName as CustomSlotType}"));
             } else if (category.type === CategoryType.INTENT) {
                 hasIntent = true;
-                assert.equal(category.utterances.length, 2);
+                assert.equal(category.utterances.length, 3);
                 assert.ok(category.utterances.includes(lowerCaseUsedUtterance));
                 assert.ok(category.utterances.includes(autoIntentTarget));
             }
         }
 
-        assert.ok(hasBuiltIn, "Expected intent 'BuiltInIntent' does not exist in the reuslt");
-        assert.ok(hasAutoSlot, "Expected category type 'Auto Slot' does not exist in the reuslt");
-        assert.ok(hasCustomSlot, "Expected category type 'Custom Slot' does not exist in the reuslt");
-        assert.ok(hasIntent, "Expected category type 'Intent' does not exist in the reuslt");
+        assert.ok(hasBuiltIn, "Expected intent 'BuiltInIntent' does not exist in the result");
+        assert.ok(hasAutoSlot, "Expected category type 'Auto Slot' does not exist in the result");
+        assert.ok(!hasCustomSlot, "Expected category type 'Custom Slot' does exist in the result");
+        assert.ok(hasIntent, "Expected category type 'Intent' does not exist in the result");
+    });
+
+    it ("copyAdditionalAttributes() - copies unknown field from base model into generated model", async function() {
+        const generatedVoiceModel: VoiceModel = {
+            languageModel: {
+                invocationName: "test invocation",
+                intents: [
+                    {
+                        name: "TestIntent",
+                        slots: [
+                            {
+                                name: "TestSlot",
+                                type: "AMAZON.NUMBER",
+                                samples: [ "one", "two" ],
+                            },
+                        ],
+                        samples: [
+                            "test {TestSlot}",
+                            "{TestSlot} test",
+                        ],
+                    },
+                ],
+                types: [
+                    {
+                        name: "TestType",
+                        values: [
+                            {
+                                id: "Id1",
+                                name: {
+                                    value: "foo",
+                                    synonyms: [ "bar" ],
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+        const baseModel: VoiceModel = {
+            languageModel: {
+                invocationName: "test invocation",
+                intents: [],
+                types: [],
+                testAttribute: {
+                    testField: "testValue",
+                },
+            },
+        };
+
+        ModelBuildHelper.copyAdditionalAttributes(generatedVoiceModel, baseModel);
+
+        assert.equal(generatedVoiceModel.languageModel.testAttribute, baseModel.languageModel.testAttribute, "Expected attribute 'testAttribute' was not copied into generated voice model");
+    });
+
+    it ("copyAdditionalAttributes() - does not overwrite invocationName, intents, or types", async function() {
+        const generatedVoiceModel: VoiceModel = {
+            languageModel: {
+                invocationName: "test invocation",
+                intents: [
+                    {
+                        name: "TestIntent",
+                        slots: [
+                            {
+                                name: "TestSlot",
+                                type: "AMAZON.NUMBER",
+                                samples: [ "one", "two" ],
+                            },
+                        ],
+                        samples: [
+                            "test {TestSlot}",
+                            "{TestSlot} test",
+                        ],
+                    },
+                ],
+                types: [
+                    {
+                        name: "TestType",
+                        values: [
+                            {
+                                id: "Id1",
+                                name: {
+                                    value: "foo",
+                                    synonyms: [ "bar" ],
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+        const baseModel: VoiceModel = {
+            languageModel: {
+                invocationName: "test invocation FAIL",
+                intents: [
+                    {
+                        name: "TestIntentFAIL",
+                        slots: [
+                            {
+                                name: "TestSlotFAIL",
+                                type: "AMAZON.NUMBER",
+                                samples: [ "one", "two" ],
+                            },
+                        ],
+                        samples: [
+                            "test {TestSlot} fail",
+                            "{TestSlot} test fail",
+                        ],
+                    },
+                ],
+                types: [
+                    {
+                        name: "TestTypeFAIL",
+                        values: [
+                            {
+                                id: "Id1FAIL",
+                                name: {
+                                    value: "fail",
+                                    synonyms: [ "failure" ],
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+
+        ModelBuildHelper.copyAdditionalAttributes(generatedVoiceModel, baseModel);
+
+        assert.notEqual(generatedVoiceModel.languageModel.invocationName, baseModel.languageModel.invocationName, "'invocationName' was incorrectly copied over generated voice model");
+        assert.notEqual(generatedVoiceModel.languageModel.intents, baseModel.languageModel.intents, "'intents' was incorrectly copied over generated voice model");
+        assert.notEqual(generatedVoiceModel.languageModel.types, baseModel.languageModel.types, "'types' was incorrectly copied over generated voice model");
     });
 });
