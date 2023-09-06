@@ -182,7 +182,7 @@
     "concurrently": "~5.3.0",
     "cross-env": "~5.2.0",
     "css-loader": "~1.0.1",
-    "electron": "10.2.0",
+    "electron": "22.3.21",
     "electron-builder": "21.2.0",
     "electron-devtools-installer": "~2.2.4",
     "enzyme": "~3.7.0",
