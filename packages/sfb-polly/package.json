@@ -43,5 +43,5 @@
     "integ-coverage": "nyc --reporter text npm run integ-test",
     "clean": "npx rimraf  ./dist"
   },
-  "version": "2.1.0"
+  "version": "2.1.1"
 }

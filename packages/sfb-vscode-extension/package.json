@@ -2,7 +2,7 @@
     "name": "@alexa-games/sfb-vscode-extension",
     "displayName": "Alexa SFB",
     "description": "Adds syntax highlighting, hover tips, and autocomplete to Alexa SFB story files.",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "engines": {
         "vscode": "^1.40.0"
     },
