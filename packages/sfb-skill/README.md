@@ -1,5 +1,9 @@
 # Skill Flow Builder Skill Library
 
+> **Warning**
+> **DEPRECATED** The Alexa Games team will no longer support or maintain this official distribution of Skill Flow Builder. Thank you to all the folks who have used SFB to make great Alexa skills over the years!
+
+
 The Skill Flow Builder Skill Library joins Alexa skill code to the SFB engine.
 This package handles incoming requests from Alexa into the skill, delegates any
 narrative content related work to the SFB content framework, and then forms an

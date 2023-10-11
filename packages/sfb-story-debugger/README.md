@@ -1,5 +1,9 @@
 # Skill Flow Builder Story Debugger
 
+> **Warning**
+> **DEPRECATED** The Alexa Games team will no longer support or maintain this official distribution of Skill Flow Builder. Thank you to all the folks who have used SFB to make great Alexa skills over the years!
+
+
 The Skill Flow Builder Story Debugger. This module enables you to simulate your
 project’s behavior through the command line by running the SFB content locally,
 rather than calling a deployed skill over the network.

@@ -1,5 +1,9 @@
 # Skill Flow Builder Command Line Interface (CLI)
 
+> **Warning**
+> **DEPRECATED** The Alexa Games team will no longer support or maintain this official distribution of Skill Flow Builder. Thank you to all the folks who have used SFB to make great Alexa skills over the years!
+
+
 This module interacts with the
 [Alexa Skills Kit (ASK)](https://developer.amazon.com/en-US/alexa/alexa-skills-kit)
 and [AWS CLI](https://github.com/aws/aws-cli) to deploy and update your skill.

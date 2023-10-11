@@ -1,5 +1,9 @@
 # Skill Flow Builder Editor
 
+> **Warning**
+> **DEPRECATED** The Alexa Games team will no longer support or maintain this official distribution of Skill Flow Builder. Thank you to all the folks who have used SFB to make great Alexa skills over the years!
+
+
 The Skill Flow Builder Editor provides a graphical interface (GUI) where you can
 create, edit, and preview content for your skill. The SFB Editor is a
 cross-platform desktop application built using the [Electron framework](https://www.electronjs.org/)

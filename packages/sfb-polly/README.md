@@ -1,5 +1,9 @@
 # Skill Flow Builder Polly Integration
 
+> **Warning**
+> **DEPRECATED** The Alexa Games team will no longer support or maintain this official distribution of Skill Flow Builder. Thank you to all the folks who have used SFB to make great Alexa skills over the years!
+
+
 The Skill Flow Builder Polly Integration. Enables Text To Speech in different
 voices & languages with [Amazon Polly](https://aws.amazon.com/polly/) in both
 the SFB editor, and Skill Flow Builder built skills. Handles the making of

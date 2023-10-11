@@ -1,5 +1,9 @@
 # Skill Flow Builder Content Framework
 
+> **Warning**
+> **DEPRECATED** The Alexa Games team will no longer support or maintain this official distribution of Skill Flow Builder. Thank you to all the folks who have used SFB to make great Alexa skills over the years!
+
+
 The Skill Flow Builder Content Framework contains the core collection of utility
 and driver functionalities that powers the Editor and the CLI. It handles the
 interpretation of SFB’s domain-specific language into a narrative structure,
