@@ -26,3 +26,4 @@ coverage
 
 # Script result
 .out
+.npmrc

@@ -1,5 +1,9 @@
 # Skill Flow Builder
 
+> **Warning**
+> **DEPRECATED** The Alexa Games team will no longer support or maintain this official distribution of Skill Flow Builder. Thank you to all the folks who have used SFB to make great Alexa skills over the years!
+
+
 <p align="center">
     <a href="https://travis-ci.com/alexa-games/skill-flow-builder/"><img src="https://travis-ci.com/alexa-games/skill-flow-builder.svg?token=PX13NfYowpbqCaNHTcBg&branch=master"></a>
     <a href="https://github.com/alexa-games/skill-flow-builder/actions"><img src="https://github.com/alexa-games/skill-flow-builder/workflows/Tests%20on%20Windows/badge.svg"/></a>
