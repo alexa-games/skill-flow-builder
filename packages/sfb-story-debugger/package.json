@@ -28,7 +28,7 @@
     "clean": "npx rimraf ./dist",
     "lint": "tslint --project tsconfig.json"
   },
-  "version": "2.1.1",
+  "version": "2.1.2",
   "nyc": {
     "exclude": [
       "**/test"
